@@ -1,6 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
+import Home from "../pages/landing/Home";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+import ForgotPassword from "../pages/auth/ForgotPassword";
 import Dashboard from "../pages/user/Dashboard";
 import Facilities from "../pages/user/Facilities";
 import FacilityDetail from "../pages/user/FacilityDetail";
@@ -51,6 +55,13 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Halaman Publik Landing Page & Otentikasi */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Portal Aplikasi Dashboard Pengguna Warga */}
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<Navigate to="/user/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -73,7 +84,7 @@ export default function AppRoutes() {
           <Route path="help" element={<HelpPage />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/user/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
