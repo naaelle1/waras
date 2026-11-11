@@ -84,6 +84,157 @@ function renderFormattedMessage(text) {
   );
 }
 
+// Menentukan daftar status loading variatif & kontekstual berdasarkan input pengguna
+function getLoadingStatusList(query) {
+  const q = (query || "").toLowerCase();
+
+  if (
+    q.includes("faskes") ||
+    q.includes("puskesmas") ||
+    q.includes("rumah sakit") ||
+    q.includes("rs") ||
+    q.includes("klinik") ||
+    q.includes("dokter") ||
+    q.includes("igd") ||
+    q.includes("ugd") ||
+    q.includes("lokasi") ||
+    q.includes("dekat") ||
+    q.includes("alamat") ||
+    q.includes("buka") ||
+    q.includes("jadwal") ||
+    q.includes("antrean") ||
+    q.includes("antri")
+  ) {
+    return [
+      "Mencari data fasilitas kesehatan di Semarang...",
+      "Memeriksa jadwal operasional faskes...",
+      "Menyiapkan informasi faskes yang relevan...",
+    ];
+  }
+
+  if (
+    q.includes("obat") ||
+    q.includes("resep") ||
+    q.includes("parasetamol") ||
+    q.includes("bodrex") ||
+    q.includes("panadol") ||
+    q.includes("dosis") ||
+    q.includes("minum obat") ||
+    q.includes("salep") ||
+    q.includes("vitamin")
+  ) {
+    return [
+      "Meninjau panduan obat bebas BPOM RI...",
+      "Memverifikasi aturan pakai yang aman...",
+      "Menyiapkan edukasi obat yang tepat...",
+    ];
+  }
+
+  if (
+    q.includes("demam") ||
+    q.includes("pusing") ||
+    q.includes("mual") ||
+    q.includes("batuk") ||
+    q.includes("flu") ||
+    q.includes("sakit") ||
+    q.includes("gejala") ||
+    q.includes("lemas") ||
+    q.includes("lambung") ||
+    q.includes("gerd") ||
+    q.includes("maag") ||
+    q.includes("diare") ||
+    q.includes("nyeri") ||
+    q.includes("pegal")
+  ) {
+    return [
+      "Menganalisis keluhan & gejala Anda...",
+      "Menelaah kemungkinan penyebab umum...",
+      "Menyiapkan tips perawatan mandiri di rumah...",
+    ];
+  }
+
+  if (
+    q.includes("imunisasi") ||
+    q.includes("vaksin") ||
+    q.includes("anak") ||
+    q.includes("bayi") ||
+    q.includes("balita") ||
+    q.includes("posyandu") ||
+    q.includes("stunting")
+  ) {
+    return [
+      "Memeriksa panduan imunisasi & gizi anak...",
+      "Menyiapkan informasi tumbuh kembang balita...",
+    ];
+  }
+
+  if (
+    q.includes("bpjs") ||
+    q.includes("rujukan") ||
+    q.includes("kartu") ||
+    q.includes("faskes 1") ||
+    q.includes("syarat") ||
+    q.includes("alur")
+  ) {
+    return [
+      "Memeriksa alur layanan & prosedur rujukan BPJS...",
+      "Menyiapkan panduan rujukan rumah sakit...",
+    ];
+  }
+
+  return [
+    "WARAS Assistant sedang memahami pertanyaan Anda...",
+    "Menyelaraskan dengan referensi kesehatan terpercaya...",
+    "Menyusun jawaban yang ringkas dan tepat...",
+  ];
+}
+
+// Komponen efek mengetik cepat (Typewriter Streaming Effect)
+function TypewriterMessage({ text, isTyping, onTick, onComplete }) {
+  const [displayedLength, setDisplayedLength] = useState(isTyping ? 0 : text.length);
+
+  useEffect(() => {
+    if (!isTyping) {
+      setDisplayedLength(text.length);
+      return;
+    }
+
+    setDisplayedLength(0);
+    let current = 0;
+    const total = text.length;
+
+    // Kecepatan adaptif: 3-6 karakter tiap 16ms agar terasa cepat layaknya stream AI modern
+    const step = Math.max(3, Math.floor(total / 60));
+    const intervalTime = 16;
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= total) {
+        setDisplayedLength(total);
+        clearInterval(timer);
+        if (onComplete) onComplete();
+      } else {
+        setDisplayedLength(current);
+        if (onTick) onTick();
+      }
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, [text, isTyping]);
+
+  const displayedText = text.slice(0, displayedLength);
+  const isCurrentlyTyping = isTyping && displayedLength < text.length;
+
+  return (
+    <div className="relative">
+      {renderFormattedMessage(displayedText)}
+      {isCurrentlyTyping && (
+        <span className="inline-block w-1.5 h-3.5 bg-[#003B3B] ml-1 animate-pulse align-middle rounded-xs" />
+      )}
+    </div>
+  );
+}
+
 export default function AIChat({
   activeConversation,
   onUpdateMessages = () => {},
@@ -91,6 +242,9 @@ export default function AIChat({
 }) {
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState("");
+  const [animatingMessageId, setAnimatingMessageId] = useState(null);
+  const activeQueryRef = useRef("");
   const messagesEndRef = useRef(null);
   const hasTriggeredInitial = useRef(false);
 
@@ -102,11 +256,28 @@ export default function AIChat({
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages, isLoading, animatingMessageId]);
+
+  // Efek rotasi status loading variatif selama proses berlangsung
+  useEffect(() => {
+    if (!isLoading) return;
+    const statuses = getLoadingStatusList(activeQueryRef.current);
+    let idx = 0;
+    setLoadingStatus(statuses[0]);
+
+    const interval = setInterval(() => {
+      idx = (idx + 1) % statuses.length;
+      setLoadingStatus(statuses[idx]);
+    }, 1800);
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   const handleSend = async (textToSend) => {
     const messageContent = textToSend || inputText;
     if (!messageContent.trim() || isLoading) return;
+
+    activeQueryRef.current = messageContent;
 
     const userMsg = {
       id: `user-${Date.now()}`,
@@ -130,6 +301,7 @@ export default function AIChat({
         }));
 
       const aiResponse = await aiService.sendMessage(messageContent, history);
+      setAnimatingMessageId(aiResponse.id);
       onUpdateMessages([...updatedMessages, aiResponse], messageContent);
     } catch (err) {
       console.error("Failed to get AI response:", err);
@@ -140,6 +312,7 @@ export default function AIChat({
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         type: "error",
       };
+      setAnimatingMessageId(errMsg.id);
       onUpdateMessages([...updatedMessages, errMsg], messageContent);
     } finally {
       setIsLoading(false);
@@ -250,13 +423,23 @@ export default function AIChat({
                     {isUser ? (
                       <p className="whitespace-pre-line font-medium">{msg.message}</p>
                     ) : (
-                      renderFormattedMessage(msg.message)
+                      <TypewriterMessage
+                        text={msg.message}
+                        isTyping={animatingMessageId === msg.id}
+                        onTick={scrollToBottom}
+                        onComplete={() => setAnimatingMessageId(null)}
+                      />
                     )}
                   </div>
 
                   {/* Facility CTA Card if AI recommends faskes */}
-                  {!isUser && msg.showFacilityCTA && (
-                    <div className="mt-3 w-full max-w-sm rounded-xl bg-[#EBF5F5] border border-[#DDEEEE] p-3.5 flex items-start gap-3">
+                  {!isUser && msg.showFacilityCTA && animatingMessageId !== msg.id && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-3 w-full max-w-sm rounded-xl bg-[#EBF5F5] border border-[#DDEEEE] p-3.5 flex items-start gap-3"
+                    >
                       <div className="p-2 rounded-lg bg-[#003B3B] text-white shrink-0">
                         <MapPin className="w-4 h-4" />
                       </div>
@@ -275,12 +458,17 @@ export default function AIChat({
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
-                    </div>
+                    </motion.div>
                   )}
 
                   {/* Article Recommendation Cards */}
-                  {!isUser && articles.length > 0 && (
-                    <div className="mt-3.5 w-full space-y-2">
+                  {!isUser && articles.length > 0 && animatingMessageId !== msg.id && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-3.5 w-full space-y-2"
+                    >
                       <div className="flex items-center gap-1.5 text-xs font-semibold text-[#003B3B]">
                         <BookOpen className="w-3.5 h-3.5" />
                         <span>Bacaan Medis Terkait:</span>
@@ -312,7 +500,7 @@ export default function AIChat({
                           </Link>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
                   )}
 
                   <span className="text-[10px] text-[#809494] mt-1 px-1 font-inter">
@@ -322,12 +510,30 @@ export default function AIChat({
               );
             })}
 
-            {/* AI Loading Indicator */}
+            {/* AI Loading Indicator (Variatif & Kontekstual) */}
             {isLoading && (
-              <div className="flex items-center gap-2 text-xs font-inter text-[#526666] py-2">
-                <Bot className="w-4 h-4 text-[#003B3B] animate-spin" />
-                <span>WARAS Assistant sedang menganalisis...</span>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2.5 text-xs font-inter text-[#526666] py-2 px-3 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl w-fit shadow-2xs"
+              >
+                <div className="relative flex items-center justify-center shrink-0">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#003B3B] animate-ping absolute opacity-60" />
+                  <div className="w-2 h-2 rounded-full bg-[#003B3B]" />
+                </div>
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <Bot className="w-3.5 h-3.5 text-[#003B3B] shrink-0" />
+                  <motion.span
+                    key={loadingStatus}
+                    initial={{ opacity: 0, x: -3 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-[#003B3B] font-medium"
+                  >
+                    {loadingStatus}
+                  </motion.span>
+                </div>
+              </motion.div>
             )}
 
             <div ref={messagesEndRef} />
