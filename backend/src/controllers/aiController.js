@@ -1,7 +1,18 @@
 import { GoogleGenAI } from '@google/genai';
 import { getSystemInstruction, AI_CONFIG } from '../config/aiInstructions.js';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiClient = null;
+
+function getAiClient() {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY belum dikonfigurasi di file .env');
+  }
+  if (!aiClient) {
+    aiClient = new GoogleGenAI({ apiKey });
+  }
+  return aiClient;
+}
 
 function getRelatedMetadata(text) {
   const t = text.toLowerCase();
@@ -69,6 +80,8 @@ export async function chat(req, res) {
       { role: 'user', parts: [{ text: message.trim() }] },
     ];
 
+    const ai = getAiClient();
+
     // Panggil Gemini dengan konfigurasi instruksi dan guardrails WARAS AI
     const response = await ai.models.generateContent({
       model,
@@ -83,11 +96,10 @@ export async function chat(req, res) {
 
     let reply = response.text?.trim() ?? 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini.';
 
-    // Bersihkan simbol-simbol markdown yang tidak diperlukan agar tampilan chat rapi
+    // Rapikan simbol markdown: perbaiki double hash (### ### -> ###) dan spasi berlebih
     reply = reply
-      .replace(/^#{1,6}\s*/gm, '') // Hapus header ###
-      .replace(/^[-*_]{3,}\s*$/gm, '') // Hapus garis horizontal ---
-      .replace(/\n{3,}/g, '\n\n') // Rapikan spasi baris berlebih
+      .replace(/^#{1,6}\s+#{1,6}\s*/gm, '### ')
+      .replace(/\n{3,}/g, '\n\n')
       .trim();
 
     const metadata = getRelatedMetadata(message);
@@ -109,6 +121,7 @@ export async function chat(req, res) {
     return res.status(502).json({
       success: false,
       message: 'Gagal menghubungi layanan AI. Silakan coba lagi.',
+      error: process.env.NODE_ENV === 'development' ? err.message : undefined,
     });
   }
 }
