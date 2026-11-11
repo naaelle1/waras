@@ -1,17 +1,48 @@
 import { GoogleGenAI } from '@google/genai';
+import { getSystemInstruction, AI_CONFIG } from '../config/aiInstructions.js';
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const SYSTEM_INSTRUCTION = `Kamu adalah WARAS Assistant, asisten kesehatan digital resmi untuk warga Kota Semarang.
-Tugasmu adalah memberikan informasi kesehatan umum yang akurat, mudah dipahami, dan bermanfaat — BUKAN mendiagnosis penyakit.
+function getRelatedMetadata(text) {
+  const t = text.toLowerCase();
+  const relatedArticleIds = [];
+  let showFacilityCTA = false;
 
-Panduan respons:
-- Gunakan Bahasa Indonesia yang ramah, lugas, dan empatik.
-- Jika pengguna menyebutkan gejala, jelaskan secara umum dan sarankan konsultasi ke dokter atau puskesmas terdekat.
-- Untuk pertanyaan tentang fasilitas kesehatan di Semarang, arahkan ke fitur Peta Fasilitas WARAS.
-- Jangan memberikan dosis obat spesifik atau diagnosis medis definitif.
-- Jawaban singkat dan to-the-point (maks 3–4 kalimat kecuali diperlukan lebih).
-- Akhiri dengan kalimat penutup yang mendorong pengguna untuk bertindak (konsultasi dokter, cek fasilitas, dll.).`;
+  if (t.includes('diabetes') || t.includes('gula darah') || t.includes('kencing manis')) {
+    relatedArticleIds.push(1);
+  }
+  if (t.includes('demam') || t.includes('dbd') || t.includes('batuk') || t.includes('flu') || t.includes('trombosit')) {
+    relatedArticleIds.push(2);
+  }
+  if (t.includes('stress') || t.includes('stres') || t.includes('burnout') || t.includes('lelah') || t.includes('mental')) {
+    relatedArticleIds.push(3);
+  }
+  if (t.includes('lambung') || t.includes('gerd') || t.includes('maag') || t.includes('asam')) {
+    relatedArticleIds.push(4);
+  }
+  if (t.includes('olahraga') || t.includes('stamina') || t.includes('pola hidup') || t.includes('sehat')) {
+    relatedArticleIds.push(5);
+  }
+  if (t.includes('imunisasi') || t.includes('vaksin') || t.includes('anak') || t.includes('bayi')) {
+    relatedArticleIds.push(6);
+  }
+
+  if (
+    t.includes('puskesmas') ||
+    t.includes('rumah sakit') ||
+    t.includes('rs') ||
+    t.includes('faskes') ||
+    t.includes('dokter') ||
+    t.includes('klinik') ||
+    t.includes('lokasi') ||
+    t.includes('berobat') ||
+    t.includes('periksa')
+  ) {
+    showFacilityCTA = true;
+  }
+
+  return { relatedArticleIds, showFacilityCTA };
+}
 
 /**
  * POST /api/ai/chat
@@ -25,24 +56,41 @@ export async function chat(req, res) {
   }
 
   try {
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+    const model = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
 
-    // Build conversation history for multi-turn context
+    // Format riwayat chat untuk Gemini
     const contents = [
-      ...history.map((h) => ({
-        role: h.role,
-        parts: [{ text: h.parts }],
-      })),
+      ...history
+        .filter((h) => h.parts && typeof h.parts === 'string')
+        .map((h) => ({
+          role: h.role === 'ai' || h.role === 'model' ? 'model' : 'user',
+          parts: [{ text: h.parts }],
+        })),
       { role: 'user', parts: [{ text: message.trim() }] },
     ];
 
+    // Panggil Gemini dengan konfigurasi instruksi dan guardrails WARAS AI
     const response = await ai.models.generateContent({
       model,
-      systemInstruction: SYSTEM_INSTRUCTION,
       contents,
+      config: {
+        systemInstruction: getSystemInstruction(),
+        temperature: AI_CONFIG.temperature,
+        topP: AI_CONFIG.topP,
+        maxOutputTokens: AI_CONFIG.maxOutputTokens,
+      },
     });
 
-    const reply = response.text?.trim() ?? 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini.';
+    let reply = response.text?.trim() ?? 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini.';
+
+    // Bersihkan simbol-simbol markdown yang tidak diperlukan agar tampilan chat rapi
+    reply = reply
+      .replace(/^#{1,6}\s*/gm, '') // Hapus header ###
+      .replace(/^[-*_]{3,}\s*$/gm, '') // Hapus garis horizontal ---
+      .replace(/\n{3,}/g, '\n\n') // Rapikan spasi baris berlebih
+      .trim();
+
+    const metadata = getRelatedMetadata(message);
 
     return res.json({
       success: true,
@@ -52,6 +100,8 @@ export async function chat(req, res) {
         message: reply,
         timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
         type: 'general',
+        relatedArticleIds: metadata.relatedArticleIds,
+        showFacilityCTA: metadata.showFacilityCTA,
       },
     });
   } catch (err) {

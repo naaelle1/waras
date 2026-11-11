@@ -1,84 +1,59 @@
 import { articles } from "../data/articles";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
 /**
- * Mock AI Service untuk WARAS Assistant
+ * AI Service untuk WARAS Assistant — terhubung ke backend Gemini API.
+ * Fallback ke mock response jika backend tidak dapat dijangkau.
  */
 export const aiService = {
-  async sendMessage(userMessage) {
-    await new Promise((resolve) => setTimeout(resolve, 650));
+  /**
+   * Kirim pesan ke backend /api/ai/chat
+   * @param {string} userMessage
+   * @param {Array}  history  - riwayat pesan untuk konteks multi-turn
+   */
+  async sendMessage(userMessage, history = []) {
+    try {
+      const res = await fetch(`${API_BASE}/ai/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage, history }),
+      });
 
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+
+      const json = await res.json();
+
+      if (!json.success) {
+        throw new Error(json.message || "Respons tidak valid dari server.");
+      }
+
+      return json.data;
+    } catch (err) {
+      console.error("[aiService] Gagal menghubungi backend, menggunakan fallback:", err.message);
+      return aiService._fallback(userMessage);
+    }
+  },
+
+  /**
+   * Fallback mock — digunakan saat backend tidak tersedia
+   */
+  _fallback(userMessage) {
     const text = userMessage.toLowerCase();
+    const timestamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-    // 1. Demam / Batuk / Gejala
-    if (
-      text.includes("demam") ||
-      text.includes("batuk") ||
-      text.includes("pusing") ||
-      text.includes("flu") ||
-      text.includes("sakit") ||
-      text.includes("pegal") ||
-      text.includes("gejala")
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: "ai",
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        type: "symptom_information",
-        message:
-          "Gejala yang Anda sampaikan (seperti demam atau batuk) dapat memiliki berbagai penyebab, seperti infeksi saluran pernapasan ringan, reaksi imunitas, atau perubahan cuaca. WARAS Assistant tidak memberikan diagnosis medis spesifik. Apabila gejala berlanjut lebih dari 3 hari, memberat, atau disertai sesak napas, disarankan untuk mengonsultasikannya langsung dengan dokter di fasilitas kesehatan terdekat.",
-        relatedArticleIds: [1, 2, 6],
-      };
+    if (["demam","batuk","pusing","flu","sakit","pegal","gejala"].some((k) => text.includes(k))) {
+      return { id: `ai-${Date.now()}`, sender: "ai", timestamp, type: "symptom_information", message: "Gejala yang Anda sampaikan dapat memiliki berbagai penyebab. WARAS Assistant tidak memberikan diagnosis medis. Apabila gejala berlanjut lebih dari 3 hari atau memberat, segera konsultasikan ke dokter di fasilitas kesehatan terdekat.", relatedArticleIds: [1, 2, 6] };
     }
-
-    // 2. Puskesmas / Faskes
-    if (
-      text.includes("puskesmas") ||
-      text.includes("rumah sakit") ||
-      text.includes("faskes") ||
-      text.includes("lokasi") ||
-      text.includes("cari") ||
-      text.includes("berobat")
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: "ai",
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        type: "facility_recommendation",
-        message:
-          "Untuk penanganan kesehatan langsung di Kota Semarang, Anda dapat mengunjungi Puskesmas terdekat (seperti Puskesmas Pandanaran atau Miroto) untuk pelayanan tingkat pertama, atau Rumah Sakit Umum rujukan. Gunakan fitur Peta Fasilitas Kesehatan WARAS untuk melihat jam operasional dan lokasi persisnya.",
-        relatedArticleIds: [2],
-        showFacilityCTA: true,
-      };
+    if (["puskesmas","rumah sakit","faskes","lokasi","cari","berobat"].some((k) => text.includes(k))) {
+      return { id: `ai-${Date.now()}`, sender: "ai", timestamp, type: "facility_recommendation", message: "Gunakan fitur Peta Fasilitas Kesehatan WARAS untuk menemukan puskesmas atau rumah sakit terdekat di Kota Semarang.", relatedArticleIds: [2], showFacilityCTA: true };
     }
-
-    // 3. Imunisasi & Vaksin
-    if (
-      text.includes("imunisasi") ||
-      text.includes("vaksin") ||
-      text.includes("anak") ||
-      text.includes("pencegahan")
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: "ai",
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        type: "general",
-        message:
-          "Imunisasi rutin sangat penting untuk membangun ketahanan tubuh, terutama bagi bayi dan anak-anak. Di Kota Semarang, pelayanan imunisasi dasar seperti BCG, DPT, Polio, dan Campak tersedia di seluruh Puskesmas pada hari kerja.",
-        relatedArticleIds: [1, 3],
-      };
+    if (["imunisasi","vaksin","anak","pencegahan"].some((k) => text.includes(k))) {
+      return { id: `ai-${Date.now()}`, sender: "ai", timestamp, type: "general", message: "Imunisasi rutin tersedia di seluruh Puskesmas Kota Semarang pada hari kerja.", relatedArticleIds: [1, 3] };
     }
-
-    // 4. Respon Umum
-    return {
-      id: `ai-${Date.now()}`,
-      sender: "ai",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      type: "general",
-      message:
-        "Terima kasih telah bertanya kepada WARAS Assistant. Saya dapat membantu Anda memahami informasi seputar kesehatan umum, persiapan ke fasilitas kesehatan, serta artikel edukasi terpercaya untuk warga Kota Semarang. Apa ada hal spesifik yang ingin Anda ketahui lebih lanjut?",
-      relatedArticleIds: [1, 2, 3],
-    };
+    return { id: `ai-${Date.now()}`, sender: "ai", timestamp, type: "general", message: "Saat ini WARAS Assistant tidak dapat terhubung ke server. Silakan coba beberapa saat lagi.", relatedArticleIds: [] };
   },
 
   getArticlesByIds(ids = []) {

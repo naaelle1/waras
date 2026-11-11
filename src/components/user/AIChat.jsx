@@ -16,6 +16,81 @@ import {
 
 import { aiService } from "../../services/aiService";
 
+// Format inline bold text: ubah **teks** jadi <strong> dan hilangkan simbol bintang/simbol liar
+function formatInlineText(text) {
+  if (!text) return null;
+
+  // Split berdasarkan format **bold**
+  const parts = text.split(/(\*\*[^*]+?\*\*)/g);
+
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+      const boldContent = part.slice(2, -2);
+      return (
+        <strong key={idx} className="font-semibold text-[#002F2F]">
+          {boldContent}
+        </strong>
+      );
+    }
+    // Hilangkan simbol * liar bila ada
+    const cleaned = part.replace(/\*/g, "");
+    return <span key={idx}>{cleaned}</span>;
+  });
+}
+
+// Render pesan AI dengan membuang simbol ###, ---, dan memformat bold serta bullet points secara rapi
+function renderFormattedMessage(text) {
+  if (!text) return null;
+
+  const lines = text.split("\n");
+
+  return (
+    <div className="space-y-2 font-inter text-sm leading-relaxed text-[#082C2C]">
+      {lines.map((line, lineIdx) => {
+        let cleaned = line.trim();
+
+        // 1. Hilangkan garis horizontal (---, ***, ___)
+        if (/^[-*_]{3,}$/.test(cleaned)) {
+          return null;
+        }
+
+        // 2. Hilangkan simbol heading (###, ##, #) dan jadikan teks tebal rapi
+        if (/^#{1,6}\s+/.test(cleaned)) {
+          const heading = cleaned.replace(/^#{1,6}\s+/, "");
+          return (
+            <p key={lineIdx} className="font-semibold text-sm sm:text-base text-[#002F2F] pt-1">
+              {formatInlineText(heading)}
+            </p>
+          );
+        }
+
+        // 3. Rapikan bullet item (*, -, •) menjadi bullet point bersih
+        if (/^[-*•]\s+/.test(cleaned)) {
+          const bullet = cleaned.replace(/^[-*•]\s+/, "");
+          return (
+            <div key={lineIdx} className="flex items-start gap-2.5 pl-2">
+              <span className="text-[#0B5D5D] font-bold text-sm leading-none mt-1 select-none">•</span>
+              <span className="flex-1">{formatInlineText(bullet)}</span>
+            </div>
+          );
+        }
+
+        // 4. Jeda baris kosong
+        if (!cleaned) {
+          return <div key={lineIdx} className="h-1.5" />;
+        }
+
+        // 5. Paragraf atau nomor biasa (1. 2. dll)
+        return (
+          <p key={lineIdx} className="leading-relaxed">
+            {formatInlineText(cleaned)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function AIChat({ activeConversation, onUpdateMessages }) {
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -49,10 +124,27 @@ export default function AIChat({ activeConversation, onUpdateMessages }) {
     setIsLoading(true);
 
     try {
-      const aiResponse = await aiService.sendMessage(messageContent);
+      // Bangun history untuk konteks multi-turn (kirim ke backend)
+      const history = messages
+        .filter((m) => m.sender === "user" || m.sender === "ai")
+        .map((m) => ({
+          role: m.sender === "user" ? "user" : "model",
+          parts: m.message,
+        }));
+
+      const aiResponse = await aiService.sendMessage(messageContent, history);
       onUpdateMessages([...updatedMessages, aiResponse], messageContent);
     } catch (err) {
       console.error("Failed to get AI response:", err);
+      // Tampilkan pesan error ke user
+      const errMsg = {
+        id: `err-${Date.now()}`,
+        sender: "ai",
+        message: "Maaf, terjadi kesalahan saat menghubungi WARAS Assistant. Silakan coba lagi.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        type: "error",
+      };
+      onUpdateMessages([...updatedMessages, errMsg], messageContent);
     } finally {
       setIsLoading(false);
     }
@@ -160,7 +252,11 @@ export default function AIChat({ activeConversation, onUpdateMessages }) {
                         : "bg-white/80 backdrop-blur-md border border-white/90 text-[#082C2C] rounded-tl-none shadow-sm"
                     }`}
                   >
-                    <p className="whitespace-pre-line">{msg.message}</p>
+                    {isUser ? (
+                      <p className="whitespace-pre-line">{msg.message}</p>
+                    ) : (
+                      renderFormattedMessage(msg.message)
+                    )}
                   </div>
 
                   {/* Facility CTA Card if AI recommends faskes */}

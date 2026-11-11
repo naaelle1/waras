@@ -12,9 +12,14 @@ const PORT = process.env.PORT || 5000;
 
 // ── Middleware ──────────────────────────────────────────────────────────────
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: (origin, callback) => {
+    // Izinkan semua origin saat development lokal atau bila tanpa origin (seperti Postman/curl)
+    if (!origin || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
 }));
 app.use(express.json());
 
@@ -42,6 +47,6 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
-  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-2.0-flash'}`);
+  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite'}`);
   console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
 });
