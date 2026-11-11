@@ -54,6 +54,11 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
-  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite'}`);
+  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite'}`);
   console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
+
+  // Warmup koneksi HTTPS TLS & model di background agar respon pertama pengguna langsung cepat
+  import('./controllers/aiController.js').then(({ warmup }) => {
+    if (typeof warmup === 'function') warmup();
+  }).catch(() => {});
 });
