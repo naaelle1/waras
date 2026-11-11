@@ -10,7 +10,7 @@ export default function UserLayout() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F7F8F8] text-[#082C2C] font-inter flex flex-col">
+    <div className="min-h-screen bg-[#F8FAFA] text-[#0D2626] font-inter flex flex-col">
       {/* SIDEBAR PERSISTEN DENGAN PROPS EKSISTING */}
       <Sidebar
         isCollapsed={isCollapsed}

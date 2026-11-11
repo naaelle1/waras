@@ -103,7 +103,10 @@ function MapBoundsUpdater({ facilities, userLocation }) {
   return null;
 }
 
-export default function MapComponent({ facilities = [] }) {
+export default function MapComponent({
+  facilities = [],
+  className = "h-80 sm:h-96 lg:h-full min-h-[380px]"
+}) {
   const [userLocation, setUserLocation] = useState(null);
   const [isLocating, setIsLocating] = useState(false);
 
@@ -134,7 +137,9 @@ export default function MapComponent({ facilities = [] }) {
   };
 
   return (
-    <div className="relative w-full h-80 sm:h-100 lg:h-125 rounded-3xl overflow-hidden glass-card border border-white/80 shadow-md">
+    <div
+      className={`relative w-full rounded-2xl overflow-hidden bg-white border border-[#E2ECEB] shadow-xs ${className}`}
+    >
       <MapContainer
         center={SEMARANG_CENTER}
         zoom={13}

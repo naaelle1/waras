@@ -25,10 +25,10 @@ export default function ReportCategoryCard({ category, isSelected, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(category.id)}
-      className={`group relative flex flex-col justify-between p-5 rounded-3xl text-left transition-all duration-200 cursor-pointer border select-none h-full ${
+      className={`group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl text-left transition-all duration-200 cursor-pointer border select-none h-full ${
         isSelected
-          ? "bg-[#003B3B]/5 border-[#003B3B] shadow-[0_10px_30px_rgba(0,59,59,0.12)] scale-[1.01]"
-          : "bg-white/70 backdrop-blur-md border-white/80 shadow-[0_4px_20px_rgba(0,43,43,0.04)] hover:bg-white/90 hover:border-[#003B3B]/30 hover:shadow-md"
+          ? "bg-[#EBF5F5] border-[#003B3B] shadow-xs"
+          : "bg-white border-[#E2ECEB] shadow-2xs hover:border-[#003B3B]/30 hover:shadow-xs"
       }`}
     >
       <div className="space-y-3">

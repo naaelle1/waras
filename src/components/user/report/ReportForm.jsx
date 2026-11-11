@@ -22,7 +22,7 @@ export default function ReportForm({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* LEFT COLUMN: Input Fields */}
-        <div className="lg:col-span-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/90 p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,43,43,0.05)] space-y-5">
+        <div className="lg:col-span-8 rounded-2xl bg-white border border-[#E2ECEB] p-6 sm:p-8 shadow-xs space-y-5">
           <div className="pb-3 border-b border-gray-100">
             <h3 className="font-poppins font-bold text-lg text-[#062B2B]">
               Detail Laporan

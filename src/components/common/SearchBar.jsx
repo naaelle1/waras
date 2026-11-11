@@ -20,7 +20,7 @@ export default function SearchBar({
         value={term}
         onChange={(e) => setTerm(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-4 pr-10 py-2 bg-white/90 backdrop-blur-md border border-white/80 rounded-full text-xs sm:text-sm text-[#062F30] placeholder-[#5F6F70] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/20 focus:border-[#003B3B] transition-all shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+        className="w-full pl-4 pr-10 py-2 bg-white border border-[#E2ECEB] rounded-full text-xs sm:text-sm text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 focus:border-[#003B3B]/40 transition-all shadow-2xs"
       />
       <button
         type="submit"

@@ -9,18 +9,16 @@ export default function Card({
   glass = false,
   onClick
 }) {
-  const baseClass = glass
-    ? "glass-card rounded-2xl p-5"
-    : "bg-white border border-[#EDEDED] shadow-sm rounded-2xl p-5";
+  const baseClass = "bg-white border border-[#E2ECEB] shadow-xs rounded-2xl p-5 transition-all duration-200";
 
   if (hoverEffect) {
     return (
       <motion.div
-        whileHover={{ y: -4, transition: { duration: 0.2 } }}
+        whileHover={{ y: -3, transition: { duration: 0.15 } }}
         onClick={onClick}
         className={clsx(
           baseClass,
-          "transition-shadow hover:shadow-md cursor-pointer",
+          "hover:border-[#003B3B]/30 hover:shadow-md cursor-pointer",
           className
         )}
       >

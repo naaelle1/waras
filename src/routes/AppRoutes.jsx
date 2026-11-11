@@ -6,6 +6,7 @@ import Facilities from "../pages/user/Facilities";
 import FacilityDetail from "../pages/user/FacilityDetail";
 import AI from "../pages/user/AI";
 import Articles from "../pages/user/Articles";
+import ArticleDetail from "../pages/user/ArticleDetail";
 import MedicalTerms from "../pages/user/MedicalTerms";
 import HealthGuide from "../pages/user/HealthGuide";
 import ServicesGuide from "../pages/user/ServicesGuide";
@@ -60,6 +61,7 @@ export default function AppRoutes() {
           {/* Sub-Rute Info Kesehatan */}
           <Route path="health-info" element={<Navigate to="/user/health-info/articles" replace />} />
           <Route path="health-info/articles" element={<Articles />} />
+          <Route path="health-info/articles/:id" element={<ArticleDetail />} />
           <Route path="health-info/guides" element={<HealthGuide />} />
           <Route path="health-info/medical-terms" element={<MedicalTerms />} />
           <Route path="health-info/terms" element={<Navigate to="/user/health-info/medical-terms" replace />} />
