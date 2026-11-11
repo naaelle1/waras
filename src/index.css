@@ -2,14 +2,15 @@
 
 @layer base {
   body {
-    background-color: #F7F8F6;
-    color: #002B2C;
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    background-color: #F8FAFA;
+    color: #0D2626;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Custom Scrollbar */
+/* Clean Medical Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -18,26 +19,22 @@
   background: transparent;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #A9D6C8;
+  background: #C8D8D7;
   border-radius: 9999px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #002B2C;
+  background: #003B3B;
 }
 
-/* Enhanced Glassmorphism Utilities */
+/* Crisp Clean Card Utilities */
 .glass-card {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 32px rgba(0, 43, 43, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2ECEB;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .glass-card-dark {
-  background: rgba(0, 43, 44, 0.75);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 43, 44, 0.2);
+  background: #003B3B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 43, 44, 0.15);
 }

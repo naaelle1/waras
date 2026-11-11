@@ -124,7 +124,7 @@ export default function Sidebar({
       <aside
         className={clsx(
           "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out",
-          "bg-white/90 backdrop-blur-md border border-white/70 shadow-[0_8px_30px_rgb(0,0,0,0.05)] rounded-2xl",
+          "bg-white border border-[#E2ECEB] shadow-xs rounded-2xl",
           isMobileOpen ? "left-3 right-auto" : "-left-full lg:left-3",
           isCollapsed ? "w-19" : "w-67.5"
         )}

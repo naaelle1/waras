@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from "react";
-import { BookOpen, Info, ShieldCheck } from "lucide-react";
-// Hapus import HealthInfoTabs
+import { useNavigate } from "react-router-dom";
+import { BookOpen, ShieldCheck } from "lucide-react";
 import FeaturedArticle from "../../components/user/FeaturedArticle";
 import ArticleCategoryFilter from "../../components/user/ArticleCategoryFilter";
 import ArticleCard from "../../components/user/ArticleCard";
+import ArticleDetailModal from "../../components/user/ArticleDetailModal";
 import { articles } from "../../data/articles";
 
 const CATEGORIES = [
@@ -17,6 +18,8 @@ const CATEGORIES = [
 
 export default function Articles() {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [selectedArticleModal, setSelectedArticleModal] = useState(null);
+  const navigate = useNavigate();
 
   const featuredArticle = useMemo(() => {
     return articles.find((art) => art.featured) || articles[0];
@@ -32,32 +35,30 @@ export default function Articles() {
   }, [featuredArticle, selectedCategory]);
 
   const handleReadMore = (article) => {
-    console.log("Navigating to article detail:", article.id);
+    setSelectedArticleModal(article);
   };
 
   return (
     <div className="space-y-8 pb-12">
-      {/* <HealthInfoTabs /> HAPUS BARIS INI */}
-
       {/* HEADER HALAMAN */}
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2.5 text-[#002B2C]">
-          <div className="p-2.5 rounded-2xl bg-[#002B2C] text-white shadow-sm">
-            <BookOpen className="w-6 h-6" />
+        <div className="flex items-center gap-2.5 text-[#003B3B]">
+          <div className="p-2.5 rounded-xl bg-[#003B3B] text-white shadow-xs">
+            <BookOpen className="w-6 h-6 text-[#EBF5F5]" />
           </div>
-          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#002B2C]">
+          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
             Artikel Kesehatan
           </h1>
         </div>
-        <p className="text-xs sm:text-sm text-[#5F6F70] font-inter max-w-2xl">
-          Informasi dan bacaan kesehatan terpercaya untuk membantu Anda menjaga pola hidup sehat.
+        <p className="text-xs sm:text-sm text-[#526666] font-inter max-w-2xl">
+          Informasi dan bacaan kesehatan terpercaya untuk membantu Anda menjaga pola hidup sehat di Kota Semarang.
         </p>
       </div>
 
       {/* UNGGULAN */}
       {featuredArticle && (
         <section className="space-y-3">
-          <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#002B2C]">
+          <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#0D2626]">
             Unggulan
           </h2>
           <FeaturedArticle article={featuredArticle} onReadMore={handleReadMore} />
@@ -65,9 +66,9 @@ export default function Articles() {
       )}
 
       {/* DAFTAR ARTIKEL */}
-      <section className="space-y-6 pt-4">
+      <section className="space-y-6 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#002B2C]">
+          <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#0D2626]">
             Kamu Mungkin Suka
           </h2>
           <ArticleCategoryFilter
@@ -88,31 +89,24 @@ export default function Articles() {
             ))}
           </div>
         ) : (
-          <div className="p-12 text-center rounded-3xl bg-white/60 backdrop-blur-md border border-white/80 space-y-3">
+          <div className="p-12 text-center rounded-2xl bg-white border border-[#E2ECEB] space-y-3">
             <ShieldCheck className="w-10 h-10 text-gray-400 mx-auto" />
-            <h3 className="font-poppins font-semibold text-base text-[#002B2C]">
+            <h3 className="font-poppins font-semibold text-base text-[#0D2626]">
               Artikel Tidak Ditemukan
             </h3>
+            <p className="text-xs text-[#526666]">
+              Tidak ada artikel dalam kategori ini saat ini.
+            </p>
           </div>
         )}
       </section>
 
-      {/* DISCLAIMER */}
-      <section className="rounded-2xl bg-[#002B2C]/5 border border-[#002B2C]/10 p-5 sm:p-6 backdrop-blur-md">
-        <div className="flex items-start gap-3.5">
-          <div className="p-2 rounded-xl bg-[#002B2C] text-white shrink-0 mt-0.5">
-            <Info className="w-5 h-5 text-[#A9D6C8]" />
-          </div>
-          <div className="space-y-1">
-            <h4 className="font-poppins font-semibold text-sm text-[#002B2C]">
-              Penafian Medis (Disclaimer)
-            </h4>
-            <p className="text-xs sm:text-sm text-[#5F6F70] font-inter leading-relaxed">
-              Informasi yang tersedia di WARAS bertujuan untuk edukasi umum dan tidak menggantikan pemeriksaan, diagnosis, atau saran medis dari dokter profesional.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* MODAL BACA ARTIKEL */}
+      <ArticleDetailModal
+        isOpen={!!selectedArticleModal}
+        article={selectedArticleModal}
+        onClose={() => setSelectedArticleModal(null)}
+      />
     </div>
   );
 }

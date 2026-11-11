@@ -3,7 +3,7 @@ import { FileText, Tag, MapPin, Clock } from "lucide-react";
 
 export default function ReportSummary({ categoryTitle, title, relatedPage, isComplete }) {
   return (
-    <div className="rounded-3xl bg-white/80 backdrop-blur-xl border border-white/90 p-6 shadow-[0_10px_35px_rgba(0,43,43,0.06)] space-y-5 lg:sticky lg:top-6">
+    <div className="rounded-2xl bg-white border border-[#E2ECEB] p-6 shadow-xs space-y-5 lg:sticky lg:top-6">
       <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
         <FileText className="w-5 h-5 text-[#003B3B]" />
         <h3 className="font-poppins font-bold text-base text-[#062B2B]">

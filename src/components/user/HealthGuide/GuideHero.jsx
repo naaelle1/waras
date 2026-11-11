@@ -65,20 +65,17 @@ export default function GuideHero({ heroData, onOpenModal }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
       {/* LEFT SIDE: Hero Guide Card */}
-      <div className="lg:col-span-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 p-6 sm:p-8 shadow-[0_12px_40px_rgba(0,43,43,0.06)] flex flex-col justify-between relative overflow-hidden group">
+      <div className="lg:col-span-8 rounded-2xl bg-white border border-[#E2ECEB] p-6 sm:p-8 shadow-xs flex flex-col justify-between relative overflow-hidden group">
         
-        {/* Ambient Subtle Highlight */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A9D6C8]/20 rounded-full blur-3xl pointer-events-none -z-10" />
-
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-poppins font-bold bg-[#003B3B]/10 text-[#003B3B]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-poppins font-bold bg-[#EBF5F5] text-[#003B3B]">
               <Sparkles className="w-3.5 h-3.5 text-[#003B3B]" />
               PANDUAN UTAMA
             </span>
           </div>
 
-          <h2 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl text-[#062B2B] leading-tight tracking-tight">
+          <h2 className="font-poppins font-bold text-2xl sm:text-3xl text-[#0D2626] leading-tight tracking-tight">
             {heroData.title}
           </h2>
 
@@ -93,10 +90,10 @@ export default function GuideHero({ heroData, onOpenModal }) {
             <div className="sm:col-span-7 space-y-4">
               {heroData.steps.map((step, idx) => (
                 <div key={idx} className="flex items-start gap-3.5 group/step">
-                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#003B3B] text-white font-poppins font-bold text-xs shrink-0 mt-0.5 shadow-sm shadow-[#003B3B]/20">
+                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#003B3B] text-white font-poppins font-bold text-xs shrink-0 mt-0.5 shadow-xs">
                     {idx + 1}
                   </span>
-                  <p className="font-poppins font-bold text-sm sm:text-base text-[#062B2B] leading-snug">
+                  <p className="font-poppins font-semibold text-sm sm:text-base text-[#0D2626] leading-snug">
                     {step}
                   </p>
                 </div>
@@ -106,10 +103,10 @@ export default function GuideHero({ heroData, onOpenModal }) {
         </div>
 
         {/* Action button inside Hero Card */}
-        <div className="pt-6 mt-6 border-t border-gray-200/60 flex items-center justify-end">
+        <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-end">
           <button
             onClick={() => onOpenModal(heroData)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#003B3B] text-white font-poppins font-bold text-xs sm:text-sm hover:bg-[#002B2B] transition-all duration-200 shadow-md active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#003B3B] text-white font-poppins font-semibold text-xs sm:text-sm hover:bg-[#002D2D] transition-colors shadow-xs active:scale-95 cursor-pointer"
           >
             <span>Lihat Detail Langkah Selengkapnya</span>
             <ArrowRight className="w-4 h-4" />
@@ -118,7 +115,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
       </div>
 
       {/* RIGHT SIDE: Rich Emergency CTA Panel */}
-      <div className="lg:col-span-4 rounded-3xl bg-linear-to-br from-[#003B3B] via-[#002525] to-[#001F1F] p-7 text-white shadow-xl shadow-[#003B3B]/20 flex flex-col justify-between relative overflow-hidden border border-white/10">
+      <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-[#003B3B] to-[#002525] p-6 sm:p-7 text-white shadow-xs flex flex-col justify-between relative overflow-hidden">
         
         {/* Layered Decorative Background Waves */}
         <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 300 400" preserveAspectRatio="none">

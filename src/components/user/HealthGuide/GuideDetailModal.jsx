@@ -16,7 +16,7 @@ export default function GuideDetailModal({ isOpen, guide, onClose }) {
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-2xl rounded-3xl bg-white/95 backdrop-blur-2xl border border-white p-6 sm:p-8 shadow-2xl z-10 space-y-6 max-h-[90vh] overflow-y-auto scrollbar-thin">
+      <div className="relative w-full max-w-2xl rounded-2xl bg-white border border-[#E2ECEB] p-6 sm:p-8 shadow-2xl z-10 space-y-6 max-h-[90vh] overflow-y-auto scrollbar-thin">
         
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-4 border-b border-gray-100">

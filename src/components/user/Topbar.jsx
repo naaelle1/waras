@@ -93,7 +93,7 @@ export default function Topbar({
       </div>
 
       {/* Notification + Profile Container */}
-      <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 sm:px-4 sm:py-1.5 border border-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative">
+      <div className="flex items-center gap-2 sm:gap-3 bg-white rounded-full px-3 py-1 sm:px-4 sm:py-1.5 border border-[#E2ECEB] shadow-2xs relative">
         {/* Notification Bell */}
         <div className="relative" ref={notificationRef}>
           <button

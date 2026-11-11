@@ -54,14 +54,19 @@ const hospitalIcon = new L.DivIcon({
 // Center default on Kota Semarang (Simpang Lima area)
 const SEMARANG_CENTER = [-6.9932, 110.4203];
 
-export default function MapComponent({ facilities = [] }) {
+export default function MapComponent({
+  facilities = [],
+  className = "h-80 sm:h-96 lg:h-full min-h-[380px]"
+}) {
   // Filter facilities with valid latitude & longitude
   const mappedFacilities = facilities.filter(
     (f) => f.latitude !== null && f.longitude !== null
   );
 
   return (
-    <div className="relative w-full h-80 sm:h-100 lg:h-120 rounded-3xl overflow-hidden glass-card border border-white/80 shadow-md">
+    <div
+      className={`relative w-full rounded-2xl overflow-hidden bg-white border border-[#E2ECEB] shadow-xs ${className}`}
+    >
       <MapContainer
         center={SEMARANG_CENTER}
         zoom={13}

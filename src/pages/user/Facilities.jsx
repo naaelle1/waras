@@ -55,19 +55,19 @@ export default function Facilities() {
     <div className="space-y-8 pb-12">
       {/* SECTION 1 — PAGE HEADER */}
       <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-[#002F2F]">
+        <div className="flex items-center gap-2 text-[#003B3B]">
           <MapPin className="w-7 h-7 stroke-[2.2]" />
-          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#082C2C]">
+          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
             Fasilitas Kesehatan
           </h1>
         </div>
-        <p className="text-sm text-[#647474] font-inter">
+        <p className="text-sm text-[#526666] font-inter">
           Temukan informasi dan lokasi fasilitas kesehatan di Kota Semarang.
         </p>
       </div>
 
       {/* SECTION 2 — SEARCH AND FILTER AREA */}
-      <div className="glass-card p-4 sm:p-5 rounded-3xl space-y-4 border border-white/80">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl space-y-4 border border-[#E2ECEB] shadow-xs">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
           {/* Search Input */}
           <div className="lg:col-span-6">
@@ -85,7 +85,7 @@ export default function Facilities() {
               <select
                 value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white/90 border border-gray-200/80 rounded-full text-xs sm:text-sm text-[#082C2C] focus:outline-none focus:ring-2 focus:ring-[#002F2F]/20 transition-all font-inter appearance-none cursor-pointer"
+                className="w-full px-4 py-2.5 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl text-xs sm:text-sm text-[#0D2626] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 transition-all font-inter appearance-none cursor-pointer"
               >
                 <option value="Semua">Semua Kecamatan</option>
                 {districts
@@ -115,7 +115,7 @@ export default function Facilities() {
 
         {/* Category Filter Pills */}
         <div className="flex items-center gap-2 pt-1 overflow-x-auto scrollbar-thin">
-          <span className="text-xs font-semibold text-[#647474] mr-1 shrink-0">
+          <span className="text-xs font-semibold text-[#526666] mr-1 shrink-0">
             Kategori:
           </span>
           {["Semua", "Puskesmas", "Rumah Sakit"].map((cat) => {
@@ -126,8 +126,8 @@ export default function Facilities() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-poppins font-semibold transition-all cursor-pointer shrink-0 ${
                   active
-                    ? "bg-[#002F2F] text-white shadow-sm"
-                    : "bg-white/80 text-[#647474] hover:bg-[#DDEEEE] hover:text-[#002F2F] border border-gray-200/60"
+                    ? "bg-[#003B3B] text-white shadow-xs"
+                    : "bg-[#F8FAFA] text-[#526666] hover:bg-[#EBF5F5] hover:text-[#003B3B] border border-[#E2ECEB]"
                 }`}
               >
                 {cat}
@@ -140,22 +140,22 @@ export default function Facilities() {
       {/* SECTION 3 — INTERACTIVE MAP */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#002F2F]">
+          <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">
             Peta Lokasi Fasilitas Kesehatan
           </h3>
-          <span className="text-xs text-[#647474]">Kota Semarang</span>
+          <span className="text-xs text-[#526666]">Kota Semarang</span>
         </div>
-        <MapComponent facilities={filteredFacilities} />
+        <MapComponent facilities={filteredFacilities} className="h-80 sm:h-96 w-full" />
       </section>
 
       {/* SECTION 4 — FACILITY LIST */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#002F2F]">
+            <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">
               Daftar Fasilitas Kesehatan
             </h3>
-            <p className="text-xs text-[#647474]">
+            <p className="text-xs text-[#526666]">
               Menampilkan <strong>{filteredFacilities.length}</strong> fasilitas kesehatan dari hasil pencarian.
             </p>
           </div>
@@ -168,12 +168,12 @@ export default function Facilities() {
             ))}
           </div>
         ) : (
-          <div className="p-12 text-center glass-card rounded-3xl border border-white/80 space-y-3">
+          <div className="p-12 text-center bg-white rounded-2xl border border-[#E2ECEB] space-y-3">
             <Hospital className="w-12 h-12 text-gray-300 mx-auto" />
-            <h4 className="font-poppins font-semibold text-base text-[#082C2C]">
+            <h4 className="font-poppins font-semibold text-base text-[#0D2626]">
               Fasilitas Kesehatan Tidak Ditemukan
             </h4>
-            <p className="text-xs text-[#647474] max-w-sm mx-auto">
+            <p className="text-xs text-[#526666] max-w-sm mx-auto">
               Tidak ada fasilitas yang cocok dengan pencarian atau filter yang Anda pilih. Silakan coba kata kunci lain.
             </p>
             <Button variant="secondary" size="sm" onClick={handleResetFilters}>
