@@ -35,12 +35,12 @@ const MAIN_NAV_ITEMS = [
   },
   {
     name: "Info Kesehatan",
-    path: "/user/health-info",
+    path: "/user/health-info/articles",
     icon: BookOpen,
     subItems: [
       { name: "Artikel", path: "/user/health-info/articles" },
       { name: "Panduan Kesehatan", path: "/user/health-info/guides" },
-      { name: "Istilah Medis", path: "/user/health-info/terms" },
+      { name: "Istilah Medis", path: "/user/health-info/medical-terms" },
       { name: "Panduan Layanan", path: "/user/health-info/services" },
     ],
   },
@@ -71,7 +71,7 @@ export default function Sidebar({
   const location = useLocation();
 
   const [openDropdowns, setOpenDropdowns] = useState({
-    "Info Kesehatan": false,
+    "Info Kesehatan": true,
   });
 
   const LOGO_SRC = "/images/logo/waraslogo.svg";
@@ -113,7 +113,6 @@ export default function Sidebar({
 
   return (
     <>
-      {/* MOBILE BACKDROP OVERLAY */}
       {isMobileOpen && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
@@ -122,34 +121,31 @@ export default function Sidebar({
         />
       )}
 
-      {/* SIDEBAR PANEL */}
       <aside
         className={clsx(
-          "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out select-none",
-          "bg-white/95 backdrop-blur-md border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl",
+          "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out",
+          "bg-white/90 backdrop-blur-md border border-white/70 shadow-[0_8px_30px_rgb(0,0,0,0.05)] rounded-2xl",
           isMobileOpen ? "left-3 right-auto" : "-left-full lg:left-3",
           isCollapsed ? "w-19" : "w-67.5"
         )}
       >
-        {/* Mobile Close Button */}
         <button
           type="button"
           onClick={() => setIsMobileOpen(false)}
           className="lg:hidden absolute top-4 right-4 p-1.5 rounded-lg text-[#5F6F70] hover:bg-gray-100"
-          aria-label="Tutup sidebar"
+          aria-label="Close sidebar"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Desktop Collapse Toggle */}
         <button
           type="button"
           onClick={() => setIsCollapsed(!isCollapsed)}
           className={clsx(
             "hidden lg:flex absolute -right-3.5 top-6 z-20 h-7 w-7 items-center justify-center rounded-full",
-            "bg-[#002B2B] text-white shadow-md hover:bg-[#063B3B] transition-all duration-200 focus:outline-none"
+            "bg-[#002B2C] text-white shadow-md hover:bg-[#003536] transition-all duration-200 focus:outline-none"
           )}
-          aria-label={isCollapsed ? "Buka sidebar" : "Tutup sidebar"}
+          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {isCollapsed ? (
             <ChevronRight className="w-4 h-4" />
@@ -158,7 +154,6 @@ export default function Sidebar({
           )}
         </button>
 
-        {/* BRAND SECTION */}
         <div className="pt-6 pb-4 px-5 flex flex-col items-start min-h-22 justify-center">
           {isCollapsed ? (
             <div className="w-full flex justify-center">
@@ -171,7 +166,7 @@ export default function Sidebar({
                   e.target.nextSibling.style.display = "flex";
                 }}
               />
-              <span className="hidden h-8 w-8 rounded-lg bg-[#002B2B] text-white font-bold text-lg items-center justify-center">
+              <span className="hidden h-8 w-8 rounded-lg bg-[#002B2C] text-white font-bold text-lg items-center justify-center">
                 W
               </span>
             </div>
@@ -186,24 +181,21 @@ export default function Sidebar({
                   e.target.nextSibling.style.display = "block";
                 }}
               />
-              <span className="hidden font-bold text-2xl tracking-wide text-[#062D2D]">
+              <span className="hidden font-bold text-2xl tracking-wide text-[#002B2C]">
                 waras
               </span>
-              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#062D2D] uppercase mt-0.5">
+              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#002B2C] uppercase mt-0.5">
                 HEALTHCARE PLATFORM
               </span>
             </div>
           )}
         </div>
 
-        {/* Top Divider */}
         <div className="px-5 my-1">
           <div className="h-px w-full bg-[#DDE5E5]" />
         </div>
 
-        {/* NAVIGATION BODY */}
         <div className="flex-1 overflow-y-auto px-3.5 py-2 space-y-5 scrollbar-thin">
-          {/* MAIN SECTION */}
           <div>
             {!isCollapsed && (
               <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase">
@@ -216,11 +208,10 @@ export default function Sidebar({
                 const hasSubItems = Boolean(item.subItems?.length);
                 const isDropdownOpen = Boolean(openDropdowns[item.name]);
 
-                const isParentRouteActive = location.pathname === item.path;
                 const isChildActive = item.subItems?.some(
-                  (sub) => location.pathname === sub.path
+                  (sub) => location.pathname === sub.path || location.pathname.startsWith(sub.path)
                 );
-                const isHeaderActive = isParentRouteActive || isChildActive;
+                const isHeaderActive = location.pathname.startsWith("/user/health-info") || isChildActive;
 
                 if (hasSubItems) {
                   return (
@@ -234,8 +225,8 @@ export default function Sidebar({
                         className={clsx(
                           "w-full group relative flex items-center h-11 px-3.5 rounded-xl font-medium text-sm transition-all duration-200 select-none",
                           isHeaderActive
-                            ? "bg-[#002B2B] text-white shadow-sm font-semibold"
-                            : "text-[#062D2D] hover:bg-[#002B2B]/5"
+                            ? "bg-[#002B2C] text-white shadow-sm font-semibold"
+                            : "text-[#002B2C] hover:bg-[#002B2C]/6"
                         )}
                       >
                         <div className="flex items-center justify-center min-w-5.5">
@@ -244,7 +235,7 @@ export default function Sidebar({
                               "w-5 h-5 transition-colors duration-200",
                               isHeaderActive
                                 ? "text-white"
-                                : "text-[#5F6F70] group-hover:text-[#062D2D]"
+                                : "text-[#5F6F70] group-hover:text-[#002B2C]"
                             )}
                             strokeWidth={2}
                           />
@@ -264,7 +255,6 @@ export default function Sidebar({
                         )}
                       </button>
 
-                      {/* Sub-items */}
                       {!isCollapsed && isDropdownOpen && (
                         <div className="pt-1 pb-1 ml-5 pl-2 space-y-1">
                           {item.subItems.map((sub, index) => {
@@ -279,14 +269,14 @@ export default function Sidebar({
                                   clsx(
                                     "relative flex items-center h-10 pl-4 pr-3.5 rounded-xl text-[14px] font-medium transition-all duration-200 select-none",
                                     isActive
-                                      ? "bg-[#002B2B] text-white font-semibold shadow-sm"
-                                      : "text-[#062D2D] hover:bg-[#002B2B]/5"
+                                      ? "bg-[#002B2C] text-white font-semibold shadow-sm"
+                                      : "text-[#002B2C] hover:bg-[#002B2C]/6"
                                   )
                                 }
                               >
-                                <span className="absolute -left-2.5 top-0 bottom-1/2 w-3.5 border-l-2 border-b-2 border-[#062D2D] rounded-bl-xl pointer-events-none" />
+                                <span className="absolute -left-2.5 top-0 bottom-1/2 w-3.5 border-l-2 border-b-2 border-[#002B2C] rounded-bl-xl pointer-events-none" />
                                 {!isLast && (
-                                  <span className="absolute -left-2.5 top-1/2 bottom-0 border-l-2 border-[#062D2D] pointer-events-none" />
+                                  <span className="absolute -left-2.5 top-1/2 bottom-0 border-l-2 border-[#002B2C] pointer-events-none" />
                                 )}
                                 <span className="truncate">{sub.name}</span>
                               </NavLink>
@@ -308,8 +298,8 @@ export default function Sidebar({
                       clsx(
                         "group relative flex items-center h-11 px-3.5 rounded-xl font-medium text-sm transition-all duration-200 select-none",
                         isActive
-                          ? "bg-[#002B2B] text-white shadow-sm font-semibold"
-                          : "text-[#5F6F70] hover:bg-[#002B2B]/5 hover:text-[#062D2D]"
+                          ? "bg-[#002B2C] text-white shadow-sm font-semibold"
+                          : "text-[#5F6F70] hover:bg-[#002B2C]/6 hover:text-[#002B2C]"
                       )
                     }
                   >
@@ -321,7 +311,7 @@ export default function Sidebar({
                               "w-5 h-5 transition-colors duration-200",
                               isActive
                                 ? "text-white"
-                                : "text-[#5F6F70] group-hover:text-[#062D2D]"
+                                : "text-[#5F6F70] group-hover:text-[#002B2C]"
                             )}
                             strokeWidth={2}
                           />
@@ -334,7 +324,7 @@ export default function Sidebar({
                         )}
 
                         {isCollapsed && (
-                          <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#062D2D] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
+                          <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#002B2C] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                             {item.name}
                           </div>
                         )}
@@ -346,12 +336,10 @@ export default function Sidebar({
             </nav>
           </div>
 
-          {/* Section Divider */}
           <div className="px-1.5">
             <div className="h-px w-full bg-[#DDE5E5]" />
           </div>
 
-          {/* SETTINGS SECTION */}
           <div>
             {!isCollapsed && (
               <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase">
@@ -372,8 +360,8 @@ export default function Sidebar({
                       clsx(
                         "group relative flex items-center h-11 px-3.5 rounded-xl font-medium text-sm transition-all duration-200 select-none",
                         isActive
-                          ? "bg-[#002B2B] text-white shadow-sm font-semibold"
-                          : "text-[#5F6F70] hover:bg-[#002B2B]/5 hover:text-[#062D2D]"
+                          ? "bg-[#002B2C] text-white shadow-sm font-semibold"
+                          : "text-[#5F6F70] hover:bg-[#002B2C]/6 hover:text-[#002B2C]"
                       )
                     }
                   >
@@ -385,7 +373,7 @@ export default function Sidebar({
                               "w-5 h-5 transition-colors duration-200",
                               isActive
                                 ? "text-white"
-                                : "text-[#5F6F70] group-hover:text-[#062D2D]"
+                                : "text-[#5F6F70] group-hover:text-[#002B2C]"
                             )}
                             strokeWidth={2}
                           />
@@ -402,7 +390,7 @@ export default function Sidebar({
                         )}
 
                         {isCollapsed && (
-                          <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#062D2D] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
+                          <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#002B2C] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                             {item.name}
                           </div>
                         )}
@@ -415,7 +403,6 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* BOTTOM SECTION */}
         <div className="mt-auto p-3.5 pt-2 border-t border-transparent space-y-1">
           <NavLink
             to="/user/help"
@@ -425,8 +412,8 @@ export default function Sidebar({
               clsx(
                 "group relative flex items-center h-11 px-3.5 rounded-xl font-medium text-sm transition-all duration-200 select-none",
                 isActive
-                  ? "bg-[#002B2B] text-white font-semibold"
-                  : "text-[#5F6F70] hover:bg-[#002B2B]/5 hover:text-[#062D2D]"
+                  ? "bg-[#002B2C] text-white font-semibold"
+                  : "text-[#5F6F70] hover:bg-[#002B2C]/6 hover:text-[#002B2C]"
               )
             }
           >
@@ -436,14 +423,18 @@ export default function Sidebar({
                   <CircleHelp
                     className={clsx(
                       "w-5 h-5",
-                      isActive ? "text-white" : "text-[#5F6F70] group-hover:text-[#062D2D]"
+                      isActive
+                        ? "text-white"
+                        : "text-[#5F6F70] group-hover:text-[#002B2C]"
                     )}
                     strokeWidth={2}
                   />
                 </div>
-                {!isCollapsed && <span className="ml-3 truncate text-[14px]">Help</span>}
+                {!isCollapsed && (
+                  <span className="ml-3 truncate text-[14px]">Help</span>
+                )}
                 {isCollapsed && (
-                  <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#062D2D] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
+                  <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#002B2C] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                     Help
                   </div>
                 )}
@@ -455,13 +446,15 @@ export default function Sidebar({
             type="button"
             onClick={handleLogout}
             title={isCollapsed ? "Logout Account" : undefined}
-            className="group relative w-full flex items-center h-11 px-3.5 rounded-xl font-medium text-sm text-[#FF5A5A] hover:bg-[#FF5A5A]/10 transition-all duration-200 select-none"
+            className="group relative w-full flex items-center h-11 px-3.5 rounded-xl font-medium text-sm text-[#FF5A5A] hover:bg-[#FF5A5A]/8 transition-all duration-200 select-none"
           >
             <div className="flex items-center justify-center min-w-5.5">
               <LogOut className="w-5 h-5 text-[#FF5A5A]" strokeWidth={2} />
             </div>
             {!isCollapsed && (
-              <span className="ml-3 truncate font-medium text-[14px]">Logout Account</span>
+              <span className="ml-3 truncate font-medium text-[14px]">
+                Logout Account
+              </span>
             )}
             {isCollapsed && (
               <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#FF5A5A] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">

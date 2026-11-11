@@ -1,17 +1,15 @@
-import { articlesData } from "../data/articles";
+import { articles } from "../data/articles";
 
 /**
- * Mock AI Service for WARAS Assistant
- * Simulates intelligent, safe healthcare responses and attaches relevant educational articles.
+ * Mock AI Service untuk WARAS Assistant
  */
 export const aiService = {
   async sendMessage(userMessage) {
-    // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 650));
 
     const text = userMessage.toLowerCase();
 
-    // 1. Symptom Query Handling
+    // 1. Demam / Batuk / Gejala
     if (
       text.includes("demam") ||
       text.includes("batuk") ||
@@ -28,11 +26,11 @@ export const aiService = {
         type: "symptom_information",
         message:
           "Gejala yang Anda sampaikan (seperti demam atau batuk) dapat memiliki berbagai penyebab, seperti infeksi saluran pernapasan ringan, reaksi imunitas, atau perubahan cuaca. WARAS Assistant tidak memberikan diagnosis medis spesifik. Apabila gejala berlanjut lebih dari 3 hari, memberat, atau disertai sesak napas, disarankan untuk mengonsultasikannya langsung dengan dokter di fasilitas kesehatan terdekat.",
-        relatedArticleIds: ["art-1", "art-2"],
+        relatedArticleIds: [1, 2, 6],
       };
     }
 
-    // 2. Facility / Puskesmas Search Query Handling
+    // 2. Puskesmas / Faskes
     if (
       text.includes("puskesmas") ||
       text.includes("rumah sakit") ||
@@ -48,12 +46,12 @@ export const aiService = {
         type: "facility_recommendation",
         message:
           "Untuk penanganan kesehatan langsung di Kota Semarang, Anda dapat mengunjungi Puskesmas terdekat (seperti Puskesmas Pandanaran atau Miroto) untuk pelayanan tingkat pertama, atau Rumah Sakit Umum rujukan. Gunakan fitur Peta Fasilitas Kesehatan WARAS untuk melihat jam operasional dan lokasi persisnya.",
-        relatedArticleIds: ["art-2"],
+        relatedArticleIds: [2],
         showFacilityCTA: true,
       };
     }
 
-    // 3. Immunization / Prevention Query Handling
+    // 3. Imunisasi & Vaksin
     if (
       text.includes("imunisasi") ||
       text.includes("vaksin") ||
@@ -67,11 +65,11 @@ export const aiService = {
         type: "general",
         message:
           "Imunisasi rutin sangat penting untuk membangun ketahanan tubuh, terutama bagi bayi dan anak-anak. Di Kota Semarang, pelayanan imunisasi dasar seperti BCG, DPT, Polio, dan Campak tersedia di seluruh Puskesmas pada hari kerja.",
-        relatedArticleIds: ["art-1", "art-3"],
+        relatedArticleIds: [1, 3],
       };
     }
 
-    // 4. Default General Health Response
+    // 4. Respon Umum
     return {
       id: `ai-${Date.now()}`,
       sender: "ai",
@@ -79,11 +77,11 @@ export const aiService = {
       type: "general",
       message:
         "Terima kasih telah bertanya kepada WARAS Assistant. Saya dapat membantu Anda memahami informasi seputar kesehatan umum, persiapan ke fasilitas kesehatan, serta artikel edukasi terpercaya untuk warga Kota Semarang. Apa ada hal spesifik yang ingin Anda ketahui lebih lanjut?",
-      relatedArticleIds: ["art-1", "art-2", "art-3"],
+      relatedArticleIds: [1, 2, 3],
     };
   },
 
   getArticlesByIds(ids = []) {
-    return articlesData.filter((art) => ids.includes(art.id));
+    return articles.filter((art) => ids.includes(art.id));
   },
 };
