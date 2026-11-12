@@ -11,7 +11,7 @@ function getAiClient() {
   if (!aiClient) {
     aiClient = new GoogleGenAI({
       apiKey,
-      httpOptions: { timeout: 10000 },
+      httpOptions: { timeout: 25000 },
     });
   }
   return aiClient;

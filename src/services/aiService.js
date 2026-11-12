@@ -13,7 +13,7 @@ export const aiService = {
    * @param {Array}  history  - riwayat pesan untuk konteks multi-turn
    */
   async sendMessage(userMessage, history = []) {
-    try {
+    const tryFetch = async () => {
       const res = await fetch(`${API_BASE}/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,15 +25,23 @@ export const aiService = {
       }
 
       const json = await res.json();
-
       if (!json.success) {
         throw new Error(json.message || "Respons tidak valid dari server.");
       }
-
       return json.data;
+    };
+
+    try {
+      return await tryFetch();
     } catch (err) {
-      console.error("[aiService] Gagal menghubungi backend, menggunakan fallback:", err.message);
-      return aiService._fallback(userMessage);
+      console.warn("[aiService] Percobaan pertama gagal, mencoba kembali:", err.message);
+      try {
+        await new Promise((r) => setTimeout(r, 1000));
+        return await tryFetch();
+      } catch (retryErr) {
+        console.error("[aiService] Gagal menghubungi backend setelah retry, menggunakan fallback:", retryErr.message);
+        return aiService._fallback(userMessage);
+      }
     }
   },
 
