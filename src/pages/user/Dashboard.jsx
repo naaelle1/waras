@@ -91,69 +91,122 @@ export default function Dashboard() {
       </div>
 
       {/* SECTION 2: WELCOME HERO BANNER */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#003B3B] via-[#004242] to-[#002D2D] text-white p-6 lg:p-8 shadow-sm">
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          <div className="lg:col-span-7 space-y-3.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-[#DDEEEE] border border-white/20">
-              <Sparkles className="w-3.5 h-3.5" /> Portal Kesehatan Terpadu Kota Semarang
-            </span>
-            <h2 className="font-poppins font-bold text-2xl lg:text-4xl leading-tight">
+      <section className="relative w-full overflow-hidden rounded-3xl bg-[#003B3B] p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(0,59,59,0.15)]">
+        {/* DEKORASI SVG FIGMA */}
+        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <svg
+            className="w-full h-full object-cover"
+            preserveAspectRatio="none"
+            viewBox="0 0 1440 437"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <mask
+              id="mask0_154_6419"
+              style={{ maskType: "alpha" }}
+              maskUnits="userSpaceOnUse"
+              x="-22"
+              y="0"
+              width="1526"
+              height="644"
+            >
+              <rect
+                x="-21.5717"
+                y="216.55"
+                width="1478.35"
+                height="431.236"
+                transform="rotate(-8.42308 -21.5717 216.55)"
+                fill="#C4C4C4"
+              />
+            </mask>
+            <g mask="url(#mask0_154_6419)">
+              <g opacity="0.05">
+                <path
+                  d="M1515.04 106.21C1515.04 106.21 1479.05 144.573 1174.49 197.569C944.011 237.673 492.796 195.637 230.373 241.502C-39.7321 288.641 -0.135085 355.024 -7.1507 307.647L3.33789 378.478C3.33789 378.478 84.0207 298.473 241.502 275.771C473.097 242.507 970.597 317.04 1198.76 287.855C1421.28 259.369 1522.06 153.588 1522.06 153.588L1515.04 106.21Z"
+                  fill="white"
+                />
+              </g>
+              <g opacity="0.1">
+                <path
+                  d="M1465.08 92.3023C979.851 431.606 579.315 131.724 301.597 180.662C15.6588 231.092 5.94788 378.047 -1.94859 324.721L9.86135 404.475C9.86135 404.475 99.4007 357.504 259.746 323.434C841.544 199.818 924.335 522.66 1192.07 447.213C1459.81 371.766 1598.83 -1.22344 1465.08 92.3023Z"
+                  fill="white"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        {/* KONTEN UTAMA DI LAYER ATAS (z-10) */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Kolom Kiri: Sapaan & Tombol Pill */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
+              <span>Portal Kesehatan Terpadu Kota Semarang</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins">
               Halo, Nael! 👋
-            </h2>
-            <p className="text-xs lg:text-sm text-gray-200 font-inter max-w-xl leading-relaxed">
+            </h1>
+
+            <p className="text-sm sm:text-base text-teal-100/80 leading-relaxed max-w-xl font-inter">
               Temukan fasilitas kesehatan terdekat, pantau antrean terkini secara transparan, atau konsultasikan keluhan awal dengan WARAS AI dalam beberapa detik.
             </p>
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Link to="/user/facilities">
-                <Button variant="secondary" leftIcon={Search}>
-                  Cari Fasilitas Kesehatan
-                </Button>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                to="/user/facilities"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#003B3B] shadow-sm hover:bg-teal-50 transition-all cursor-pointer hover:shadow"
+              >
+                <Search className="w-4 h-4" />
+                <span>Cari Fasilitas Kesehatan</span>
               </Link>
-              <Link to="/user/ai">
-                <Button
-                  variant="outline"
-                  className="text-white border-white/30 hover:bg-white/10"
-                  leftIcon={Bot}
-                >
-                  Konsultasi WARAS AI
-                </Button>
+
+              <Link
+                to="/user/ai"
+                className="inline-flex items-center gap-2 rounded-full bg-[#004D4D]/80 border border-teal-400/25 px-5 py-2.5 text-xs sm:text-sm font-medium text-white backdrop-blur-md hover:bg-[#005959] transition-all cursor-pointer"
+              >
+                <Bot className="w-4 h-4 text-[#37F4B4]" />
+                <span>Konsultasi WARAS AI</span>
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-sm bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5 text-white shadow-inner space-y-3">
-              <div className="flex items-center justify-between border-b border-white/15 pb-2.5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#DDEEEE]">
+          {/* Kolom Kanan: Panel Kesiapan Layanan Medis */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-5 shadow-inner">
+              <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+                <span className="text-[11px] font-bold tracking-wider uppercase text-teal-100/90 font-poppins">
                   Kesiapan Layanan Medis
                 </span>
-                <span className="inline-flex items-center gap-1 text-[11px] text-emerald-300 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#37F4B4] font-inter">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
                   Live Data
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-2.5 pt-0.5">
-                <div className="bg-white/10 rounded-xl p-2.5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white">37</span>
-                  <span className="text-[11px] text-gray-200">Puskesmas Aktif</span>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
+                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">37</span>
+                  <span className="text-[11px] text-teal-100/75 font-inter">Puskesmas Aktif</span>
                 </div>
-                <div className="bg-white/10 rounded-xl p-2.5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white">14</span>
-                  <span className="text-[11px] text-gray-200">RS Rujukan</span>
+                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
+                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">14</span>
+                  <span className="text-[11px] text-teal-100/75 font-inter">RS Rujukan</span>
                 </div>
-                <div className="bg-white/10 rounded-xl p-2.5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white">~15 m</span>
-                  <span className="text-[11px] text-gray-200">Rata-rata Antrean</span>
+                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
+                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">~15 m</span>
+                  <span className="text-[11px] text-teal-100/75 font-inter">Rata-rata Antrean</span>
                 </div>
-                <div className="bg-white/10 rounded-xl p-2.5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white">24/7</span>
-                  <span className="text-[11px] text-gray-200">WARAS AI Siaga</span>
+                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
+                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">24/7</span>
+                  <span className="text-[11px] text-teal-100/75 font-inter">WARAS AI Siaga</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* SECTION 3: QUICK ACCESS */}
       <section className="space-y-4">
