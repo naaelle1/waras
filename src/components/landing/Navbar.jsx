@@ -1,162 +1,141 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import {
-  House,
-  MapPin,
-  Clock,
-  Bot,
-  BookOpen,
-  ArrowRight,
-  Menu,
-  X,
-  ShieldCheck,
-  Sparkles,
-  LogIn
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { navLinks } from "../../data/landingData";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const { scrollY } = useScroll();
+  const [activeSection, setActiveSection] = useState("beranda");
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 30);
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 25);
 
-  const navLinks = [
-    { name: "Beranda", href: "#hero" },
-    { name: "Fitur", href: "#features" },
-    { name: "Cara Kerja", href: "#how-it-works" },
-    { name: "Antrean & Faskes", href: "#faskes" },
-    { name: "WARAS AI", href: "#ai" },
-    { name: "Tentang", href: "#about" },
-  ];
-
-  const handleNavClick = (e, href) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const el = document.querySelector(href);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        setMobileMenuOpen(false);
+      const sections = ["beranda", "tentang", "fitur", "panduan", "faskes", "faq"];
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom >= 160) {
+            setActiveSection(section);
+            break;
+          }
+        }
       }
-    }
-  };
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pt-3 sm:pt-4 transition-all duration-300">
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`w-full max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/90 backdrop-blur-md border border-[#E2ECEB] shadow-sm"
-            : "bg-white/70 backdrop-blur-xs border border-white/80 shadow-2xs"
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none">
+      <div
+        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 pointer-events-auto flex items-center justify-between ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-xl border border-black/5 shadow-[0_12px_40px_rgba(0,61,59,0.12)] py-2.5 px-5 sm:px-6"
+            : "bg-white/85 backdrop-blur-md border border-white/80 shadow-[0_4px_24px_rgba(0,61,59,0.06)] py-3 px-5 sm:px-7"
         }`}
       >
-        {/* LOGO & BRAND */}
-        <Link to="/" className="flex items-center gap-2.5 group select-none">
-          <div className="w-9 h-9 rounded-xl bg-[#003B3B] text-white flex items-center justify-center font-bold text-base shadow-xs group-hover:scale-105 transition-transform">
-            W
-          </div>
-          <div className="flex flex-col">
-            <span className="font-poppins font-extrabold text-lg tracking-tight text-[#003B3B] leading-none">
-              waras
-            </span>
-            <span className="text-[9px] font-semibold tracking-[0.16em] text-[#526666] uppercase mt-0.5">
-              SEMARANG HEALTH
-            </span>
-          </div>
-        </Link>
+        {/* LOGO */}
+        <a href="#beranda" className="flex items-center gap-2.5 group cursor-pointer shrink-0">
+          <img
+            src="/images/logo/waraslogo.svg"
+            alt="WARAS Logo"
+            className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+          />
+        </a>
 
-        {/* DESKTOP NAV LINKS */}
-        <div className="hidden lg:flex items-center gap-1 bg-[#F8FAFA] p-1 rounded-xl border border-[#E2ECEB]">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#526666] hover:text-[#003B3B] hover:bg-white transition-all cursor-pointer select-none"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+        {/* DESKTOP NAV PILL */}
+        <nav className="hidden lg:flex items-center gap-1 bg-[#F5F8F7] p-1 rounded-full border border-black/5">
+          {navLinks.map((link) => {
+            const sectionId = link.href.replace("#", "");
+            const isActive = activeSection === sectionId;
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-[#003D3B] text-[#63D6AE] shadow-xs"
+                    : "text-[#647777] hover:text-[#062E2B] hover:bg-black/5"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
+        </nav>
 
-        {/* ACTIONS */}
-        <div className="hidden sm:flex items-center gap-2.5">
+        {/* CTA BUTTONS */}
+        <div className="hidden sm:flex items-center gap-2.5 shrink-0">
           <Link
             to="/login"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#003B3B] hover:bg-[#EBF5F5] transition-colors min-h-[44px]"
+            className="px-4 py-2 rounded-full text-xs font-bold text-[#003D3B] hover:text-[#005B52] hover:bg-[#003D3B]/5 transition-colors cursor-pointer"
           >
-            <LogIn className="w-3.5 h-3.5" />
-            <span>Masuk</span>
+            Masuk
           </Link>
-
           <Link
             to="/user/dashboard"
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold shadow-xs hover:shadow transition-all duration-200 active:scale-95 min-h-[44px]"
+            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-[#003D3B] text-white text-xs font-bold shadow-md shadow-[#003D3B]/25 hover:bg-[#005B52] active:scale-95 transition-all cursor-pointer group"
           >
-            <span>Buka Dashboard</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Mulai Sekarang</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#63D6AE] transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
         {/* MOBILE MENU TOGGLE */}
         <div className="flex sm:hidden items-center gap-2">
           <Link
-            to="/login"
-            className="p-2.5 rounded-xl text-xs font-semibold text-[#003B3B] hover:bg-[#EBF5F5] min-h-[44px] min-w-[44px] flex items-center justify-center"
+            to="/user/dashboard"
+            className="px-3 py-1.5 rounded-full bg-[#003D3B] text-white text-[11px] font-bold"
           >
-            Masuk
+            Mulai
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl bg-[#F8FAFA] text-[#003B3B] border border-[#E2ECEB] min-h-[44px] min-w-[44px] flex items-center justify-center"
-            aria-label="Toggle navigation menu"
+            className="p-1.5 rounded-full text-[#062E2B] hover:bg-black/5 transition-colors focus:outline-none"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </motion.nav>
+      </div>
 
-      {/* MOBILE EXPANDED MENU */}
+      {/* MOBILE DROPDOWN */}
       {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="lg:hidden fixed top-20 left-4 right-4 bg-white rounded-2xl border border-[#E2ECEB] p-5 shadow-xl space-y-4 z-50"
-        >
-          <div className="flex flex-col space-y-2">
+        <div className="lg:hidden pointer-events-auto max-w-md mx-auto mt-2 p-4 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/80 shadow-[0_20px_50px_rgba(0,61,59,0.2)] flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="px-3 py-2.5 rounded-xl text-sm font-semibold text-[#0D2626] hover:bg-[#EBF5F5] hover:text-[#003B3B] transition-colors min-h-[44px] flex items-center"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2.5 rounded-2xl text-sm font-semibold text-[#062E2B] hover:bg-[#F5F8F7] hover:text-[#003D3B] transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </div>
-
           <div className="pt-3 border-t border-gray-100 flex flex-col gap-2">
+            <Link
+              to="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2.5 rounded-xl text-xs font-bold text-[#003D3B] bg-[#F5F8F7]"
+            >
+              Masuk ke Akun
+            </Link>
             <Link
               to="/user/dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#003B3B] text-white text-sm font-semibold shadow-xs"
+              className="w-full text-center py-2.5 rounded-xl text-xs font-bold text-white bg-[#003D3B] shadow-md shadow-[#003D3B]/20"
             >
-              <span>Buka Dashboard Warga</span>
-              <ArrowRight className="w-4 h-4" />
+              Mulai Sekarang
             </Link>
           </div>
-        </motion.div>
+        </div>
       )}
     </header>
   );
 }
-

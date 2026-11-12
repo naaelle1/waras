@@ -1,10 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+// Layouts & Public Pages
 import UserLayout from "../layouts/UserLayout";
 import Home from "../pages/landing/Home";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
+
+// User Dashboard Pages
 import Dashboard from "../pages/user/Dashboard";
 import Facilities from "../pages/user/Facilities";
 import FacilityDetail from "../pages/user/FacilityDetail";
@@ -16,20 +20,7 @@ import HealthGuide from "../pages/user/HealthGuide";
 import ServicesGuide from "../pages/user/ServicesGuide";
 import ReportProblem from "../pages/user/ReportProblem";
 
-const ServicesGuidePlaceholder = () => (
-  <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Panduan Layanan</h2>
-    <p className="text-sm text-[#5F6F70] mt-1">Halaman panduan layanan rujukan faskes sedang disiapkan.</p>
-  </div>
-);
-
-const ReportProblemPage = () => (
-  <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Laporkan Kesalahan</h2>
-    <p className="text-sm text-[#5F6F70] mt-1">Halaman formulir laporan komunitas sedang disiapkan.</p>
-  </div>
-);
-
+// Placeholder Pages (Temporary)
 const SettingsPage = () => (
   <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
     <h2 className="text-xl font-bold text-[#002B2C]">Settings</h2>
@@ -61,7 +52,7 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        {/* Portal Aplikasi Dashboard Pengguna Warga */}
+        {/* Portal Aplikasi Dashboard Pengguna WARAS */}
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<Navigate to="/user/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -78,12 +69,14 @@ export default function AppRoutes() {
           <Route path="health-info/terms" element={<Navigate to="/user/health-info/medical-terms" replace />} />
           <Route path="health-info/services" element={<ServicesGuide />} />
 
+          {/* Rute Fitur Tambahan & Akun */}
           <Route path="report-problem" element={<ReportProblem />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="help" element={<HelpPage />} />
         </Route>
 
+        {/* Fallback Redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
