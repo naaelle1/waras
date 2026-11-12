@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logo from "../../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -90,7 +91,7 @@ export default function Register() {
 
   return (
     <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
-      {/* ── PANEL KIRI: FULL-HEIGHT BRANDING & STEP CARDS (lg:col-span-5) ── */}
+      {/* â”€â”€ PANEL KIRI: FULL-HEIGHT BRANDING & STEP CARDS (lg:col-span-5) â”€â”€ */}
       <aside className="lg:col-span-5 bg-[#031b17] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-12 lg:p-14 min-h-[540px] lg:min-h-screen">
         {/* Ambient Organic Glow Layers - Exact Match to Reference */}
         <div
@@ -103,30 +104,22 @@ export default function Register() {
         <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-teal-500/15 blur-[100px]" />
         <div className="pointer-events-none absolute bottom-0 right-0 w-96 h-96 rounded-full bg-emerald-500/20 blur-[120px]" />
 
-        {/* Subtle Background Geometric Texture */}
-        <div
-          className="absolute inset-0 opacity-[0.035] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-            backgroundSize: "36px 36px"
-          }}
+        {/* Wave Pattern Overlay from Mask Group.svg */}
+        <img
+          src="/images/mask-group.svg"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="pointer-events-none absolute inset-0 w-full h-full object-cover select-none"
         />
 
         {/* TOP: Brand Logo & Title */}
         <div className="relative z-10">
-          <Link to="/" className="inline-flex items-center gap-3 group w-fit">
-            <div className="w-10 h-10 rounded-xl bg-white text-[#003B3B] font-black flex items-center justify-center text-lg shadow-sm transition-transform duration-200 group-hover:scale-105">
-              W
-            </div>
-            <div className="flex flex-col">
-              <span className="font-poppins font-extrabold text-2xl tracking-tight text-white leading-none">
-                waras
-              </span>
-              <span className="text-[10px] font-semibold tracking-[0.2em] text-teal-200/90 uppercase mt-0.5">
-                HEALTHCARE PLATFORM
-              </span>
-            </div>
+          <Link to="/" aria-label="WARAS - Beranda" className="inline-flex flex-col items-start gap-1.5 group w-fit">
+            <Logo tone="dark" className="h-9 transition-transform duration-200 group-hover:scale-105 origin-left" />
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-teal-200/90 uppercase">
+              HEALTHCARE PLATFORM
+            </span>
           </Link>
         </div>
 
@@ -183,7 +176,7 @@ export default function Register() {
         </div>
       </aside>
 
-      {/* ── PANEL KANAN: FULL-HEIGHT CLEAN FORM (lg:col-span-7) ── */}
+      {/* â”€â”€ PANEL KANAN: FULL-HEIGHT CLEAN FORM (lg:col-span-7) â”€â”€ */}
       <main className="lg:col-span-7 bg-white min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14">
         {/* Top Navigation Bar */}
         <div className="w-full flex items-center justify-between pb-6">
