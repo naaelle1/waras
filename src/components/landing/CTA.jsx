@@ -1,52 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, HeartPulse } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="px-4 sm:px-8 lg:px-12 py-16 bg-white">
+    <section className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#014751]/10">
       <div className="max-w-[1480px] mx-auto">
         
-        {/* BIG ROUNDED CTA CARD (Matching Reference Aesthetic) */}
-        <div className="relative rounded-[2.5rem] bg-[#014751] p-10 sm:p-14 lg:p-16 text-white shadow-[0_20px_50px_rgba(1,71,81,0.18)] overflow-hidden text-center">
+        {/* CLEAN SEAMLESS CTA CONTAINER (Seiras dengan halaman di atasnya, tanpa warna nabrak & tanpa tag pengganggu) */}
+        <div className="relative rounded-3xl sm:rounded-[2.5rem] bg-gradient-to-b from-[#F5FCFC] to-[#EDF9F9] border border-[#014751]/10 p-10 sm:p-14 lg:p-16 text-center overflow-hidden">
           
-          {/* MASK GROUP.SVG BACKGROUND */}
-          <div className="absolute inset-x-0 bottom-0 w-full pointer-events-none select-none z-0 opacity-20">
-            <img
-              src="/Mask Group.svg"
-              alt=""
-              className="w-full h-auto object-cover object-bottom"
-            />
-          </div>
-
-          <div className="relative z-10 max-w-2xl mx-auto space-y-6">
+          <div className="relative z-10 max-w-2xl mx-auto space-y-5">
             
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#37F4B4] text-xs font-mono uppercase tracking-wider border border-white/15">
-              <HeartPulse className="w-3.5 h-3.5" />
-              <span>Platform Publik Kota Semarang</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-light text-white tracking-tight leading-[1.12]">
-              Layanan Kesehatan Publik <br />
-              <span className="font-normal text-[#37F4B4]">Untuk Kita Semua.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
+              Layanan Kesehatan Publik, <br />
+              <span className="font-normal text-[#014751]">Untuk Kita Semua.</span>
             </h2>
 
-            <p className="text-white/80 text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed">
+            <p className="text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
               Mulai temukan fasilitas siaga terdekat, panduan darurat terverifikasi, dan nomor darurat 119 sekarang juga tanpa biaya.
             </p>
 
-            <div className="pt-2">
+            <div className="pt-3">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#37F4B4] text-[#022022] text-xs sm:text-sm font-medium shadow-md hover:bg-white active:scale-95 transition-all group"
+                className="inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#014751] text-white text-xs sm:text-sm font-medium hover:bg-[#022022] active:scale-95 transition-all shadow-sm group"
               >
                 <span>Cari Fasilitas Kesehatan</span>
-                <ArrowRight className="w-4 h-4 text-[#022022] transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-[#37F4B4] transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
-            <p className="text-[11px] text-white/60 font-light">
-              100% Layanan Terbuka • Gratis Tanpa Biaya • Resmi Kota Semarang
+            <p className="text-[11px] text-[#022022]/55 font-light pt-2">
+              100% Layanan Terbuka • Gratis Tanpa Biaya • Terhubung Resmi Kota Semarang
             </p>
 
           </div>

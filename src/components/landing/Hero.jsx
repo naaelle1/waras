@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="beranda" className="w-full pt-6 pb-16 bg-white relative overflow-hidden">
+    <section id="beranda" className="w-full pt-8 pb-16 bg-white relative overflow-hidden">
       {/* 
-        MASK GROUP.SVG: 
-        Single unified background layer directly on the white canvas!
-        No 2nd layer card, no box borders.
+        MASK GROUP.SVG BACKGROUND:
+        Positioned towards the right side and masked to fade out on the left!
+        This guarantees the text on the left NEVER collides with background curves.
       */}
-      <div className="absolute inset-x-0 bottom-0 w-full pointer-events-none select-none z-0 opacity-45">
+      <div 
+        className="absolute right-0 bottom-0 w-full lg:w-3/5 h-auto pointer-events-none select-none z-0 opacity-45 [mask-image:linear-gradient(to_right,transparent_0%,black_45%)]"
+      >
         <img
           src="/Mask Group.svg"
           alt=""
@@ -20,12 +21,12 @@ export default function Hero() {
       </div>
 
       <div className="max-w-[1480px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center min-h-[460px] lg:min-h-[520px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center min-h-[460px] lg:min-h-[500px]">
           
-          {/* LEFT SIDE: CLEAN POLOS EDITORIAL HEADLINE */}
+          {/* LEFT SIDE: CLEAN POLOS EDITORIAL TYPOGRAPHY ON 100% WHITE CANVAS */}
           <div className="lg:col-span-7 xl:col-span-7 space-y-6 sm:space-y-7">
             
-            {/* Simple Polos Category Label (No Pill Badge) */}
+            {/* Simple Polos Category Label */}
             <span className="text-xs font-mono uppercase tracking-wider text-[#014751] block">
               PORTAL LAYANAN PUBLIK KOTA SEMARANG
             </span>
@@ -36,7 +37,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-[64px] xl:text-[72px] font-light text-[#022022] leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-6xl lg:text-[62px] xl:text-[70px] font-light text-[#022022] leading-[1.12] tracking-tight">
                 Kesehatan Lebih{" "}
                 <span className="font-normal text-[#014751] block sm:inline">
                   Mudah Diakses,
@@ -52,7 +53,7 @@ export default function Hero() {
               WARAS menyederhanakan akses faskes siaga, alur rujukan, dan panduan medis darurat di Kota Semarang agar warga dapat mengambil tindakan tepat tanpa kebingungan.
             </p>
 
-            {/* Action Button Row (Clean & Polos) */}
+            {/* Action Buttons */}
             <div className="pt-2 flex items-center gap-4">
               <Link
                 to="/user/facilities"
@@ -69,7 +70,7 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* 4 CLEAN METRICS (Flat, Integrated, No 2nd Layer Box!) */}
+            {/* 4 Clean Flat Metrics (Zero Clutter, Sharp Readability) */}
             <div className="pt-8 border-t border-[#014751]/10 grid grid-cols-2 sm:grid-cols-4 gap-6">
               <div>
                 <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">37</span>
@@ -94,7 +95,7 @@ export default function Hero() {
 
           </div>
 
-          {/* RIGHT SIDE: CLEAN STETHOSCOPE (NO ZOOM-IN / SMOOTH BACKGROUND) */}
+          {/* RIGHT SIDE: CLEAN STETHOSCOPE (NO ZOOM-IN / AMBIENT RIGHT-SIDE WAVE) */}
           <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
