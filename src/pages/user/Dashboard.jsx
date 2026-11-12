@@ -27,7 +27,7 @@ import MapComponent from "../../components/user/MapComponent";
 import { facilities as facilitiesData } from "../../data/facilities";
 import { articlesData } from "../../data/articles";
 import { queueData } from "../../data/queueData";
-import heroImg from "../../assets/hero.png";
+import transhumansSvg from "../../assets/Transhumans Experiments.svg";
 
 export default function Dashboard() {
   const [selectedArticleModal, setSelectedArticleModal] = useState(null);
@@ -173,41 +173,13 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* KOLOM KANAN: KARTU VISUAL LOGO/ILUSTRASI SVG FIGMA */}
+          {/* KOLOM KANAN: KARTU VISUAL LOGO/ILUSTRASI FIGMA */}
           <div className="lg:col-span-5 relative overflow-hidden rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-4 shadow-lg min-h-[220px] flex items-center justify-center">
-            <svg
-              width="363"
-              height="340"
-              viewBox="0 0 363 340"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              className="w-full max-h-[200px] object-contain"
-            >
-              <rect width="363" height="340" fill="url(#pattern0_70_861)" />
-              <defs>
-                <pattern
-                  id="pattern0_70_861"
-                  patternContentUnits="objectBoundingBox"
-                  width="1"
-                  height="1"
-                >
-                  <use
-                    href="#image0_70_861"
-                    xlinkHref="#image0_70_861"
-                    transform="matrix(0.0025 0 0 0.00266912 0 0.0902904)"
-                  />
-                </pattern>
-                <image
-                  id="image0_70_861"
-                  width="400"
-                  height="307"
-                  preserveAspectRatio="none"
-                  href={heroImg}
-                  xlinkHref={heroImg}
-                />
-              </defs>
-            </svg>
+            <img
+              src={transhumansSvg}
+              alt="Ilustrasi Layanan Medis WARAS"
+              className="w-full max-h-[220px] object-contain drop-shadow-md select-none pointer-events-none"
+            />
           </div>
         </div>
       </section>
