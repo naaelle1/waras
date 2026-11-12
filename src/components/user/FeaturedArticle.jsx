@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../common/Logo";
 import { ArrowRight, Clock, Tag, Sparkles } from "lucide-react";
 
 export default function FeaturedArticle({ article, onReadMore }) {
@@ -30,7 +31,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
                 <Tag className="w-3 h-3" />
                 {article.category}
               </span>
-              <span>•</span>
+              <span>â€¢</span>
               <span className="flex items-center gap-1 text-gray-200">
                 <Clock className="w-3 h-3" />
                 {article.readingTime || "5 min baca"}
@@ -48,8 +49,8 @@ export default function FeaturedArticle({ article, onReadMore }) {
 
           <div className="pt-6 mt-4 border-t border-white/15 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-xs">
-                W
+              <div className="h-7 px-2 rounded-full bg-white/15 flex items-center justify-center">
+                <Logo tone="light" className="h-3.5" />
               </div>
               <span className="text-xs font-medium text-gray-200">{article.author || "Tim Medis WARAS"}</span>
             </div>

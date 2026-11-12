@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../common/Logo";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -135,8 +136,8 @@ export default function Hero() {
                 {/* Interface Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-[#F0F5F4]">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#003D3B] text-[#63D6AE] flex items-center justify-center font-bold text-sm shadow-xs">
-                      W
+                    <div className="h-10 px-2.5 rounded-xl bg-[#003D3B] flex items-center justify-center shadow-xs">
+                      <Logo tone="light" className="h-5" />
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5">
@@ -169,7 +170,7 @@ export default function Hero() {
                     <span className="text-[10px] text-[#63D6AE]/80 font-mono">Real-time</span>
                   </div>
                   <p className="text-xs text-emerald-50/90 leading-relaxed font-light">
-                    "Demam anak di atas 38.5°C? Berikan kompres hangat di dahi dan lipatan ketiak, penuhi hidrasi, dan pantau respons."
+                    "Demam anak di atas 38.5Â°C? Berikan kompres hangat di dahi dan lipatan ketiak, penuhi hidrasi, dan pantau respons."
                   </p>
                 </div>
 
@@ -213,7 +214,7 @@ export default function Hero() {
                   <h4 className="text-xs font-bold text-[#062E2B] leading-tight">RSUD Kota Semarang</h4>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-bold text-emerald-700">Buka 24 Jam • IGD Ready</span>
+                    <span className="text-[10px] font-bold text-emerald-700">Buka 24 Jam â€¢ IGD Ready</span>
                   </div>
                 </div>
               </motion.div>
