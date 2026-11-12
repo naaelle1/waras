@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Link } from "react-router-dom";
 import L from "leaflet";
-import { ArrowRight, MapPin, Hospital, Info, Navigation, RotateCcw } from "lucide-react";
+import { ArrowRight, MapPin, Hospital, Info, Navigation, ExternalLink } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
 // Fix default leaflet marker icon issue in Vite build environments
@@ -35,7 +35,7 @@ const puskesmasIcon = new L.DivIcon({
 const hospitalIcon = new L.DivIcon({
   className: "custom-leaflet-marker",
   html: `<div style="
-    background-color: #002F2F;
+    background-color: #003B3B;
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -43,7 +43,7 @@ const hospitalIcon = new L.DivIcon({
     align-items: center;
     justify-content: center;
     color: white;
-    box-shadow: 0 4px 14px rgba(0, 47, 47, 0.55);
+    box-shadow: 0 4px 14px rgba(0, 59, 59, 0.55);
     border: 2px solid white;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -73,9 +73,18 @@ const userLocationIcon = new L.DivIcon({
 // Center default Kota Semarang (Simpang Lima area)
 const SEMARANG_CENTER = [-6.9932, 110.4203];
 
-// Helper component untuk auto-recenter / fitBounds saat daftar fasilitas berubah
+// Helper component untuk auto-recenter / fitBounds & invalidate size
 function MapBoundsUpdater({ facilities, userLocation }) {
   const map = useMap();
+
+  useEffect(() => {
+    // Invalidate map size so Leaflet accurately fills the container
+    map.invalidateSize();
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [map]);
 
   useEffect(() => {
     if (userLocation) {
@@ -88,7 +97,7 @@ function MapBoundsUpdater({ facilities, userLocation }) {
     if (facilities.length === 1) {
       const f = facilities[0];
       if (f.latitude && f.longitude) {
-        map.flyTo([f.latitude, f.longitude], 16, { duration: 1.2 });
+        map.setView([f.latitude, f.longitude], 16);
       }
     } else {
       const bounds = L.latLngBounds(
@@ -105,7 +114,7 @@ function MapBoundsUpdater({ facilities, userLocation }) {
 
 export default function MapComponent({
   facilities = [],
-  className = "h-80 sm:h-96 lg:h-full min-h-[380px]"
+  className = "h-80 sm:h-96 lg:h-[400px] w-full"
 }) {
   const [userLocation, setUserLocation] = useState(null);
   const [isLocating, setIsLocating] = useState(false);
@@ -114,6 +123,14 @@ export default function MapComponent({
   const mappedFacilities = facilities.filter(
     (f) => f.latitude !== null && f.longitude !== null && !isNaN(f.latitude) && !isNaN(f.longitude)
   );
+
+  const isSingle = mappedFacilities.length === 1;
+  const singleFacility = isSingle ? mappedFacilities[0] : null;
+
+  const initialCenter = singleFacility
+    ? [singleFacility.latitude, singleFacility.longitude]
+    : SEMARANG_CENTER;
+  const initialZoom = singleFacility ? 16 : 13;
 
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
@@ -139,12 +156,15 @@ export default function MapComponent({
   return (
     <div
       className={`relative w-full rounded-2xl overflow-hidden bg-white border border-[#E2ECEB] shadow-xs ${className}`}
+      style={{ minHeight: "320px" }}
     >
       <MapContainer
-        center={SEMARANG_CENTER}
-        zoom={13}
+        key={singleFacility ? `facility-${singleFacility.id}` : `facilities-map-${mappedFacilities.length}`}
+        center={initialCenter}
+        zoom={initialZoom}
         scrollWheelZoom={false}
         className="w-full h-full z-10"
+        style={{ height: "100%", width: "100%", minHeight: "320px" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -157,7 +177,7 @@ export default function MapComponent({
         {userLocation && (
           <Marker position={userLocation} icon={userLocationIcon}>
             <Popup className="waras-custom-popup">
-              <div className="p-1 font-inter text-xs font-semibold text-[#082C2C]">
+              <div className="p-1 font-inter text-xs font-semibold text-[#0D2626]">
                 📍 Posisi Anda Saat Ini
               </div>
             </Popup>
@@ -176,40 +196,52 @@ export default function MapComponent({
               icon={icon}
             >
               <Popup className="waras-custom-popup">
-                <div className="p-1 max-w-xs font-inter text-[#082C2C]">
+                <div className="p-1 max-w-xs font-inter text-[#0D2626]">
                   <div className="flex items-center gap-1.5 mb-1">
                     <span
                       className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isHospital
-                          ? "bg-[#002F2F] text-white"
-                          : "bg-[#DDEEEE] text-[#002F2F]"
+                          ? "bg-[#003B3B] text-white"
+                          : "bg-[#EBF5F5] text-[#003B3B]"
                       }`}
                     >
                       {facility.category}
                     </span>
                     {facility.district && (
-                      <span className="text-[10px] text-[#647474]">
+                      <span className="text-[10px] text-[#526666]">
                         • {facility.district}
                       </span>
                     )}
                   </div>
 
-                  <h4 className="font-poppins font-semibold text-sm text-[#082C2C] leading-snug mb-1">
+                  <h4 className="font-poppins font-semibold text-sm text-[#0D2626] leading-snug mb-1">
                     {facility.name}
                   </h4>
 
-                  <p className="text-xs text-[#647474] mb-3 flex items-start gap-1">
-                    <MapPin className="w-3.5 h-3.5 shrink-0 text-[#0B5D5D] mt-0.5" />
+                  <p className="text-xs text-[#526666] mb-3 flex items-start gap-1">
+                    <MapPin className="w-3.5 h-3.5 shrink-0 text-[#003B3B] mt-0.5" />
                     <span className="line-clamp-2">{facility.address}</span>
                   </p>
 
-                  <Link
-                    to={`/user/facilities/${facility.id}`}
-                    className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#002F2F] hover:bg-[#0B5D5D] text-white text-xs font-semibold transition-colors"
-                  >
-                    <span>Lihat Detail</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                  {isSingle ? (
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold transition-colors"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>Petunjuk Arah (Google Maps)</span>
+                    </a>
+                  ) : (
+                    <Link
+                      to={`/user/facilities/${facility.id}`}
+                      className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold transition-colors"
+                    >
+                      <span>Lihat Detail</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
                 </div>
               </Popup>
             </Marker>
@@ -223,29 +255,31 @@ export default function MapComponent({
           onClick={handleGetLocation}
           disabled={isLocating}
           title="Tampilkan Lokasi Saya"
-          className="p-2.5 rounded-2xl bg-white/90 hover:bg-white text-[#002F2F] border border-white/90 shadow-md backdrop-blur-md transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+          className="p-2.5 rounded-xl bg-white hover:bg-gray-50 text-[#003B3B] border border-[#E2ECEB] shadow-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
         >
           <Navigation className={`w-4 h-4 ${isLocating ? "animate-spin text-blue-600" : ""}`} />
         </button>
       </div>
 
       {/* Floating Info Banner */}
-      <div className="absolute bottom-3 left-3 right-3 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-white/80 shadow-sm flex items-center justify-between text-xs text-[#647474]">
-        <div className="flex items-center gap-2">
-          <Info className="w-4 h-4 text-[#0B5D5D]" />
-          <span>
-            Menampilkan <strong>{mappedFacilities.length}</strong> fasilitas kesehatan terpetakan di Semarang.
-          </span>
+      {!isSingle && (
+        <div className="absolute bottom-3 left-3 right-3 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-[#E2ECEB] shadow-xs flex items-center justify-between text-xs text-[#526666]">
+          <div className="flex items-center gap-2">
+            <Info className="w-4 h-4 text-[#003B3B]" />
+            <span>
+              Menampilkan <strong>{mappedFacilities.length}</strong> fasilitas kesehatan terpetakan di Semarang.
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-3 font-medium text-[11px]">
+            <span className="flex items-center gap-1">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0B5D5D]" /> Puskesmas (38)
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#003B3B]" /> Rumah Sakit (26)
+            </span>
+          </div>
         </div>
-        <div className="hidden sm:flex items-center gap-3 font-medium text-[11px]">
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0B5D5D]" /> Puskesmas (38)
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#002F2F]" /> Rumah Sakit (26)
-          </span>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

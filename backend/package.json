@@ -6,13 +6,23 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "db:init": "node src/database/init.js",
+    "db:seed": "node src/database/seed.js"
   },
-  "keywords": ["waras", "civic-tech", "express", "gemini-api"],
+  "keywords": [
+    "waras",
+    "civic-tech",
+    "express",
+    "gemini-api",
+    "turso",
+    "libsql"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google/genai": "^3.0.0",
+    "@libsql/client": "^0.18.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"

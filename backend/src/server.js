@@ -6,6 +6,9 @@ import aiRoutes from './routes/ai.js';
 import facilitiesRoutes from './routes/facilities.js';
 import articlesRoutes from './routes/articles.js';
 import reportsRoutes from './routes/reports.js';
+import queuesRoutes from './routes/queues.js';
+import { dbMode } from './config/db.js';
+import { seedDatabase } from './database/seed.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,10 +31,16 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/facilities', facilitiesRoutes);
 app.use('/api/articles', articlesRoutes);
 app.use('/api/reports', reportsRoutes);
+app.use('/api/queues', queuesRoutes);
 
 // ── Health Check ────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', project: 'WARAS Backend', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    project: 'WARAS Backend',
+    database: dbMode,
+    timestamp: new Date().toISOString()
+  });
 });
 
 // ── 404 Handler ─────────────────────────────────────────────────────────────
@@ -45,8 +54,14 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ success: false, message: 'Terjadi kesalahan pada server.' });
 });
 
+// Auto-seed database jika tabel belum ada / masih kosong
+seedDatabase().catch((err) => {
+  console.warn('[Database] Peringatan saat inisialisasi database:', err.message);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
+  console.log(`   Database     : ${dbMode}`);
   console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite'}`);
   console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
 });

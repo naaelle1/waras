@@ -1,0 +1,82 @@
+/**
+ * Skema Database WARAS (Turso / libSQL)
+ */
+
+export const CREATE_TABLES_SQL = `
+-- 1. Tabel Fasilitas Kesehatan Kota Semarang (64 Faskes)
+CREATE TABLE IF NOT EXISTS facilities (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  category TEXT NOT NULL,
+  type TEXT,
+  address TEXT NOT NULL,
+  district TEXT,
+  phone TEXT,
+  whatsapp TEXT,
+  services TEXT,
+  latitude REAL,
+  longitude REAL,
+  image TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Tabel Artikel Edukasi Kesehatan
+CREATE TABLE IF NOT EXISTS articles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  description TEXT NOT NULL,
+  reading_time TEXT,
+  date TEXT,
+  author TEXT,
+  featured INTEGER DEFAULT 0,
+  tags TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Tabel Laporan Masyarakat / Komunitas
+CREATE TABLE IF NOT EXISTS reports (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  report_id TEXT UNIQUE NOT NULL,
+  category TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  location TEXT,
+  contact TEXT,
+  status TEXT DEFAULT 'Menunggu Peninjauan',
+  submitted_at TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Tabel Estimasi Antrean Faskes
+CREATE TABLE IF NOT EXISTS queues (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  facility_id INTEGER NOT NULL UNIQUE REFERENCES facilities(id),
+  current_number TEXT,
+  total_queue INTEGER DEFAULT 0,
+  estimated_wait_minutes INTEGER DEFAULT 15,
+  status TEXT DEFAULT 'Normal',
+  last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5. Tabel Pengguna (Admin & User)
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role TEXT DEFAULT 'user',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 6. Tabel Riwayat Chat AI (Konteks & Percakapan)
+CREATE TABLE IF NOT EXISTS chat_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  session_id TEXT NOT NULL,
+  sender TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+`;

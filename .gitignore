@@ -6,6 +6,11 @@ backend/.env
 backend/.env.*
 !backend/.env.example
 
+# Local Databases
+*.db
+*.db-journal
+backend/data/
+
 # Logs
 logs
 *.log

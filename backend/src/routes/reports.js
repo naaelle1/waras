@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { submit } from '../controllers/reportsController.js';
+import { submit, getAll } from '../controllers/reportsController.js';
 
 const router = Router();
 
-// POST /api/reports
+router.get('/', getAll);
 router.post('/', submit);
 
 export default router;
