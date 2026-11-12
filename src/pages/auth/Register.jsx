@@ -90,27 +90,20 @@ export default function Register() {
   };
 
   return (
-    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
-      {/* â”€â”€ PANEL KIRI: FULL-HEIGHT BRANDING & STEP CARDS (lg:col-span-5) â”€â”€ */}
-      <aside className="lg:col-span-5 bg-[#031b17] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-12 lg:p-14 min-h-[540px] lg:min-h-screen">
-        {/* Ambient Organic Glow Layers - Exact Match to Reference */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 75% 45%, rgba(13, 148, 136, 0.32) 0%, rgba(5, 150, 105, 0.16) 35%, rgba(3, 27, 23, 0.95) 75%)"
-          }}
-        />
-        <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-teal-500/15 blur-[100px]" />
-        <div className="pointer-events-none absolute bottom-0 right-0 w-96 h-96 rounded-full bg-emerald-500/20 blur-[120px]" />
+    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
+      {/* ── PANEL KIRI: 50% FULL-HEIGHT BRANDING & STEP CARDS ── */}
+      <aside className="lg:col-span-1 bg-[#002424] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-10 lg:p-12 xl:p-14 min-h-[560px] lg:min-h-screen">
+        {/* Layered rich teal gradient background (sesuai warna masuk akun yang disukai user) */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_35%,#0B6B6B_0%,#004242_38%,#002424_75%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_15%_100%,rgba(221,238,238,0.14)_0%,transparent_70%)]" />
 
-        {/* Wave Pattern Overlay from Mask Group.svg */}
+        {/* Wave Pattern Overlay from Mask Group.svg at bottom */}
         <img
           src="/images/mask-group.svg"
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="pointer-events-none absolute inset-0 w-full h-full object-cover select-none"
+          className="pointer-events-none absolute bottom-0 inset-x-0 w-full h-auto select-none z-[1]"
         />
 
         {/* TOP: Brand Logo & Title */}
@@ -123,52 +116,95 @@ export default function Register() {
           </Link>
         </div>
 
+        {/* MIDDLE SECTION: Mengisi area tengah dengan Widget Jaringan Layanan Kesehatan Semarang */}
+        <div className="relative z-10 py-6 my-auto max-w-lg">
+          <div className="rounded-2xl bg-white/[0.07] backdrop-blur-md border border-white/12 p-5 sm:p-6 space-y-4 shadow-xl shadow-black/10">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-teal-200">
+                  Layanan Terpadu Warga Semarang
+                </span>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-400/20 text-teal-200 border border-teal-300/20">
+                Resmi Dinkes
+              </span>
+            </div>
+
+            <p className="text-xs sm:text-sm text-teal-50/90 leading-relaxed font-inter">
+              "Pendaftaran akun pasien terintegrasi langsung dengan database faskes Kota Semarang untuk kenyamanan antrean dan rekam medis."
+            </p>
+
+            <div className="grid grid-cols-3 gap-2.5 pt-2 border-t border-white/10 text-center">
+              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+                <span className="block text-base sm:text-lg font-bold font-poppins text-white">37</span>
+                <span className="text-[10px] text-teal-200/80 font-medium">Puskesmas</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+                <span className="block text-base sm:text-lg font-bold font-poppins text-white">14</span>
+                <span className="text-[10px] text-teal-200/80 font-medium">RS Rujukan</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+                <span className="block text-base sm:text-lg font-bold font-poppins text-white">24/7</span>
+                <span className="text-[10px] text-teal-200/80 font-medium">WARAS AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* BOTTOM SECTION: Aligned Headline & 3 Step Bento Cards */}
-        <div className="relative z-10 pt-12 mt-auto">
-          {/* Header & Subtitle placed side-by-side or stacked cleanly */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-bold leading-tight font-poppins text-white tracking-tight">
-              Mulai Layanan<br />Kesehatan
-            </h1>
-            <p className="text-xs sm:text-sm text-teal-100/75 max-w-[210px] leading-relaxed font-inter">
-              Lengkapi 3 langkah mudah untuk registrasi akun pasien warga.
+        <div className="relative z-10 pt-4 mt-auto space-y-5 sm:space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold leading-[1.12] font-poppins text-white tracking-tight">
+              Mulai Peduli
+              <br />
+              Kesehatanmu
+            </h2>
+            <p className="text-xs sm:text-sm text-teal-100/80 leading-relaxed font-inter max-w-md">
+              Satu akun untuk mengakses 37 Puskesmas dan 14 rumah sakit rujukan di Kota Semarang.
             </p>
           </div>
 
           {/* 3 Step Bento Cards Row */}
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
             {/* Step 1: Active White Card */}
-            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5">
-              <div className="w-6 h-6 rounded-full bg-slate-950 text-white flex items-center justify-center text-[11px] font-bold shadow-2xs">
+            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-[22px] p-4 sm:p-5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="w-7 h-7 rounded-full bg-[#003B3B] text-white flex items-center justify-center text-xs font-bold shadow-2xs">
                 1
               </div>
               <div className="pt-3">
-                <p className="text-xs sm:text-[13px] font-bold text-slate-950 leading-snug font-poppins">
-                  Isi Identitas<br />KTP & NIK
+                <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-snug font-poppins">
+                  Daftar akun
+                  <br />
+                  warga baru
                 </p>
               </div>
             </div>
 
             {/* Step 2: Glassmorphism Inactive Card */}
-            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
-              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-7 h-7 rounded-full bg-white/15 text-white/90 flex items-center justify-center text-xs font-semibold">
                 2
               </div>
               <div className="pt-3">
-                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
-                  Verifikasi<br />Faskes Semarang
+                <p className="text-xs sm:text-sm font-medium text-white/95 leading-snug font-poppins">
+                  Pantau antrean
+                  <br />
+                  faskes terdekat
                 </p>
               </div>
             </div>
 
             {/* Step 3: Glassmorphism Inactive Card */}
-            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
-              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-7 h-7 rounded-full bg-white/15 text-white/90 flex items-center justify-center text-xs font-semibold">
                 3
               </div>
               <div className="pt-3">
-                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
-                  Akses Antrean<br />& Rekam Medis
+                <p className="text-xs sm:text-sm font-medium text-white/95 leading-snug font-poppins">
+                  Konsultasi awal
+                  <br />
+                  dengan WARAS AI
                 </p>
               </div>
             </div>
@@ -176,8 +212,8 @@ export default function Register() {
         </div>
       </aside>
 
-      {/* â”€â”€ PANEL KANAN: FULL-HEIGHT CLEAN FORM (lg:col-span-7) â”€â”€ */}
-      <main className="lg:col-span-7 bg-white min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14">
+      {/* ── PANEL KANAN: 50% FULL-HEIGHT CLEAN FORM ── */}
+      <main className="lg:col-span-1 bg-white min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-12 xl:p-14">
         {/* Top Navigation Bar */}
         <div className="w-full flex items-center justify-between pb-6">
           <Link
