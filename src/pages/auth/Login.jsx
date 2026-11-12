@@ -7,10 +7,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Sparkles,
-  Bot,
-  Clock,
   ArrowLeft,
-  CheckCircle2,
   Lock,
   Mail,
   UserCheck
@@ -36,7 +33,7 @@ export default function Login() {
     setErrorMessage("");
     setIsLoading(true);
 
-    // Simulate authentication and redirect
+    // Simulasi autentikasi dan redirect ke dashboard
     setTimeout(() => {
       setIsLoading(false);
       navigate("/user/dashboard");
@@ -46,6 +43,7 @@ export default function Login() {
   const handleDemoLogin = () => {
     setIdentifier("nael@semarangkota.go.id");
     setPassword("password123");
+    setErrorMessage("");
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -54,220 +52,273 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFA] flex flex-col justify-center py-10 sm:py-16 px-4 sm:px-6 lg:px-8 selection:bg-[#003B3B] selection:text-white">
-      {/* TOP FLOATING HOME SHORTCUT */}
-      <div className="max-w-5xl mx-auto w-full mb-6 flex items-center justify-between">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#526666] hover:text-[#003B3B] transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Kembali ke Beranda</span>
-        </Link>
+    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
+      {/* ── PANEL KIRI: FULL-HEIGHT BRANDING & STEP CARDS (lg:col-span-5) ── */}
+      <aside className="lg:col-span-5 bg-[#031b17] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-12 lg:p-14 min-h-[540px] lg:min-h-screen">
+        {/* Ambient Organic Glow Layers - Exact Match to Reference */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 75% 45%, rgba(13, 148, 136, 0.32) 0%, rgba(5, 150, 105, 0.16) 35%, rgba(3, 27, 23, 0.95) 75%)"
+          }}
+        />
+        <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-teal-500/15 blur-[100px]" />
+        <div className="pointer-events-none absolute bottom-0 right-0 w-96 h-96 rounded-full bg-emerald-500/20 blur-[120px]" />
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EBF5F5] text-[#003B3B]">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Sistem Resmi Kota Semarang
-        </span>
-      </div>
+        {/* Subtle Background Geometric Texture */}
+        <div
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "36px 36px"
+          }}
+        />
 
-      {/* MAIN CONTAINER: TWO-PANEL SPLIT */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-5xl mx-auto w-full rounded-3xl bg-white border border-[#E2ECEB] shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12"
-      >
-        {/* LEFT BRAND PANEL (DESKTOP) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#003B3B] via-[#004242] to-[#002727] text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
-          {/* Subtle Ambient Light in Background */}
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-48 h-48 bg-[#DDEEEE]/20 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-48 h-48 bg-[#DDEEEE]/15 rounded-full blur-2xl pointer-events-none" />
-
-          {/* Top Logo & Title */}
-          <div className="space-y-6 relative z-10">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-white text-[#003B3B] flex items-center justify-center font-bold text-lg shadow-sm">
-                W
-              </div>
-              <div className="flex flex-col">
-                <span className="font-poppins font-extrabold text-2xl tracking-tight text-white leading-none">
-                  waras
-                </span>
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-[#DDEEEE] uppercase mt-0.5">
-                  HEALTHCARE PLATFORM
-                </span>
-              </div>
-            </Link>
-
-            <div className="space-y-2 pt-2">
-              <h2 className="font-poppins font-bold text-xl sm:text-2xl text-white leading-snug">
-                Satu Akses untuk Seluruh Layanan Kesehatan Warga.
-              </h2>
-              <p className="text-xs sm:text-sm text-gray-200 font-inter leading-relaxed">
-                Kelola antrean faskes, konsultasikan keluhan fisik awal dengan WARAS AI, dan pantau riwayat kesehatan dengan mudah.
-              </p>
+        {/* TOP: Brand Logo & Title */}
+        <div className="relative z-10">
+          <Link to="/" className="inline-flex items-center gap-3 group w-fit">
+            <div className="w-10 h-10 rounded-xl bg-white text-[#003B3B] font-black flex items-center justify-center text-lg shadow-sm transition-transform duration-200 group-hover:scale-105">
+              W
             </div>
-
-            {/* Benefit Checkpoints */}
-            <div className="space-y-3 pt-2 font-inter text-xs text-gray-200">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Terhubung dengan 37 Puskesmas Kota Semarang</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Monitoring waktu tunggu antrean poli secara transparan</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Bantuan konsultasi medis AI siap siaga 24/7</span>
-              </div>
+            <div className="flex flex-col">
+              <span className="font-poppins font-extrabold text-2xl tracking-tight text-white leading-none">
+                waras
+              </span>
+              <span className="text-[10px] font-semibold tracking-[0.2em] text-teal-200/90 uppercase mt-0.5">
+                HEALTHCARE PLATFORM
+              </span>
             </div>
+          </Link>
+        </div>
+
+        {/* BOTTOM SECTION: Aligned Headline & 3 Step Bento Cards */}
+        <div className="relative z-10 pt-12 mt-auto">
+          {/* Header & Subtitle placed side-by-side or stacked cleanly */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-bold leading-tight font-poppins text-white tracking-tight">
+              Satu Akses<br />untuk Warga
+            </h1>
+            <p className="text-xs sm:text-sm text-teal-100/75 max-w-[210px] leading-relaxed font-inter">
+              Kelola antrean 37 Puskesmas dan konsultasi medis terpadu.
+            </p>
           </div>
 
-          {/* Bottom Citizen Quote Card */}
-          <div className="mt-8 pt-6 border-t border-white/15 relative z-10 space-y-2">
-            <p className="text-xs text-gray-300 italic font-inter">
-              "Tidak perlu lagi berangkat subuh untuk sekadar mengantre di puskesmas. Semuanya terpantau jelas di WARAS."
-            </p>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] font-bold">
-                W
+          {/* 3 Step Bento Cards Row */}
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+            {/* Card 1: Highlighted Active White Card */}
+            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="w-6 h-6 rounded-full bg-slate-950 text-white flex items-center justify-center text-[11px] font-bold shadow-2xs">
+                1
               </div>
-              <span className="text-[11px] font-semibold text-white">Warga Semarang Selatan</span>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-bold text-slate-950 leading-snug font-poppins">
+                  37 Faskes<br />Terintegrasi
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2: Glassmorphism Inactive Card */}
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+                2
+              </div>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
+                  Pantau Antrean<br />Real-time
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: Glassmorphism Inactive Card */}
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+                3
+              </div>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
+                  Asisten Medis<br />Siaga 24 Jam
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </aside>
 
-        {/* RIGHT FORM PANEL */}
-        <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between space-y-6">
+      {/* ── PANEL KANAN: FULL-HEIGHT CLEAN FORM (lg:col-span-7) ── */}
+      <main className="lg:col-span-7 bg-white min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14">
+        {/* Top Navigation Bar */}
+        <div className="w-full flex items-center justify-between pb-6">
+          <Link
+            to="/"
+            className="text-xs sm:text-sm font-semibold text-slate-500 hover:text-[#003B3B] flex items-center gap-1.5 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Kembali ke Beranda</span>
+          </Link>
+
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/70 text-[#003B3B] text-xs font-semibold shadow-2xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#003B3B]" />
+            <span>Sistem Resmi Kota Semarang</span>
+          </span>
+        </div>
+
+        {/* Centered Form Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="w-full max-w-md mx-auto my-auto py-4 space-y-6"
+        >
+          {/* Header Form */}
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#EBF5F5] text-[#003B3B]">
-              <UserCheck className="w-3.5 h-3.5" /> Portal Warga Semarang
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#003B3B] border border-teal-200/60 shadow-2xs">
+              <UserCheck className="w-3.5 h-3.5 text-[#003B3B]" />
+              <span>Portal Warga Semarang</span>
             </div>
-            <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-[#0D2626]">
+            <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight">
               Selamat Datang Kembali
             </h1>
-            <p className="text-xs sm:text-sm text-[#526666] font-inter">
+            <p className="text-xs sm:text-sm text-slate-500 font-inter">
               Masukkan email atau NIK yang terdaftar untuk mengakses dashboard kesehatan Anda.
             </p>
           </div>
 
-          {/* Error Message */}
+          {/* Error Message Box */}
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium">
-              {errorMessage}
+            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+              <span>{errorMessage}</span>
             </div>
           )}
 
-          {/* LOGIN FORM */}
+          {/* Form */}
           <form onSubmit={handleLogin} className="space-y-4">
-            {/* Email or NIK input */}
+            {/* Input Identifier */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#0D2626]">
+              <label className="block text-xs font-semibold text-slate-800 font-inter">
                 Email atau NIK Kependudukan
               </label>
               <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-gray-400">
-                  <Mail className="w-4 h-4" />
-                </div>
+                <Mail className="w-4 h-4 absolute left-3.5 text-slate-400" />
                 <input
                   type="text"
                   value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="Contoh: nael@semarangkota.go.id atau 3374..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs sm:text-sm text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 focus:border-[#003B3B]/40 transition-all font-inter"
+                  onChange={(e) => {
+                    setIdentifier(e.target.value);
+                    if (errorMessage) setErrorMessage("");
+                  }}
+                  placeholder="nama@email.com atau NIK 16 digit"
+                  className="w-full pl-10 pr-4 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                 />
               </div>
             </div>
 
-            {/* Password input */}
+            {/* Input Password */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="block text-xs font-semibold text-[#0D2626]">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
                   Kata Sandi
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs font-medium text-[#003B3B] hover:underline"
+                  className="text-xs font-semibold text-[#003B3B] hover:underline"
                 >
                   Lupa kata sandi?
                 </Link>
               </div>
               <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-gray-400">
-                  <Lock className="w-4 h-4" />
-                </div>
+                <Lock className="w-4 h-4 absolute left-3.5 text-slate-400" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Masukkan kata sandi akun..."
-                  className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs sm:text-sm text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 focus:border-[#003B3B]/40 transition-all font-inter"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errorMessage) setErrorMessage("");
+                  }}
+                  placeholder="Masukkan kata sandi akun"
+                  className="w-full pl-10 pr-10 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 text-gray-400 hover:text-[#0D2626] cursor-pointer"
-                  aria-label="Lihat kata sandi"
+                  className="absolute right-3 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                  aria-label="Toggle password visibility"
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
                 </button>
               </div>
             </div>
 
-            {/* Remember Me Checkbox */}
-            <div className="flex items-center justify-between pt-1">
+            {/* Remember Me */}
+            <div className="flex items-center">
               <label className="flex items-center gap-2 cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded text-[#003B3B] focus:ring-[#003B3B]/20 cursor-pointer accent-[#003B3B]"
+                  className="w-4 h-4 rounded text-[#003B3B] focus:ring-[#003B3B] border-slate-300"
                 />
-                <span className="text-xs text-[#526666]">Ingat saya di peramban ini</span>
+                <span className="text-xs text-slate-600 font-inter">
+                  Ingat perangkat ini selama 30 hari
+                </span>
               </label>
             </div>
 
-            {/* Submit Button */}
+            {/* Primary Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-98"
+              className="w-full h-11 inline-flex items-center justify-center gap-2 px-5 rounded-xl bg-[#003B3B] hover:bg-[#002A2A] disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-[0.99]"
             >
               {isLoading ? (
-                <span>Memproses Masuk...</span>
+                <span>Memverifikasi Masuk...</span>
               ) : (
                 <>
-                  <span>Masuk ke Dashboard</span>
+                  <span>Masuk ke Akun WARAS</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
 
-          {/* QUICK DEMO LOGIN BUTTON */}
-          <div className="space-y-3 pt-2 border-t border-gray-100">
+          {/* Quick Demo Login Option */}
+          <div className="pt-2">
             <button
               type="button"
               onClick={handleDemoLogin}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#EBF5F5] hover:bg-[#DDEEEE] text-[#003B3B] border border-[#003B3B]/15 text-xs font-semibold transition-colors cursor-pointer"
+              disabled={isLoading}
+              className="w-full py-2.5 px-3.5 rounded-xl border border-teal-200 bg-teal-50/50 hover:bg-teal-50 text-[#003B3B] text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B6B]" />
-              <span>Masuk Cepat sebagai Pengguna Demo (Nael)</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#003B3B]" />
+              <span>Gunakan Akun Demo Pengujian (1-Klik)</span>
             </button>
-
-            <div className="text-center text-xs text-[#526666] pt-1 font-inter">
-              Belum memiliki akun warga?{" "}
-              <Link to="/register" className="font-semibold text-[#003B3B] hover:underline">
-                Daftar akun baru
-              </Link>
-            </div>
           </div>
+
+          {/* Switch to Register */}
+          <div className="pt-4 border-t border-slate-100 text-center">
+            <p className="text-xs text-slate-500 font-inter">
+              Belum memiliki akun WARAS?{" "}
+              <Link
+                to="/register"
+                className="font-semibold text-[#003B3B] hover:underline"
+              >
+                Daftar sekarang
+              </Link>
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Small Bottom Footer */}
+        <div className="w-full text-center pt-6 text-[11px] text-slate-400 font-inter">
+          &copy; 2026 WARAS &mdash; Dinas Kesehatan Kota Semarang. Hak cipta dilindungi.
         </div>
-      </motion.div>
+      </main>
     </div>
   );
 }
-

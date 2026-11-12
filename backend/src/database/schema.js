@@ -79,4 +79,16 @@ CREATE TABLE IF NOT EXISTS chat_history (
   message TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 7. Tabel Istilah Medis A-Z (1.485 Istilah Medis Terintegrasi)
+CREATE TABLE IF NOT EXISTS medical_terms (
+  id INTEGER PRIMARY KEY,
+  term TEXT NOT NULL,
+  category TEXT NOT NULL,
+  first_letter TEXT NOT NULL,
+  definition TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_medical_terms_letter ON medical_terms(first_letter);
+CREATE INDEX IF NOT EXISTS idx_medical_terms_category ON medical_terms(category);
 `;

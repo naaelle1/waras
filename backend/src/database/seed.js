@@ -1,6 +1,7 @@
 import { db } from '../config/db.js';
 import { initDatabase } from './init.js';
 import { facilities } from '../data/facilities.js';
+import { medicalTerms } from '../data/medicalTerms.js';
 
 const initialArticles = [
   {
@@ -160,6 +161,23 @@ export async function seedDatabase() {
       args: ['Admin WARAS Semarang', 'admin@waras.semarangkota.go.id', 'hashed_admin_pass', 'admin']
     });
     console.log('[Database Seed] User admin awal dibuat.');
+  }
+
+  // 5. Seed Medical Terms (1.485 istilah A-Z)
+  const countTerms = await db.execute('SELECT COUNT(*) as count FROM medical_terms');
+  if (countTerms.rows[0].count === 0) {
+    console.log(`[Database Seed] Mengisi ${medicalTerms.length} istilah medis A-Z ke database...`);
+    const batchSize = 100;
+    for (let i = 0; i < medicalTerms.length; i += batchSize) {
+      const chunk = medicalTerms.slice(i, i + batchSize);
+      const statements = chunk.map((term) => ({
+        sql: `INSERT OR IGNORE INTO medical_terms (id, term, category, first_letter, definition)
+              VALUES (?, ?, ?, ?, ?)`,
+        args: [term.id, term.term, term.category, term.firstLetter, term.definition]
+      }));
+      await db.batch(statements);
+    }
+    console.log(`[Database Seed] Selesai mengisi ${medicalTerms.length} istilah medis.`);
   }
 
   console.log('[Database Seed] Seeding database selesai 100%!');

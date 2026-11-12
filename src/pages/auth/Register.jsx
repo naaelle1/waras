@@ -7,13 +7,13 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
+  ArrowLeft,
   Lock,
   Mail,
   User,
   Phone,
-  CreditCard,
-  ArrowLeft,
-  Sparkles
+  FileText,
+  UserPlus
 } from "lucide-react";
 
 export default function Register() {
@@ -24,10 +24,11 @@ export default function Register() {
     phone: "",
     password: "",
     confirmPassword: "",
-    termsAccepted: false,
+    termsAccepted: false
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -38,32 +39,37 @@ export default function Register() {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked : value
     }));
+    if (errorMessage) setErrorMessage("");
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    setErrorMessage("");
-    setSuccessMessage("");
-
     if (
       !formData.fullName.trim() ||
       !formData.nik.trim() ||
       !formData.email.trim() ||
-      !formData.password.trim()
+      !formData.phone.trim() ||
+      !formData.password.trim() ||
+      !formData.confirmPassword.trim()
     ) {
-      setErrorMessage("Mohon lengkapi seluruh kolom formulir pendaftaran.");
+      setErrorMessage("Silakan lengkapi seluruh formulir pendaftaran.");
       return;
     }
 
     if (formData.nik.length < 16) {
-      setErrorMessage("NIK kependudukan harus terdiri dari 16 digit.");
+      setErrorMessage("NIK kependudukan harus terdiri dari 16 digit angka.");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("Konfirmasi kata sandi tidak cocok.");
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setErrorMessage("Kata sandi minimal harus 8 karakter.");
       return;
     }
 
@@ -75,253 +81,312 @@ export default function Register() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setSuccessMessage("Pendaftaran berhasil! Mengalihkan ke halaman dashboard...");
+      setSuccessMessage("Pendaftaran akun berhasil! Mengalihkan ke dashboard warga...");
       setTimeout(() => {
         navigate("/user/dashboard");
-      }, 1000);
-    }, 800);
+      }, 900);
+    }, 700);
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFA] flex flex-col justify-center py-10 sm:py-16 px-4 sm:px-6 lg:px-8 selection:bg-[#003B3B] selection:text-white">
-      {/* TOP FLOATING HOME SHORTCUT */}
-      <div className="max-w-5xl mx-auto w-full mb-6 flex items-center justify-between">
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#526666] hover:text-[#003B3B] transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Kembali ke Halaman Masuk</span>
-        </Link>
+    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
+      {/* ── PANEL KIRI: FULL-HEIGHT BRANDING & STEP CARDS (lg:col-span-5) ── */}
+      <aside className="lg:col-span-5 bg-[#031b17] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-12 lg:p-14 min-h-[540px] lg:min-h-screen">
+        {/* Ambient Organic Glow Layers - Exact Match to Reference */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 75% 45%, rgba(13, 148, 136, 0.32) 0%, rgba(5, 150, 105, 0.16) 35%, rgba(3, 27, 23, 0.95) 75%)"
+          }}
+        />
+        <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-teal-500/15 blur-[100px]" />
+        <div className="pointer-events-none absolute bottom-0 right-0 w-96 h-96 rounded-full bg-emerald-500/20 blur-[120px]" />
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EBF5F5] text-[#003B3B]">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          Registrasi Pasien Resmi
-        </span>
-      </div>
+        {/* Subtle Background Geometric Texture */}
+        <div
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "36px 36px"
+          }}
+        />
 
-      {/* MAIN CONTAINER: TWO-PANEL SPLIT */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-5xl mx-auto w-full rounded-3xl bg-white border border-[#E2ECEB] shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12"
-      >
-        {/* LEFT BRAND PANEL */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#003B3B] via-[#004242] to-[#002727] text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-48 h-48 bg-[#DDEEEE]/20 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-48 h-48 bg-[#DDEEEE]/15 rounded-full blur-2xl pointer-events-none" />
-
-          <div className="space-y-6 relative z-10">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-white text-[#003B3B] flex items-center justify-center font-bold text-lg shadow-sm">
-                W
-              </div>
-              <div className="flex flex-col">
-                <span className="font-poppins font-extrabold text-2xl tracking-tight text-white leading-none">
-                  waras
-                </span>
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-[#DDEEEE] uppercase mt-0.5">
-                  HEALTHCARE PLATFORM
-                </span>
-              </div>
-            </Link>
-
-            <div className="space-y-2 pt-2">
-              <h2 className="font-poppins font-bold text-xl sm:text-2xl text-white leading-snug">
-                Pendaftaran Akun Warga Kota Semarang
-              </h2>
-              <p className="text-xs sm:text-sm text-gray-200 font-inter leading-relaxed">
-                Nikmati kemudahan reservasi antrean puskesmas dan konsultasi gejala awal terpadu tanpa antre panjang.
-              </p>
+        {/* TOP: Brand Logo & Title */}
+        <div className="relative z-10">
+          <Link to="/" className="inline-flex items-center gap-3 group w-fit">
+            <div className="w-10 h-10 rounded-xl bg-white text-[#003B3B] font-black flex items-center justify-center text-lg shadow-sm transition-transform duration-200 group-hover:scale-105">
+              W
             </div>
-
-            <div className="space-y-3 pt-2 font-inter text-xs text-gray-200">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Terintegrasi dengan NIK Kependudukan</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Riwayat antrean dan konsultasi aman terenkripsi</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DDEEEE] shrink-0" />
-                <span>Gratis tanpa pungutan biaya langganan</span>
-              </div>
+            <div className="flex flex-col">
+              <span className="font-poppins font-extrabold text-2xl tracking-tight text-white leading-none">
+                waras
+              </span>
+              <span className="text-[10px] font-semibold tracking-[0.2em] text-teal-200/90 uppercase mt-0.5">
+                HEALTHCARE PLATFORM
+              </span>
             </div>
+          </Link>
+        </div>
+
+        {/* BOTTOM SECTION: Aligned Headline & 3 Step Bento Cards */}
+        <div className="relative z-10 pt-12 mt-auto">
+          {/* Header & Subtitle placed side-by-side or stacked cleanly */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-bold leading-tight font-poppins text-white tracking-tight">
+              Mulai Layanan<br />Kesehatan
+            </h1>
+            <p className="text-xs sm:text-sm text-teal-100/75 max-w-[210px] leading-relaxed font-inter">
+              Lengkapi 3 langkah mudah untuk registrasi akun pasien warga.
+            </p>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/15 relative z-10 space-y-2">
-            <p className="text-xs text-gray-300 italic font-inter">
-              "Kesehatan warga adalah prioritas utama. Dapatkan pelayanan fasilitas kesehatan terdekat dengan cepat dan transparan."
-            </p>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-semibold text-white">Dinas Kesehatan Kota Semarang</span>
+          {/* 3 Step Bento Cards Row */}
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+            {/* Step 1: Active White Card */}
+            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="w-6 h-6 rounded-full bg-slate-950 text-white flex items-center justify-center text-[11px] font-bold shadow-2xs">
+                1
+              </div>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-bold text-slate-950 leading-snug font-poppins">
+                  Isi Identitas<br />KTP & NIK
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2: Glassmorphism Inactive Card */}
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+                2
+              </div>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
+                  Verifikasi<br />Faskes Semarang
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3: Glassmorphism Inactive Card */}
+            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between min-h-[118px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
+              <div className="w-6 h-6 rounded-full bg-white/15 text-white/80 flex items-center justify-center text-[11px] font-semibold">
+                3
+              </div>
+              <div className="pt-3">
+                <p className="text-xs sm:text-[13px] font-semibold text-white/95 leading-snug font-poppins">
+                  Akses Antrean<br />& Rekam Medis
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </aside>
 
-        {/* RIGHT FORM PANEL */}
-        <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+      {/* ── PANEL KANAN: FULL-HEIGHT CLEAN FORM (lg:col-span-7) ── */}
+      <main className="lg:col-span-7 bg-white min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14">
+        {/* Top Navigation Bar */}
+        <div className="w-full flex items-center justify-between pb-6">
+          <Link
+            to="/login"
+            className="text-xs sm:text-sm font-semibold text-slate-500 hover:text-[#003B3B] flex items-center gap-1.5 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Kembali ke Halaman Masuk</span>
+          </Link>
+
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/70 text-[#003B3B] text-xs font-semibold shadow-2xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#003B3B]" />
+            <span>Registrasi Pasien Resmi</span>
+          </span>
+        </div>
+
+        {/* Centered Form Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="w-full max-w-lg mx-auto my-auto py-4 space-y-5"
+        >
+          {/* Header Form */}
           <div className="space-y-2">
-            <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-[#0D2626]">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#003B3B] border border-teal-200/60 shadow-2xs">
+              <UserPlus className="w-3.5 h-3.5 text-[#003B3B]" />
+              <span>Pendaftaran Warga Baru</span>
+            </div>
+            <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight">
               Buat Akun Baru
             </h1>
-            <p className="text-xs sm:text-sm text-[#526666] font-inter">
+            <p className="text-xs sm:text-sm text-slate-500 font-inter">
               Isi data diri Anda sesuai identitas KTP yang berlaku di wilayah Kota Semarang.
             </p>
           </div>
 
-          {/* Error & Success Notification */}
+          {/* Notification Alert Box */}
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium">
-              {errorMessage}
+            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+              <span>{errorMessage}</span>
             </div>
           )}
 
           {successMessage && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
-              {successMessage}
+            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{successMessage}</span>
             </div>
           )}
 
-          {/* FORM */}
+          {/* Form */}
           <form onSubmit={handleRegister} className="space-y-3.5">
+            {/* Row 1: Nama Lengkap & NIK */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {/* Nama Lengkap */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
                   Nama Lengkap
                 </label>
                 <div className="relative flex items-center">
-                  <User className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <User className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
                     type="text"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Sesuai KTP"
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
                 </div>
               </div>
 
-              {/* NIK */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
-                  Nomor Induk Kependudukan (NIK)
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
+                  NIK Kependudukan (16 Digit)
                 </label>
                 <div className="relative flex items-center">
-                  <CreditCard className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <FileText className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
                     type="text"
                     name="nik"
                     maxLength={16}
                     value={formData.nik}
                     onChange={handleChange}
-                    placeholder="16 Digit NIK"
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    placeholder="3374xxxxxxxxxxxx"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
                 </div>
               </div>
             </div>
 
+            {/* Row 2: Email & Nomor HP */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {/* Email */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
                   Alamat Email Aktif
                 </label>
                 <div className="relative flex items-center">
-                  <Mail className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <Mail className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="nama@email.com"
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
                 </div>
               </div>
 
-              {/* No WhatsApp/HP */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
-                  Nomor WhatsApp/HP
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
+                  Nomor WhatsApp / HP
                 </label>
                 <div className="relative flex items-center">
-                  <Phone className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <Phone className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="0812xxxxxxxx"
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
                 </div>
               </div>
             </div>
 
+            {/* Row 3: Kata Sandi & Konfirmasi */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {/* Password */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
-                  Kata Sandi
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
+                  Kata Sandi Baru
                 </label>
                 <div className="relative flex items-center">
-                  <Lock className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <Lock className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="Minimal 8 karakter"
-                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    placeholder="Min. 8 karakter"
+                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    aria-label="Toggle password visibility"
                   >
-                    {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
               </div>
 
-              {/* Confirm Password */}
-              <div className="space-y-1">
-                <label className="block text-xs font-semibold text-[#0D2626]">
-                  Konfirmasi Kata Sandi
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-800 font-inter">
+                  Konfirmasi Sandi
                 </label>
                 <div className="relative flex items-center">
-                  <Lock className="w-4 h-4 absolute left-3.5 text-gray-400" />
+                  <Lock className="w-4 h-4 absolute left-3.5 text-slate-400" />
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Ulangi kata sandi"
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs text-[#0D2626] focus:outline-none focus:border-[#003B3B]/40 font-inter"
+                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    aria-label="Toggle confirm password visibility"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Checkbox Terms */}
-            <div className="pt-2">
+            {/* Terms and conditions checkbox */}
+            <div className="pt-1">
               <label className="flex items-start gap-2.5 cursor-pointer select-none">
                 <input
                   type="checkbox"
                   name="termsAccepted"
                   checked={formData.termsAccepted}
                   onChange={handleChange}
-                  className="mt-0.5 w-4 h-4 rounded text-[#003B3B] focus:ring-[#003B3B]/20 cursor-pointer accent-[#003B3B]"
+                  className="mt-0.5 w-4 h-4 rounded text-[#003B3B] focus:ring-[#003B3B] border-slate-300"
                 />
-                <span className="text-[11px] text-[#526666] leading-relaxed">
-                  Saya menyatakan bahwa data yang diisikan adalah benar dan menyetujui pemanfaatan data untuk sistem informasi kesehatan publik Kota Semarang.
+                <span className="text-xs text-slate-600 leading-relaxed font-inter">
+                  Saya menyatakan data di atas adalah benar sesuai KTP resmi dan menyetujui ketentuan integrasi data rekam medis terpadu Kota Semarang.
                 </span>
               </label>
             </div>
@@ -330,29 +395,38 @@ export default function Register() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer"
+              className="w-full h-11 inline-flex items-center justify-center gap-2 px-5 rounded-xl bg-[#003B3B] hover:bg-[#002A2A] disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-[0.99] mt-2"
             >
               {isLoading ? (
-                <span>Mendaftarkan Akun...</span>
+                <span>Memproses Pendaftaran...</span>
               ) : (
                 <>
-                  <span>Daftar Akun Warga</span>
+                  <span>Daftar Akun WARAS</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
 
-          {/* Quick link to login */}
-          <div className="text-center text-xs text-[#526666] pt-2 border-t border-gray-100 font-inter">
-            Sudah memiliki akun terdaftar?{" "}
-            <Link to="/login" className="font-semibold text-[#003B3B] hover:underline">
-              Masuk di sini
-            </Link>
+          {/* Switch to Login */}
+          <div className="pt-4 border-t border-slate-100 text-center">
+            <p className="text-xs text-slate-500 font-inter">
+              Sudah memiliki akun terdaftar?{" "}
+              <Link
+                to="/login"
+                className="font-semibold text-[#003B3B] hover:underline"
+              >
+                Masuk ke akun
+              </Link>
+            </p>
           </div>
+        </motion.div>
+
+        {/* Small Bottom Footer */}
+        <div className="w-full text-center pt-6 text-[11px] text-slate-400 font-inter">
+          &copy; 2026 WARAS &mdash; Dinas Kesehatan Kota Semarang. Hak cipta dilindungi.
         </div>
-      </motion.div>
+      </main>
     </div>
   );
 }
-

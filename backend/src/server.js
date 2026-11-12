@@ -14,6 +14,7 @@ import facilitiesRoutes from './routes/facilities.js';
 import articlesRoutes from './routes/articles.js';
 import reportsRoutes from './routes/reports.js';
 import queuesRoutes from './routes/queues.js';
+import termsRoutes from './routes/terms.js';
 import { dbMode } from './config/db.js';
 import { seedDatabase } from './database/seed.js';
 
@@ -39,6 +40,7 @@ app.use('/api/facilities', facilitiesRoutes);
 app.use('/api/articles', articlesRoutes);
 app.use('/api/reports', reportsRoutes);
 app.use('/api/queues', queuesRoutes);
+app.use('/api/terms', termsRoutes);
 
 // ── Health Check ────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
