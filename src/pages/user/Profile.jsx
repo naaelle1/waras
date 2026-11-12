@@ -42,7 +42,7 @@ export default function Profile() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12 font-inter">
       {/* HEADER BANNER */}
-      <div className="rounded-3xl bg-gradient-to-r from-[#003B3B] via-[#004242] to-[#002727] text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="rounded-3xl bg-linear-to-r from-[#003B3B] via-[#004242] to-[#002727] text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
         <div className="absolute right-0 top-0 -mt-10 -mr-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
         <div className="flex items-center gap-4 relative z-10">
@@ -189,7 +189,7 @@ export default function Profile() {
         {/* RIGHT COLUMN: KARTU BPJS & STATUS KESEHATAN (5 COLS) */}
         <div className="lg:col-span-5 space-y-6">
           {/* KARTU BPJS DIGITAL */}
-          <div className="rounded-3xl bg-gradient-to-br from-[#0B6B6B] to-[#003B3B] text-white p-6 shadow-sm space-y-4">
+          <div className="rounded-3xl bg-linear-to-br from-[#0B6B6B] to-[#003B3B] text-white p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-white/20 pb-3">
               <div className="flex items-center gap-2">
                 <HeartPulse className="w-5 h-5 text-[#DDEEEE]" />
