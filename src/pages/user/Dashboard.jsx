@@ -27,6 +27,7 @@ import MapComponent from "../../components/user/MapComponent";
 import { facilities as facilitiesData } from "../../data/facilities";
 import { articlesData } from "../../data/articles";
 import { queueData } from "../../data/queueData";
+import transhumansSvg from "../../assets/Transhumans Experiments.svg";
 
 export default function Dashboard() {
   const [selectedArticleModal, setSelectedArticleModal] = useState(null);
@@ -172,38 +173,13 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Kolom Kanan: Panel Kesiapan Layanan Medis */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-5 shadow-inner">
-              <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-                <span className="text-[11px] font-bold tracking-wider uppercase text-teal-100/90 font-poppins">
-                  Kesiapan Layanan Medis
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#37F4B4] font-inter">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
-                  Live Data
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">37</span>
-                  <span className="text-[11px] text-teal-100/75 font-inter">Puskesmas Aktif</span>
-                </div>
-                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">14</span>
-                  <span className="text-[11px] text-teal-100/75 font-inter">RS Rujukan</span>
-                </div>
-                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">~15 m</span>
-                  <span className="text-[11px] text-teal-100/75 font-inter">Rata-rata Antrean</span>
-                </div>
-                <div className="bg-white/[0.07] hover:bg-white/[0.1] transition-colors rounded-xl p-3 border border-white/5">
-                  <span className="text-xl sm:text-2xl font-bold font-poppins block text-white leading-tight">24/7</span>
-                  <span className="text-[11px] text-teal-100/75 font-inter">WARAS AI Siaga</span>
-                </div>
-              </div>
-            </div>
+          {/* KOLOM KANAN: KARTU VISUAL LOGO/ILUSTRASI FIGMA */}
+          <div className="lg:col-span-5 relative overflow-hidden rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-4 shadow-lg min-h-[220px] flex items-center justify-center">
+            <img
+              src={transhumansSvg}
+              alt="Ilustrasi Layanan Medis WARAS"
+              className="w-full max-h-[220px] object-contain drop-shadow-md select-none pointer-events-none"
+            />
           </div>
         </div>
       </section>
