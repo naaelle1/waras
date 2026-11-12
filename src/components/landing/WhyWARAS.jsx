@@ -1,56 +1,59 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Zap, ShieldCheck, Link2, Info } from "lucide-react";
+import { Zap, ShieldCheck, Link2, Info, HeartPulse } from "lucide-react";
 
 const pillars = [
   {
     number: "01",
-    title: "AKSES LEBIH CEPAT",
-    subtitle: "Tanpa Birokrasi Berbelit",
-    description: "Cari nomor darurat ambulans 119 dan lokasi faskes IGD dalam hitungan detik tanpa registrasi panjang.",
+    title: "AKSES CEPAT TANPA HAMBATAN",
+    subtitle: "Tanggap Darurat Kritis",
+    description: "Cari nomor ambulans 119 dan faskes siaga dalam hitungan detik tanpa dipersulit oleh formulir atau registrasi panjang.",
     icon: Zap,
   },
   {
     number: "02",
-    title: "INFORMASI LEBIH JELAS",
-    subtitle: "Bebas Jargon Rumit",
-    description: "Panduan P3K dan alur BPJS disajikan dalam bahasa awam yang terstruktur agar langsung dapat dieksekusi.",
+    title: "BAHASA MEDIS RAMAH AWAM",
+    subtitle: "Bebas Istilah Membingungkan",
+    description: "Panduan pertolongan pertama dan alur rujukan fasilitas kesehatan disusun dengan kalimat ringkas dan dapat langsung dieksekusi.",
     icon: ShieldCheck,
   },
   {
     number: "03",
-    title: "TERHUBUNG DENGAN FASILITAS",
-    subtitle: "Jaringan Resmi Semarang",
-    description: "Terintegrasi dengan 37 Puskesmas dan seluruh RSUD & RS rujukan se-Kota Semarang secara langsung.",
+    title: "JARINGAN RESMI KOTA SEMARANG",
+    subtitle: "Integrasi Pelayanan Publik",
+    description: "Terhubung langsung dengan 37 Puskesmas dan seluruh RSUD rujukan se-Kota Semarang demi keakuratan data fasilitas.",
     icon: Link2,
   },
 ];
 
 export default function WhyWARAS() {
   return (
-    <section className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#003D3B] text-white">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-radial from-[#63D6AE]/20 via-transparent to-transparent blur-3xl pointer-events-none -z-0" />
+    <section className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#E6FEFF]/30 text-[#022022]">
+      {/* BACKGROUND WING WATERMARK */}
+      <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[650px] h-auto pointer-events-none opacity-[0.05] select-none -z-0">
+        <img src="/Wing.svg" alt="" className="w-full h-auto object-contain" />
+      </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#63D6AE] text-xs font-bold mb-3 border border-white/10">
-            <span>Filosofi & Nilai Layanan</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#014751]/15 text-[#014751] text-xs font-medium mb-3 shadow-2xs">
+            <HeartPulse className="w-3.5 h-3.5 text-[#014751]" />
+            <span>Prinsip Layanan Publik</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-extrabold text-white tracking-tight leading-[1.12]">
-            Dibuat untuk Mempermudah, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#63D6AE] via-emerald-200 to-[#63D6AE]">
+          <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-light text-[#022022] tracking-tight leading-[1.12]">
+            Dihadirkan untuk Mempermudah, <br />
+            <span className="font-normal text-[#014751]">
               Bukan Membingungkan.
             </span>
           </h2>
-          <p className="mt-4 text-emerald-100/80 text-sm sm:text-base font-normal max-w-lg mx-auto">
-            Platform kesehatan publik yang berfokus pada kecepatan penanganan dan kepastian informasi bagi warga.
+          <p className="mt-4 text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
+            Platform kesehatan publik Kota Semarang yang berfokus pada ketepatan tindakan dan kejelasan informasi bagi setiap warga.
           </p>
         </div>
 
-        {/* 3 BIG REASONS (Large Typography & Minimal Text) */}
+        {/* 3 BIG PILLARS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {pillars.map((item, idx) => {
             const Icon = item.icon;
@@ -61,45 +64,46 @@ export default function WhyWARAS() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-[#63D6AE]/50 hover:bg-white/10 transition-all duration-300 group flex flex-col justify-between"
+                className="p-8 rounded-3xl bg-white border border-[#014751]/15 hover:border-[#014751]/40 hover:shadow-[0_20px_45px_rgba(2,32,34,0.06)] transition-all duration-300 group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-4xl sm:text-5xl font-black font-mono text-[#63D6AE]">
+                    <span className="text-4xl sm:text-5xl font-light font-mono text-[#014751]">
                       {item.number}
                     </span>
-                    <div className="w-10 h-10 rounded-xl bg-white/10 text-[#63D6AE] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-11 h-11 rounded-2xl bg-[#E6FEFF] text-[#014751] flex items-center justify-center group-hover:bg-[#014751] group-hover:text-white transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-black text-white tracking-wide">
+                  <h3 className="text-base sm:text-lg font-normal text-[#022022] tracking-wide">
                     {item.title}
                   </h3>
-                  <span className="text-xs font-mono text-emerald-200/70 block mt-1">
+                  <span className="text-xs font-mono text-[#014751] block mt-1">
                     {item.subtitle}
                   </span>
 
-                  <p className="mt-3 text-xs sm:text-sm text-emerald-100/75 leading-relaxed font-light">
+                  <p className="mt-3 text-xs sm:text-sm text-[#022022]/70 leading-relaxed font-light">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-1.5 text-[11px] font-bold text-[#63D6AE]">
-                  <span>Standar Publik WARAS</span>
+                <div className="mt-6 pt-4 border-t border-[#014751]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#014751]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
+                  <span>Standar Akses WARAS</span>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* MEDICAL DISCLAIMER BADGE */}
+        {/* MEDICAL DISCLAIMER BADGE (Clean White Frame) */}
         <div className="mt-14 max-w-2xl mx-auto">
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
-            <Info className="w-5 h-5 text-[#63D6AE] shrink-0" />
-            <p className="text-xs text-emerald-100/80 leading-relaxed font-light">
-              <strong className="text-white font-bold">Pemberitahuan: </strong>
-              WARAS menyediakan panduan dan informasi kesehatan umum dan tidak menggantikan diagnosis atau konsultasi tenaga medis profesional.
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#014751]/15 flex items-center gap-3.5 shadow-2xs">
+            <Info className="w-5 h-5 text-[#014751] shrink-0" />
+            <p className="text-xs text-[#022022]/75 leading-relaxed font-light">
+              <strong className="text-[#022022] font-medium">Pemberitahuan Medis: </strong>
+              WARAS menyediakan panduan pertolongan pertama dan direktori informasi kesehatan umum. Dalam kondisi gawat darurat yang mengancam jiwa, segera hubungi ambulans 119 atau kunjungi IGD rumah sakit terdekat.
             </p>
           </div>
         </div>

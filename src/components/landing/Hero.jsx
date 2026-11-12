@@ -1,274 +1,122 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Sparkles,
-  Search,
-  ShieldCheck,
-  Check,
-  Hospital,
-  Bot,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section
-      id="beranda"
-      className="relative min-h-[92vh] pt-32 pb-20 lg:pt-36 lg:pb-28 flex items-center overflow-hidden bg-[#F5F8F7]"
-    >
-      {/* AMBIENT BACKGROUND GLOWS (Radial Mint & Dark Teal Ambient) */}
-      <div className="absolute top-[-12%] right-[-6%] w-[650px] h-[650px] rounded-full bg-radial from-[#63D6AE]/30 via-[#D8F5E8]/25 to-transparent blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-[2%] left-[-12%] w-[580px] h-[580px] rounded-full bg-radial from-[#005B52]/18 via-[#63D6AE]/10 to-transparent blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-[40%] left-[38%] w-[420px] h-[420px] rounded-full bg-radial from-[#63D6AE]/15 to-transparent blur-2xl pointer-events-none -z-10" />
+    <section id="beranda" className="w-full pt-6 pb-16 bg-white relative overflow-hidden">
+      {/* 
+        MASK GROUP.SVG: 
+        Single unified background layer directly on the white canvas!
+        No 2nd layer card, no box borders.
+      */}
+      <div className="absolute inset-x-0 bottom-0 w-full pointer-events-none select-none z-0 opacity-45">
+        <img
+          src="/Mask Group.svg"
+          alt=""
+          className="w-full h-auto object-cover object-bottom"
+        />
+      </div>
 
-      {/* SUBTLE BACKGROUND GRID MESH */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
-        style={{
-          backgroundImage: `radial-gradient(#003D3B 1.2px, transparent 1.2px)`,
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center min-h-[460px] lg:min-h-[520px]">
           
-          {/* LEFT SIDE: BOLD EDITORIAL HEADLINE & CTA */}
-          <div className="lg:col-span-6 xl:col-span-7 space-y-7 text-center lg:text-left">
+          {/* LEFT SIDE: CLEAN POLOS EDITORIAL HEADLINE */}
+          <div className="lg:col-span-7 xl:col-span-7 space-y-6 sm:space-y-7">
             
-            {/* 1. Small badge */}
+            {/* Simple Polos Category Label (No Pill Badge) */}
+            <span className="text-xs font-mono uppercase tracking-wider text-[#014751] block">
+              PORTAL LAYANAN PUBLIK KOTA SEMARANG
+            </span>
+
+            {/* Headline */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#63D6AE]/60 shadow-xs"
+              transition={{ duration: 0.5 }}
             >
-              <span className="w-2 h-2 rounded-full bg-[#005B52] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-bold text-[#003D3B] tracking-wide">
-                Healthcare Platform Kota Semarang
-              </span>
-            </motion.div>
-
-            {/* 2. Large Bold Editorial Headline (68px - 88px desktop scale) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            >
-              <h1 className="text-4xl sm:text-6xl lg:text-[70px] xl:text-[80px] font-extrabold text-[#062E2B] leading-[1.08] tracking-tight">
-                Kesehatan Lebih Mudah{" "}
-                <span className="block text-[#003D3B]">
-                  Diakses,
+              <h1 className="text-4xl sm:text-6xl lg:text-[64px] xl:text-[72px] font-light text-[#022022] leading-[1.1] tracking-tight">
+                Kesehatan Lebih{" "}
+                <span className="font-normal text-[#014751] block sm:inline">
+                  Mudah Diakses,
                 </span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#003D3B] via-[#005B52] to-[#003D3B]">
-                  Informasi Lebih Mudah Dipahami.
+                <span className="block font-extralight text-[#022022]/85 mt-1.5">
+                  Informasi Lebih Terpercaya.
                 </span>
               </h1>
             </motion.div>
 
-            {/* 3. Supporting text (max 2 short lines) */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
-              className="text-[#647777] text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal"
-            >
-              Temukan faskes siaga Semarang, pahami panduan medis darurat, dan konsultasikan keluhan awal bersama AI Assistant.
-            </motion.p>
+            {/* Subtext */}
+            <p className="text-[#022022]/70 text-base sm:text-lg font-light leading-relaxed max-w-xl">
+              WARAS menyederhanakan akses faskes siaga, alur rujukan, dan panduan medis darurat di Kota Semarang agar warga dapat mengambil tindakan tepat tanpa kebingungan.
+            </p>
 
-            {/* 4. CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
-              className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-            >
+            {/* Action Button Row (Clean & Polos) */}
+            <div className="pt-2 flex items-center gap-4">
               <Link
-                to="/user/dashboard"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#003D3B] text-white text-sm font-bold hover:bg-[#005B52] active:scale-98 transition-all shadow-xl shadow-[#003D3B]/20 group"
+                to="/user/facilities"
+                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#014751] active:scale-95 transition-all shadow-sm"
               >
-                <span>Mulai Sekarang</span>
-                <ArrowRight className="w-4 h-4 text-[#63D6AE] transition-transform group-hover:translate-x-1" />
+                Mulai Sekarang
               </Link>
+
               <a
                 href="#tentang"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-white border border-[#E2ECEB] text-[#062E2B] text-sm font-bold hover:bg-[#F5F8F7] hover:border-[#63D6AE] transition-all shadow-xs"
+                className="text-xs sm:text-sm font-light text-[#014751] hover:text-[#022022] transition-colors underline-offset-4 hover:underline"
               >
-                Pelajari WARAS
+                Pelajari Layanan
               </a>
-            </motion.div>
+            </div>
 
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-5 text-xs text-[#647777] font-semibold"
-            >
-              <div className="flex items-center gap-1.5">
-                <span className="w-4 h-4 rounded-full bg-[#D8F5E8] text-[#005B52] flex items-center justify-center shrink-0">
-                  <Check className="w-2.5 h-2.5 stroke-[3]" />
-                </span>
-                <span>Gratis untuk digunakan</span>
+            {/* 4 CLEAN METRICS (Flat, Integrated, No 2nd Layer Box!) */}
+            <div className="pt-8 border-t border-[#014751]/10 grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <div>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">37</span>
+                <p className="text-xs text-[#022022]/70 font-light mt-0.5">Puskesmas Siaga</p>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-4 h-4 rounded-full bg-[#D8F5E8] text-[#005B52] flex items-center justify-center shrink-0">
-                  <Check className="w-2.5 h-2.5 stroke-[3]" />
-                </span>
-                <span>Informasi lebih mudah diakses</span>
+
+              <div>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">18+</span>
+                <p className="text-xs text-[#022022]/70 font-light mt-0.5">RSUD & RSUP Rujukan</p>
               </div>
-            </motion.div>
+
+              <div>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">119</span>
+                <p className="text-xs text-[#022022]/70 font-light mt-0.5">Hotline Darurat 24 Jam</p>
+              </div>
+
+              <div>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">100%</span>
+                <p className="text-xs text-[#022022]/70 font-light mt-0.5">Akses Terbuka Warga</p>
+              </div>
+            </div>
+
           </div>
 
-          {/* RIGHT SIDE: LAYERED PRODUCT SHOWCASE & FLOATING CARDS */}
-          <div className="lg:col-span-6 xl:col-span-5 relative flex justify-center items-center">
-            <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-none">
-              
-              {/* MAIN DIGITAL INTERFACE (Layered product interface) */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 rounded-3xl bg-white p-6 shadow-[0_30px_70px_-15px_rgba(0,61,59,0.15)] border border-[#E2ECEB]"
-              >
-                {/* Interface Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-[#F0F5F4]">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#003D3B] text-[#63D6AE] flex items-center justify-center font-bold text-sm shadow-xs">
-                      W
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-[#062E2B]">Halo Warga Semarang</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      </div>
-                      <p className="text-[11px] text-[#647777]">Pusat Layanan Kesehatan Terpadu</p>
-                    </div>
-                  </div>
-                  <div className="px-2.5 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-[10px] font-bold">
-                    Siaga 24 Jam
-                  </div>
-                </div>
-
-                {/* Search Bar Simulation */}
-                <div className="mt-4 flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#F5F8F7] border border-[#E2ECEB] text-xs text-[#647777]">
-                  <Search className="w-4 h-4 text-[#005B52]" />
-                  <span className="truncate">Cari RSUD, Puskesmas, atau Gejala Medis...</span>
-                </div>
-
-                {/* AI Assistant Preview Card */}
-                <div className="mt-4 p-4 rounded-2xl bg-gradient-to-br from-[#003D3B] via-[#004B48] to-[#002D2B] text-white space-y-2 shadow-md">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-md bg-[#63D6AE]/20 flex items-center justify-center">
-                        <Sparkles className="w-3 h-3 text-[#63D6AE]" />
-                      </div>
-                      <span className="text-xs font-bold text-[#63D6AE]">WARAS AI Health Guide</span>
-                    </div>
-                    <span className="text-[10px] text-[#63D6AE]/80 font-mono">Real-time</span>
-                  </div>
-                  <p className="text-xs text-emerald-50/90 leading-relaxed font-light">
-                    "Demam anak di atas 38.5°C? Berikan kompres hangat di dahi dan lipatan ketiak, penuhi hidrasi, dan pantau respons."
-                  </p>
-                </div>
-
-                {/* Facility Result Preview */}
-                <div className="mt-3.5 p-3 rounded-2xl bg-[#F5F8F7] border border-[#E2ECEB] flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-white border border-[#E2ECEB] flex items-center justify-center text-[#003D3B]">
-                      <Hospital className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-[#062E2B]">RSUP Dr. Kariadi</h4>
-                      <p className="text-[10px] text-[#647777]">Jl. Dr. Sutomo No.16, Semarang</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] font-bold text-emerald-600 block">Rujukan Utama</span>
-                    <span className="text-[10px] text-[#647777]">1.8 km</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* FLOATING CARD 1: RSUD KOTA SEMARANG (Top Left) */}
-              <motion.div
-                initial={{ opacity: 0, x: -30, y: -20 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: [0, -6, 0],
+          {/* RIGHT SIDE: CLEAN STETHOSCOPE (NO ZOOM-IN / SMOOTH BACKGROUND) */}
+          <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{
+                opacity: 1,
+                y: [0, -6, 0], // Smooth subtle floating animation without zoom
+              }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+              }}
+              className="relative z-10 w-full flex items-center justify-center"
+            >
+              <img
+                src="/images/elements/stethoscope.png"
+                alt="Stetoskop Medis WARAS"
+                onError={(e) => {
+                  e.currentTarget.src = "/images/elements/image-removebg-preview.png";
                 }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 0.5 },
-                  x: { duration: 0.6, delay: 0.5 },
-                  y: { repeat: Infinity, duration: 4.5, ease: "easeInOut" },
-                }}
-                className="absolute -top-7 -left-4 sm:-left-8 z-20 px-4 py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,61,59,0.15)] flex items-center gap-3"
-              >
-                <div className="w-9 h-9 rounded-xl bg-[#D8F5E8] text-[#005B52] flex items-center justify-center shrink-0">
-                  <Hospital className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#062E2B] leading-tight">RSUD Kota Semarang</h4>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-bold text-emerald-700">Buka 24 Jam • IGD Ready</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* FLOATING CARD 2: AI ASSISTANT ONLINE (Top Right) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: -15 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: [0, 6, 0],
-                }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 0.6 },
-                  x: { duration: 0.6, delay: 0.6 },
-                  y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 },
-                }}
-                className="absolute -top-5 -right-3 sm:-right-6 z-20 px-3.5 py-2.5 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,61,59,0.15)] flex items-center gap-2.5"
-              >
-                <div className="w-8 h-8 rounded-xl bg-[#003D3B] text-[#63D6AE] flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#062E2B] leading-tight">WARAS AI Assistant</h4>
-                  <p className="text-[10px] text-[#005B52] font-semibold flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    Online
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* FLOATING CARD 3: PANDUAN P3K TERVERIFIKASI (Bottom Right) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: [0, -6, 0],
-                }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 0.7 },
-                  y: { repeat: Infinity, duration: 4.8, ease: "easeInOut", delay: 1 },
-                }}
-                className="absolute -bottom-6 -right-2 sm:-right-6 z-20 px-4 py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,61,59,0.15)] flex items-center gap-3"
-              >
-                <div className="w-9 h-9 rounded-xl bg-[#D8F5E8] text-[#005B52] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#062E2B]">Panduan P3K</h4>
-                  <p className="text-[10px] text-[#647777] font-semibold">Terverifikasi Medis</p>
-                </div>
-              </motion.div>
-
-            </div>
+                className="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto object-contain select-none drop-shadow-[0_15px_30px_rgba(1,71,81,0.12)]"
+              />
+            </motion.div>
           </div>
 
         </div>

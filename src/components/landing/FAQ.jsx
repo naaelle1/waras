@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, HelpCircle, ArrowRight } from "lucide-react";
+import { Plus, Minus, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { faqData } from "../../data/landingData";
 
@@ -12,43 +12,40 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section id="faq" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#014751]/10 text-[#022022]">
+      <div className="max-w-[1480px] mx-auto">
         
-        {/* WIREFRAME ALIGNED 2-COLUMN SPLIT LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+        {/* 2-COLUMN SPLIT LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* LEFT: LARGE HEADING & DESCRIPTION */}
-          <div className="lg:col-span-5 space-y-5 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold">
-              <HelpCircle className="w-3.5 h-3.5" />
-              <span>Pusat Tanya Jawab</span>
-            </div>
+          {/* LEFT: HEADING & DESCRIPTION */}
+          <div className="lg:col-span-5 space-y-4 text-left">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#014751]">
+              PUSAT PERTANYAAN
+            </span>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#062E2B] leading-[1.1] tracking-tight">
-              Masih Ada <br />
-              <span className="text-[#003D3B]">
-                Pertanyaan?
-              </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.12] tracking-tight">
+              Pertanyaan yang Sering <br />
+              <span className="font-normal text-[#014751]">Diajukan Warga.</span>
             </h2>
 
-            <p className="text-[#647777] text-sm sm:text-base font-normal leading-relaxed max-w-sm">
-              Kami merangkum jawaban atas pertanyaan yang paling sering diajukan warga mengenai platform WARAS.
+            <p className="text-[#022022]/70 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
+              Rangkuman jawaban atas pertanyaan umum seputar pencarian faskes, panduan P3K, dan penggunaan platform WARAS.
             </p>
 
             <div className="pt-2">
               <Link
                 to="/user/help"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#003D3B] hover:text-[#005B52] transition-colors"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group"
               >
                 <span>Kunjungi Pusat Bantuan Lengkap</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
-          {/* RIGHT: MINIMAL ACCORDION WITH CLEAN BORDER LINES */}
-          <div className="lg:col-span-7 divide-y divide-[#E2ECEB] border-t border-b border-[#E2ECEB]">
+          {/* RIGHT: MINIMAL ACCORDION WITH CLEAN BORDERS */}
+          <div className="lg:col-span-7 divide-y divide-[#014751]/10 border-t border-b border-[#014751]/10">
             {faqData.map((item, index) => {
               const isOpen = openIndex === index;
               return (
@@ -60,8 +57,8 @@ export default function FAQ() {
                     aria-expanded={isOpen}
                   >
                     <span
-                      className={`text-base sm:text-lg font-bold transition-colors ${
-                        isOpen ? "text-[#003D3B]" : "text-[#062E2B] group-hover:text-[#005B52]"
+                      className={`text-base sm:text-lg transition-colors ${
+                        isOpen ? "font-normal text-[#014751]" : "font-light text-[#022022] group-hover:text-[#014751]"
                       }`}
                     >
                       {item.q}
@@ -71,14 +68,14 @@ export default function FAQ() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
                         isOpen
-                          ? "bg-[#003D3B] text-[#63D6AE]"
-                          : "bg-[#F5F8F7] text-[#647777] group-hover:bg-[#D8F5E8] group-hover:text-[#005B52]"
+                          ? "bg-[#014751] text-white"
+                          : "bg-[#E6FEFF] text-[#014751] group-hover:bg-[#014751] group-hover:text-white"
                       }`}
                     >
                       {isOpen ? (
-                        <Minus className="w-4 h-4 stroke-[2.5]" />
+                        <Minus className="w-4 h-4 stroke-[2]" />
                       ) : (
-                        <Plus className="w-4 h-4 stroke-[2.5]" />
+                        <Plus className="w-4 h-4 stroke-[2]" />
                       )}
                     </div>
                   </button>
@@ -93,7 +90,7 @@ export default function FAQ() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <p className="pt-3 text-xs sm:text-sm text-[#647777] leading-relaxed pr-6 sm:pr-10">
+                        <p className="pt-3 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed pr-6 sm:pr-10">
                           {item.a}
                         </p>
                       </motion.div>

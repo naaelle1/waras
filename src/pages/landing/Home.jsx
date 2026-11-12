@@ -1,42 +1,40 @@
 import React from "react";
 import Navbar from "../../components/landing/Navbar";
 import Hero from "../../components/landing/Hero";
+import PartnerStrip from "../../components/landing/PartnerStrip";
+import PopularFacilities from "../../components/landing/PopularFacilities";
+import SimpleServices from "../../components/landing/SimpleServices";
 import AboutSection from "../../components/landing/AboutSection";
-import BentoFeatures from "../../components/landing/BentoFeatures";
-import HowItWorks from "../../components/landing/HowItWorks";
-import FacilitiesSection from "../../components/landing/FacilitiesSection";
-import WhyWARAS from "../../components/landing/WhyWARAS";
 import FAQ from "../../components/landing/FAQ";
 import CTA from "../../components/landing/CTA";
 import Footer from "../../components/landing/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F5F8F7] font-['Inter',sans-serif] text-[#062E2B] selection:bg-[#003D3B] selection:text-[#63D6AE] relative overflow-x-hidden">
+    <div className="min-h-screen bg-white font-['Inter',sans-serif] font-light text-[#022022] selection:bg-[#E6FEFF] selection:text-[#014751] relative overflow-x-hidden">
+      {/* 01. NAVBAR */}
       <Navbar />
+
       <main>
-        {/* 01. HERO */}
+        {/* 02. HERO CONTAINER (ROUNDED CARD WITH MASK GROUP.SVG, CLEAN FOCAL ELEMENT, & CUTOUT PILL) */}
         <Hero />
 
-        {/* 02. TENTANG WARAS (HARUS SECTION KEDUA - DEEP DARK TEAL) */}
+        {/* 03. PARTNER / NETWORK STRIP (CLEAN & MINIMAL, NO RUNNING TEXT) */}
+        <PartnerStrip />
+
+        {/* 04. FASILITAS KESEHATAN SIAGA (MATCHING "POPULAR DESTINATION" IN REFERENCE) */}
+        <PopularFacilities />
+
+        {/* 05. PENANGANAN MEDIS LEBIH SEDERHANA (MATCHING "JOURNEY TO THE SKIES MADE SIMPLE!" IN REFERENCE) */}
+        <SimpleServices />
+
+        {/* 06. TENTANG WARAS (CLEAN EDITORIAL PILLARS) */}
         <AboutSection />
 
-        {/* 03. FITUR UNGGULAN (BENTO GRID WIREFRAME ALIGNED) */}
-        <BentoFeatures />
-
-        {/* 04. CARA KERJA / HOW IT WORKS */}
-        <HowItWorks />
-
-        {/* 05. FASILITAS KESEHATAN (MAP DOMINANT) */}
-        <FacilitiesSection />
-
-        {/* 06. WHY WARAS / TRUST (3 BIG REASONS) */}
-        <WhyWARAS />
-
-        {/* 07. FAQ (2-COLUMN SPLIT ACCORDION) */}
+        {/* 07. FAQ (MINIMAL CLEAN ACCORDION) */}
         <FAQ />
 
-        {/* 08. FINAL CTA (DEEP DARK TEAL) */}
+        {/* 08. FINAL CTA */}
         <CTA />
       </main>
 

@@ -1,71 +1,73 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Search, Sparkles, Navigation, ArrowRight } from "lucide-react";
+import { Search, Compass, Navigation, ArrowRight, ShieldCheck, HeartPulse } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const steps = [
   {
     number: "01",
     label: "CARI",
-    title: "Temukan kebutuhan Anda",
-    description: "Ketik gejala awal yang dirasakan, cari faskes spesifik, atau pilih topik panduan medis yang Anda butuhkan.",
+    title: "Tentukan Kebutuhan Anda",
+    description: "Ketik keluhan awal yang dirasakan, cari fasilitas kesehatan spesifik, atau buka panduan darurat yang dibutuhkan.",
     icon: Search,
-    accentColor: "#003D3B",
-    badge: "Input Cepat",
+    badge: "Pencarian Cepat",
   },
   {
     number: "02",
     label: "PAHAMI",
-    title: "Dapatkan informasi yang jelas",
-    description: "Sistem cerdas memfilter faskes siaga, menerjemahkan istilah medis, dan memberikan arahan SOP pertolongan awal.",
-    icon: Sparkles,
-    accentColor: "#005B52",
-    badge: "Edukasi Tepat",
+    title: "Dapatkan Panduan Jelas",
+    description: "Sistem menyajikan faskes terdekat yang siap melayani, menerjemahkan istilah medis, dan memberikan arahan pertolongan pertama.",
+    icon: Compass,
+    badge: "Petunjuk Teruji",
   },
   {
     number: "03",
-    label: "TEMUKAN",
-    title: "Arahkan diri ke layanan tepat",
-    description: "Kunjungi faskes dengan navigasi rute langsung, hubungi hotline darurat 119, atau terapkan langkah mandiri secara aman.",
+    label: "TINDAK",
+    title: "Langkah Penanganan Tepat",
+    description: "Kunjungi faskes dengan panduan rute peta, hubungi ambulans darurat 119, atau lakukan perawatan mandiri secara terarah.",
     icon: Navigation,
-    accentColor: "#003D3B",
-    badge: "Solusi Nyata",
+    badge: "Solusi Pasti",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="panduan" className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#F5F8F7]">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-radial from-[#D8F5E8]/60 via-transparent to-transparent blur-3xl pointer-events-none -z-10" />
+    <section id="panduan" className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-white">
+      {/* BACKGROUND WING WATERMARK */}
+      <div className="absolute top-1/2 right-[-15%] -translate-y-1/2 w-[700px] h-auto pointer-events-none opacity-[0.05] select-none -z-0">
+        <img src="/Wing.svg" alt="" className="w-full h-auto object-contain" />
+      </div>
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto relative z-10">
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold mb-3">
-            <span>Alur Penggunaan</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6FEFF] border border-[#014751]/15 text-[#014751] text-xs font-medium mb-3">
+            <HeartPulse className="w-3.5 h-3.5 text-[#014751]" />
+            <span>Alur Penggunaan Mudah</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#062E2B] tracking-tight leading-[1.15]">
-            Cara Kerja WARAS, <br />
-            Sesederhana Itu.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
+            Tiga Langkah Sederhana <br />
+            <span className="font-normal text-[#014751]">
+              Menuju Penanganan Tepat.
+            </span>
           </h2>
-          <p className="mt-3 text-[#647777] text-sm sm:text-base font-normal max-w-md mx-auto">
-            Hanya butuh 3 langkah singkat untuk beralih dari kebingungan ke tindakan medis yang tepat.
+          <p className="mt-3 text-[#022022]/70 text-sm sm:text-base font-light max-w-md mx-auto">
+            Tidak ada tahapan yang rumit. Akses informasi penting dalam hitungan detik tanpa hambatan teknis.
           </p>
         </div>
 
-        {/* 3 STEPS HORIZONTAL WITH ANIMATED CONNECTING LINE */}
+        {/* 3 STEPS HORIZONTAL WITH CONNECTING LINE */}
         <div className="relative">
           
           {/* Animated Connecting Line Behind Steps (Desktop) */}
-          <div className="hidden lg:block absolute top-[58px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-[#D8F5E8] via-[#63D6AE] to-[#005B52]/30 -z-0">
+          <div className="hidden lg:block absolute top-[58px] left-[15%] right-[15%] h-0.5 bg-[#E6FEFF] -z-0">
             <motion.div
               initial={{ width: "0%" }}
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="h-full bg-gradient-to-r from-[#003D3B] via-[#005B52] to-[#63D6AE]"
+              className="h-full bg-gradient-to-r from-[#014751] via-[#014751] to-[#37F4B4]"
             />
           </div>
 
@@ -80,38 +82,36 @@ export default function HowItWorks() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: idx * 0.18 }}
-                  className="relative rounded-3xl bg-white border border-[#E2ECEB] p-7 sm:p-8 hover:border-[#63D6AE] hover:shadow-[0_20px_50px_rgba(0,61,59,0.08)] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
+                  className="relative rounded-3xl bg-white border border-[#014751]/15 p-7 sm:p-8 hover:border-[#014751]/40 hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
                 >
                   {/* GIANT TRANSPARENT BACKGROUND NUMBER */}
-                  <span className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-black text-[#003D3B]/[0.05] group-hover:text-[#005B52]/[0.09] transition-colors select-none pointer-events-none font-mono">
+                  <span className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-extralight text-[#014751]/[0.06] group-hover:text-[#014751]/[0.1] transition-colors select-none pointer-events-none font-mono">
                     {step.number}
                   </span>
 
                   {/* STEP ICON & NUMBER PILL */}
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-13 h-13 rounded-2xl bg-[#D8F5E8] text-[#005B52] flex items-center justify-center group-hover:bg-[#003D3B] group-hover:text-[#63D6AE] transition-all duration-300 shadow-xs">
-                      <Icon className="w-6 h-6 stroke-[2.2]" />
+                    <div className="w-12 h-12 rounded-2xl bg-[#E6FEFF] text-[#014751] flex items-center justify-center group-hover:bg-[#014751] group-hover:text-white transition-all duration-300 shadow-2xs">
+                      <Icon className="w-5 h-5 stroke-[2]" />
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[11px] font-mono font-bold text-[#005B52] bg-[#D8F5E8] px-2.5 py-0.5 rounded-full">
-                        {step.label}
-                      </span>
-                    </div>
+                    <span className="text-[11px] font-mono font-medium text-[#014751] bg-[#E6FEFF] px-2.5 py-0.5 rounded-full border border-[#014751]/10">
+                      {step.label}
+                    </span>
                   </div>
 
                   {/* STEP TITLE */}
-                  <h3 className="text-xl font-bold text-[#062E2B] group-hover:text-[#003D3B] transition-colors">
+                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
                     {step.title}
                   </h3>
 
-                  {/* 1 SHORT SENTENCE DESCRIPTION */}
-                  <p className="mt-2 text-xs sm:text-sm text-[#647777] leading-relaxed">
+                  {/* DESCRIPTION */}
+                  <p className="mt-2 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed">
                     {step.description}
                   </p>
 
                   {/* TAG HIGHLIGHT */}
-                  <div className="mt-5 pt-4 border-t border-[#F0F5F4] flex items-center gap-1.5 text-[11px] font-bold text-[#005B52]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="mt-6 pt-4 border-t border-[#014751]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#014751]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                     <span>{step.badge}</span>
                   </div>
                 </motion.div>
@@ -122,13 +122,13 @@ export default function HowItWorks() {
         </div>
 
         {/* BOTTOM HELPER BANNER */}
-        <div className="mt-12 text-center">
+        <div className="mt-14 text-center">
           <Link
             to="/user/dashboard"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#003D3B] hover:text-[#005B52] transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group"
           >
-            <span>Mulai eksplorasi panduan dan fasilitas sekarang</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Mulai eksplorasi seluruh panduan kesehatan sekarang</span>
+            <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 

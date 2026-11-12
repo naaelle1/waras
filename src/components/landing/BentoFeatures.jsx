@@ -1,289 +1,276 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
   MapPin,
   BookOpen,
   ArrowRight,
-  ChevronRight,
-  ShieldAlert,
-  Send,
+  PhoneCall,
+  Activity,
+  HeartPulse,
   Navigation,
-  CheckCircle2,
+  ShieldCheck,
+  Search,
+  FileText,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function BentoFeatures() {
-  return (
-    <section id="fitur" className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-white">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-radial from-[#63D6AE]/15 to-transparent blur-3xl pointer-events-none -z-10" />
+  const [aidImageError, setAidImageError] = useState(false);
 
-      <div className="max-w-6xl mx-auto">
+  return (
+    <section id="fitur" className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#E6FEFF]/30">
+      {/* BACKGROUND WING WATERMARK */}
+      <div className="absolute top-1/2 left-[-15%] -translate-y-1/2 w-[700px] h-auto pointer-events-none opacity-[0.05] select-none -z-0">
+        <img src="/Wing.svg" alt="" className="w-full h-auto object-contain" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* SECTION HEADER (Wireframe aligned) */}
+        {/* SECTION HEADER (Clean Light Typography) */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Fitur Unggulan WARAS</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6FEFF] border border-[#014751]/15 text-[#014751] text-xs font-medium mb-3">
+            <Activity className="w-3.5 h-3.5 text-[#014751]" />
+            <span>Fokus Layanan Utama</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#062E2B] tracking-tight leading-[1.15]">
-            Semua yang Anda Butuhkan, <br />
-            Tanpa Harus Mencari Terpisah.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
+            Kemudahan Informasi Medis, <br />
+            <span className="font-normal text-[#014751]">
+              Tanpa Kebingungan & Keraguan.
+            </span>
           </h2>
-          <p className="mt-3 text-[#647777] text-sm sm:text-base font-normal max-w-lg mx-auto">
-            Akses langsung ke asistensi medis cerdas, pemetaan faskes, panduan darurat, dan informasi terkurasi dalam satu tempat.
+          <p className="mt-3 text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto">
+            Dirancang secara bersih untuk memberikan pertolongan nyata: lokasi faskes siaga, panduan medis darurat, dan kontak darurat resmi Kota Semarang.
           </p>
         </div>
 
         {/* ASYMMETRIC BENTO GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          {/* 1. LARGE FEATURE: AI ASSISTANT KESEHATAN (col-span-7) */}
+          {/* CARD 1: PETA & DIREKTORI FASKES KOTA SEMARANG (col-span-7) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7 rounded-3xl bg-[#F5F8F7] border border-[#E2ECEB] p-6 sm:p-8 flex flex-col justify-between hover:bg-white hover:border-[#63D6AE] hover:shadow-[0_20px_50px_rgba(0,61,59,0.08)] hover:-translate-y-1 transition-all duration-300 group"
+            className="lg:col-span-7 rounded-3xl bg-white border border-[#014751]/15 p-6 sm:p-8 flex flex-col justify-between hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:border-[#014751]/30 transition-all duration-300 group"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold">
-                  AI Assistant Cerdas
+                <span className="px-3 py-1 rounded-full bg-[#E6FEFF] text-[#014751] text-xs font-medium border border-[#014751]/10">
+                  Direktori Siaga
                 </span>
-                <span className="text-[11px] font-mono text-[#005B52] bg-white px-2.5 py-0.5 rounded-full border border-[#E2ECEB]">
-                  Konsultasi 24/7
+                <span className="text-[11px] font-mono text-[#014751] bg-[#E6FEFF]/50 px-2.5 py-0.5 rounded-full border border-[#014751]/10">
+                  37 Puskesmas & RS
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-[#062E2B] group-hover:text-[#003D3B] transition-colors">
-                AI Assistant Kesehatan
+              <h3 className="text-2xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
+                Pemetaan Faskes & Rute Darurat
               </h3>
-              <p className="text-xs sm:text-sm text-[#647777] mt-1.5 leading-relaxed">
-                Tanyakan keluhan atau gejala awal dan peroleh panduan penanganan pertama terstruktur sebelum ke faskes.
+              <p className="text-xs sm:text-sm text-[#022022]/70 font-light mt-1.5 leading-relaxed">
+                Temukan lokasi Puskesmas terdekat dan Rumah Sakit rujukan dengan status operasional IGD 24 Jam, nomor telepon aktif, dan panduan rute navigasi langsung.
               </p>
             </div>
 
-            {/* VISUAL INTERFACE: CHAT BUBBLES MOCKUP */}
-            <div className="my-6 p-4 sm:p-5 rounded-2xl bg-white border border-[#E2ECEB] space-y-3 shadow-xs">
-              {/* User Bubble */}
-              <div className="flex justify-end">
-                <div className="bg-[#003D3B] text-white p-3 rounded-2xl rounded-tr-xs text-xs max-w-[85%] shadow-xs">
-                  <p>Kaki saya terkilir saat badminton pagi ini, apa langkah awalnya?</p>
-                </div>
-              </div>
-              {/* AI Bubble */}
-              <div className="flex items-start gap-2.5 max-w-[92%]">
-                <div className="w-7 h-7 rounded-lg bg-[#005B52] text-white flex items-center justify-center shrink-0 text-xs font-bold mt-1">
-                  AI
-                </div>
-                <div className="bg-[#F5F8F7] border border-[#E2ECEB] p-3 rounded-2xl rounded-tl-xs text-xs space-y-1">
-                  <span className="text-[10px] font-bold text-[#005B52] bg-[#D8F5E8] px-2 py-0.5 rounded-full">
-                    Metode R.I.C.E
-                  </span>
-                  <p className="text-[#062E2B] leading-relaxed">
-                    Istirahatkan kaki, kompres es 15-20 menit, dan posisikan kaki lebih tinggi. Jangan dipijat keras saat masih bengkak akut.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-[#E2ECEB] flex items-center justify-between">
-              <span className="text-xs text-[#647777]">Respon instan berbasis referensi medis</span>
-              <Link
-                to="/user/ai"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#003D3B] group-hover:text-[#005B52] transition-colors"
-              >
-                <span>Coba AI Assistant</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* 2. MEDIUM FEATURE: CARI FASILITAS (col-span-5) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 rounded-3xl bg-[#F5F8F7] border border-[#E2ECEB] p-6 sm:p-7 flex flex-col justify-between hover:bg-white hover:border-[#63D6AE] hover:shadow-[0_20px_50px_rgba(0,61,59,0.08)] hover:-translate-y-1 transition-all duration-300 group"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold">
-                  Geolokasi Faskes
-                </span>
-                <span className="text-xs font-bold text-[#003D3B]">37+ Lokasi</span>
-              </div>
-              <h3 className="text-xl font-bold text-[#062E2B] group-hover:text-[#003D3B] transition-colors">
-                Cari Fasilitas
-              </h3>
-              <p className="text-xs text-[#647777] mt-1 leading-relaxed">
-                Temukan RS, Puskesmas, dan Klinik terdekat dari lokasi Anda di Kota Semarang.
-              </p>
-            </div>
-
-            {/* VISUAL INTERFACE: MINI MAP & LOCATION PINS */}
-            <div className="my-5 p-3.5 rounded-2xl bg-white border border-[#E2ECEB] space-y-2">
-              <div className="p-2.5 rounded-xl bg-[#F5F8F7] border border-[#E2ECEB] flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+            {/* VISUAL TEASER: CLEAN FASKES LISTING */}
+            <div className="my-6 p-4 rounded-2xl bg-[#E6FEFF]/40 border border-[#014751]/10 space-y-2.5">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-[#014751]/10 shadow-2xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#E6FEFF] text-[#014751] flex items-center justify-center font-semibold text-xs">
+                    <MapPin className="w-4 h-4" />
+                  </div>
                   <div>
-                    <h5 className="font-bold text-[#062E2B]">RSUD KRMT Wongsonegoro</h5>
-                    <span className="text-[10px] text-[#647777]">IGD 24 Jam • Tipe B</span>
+                    <h5 className="text-xs font-medium text-[#022022]">RSUD KRMT Wongsonegoro</h5>
+                    <p className="text-[10px] font-light text-[#022022]/60">Semarang Selatan • IGD Siaga 24 Jam</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-[#003D3B] bg-white px-2 py-0.5 rounded-md border border-[#E2ECEB]">
-                  2.4 km
-                </span>
+                <span className="text-[10px] font-mono text-[#014751] bg-[#E6FEFF] px-2 py-0.5 rounded-full">1.2 km</span>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-[#F5F8F7] border border-[#E2ECEB] flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+              <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-[#014751]/10 shadow-2xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#E6FEFF] text-[#014751] flex items-center justify-center font-semibold text-xs">
+                    <MapPin className="w-4 h-4" />
+                  </div>
                   <div>
-                    <h5 className="font-bold text-[#062E2B]">Puskesmas Pandanaran</h5>
-                    <span className="text-[10px] text-[#647777]">Faskes Tingkat 1</span>
+                    <h5 className="text-xs font-medium text-[#022022]">Puskesmas Pandanaran</h5>
+                    <p className="text-[10px] font-light text-[#022022]/60">Semarang Selatan • Pelayanan Dasar & Vaksin</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-[#003D3B] bg-white px-2 py-0.5 rounded-md border border-[#E2ECEB]">
-                  1.1 km
-                </span>
+                <span className="text-[10px] font-mono text-[#014751] bg-[#E6FEFF] px-2 py-0.5 rounded-full">0.9 km</span>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#E2ECEB] flex justify-end">
+            <div className="pt-3 border-t border-[#014751]/10 flex items-center justify-between">
+              <span className="text-xs font-light text-[#022022]/65">Terhubung peta interaktif Kota Semarang</span>
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#003D3B] group-hover:text-[#005B52] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
               >
-                <span>Buka Direktori Peta</span>
-                <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <span>Buka Peta Faskes</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
 
-          {/* 3. MEDIUM FEATURE: PANDUAN KESEHATAN (col-span-5) */}
+          {/* CARD 2: PANDUAN P3K DENGAN SLOT GAMBAR ELEMEN MEDIS (col-span-5) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="lg:col-span-5 rounded-3xl bg-[#F5F8F7] border border-[#E2ECEB] p-6 sm:p-7 flex flex-col justify-between hover:bg-white hover:border-[#63D6AE] hover:shadow-[0_20px_50px_rgba(0,61,59,0.08)] hover:-translate-y-1 transition-all duration-300 group"
+            className="lg:col-span-5 rounded-3xl bg-white border border-[#014751]/15 p-6 sm:p-8 flex flex-col justify-between hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:border-[#014751]/30 transition-all duration-300 group"
           >
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold">
-                  SOP & Darurat
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 rounded-full bg-[#E6FEFF] text-[#014751] text-xs font-medium border border-[#014751]/10">
+                  Pertolongan Pertama
                 </span>
-                <span className="text-[11px] font-bold text-red-600 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-100">
-                  Call 119
-                </span>
+                <ShieldCheck className="w-4 h-4 text-[#014751]" />
               </div>
-              <h3 className="text-xl font-bold text-[#062F2F] group-hover:text-[#003D3B] transition-colors">
-                Panduan Kesehatan & P3K
+              <h3 className="text-2xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
+                Panduan Darurat P3K
               </h3>
-              <p className="text-xs text-[#647777] mt-1 leading-relaxed">
-                Langkah pertolongan pertama terverifikasi dan panduan alur rujukan berjenjang BPJS tanpa panik.
+              <p className="text-xs sm:text-sm text-[#022022]/70 font-light mt-1.5 leading-relaxed">
+                Instruksi langkah demi langkah penanganan awal sebelum tenaga medis tiba, mulai dari luka bakar, tersedak, hingga pingsan.
               </p>
             </div>
 
-            {/* VISUAL INTERFACE: STEP CARDS */}
-            <div className="my-5 space-y-2">
-              <div className="p-2.5 rounded-xl bg-white border border-[#E2ECEB] flex items-center gap-2.5 text-xs">
-                <span className="w-5 h-5 rounded-md bg-[#003D3B] text-white flex items-center justify-center font-bold text-[10px]">
-                  1
-                </span>
-                <span className="text-[#062E2B] font-medium">Ketahui tingkat kedaruratan korban</span>
-              </div>
-              <div className="p-2.5 rounded-xl bg-white border border-[#E2ECEB] flex items-center gap-2.5 text-xs">
-                <span className="w-5 h-5 rounded-md bg-[#005B52] text-white flex items-center justify-center font-bold text-[10px]">
-                  2
-                </span>
-                <span className="text-[#062E2B] font-medium">Terapkan tindakan P3K yang terverifikasi</span>
-              </div>
-              <div className="p-2.5 rounded-xl bg-white border border-[#E2ECEB] flex items-center gap-2.5 text-xs">
-                <span className="w-5 h-5 rounded-md bg-[#63D6AE] text-[#003D3B] flex items-center justify-center font-bold text-[10px]">
-                  3
-                </span>
-                <span className="text-[#062E2B] font-medium">Hubungi hotline ambulans jika gawat</span>
-              </div>
+            {/* DESIGNATED IMAGE SLOT / MEDICAL FIRST AID ELEMENT */}
+            <div className="my-6 p-4 rounded-2xl bg-gradient-to-b from-[#E6FEFF]/40 to-white border border-[#014751]/10 flex flex-col items-center justify-center min-h-[140px] text-center relative overflow-hidden">
+              {!aidImageError ? (
+                <img
+                  src="/images/elements/first-aid.png"
+                  alt="Kotak P3K Medis"
+                  onError={() => setAidImageError(true)}
+                  className="max-h-24 w-auto object-contain drop-shadow-md z-10 transition-transform group-hover:scale-105"
+                />
+              ) : (
+                /* Fallback First Aid Kit Vector Illustration */
+                <div className="flex flex-col items-center z-10">
+                  <div className="w-16 h-14 rounded-xl bg-[#014751] text-white flex items-center justify-center relative shadow-sm group-hover:scale-105 transition-transform">
+                    {/* Handle */}
+                    <div className="absolute -top-3 w-8 h-4 border-2 border-[#014751] rounded-t-lg bg-transparent" />
+                    {/* Medical Cross */}
+                    <div className="relative w-6 h-6 flex items-center justify-center">
+                      <div className="absolute w-5 h-2 bg-[#37F4B4] rounded-xs" />
+                      <div className="absolute h-5 w-2 bg-[#37F4B4] rounded-xs" />
+                    </div>
+                  </div>
+                  <span className="mt-2 text-[10px] font-mono uppercase text-[#014751] tracking-wider">
+                    Slot Elemen: Kotak P3K
+                  </span>
+                </div>
+              )}
+              <span className="text-[11px] font-light text-[#022022]/60 mt-1 z-10">
+                Standar Penanganan Medis Aman
+              </span>
             </div>
 
-            <div className="pt-3 border-t border-[#E2ECEB] flex justify-end">
+            <div className="pt-3 border-t border-[#014751]/10 flex items-center justify-between">
+              <span className="text-xs font-light text-[#022022]/65">Langkah aman & tervalidasi</span>
               <Link
                 to="/user/health-info/guides"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#003D3B] group-hover:text-[#005B52] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
               >
-                <span>Lihat Semua Panduan</span>
-                <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <span>Lihat Panduan</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
 
-          {/* 4. WIDE FEATURE: INFORMASI & ARTIKEL (col-span-7) */}
+          {/* CARD 3: ISTILAH MEDIS LENGKAP A-Z (col-span-6) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:col-span-7 rounded-3xl bg-[#F5F8F7] border border-[#E2ECEB] p-6 sm:p-8 flex flex-col justify-between hover:bg-white hover:border-[#63D6AE] hover:shadow-[0_20px_50px_rgba(0,61,59,0.08)] hover:-translate-y-1 transition-all duration-300 group"
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="lg:col-span-6 rounded-3xl bg-white border border-[#014751]/15 p-6 sm:p-8 flex flex-col justify-between hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:border-[#014751]/30 transition-all duration-300 group"
           >
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-3 py-1 rounded-full bg-[#D8F5E8] text-[#005B52] text-xs font-bold">
-                  Edukasi Medis
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 rounded-full bg-[#E6FEFF] text-[#014751] text-xs font-medium border border-[#014751]/10">
+                  Glosarium Awam
                 </span>
-                <span className="text-[11px] text-[#647777]">Dokter Reviewed</span>
+                <BookOpen className="w-4 h-4 text-[#014751]" />
               </div>
-              <h3 className="text-2xl font-bold text-[#062E2B] group-hover:text-[#003D3B] transition-colors">
-                Informasi & Artikel Medis
+              <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
+                Kamus Medis A - Z Bahasa Awam
               </h3>
-              <p className="text-xs sm:text-sm text-[#647777] mt-1.5 leading-relaxed">
-                Artikel kesehatan preventif dan kuratif yang ditulis dengan bahasa yang mudah dipahami seluruh kalangan keluarga.
+              <p className="text-xs sm:text-sm text-[#022022]/70 font-light mt-1.5 leading-relaxed">
+                Pahami arti diagnosa, nama obat, serta singkatan resep dokter tanpa bingung oleh jargon teknis kesehatan.
               </p>
             </div>
 
-            {/* VISUAL INTERFACE: ARTICLE PREVIEW CARDS */}
-            <div className="my-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E2ECEB] space-y-1.5">
-                <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                  Kedaruratan
-                </span>
-                <h5 className="text-xs font-bold text-[#062E2B] line-clamp-1">
-                  Pertolongan Pertama Tersedak
-                </h5>
-                <p className="text-[11px] text-[#647777] line-clamp-2">
-                  Manuver Heimlich dan tindakan mandiri menangani sumbatan jalan napas.
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E2ECEB] space-y-1.5">
-                <span className="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 text-[10px] font-bold">
-                  Penyakit Tropis
-                </span>
-                <h5 className="text-xs font-bold text-[#062E2B] line-clamp-1">
-                  Fase Kritis Demam Berdarah
-                </h5>
-                <p className="text-[11px] text-[#647777] line-clamp-2">
-                  Gejala tanda bahaya saat suhu tubuh turun pada hari ke-3 hingga ke-5.
-                </p>
-              </div>
+            <div className="my-5 p-3 rounded-xl bg-[#E6FEFF]/30 border border-[#014751]/10 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-white border border-[#014751]/15 flex items-center justify-center text-xs font-mono font-bold text-[#014751]">
+                A-Z
+              </span>
+              <span className="text-xs font-light text-[#022022]/80">
+                1.480+ Istilah medis disederhanakan dalam bahasa Indonesia sehari-hari.
+              </span>
             </div>
 
-            <div className="pt-3 border-t border-[#E2ECEB] flex items-center justify-between">
-              <span className="text-xs text-[#647777]">Diperbarui secara berkala</span>
+            <div className="pt-3 border-t border-[#014751]/10 flex items-center justify-between">
+              <span className="text-xs font-light text-[#022022]/65">Cari istilah & singkatan</span>
               <Link
-                to="/user/health-info/articles"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#003D3B] group-hover:text-[#005B52] transition-colors"
+                to="/user/health-info/medical-terms"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
               >
-                <span>Baca Artikel Terlengkap</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <span>Buka Kamus Medis</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
 
+          {/* CARD 4: HOTLINE DARURAT 119 SEMARANG (col-span-6) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="lg:col-span-6 rounded-3xl bg-[#014751] text-white p-6 sm:p-8 flex flex-col justify-between shadow-lg shadow-[#014751]/15 group"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 rounded-full bg-white/10 text-[#37F4B4] text-xs font-medium border border-white/15">
+                  Hotline Tanggap Darurat
+                </span>
+                <span className="w-2.5 h-2.5 rounded-full bg-[#37F4B4] animate-ping" />
+              </div>
+              <h3 className="text-xl font-normal text-white">
+                Pusat Panggilan Ambulans 119
+              </h3>
+              <p className="text-xs sm:text-sm text-white/80 font-light mt-1.5 leading-relaxed">
+                Layanan darurat terpadu Kota Semarang (PSC 119). Langsung terhubung untuk penjemputan pasien kritis dan bantuan medis darurat.
+              </p>
+            </div>
+
+            <div className="my-5 p-4 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#37F4B4] text-[#022022] flex items-center justify-center font-bold">
+                  <PhoneCall className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/70 block">Nomor Cepat</span>
+                  <span className="text-2xl font-light font-mono text-white">119</span>
+                </div>
+              </div>
+              <a
+                href="tel:119"
+                className="px-4 py-2 rounded-full bg-white text-[#014751] text-xs font-medium hover:bg-[#37F4B4] transition-colors"
+              >
+                Panggil Sekarang
+              </a>
+            </div>
+
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-white/70 font-light">
+              <span>Siaga 24 Jam • Bebas Pulsa</span>
+              <span className="text-[#37F4B4] font-medium">PSC Kota Semarang</span>
+            </div>
+          </motion.div>
+
         </div>
+
       </div>
     </section>
   );
