@@ -54,6 +54,7 @@ export default function ForgotPassword() {
           aria-hidden="true"
           draggable={false}
           className="pointer-events-none absolute inset-0 w-full h-full object-cover select-none"
+        />
 
         {/* TOP: Brand Logo & Title */}
         <div className="relative z-10">
