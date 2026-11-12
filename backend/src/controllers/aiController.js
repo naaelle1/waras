@@ -1,7 +1,21 @@
 import { GoogleGenAI } from '@google/genai';
 import { getSystemInstruction, AI_CONFIG } from '../config/aiInstructions.js';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiClient = null;
+
+function getAiClient() {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY belum dikonfigurasi di file .env');
+  }
+  if (!aiClient) {
+    aiClient = new GoogleGenAI({
+      apiKey,
+      httpOptions: { timeout: 10000 },
+    });
+  }
+  return aiClient;
+}
 
 function getRelatedMetadata(text) {
   const t = text.toLowerCase();
@@ -56,7 +70,7 @@ export async function chat(req, res) {
   }
 
   try {
-    const model = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+    const primaryModel = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
 
     // Format riwayat chat untuk Gemini
     const contents = [
@@ -69,25 +83,40 @@ export async function chat(req, res) {
       { role: 'user', parts: [{ text: message.trim() }] },
     ];
 
-    // Panggil Gemini dengan konfigurasi instruksi dan guardrails WARAS AI
-    const response = await ai.models.generateContent({
-      model,
-      contents,
-      config: {
-        systemInstruction: getSystemInstruction(),
-        temperature: AI_CONFIG.temperature,
-        topP: AI_CONFIG.topP,
-        maxOutputTokens: AI_CONFIG.maxOutputTokens,
-      },
-    });
+    const ai = getAiClient();
+
+    const generateOptions = {
+      systemInstruction: getSystemInstruction(),
+      temperature: AI_CONFIG.temperature,
+      topP: AI_CONFIG.topP,
+      maxOutputTokens: AI_CONFIG.maxOutputTokens,
+      thinkingConfig: AI_CONFIG.thinkingConfig,
+    };
+
+    let response;
+    try {
+      response = await ai.models.generateContent({
+        model: primaryModel,
+        contents,
+        config: generateOptions,
+      });
+    } catch (modelErr) {
+      // Fallback model jika primary model sedang mengalami lonjakan beban sesaat
+      console.warn(`[AI Controller] Model ${primaryModel} gagal, mencoba fallback:`, modelErr.message);
+      const fallbackModel = primaryModel === 'gemini-3.1-flash-lite' ? 'gemini-3.5-flash-lite' : 'gemini-3.1-flash-lite';
+      response = await ai.models.generateContent({
+        model: fallbackModel,
+        contents,
+        config: generateOptions,
+      });
+    }
 
     let reply = response.text?.trim() ?? 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini.';
 
-    // Bersihkan simbol-simbol markdown yang tidak diperlukan agar tampilan chat rapi
+    // Rapikan simbol markdown: perbaiki double hash (### ### -> ###) dan spasi berlebih
     reply = reply
-      .replace(/^#{1,6}\s*/gm, '') // Hapus header ###
-      .replace(/^[-*_]{3,}\s*$/gm, '') // Hapus garis horizontal ---
-      .replace(/\n{3,}/g, '\n\n') // Rapikan spasi baris berlebih
+      .replace(/^#{1,6}\s+#{1,6}\s*/gm, '### ')
+      .replace(/\n{3,}/g, '\n\n')
       .trim();
 
     const metadata = getRelatedMetadata(message);
@@ -109,6 +138,25 @@ export async function chat(req, res) {
     return res.status(502).json({
       success: false,
       message: 'Gagal menghubungi layanan AI. Silakan coba lagi.',
+      error: process.env.NODE_ENV === 'development' ? err.message : undefined,
     });
+  }
+}
+
+/**
+ * Pre-warm connection to Gemini API to eliminate cold-start TLS latency
+ */
+export async function warmup() {
+  try {
+    const ai = getAiClient();
+    const model = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
+    await ai.models.generateContent({
+      model,
+      contents: [{ role: 'user', parts: [{ text: 'ping' }] }],
+      config: { maxOutputTokens: 5, thinkingConfig: { thinkingLevel: 'MINIMAL' } },
+    });
+    console.log('⚡ Koneksi AI Gemini berhasil dipanaskan (warm up ready)');
+  } catch (_err) {
+    // Ignore warmup errors
   }
 }

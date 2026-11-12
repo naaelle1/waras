@@ -1,4 +1,11 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 
@@ -62,6 +69,11 @@ seedDatabase().catch((err) => {
 app.listen(PORT, () => {
   console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
   console.log(`   Database     : ${dbMode}`);
-  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite'}`);
+  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite'}`);
   console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
+
+  // Warmup koneksi HTTPS TLS & model di background agar respon pertama pengguna langsung cepat
+  import('./controllers/aiController.js').then(({ warmup }) => {
+    if (typeof warmup === 'function') warmup();
+  }).catch(() => {});
 });
