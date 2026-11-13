@@ -279,7 +279,7 @@ export default function AIChat({
           parts: m.message,
         }));
 
-      const aiResponse = await aiService.sendMessage(messageContent, history);
+      const aiResponse = await aiService.sendMessage(messageContent, history, activeConversation?.id);
       setAnimatingMessageId(aiResponse.id);
       onUpdateMessages([...updatedMessages, aiResponse], messageContent);
     } catch (err) {

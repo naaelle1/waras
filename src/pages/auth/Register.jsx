@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { authService } from "../../services/authService";
 import {
   Eye,
   EyeOff,
@@ -45,7 +46,7 @@ export default function Register() {
     if (errorMessage) setErrorMessage("");
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (
       !formData.fullName.trim() ||
@@ -80,13 +81,19 @@ export default function Register() {
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setErrorMessage("");
+
+    try {
+      await authService.register(formData);
       setSuccessMessage("Pendaftaran akun berhasil! Mengalihkan ke dashboard warga...");
       setTimeout(() => {
         navigate("/user/dashboard");
-      }, 900);
-    }, 700);
+      }, 700);
+    } catch (err) {
+      setErrorMessage(err.message || "Gagal melakukan pendaftaran. Silakan periksa kembali data Anda.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import { getSystemInstruction, AI_CONFIG } from '../config/aiInstructions.js';
+import { db } from '../config/db.js';
 
 let aiClient = null;
 
@@ -59,14 +60,294 @@ function getRelatedMetadata(text) {
 }
 
 /**
+ * Pastikan percakapan awal (starter) tersedia jika tabel ai_conversations masih kosong
+ */
+async function ensureDefaultConversations() {
+  const check = await db.execute('SELECT COUNT(*) as count FROM ai_conversations');
+  if (check.rows[0].count > 0) return;
+
+  const defaults = [
+    {
+      id: 'conv-1',
+      title: 'Demam & Batuk',
+      is_pinned: 0,
+      category: 'today',
+      messages: [
+        {
+          sender: 'user',
+          message: 'Halo dokter, anak saya demam 38 derajat disertai batuk sejak kemarin malam. Langkah awal apa yang harus saya lakukan?'
+        },
+        {
+          sender: 'ai',
+          message: 'Halo! Untuk demam 38°C pada anak, langkah awal yang aman adalah:\n\n1. Pastikan anak terhidrasi dengan baik (beri air hangat, ASI, atau cairan elektrolit).\n2. Kenakan pakaian yang tipis dan nyaman, jangan diselimuti terlalu tebal.\n3. Kompres hangat di area dahi atau lipatan ketiak.\n4. Apabila demam menetap lebih dari 3 hari, timbul sesak napas, atau anak tampak lemas tidak mau minum, segera periksakan ke Puskesmas atau faskes terdekat di Kota Semarang.',
+          type: 'symptom_information',
+          relatedArticleIds: [2],
+          showFacilityCTA: true
+        }
+      ]
+    },
+    {
+      id: 'conv-2',
+      title: 'Informasi Imunisasi',
+      is_pinned: 0,
+      category: 'today',
+      messages: [
+        {
+          sender: 'user',
+          message: 'Kapan jadwal imunisasi polio dan DPT di Puskesmas Pandanaran?'
+        },
+        {
+          sender: 'ai',
+          message: 'Layanan imunisasi rutin bayi dan balita di Puskesmas Pandanaran Kota Semarang biasanya diselenggarakan setiap hari Selasa dan Kamis mulai pukul 08.00 - 11.30 WIB.\n\nDisarankan membawa Buku KIA/KMS dan datang lebih awal untuk mengambil nomor antrean poli KIA.',
+          type: 'general',
+          relatedArticleIds: [6]
+        }
+      ]
+    },
+    {
+      id: 'conv-3',
+      title: 'Rujukan BPJS ke RS',
+      is_pinned: 1,
+      category: 'yesterday',
+      messages: [
+        {
+          sender: 'user',
+          message: 'Bagaimana alur rujukan berjenjang BPJS dari faskes pertama ke RS Kariadi?'
+        },
+        {
+          sender: 'ai',
+          message: 'Berikut alur rujukan berjenjang BPJS Kesehatan di Kota Semarang:\n\n1. Kunjungi Faskes Tingkat Pertama (FKTP) tempat Anda terdaftar (Puskesmas / Klinik Pratama).\n2. Lakukan pemeriksaan dengan dokter FKTP. Apabila membutuhkan penanganan spesialis, dokter akan menerbitkan Surat Rujukan Online (V-Claim).\n3. Bawa KTP, Kartu BPJS/KIS, dan Surat Rujukan ke RSUP Dr. Kariadi sesuai jadwal poli yang ditentukan.',
+          type: 'facility_recommendation',
+          showFacilityCTA: true
+        }
+      ]
+    }
+  ];
+
+  for (const c of defaults) {
+    await db.execute({
+      sql: `INSERT OR IGNORE INTO ai_conversations (id, title, is_pinned, category)
+            VALUES (?, ?, ?, ?)`,
+      args: [c.id, c.title, c.is_pinned, c.category]
+    });
+
+    for (const m of c.messages) {
+      await db.execute({
+        sql: `INSERT INTO chat_history (session_id, sender, message, message_type, related_article_ids, show_facility_cta)
+              VALUES (?, ?, ?, ?, ?, ?)`,
+        args: [
+          c.id,
+          m.sender,
+          m.message,
+          m.type || 'general',
+          JSON.stringify(m.relatedArticleIds || []),
+          m.showFacilityCTA ? 1 : 0
+        ]
+      });
+    }
+  }
+}
+
+/**
+ * GET /api/ai/conversations
+ * Mengambil daftar sesi percakapan dari Turso DB
+ */
+export async function getConversations(_req, res) {
+  try {
+    await ensureDefaultConversations();
+
+    const result = await db.execute(`
+      SELECT id, title, is_pinned, category, created_at, updated_at
+      FROM ai_conversations
+      ORDER BY is_pinned DESC, updated_at DESC
+    `);
+
+    const conversations = result.rows.map((row) => ({
+      id: row.id,
+      title: row.title,
+      isPinned: Boolean(row.is_pinned),
+      category: row.category || 'today',
+      createdAt: row.created_at,
+      updatedAt: row.updated_at
+    }));
+
+    return res.json({ success: true, data: conversations });
+  } catch (err) {
+    console.error('[AI getConversations Error]', err);
+    return res.status(500).json({ success: false, message: 'Gagal memuat daftar percakapan.' });
+  }
+}
+
+/**
+ * POST /api/ai/conversations
+ * Membuat sesi percakapan baru di database
+ */
+export async function createConversation(req, res) {
+  try {
+    const { id, title = 'Percakapan Baru', isPinned = false, category = 'today' } = req.body;
+    const conversationId = id || `conv-${Date.now()}`;
+
+    await db.execute({
+      sql: `INSERT INTO ai_conversations (id, title, is_pinned, category)
+            VALUES (?, ?, ?, ?)`,
+      args: [conversationId, title, isPinned ? 1 : 0, category]
+    });
+
+    return res.status(201).json({
+      success: true,
+      data: {
+        id: conversationId,
+        title,
+        isPinned,
+        category,
+        messages: [],
+        updatedAt: new Date().toISOString()
+      }
+    });
+  } catch (err) {
+    console.error('[AI createConversation Error]', err);
+    return res.status(500).json({ success: false, message: 'Gagal membuat sesi percakapan baru.' });
+  }
+}
+
+/**
+ * GET /api/ai/conversations/:id/messages
+ * Mengambil seluruh riwayat pesan untuk percakapan tertentu
+ */
+export async function getMessages(req, res) {
+  try {
+    const { id } = req.params;
+
+    const result = await db.execute({
+      sql: `SELECT id, session_id, sender, message, message_type, related_article_ids, show_facility_cta, created_at
+            FROM chat_history
+            WHERE session_id = ?
+            ORDER BY id ASC`,
+      args: [id]
+    });
+
+    const messages = result.rows.map((row) => {
+      let relatedArticleIds = [];
+      try {
+        if (row.related_article_ids) {
+          relatedArticleIds = JSON.parse(row.related_article_ids);
+        }
+      } catch (_e) {
+        relatedArticleIds = [];
+      }
+
+      return {
+        id: `msg-${row.id}`,
+        sender: row.sender,
+        message: row.message,
+        timestamp: new Date(row.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        type: row.message_type || 'general',
+        relatedArticleIds,
+        showFacilityCTA: Boolean(row.show_facility_cta)
+      };
+    });
+
+    return res.json({ success: true, data: messages });
+  } catch (err) {
+    console.error('[AI getMessages Error]', err);
+    return res.status(500).json({ success: false, message: 'Gagal memuat riwayat pesan.' });
+  }
+}
+
+/**
+ * PATCH /api/ai/conversations/:id
+ * Mengubah status pin atau judul percakapan
+ */
+export async function updateConversation(req, res) {
+  try {
+    const { id } = req.params;
+    const { title, isPinned } = req.body;
+
+    const fields = [];
+    const args = [];
+
+    if (title !== undefined) {
+      fields.push('title = ?');
+      args.push(title);
+    }
+    if (isPinned !== undefined) {
+      fields.push('is_pinned = ?');
+      args.push(isPinned ? 1 : 0);
+    }
+
+    if (fields.length === 0) {
+      return res.status(400).json({ success: false, message: 'Tidak ada data yang diperbarui.' });
+    }
+
+    fields.push('updated_at = CURRENT_TIMESTAMP');
+    args.push(id);
+
+    await db.execute({
+      sql: `UPDATE ai_conversations SET ${fields.join(', ')} WHERE id = ?`,
+      args
+    });
+
+    return res.json({ success: true, message: 'Percakapan berhasil diperbarui.' });
+  } catch (err) {
+    console.error('[AI updateConversation Error]', err);
+    return res.status(500).json({ success: false, message: 'Gagal memperbarui percakapan.' });
+  }
+}
+
+/**
+ * DELETE /api/ai/conversations/:id
+ * Menghapus sesi percakapan beserta seluruh pesannya dari database
+ */
+export async function deleteConversation(req, res) {
+  try {
+    const { id } = req.params;
+
+    await db.execute({
+      sql: 'DELETE FROM ai_conversations WHERE id = ?',
+      args: [id]
+    });
+    await db.execute({
+      sql: 'DELETE FROM chat_history WHERE session_id = ?',
+      args: [id]
+    });
+
+    return res.json({ success: true, message: 'Percakapan berhasil dihapus.' });
+  } catch (err) {
+    console.error('[AI deleteConversation Error]', err);
+    return res.status(500).json({ success: false, message: 'Gagal menghapus percakapan.' });
+  }
+}
+
+/**
  * POST /api/ai/chat
- * Body: { message: string, history?: Array<{role, parts}> }
+ * Body: { message: string, history?: Array<{role, parts}>, sessionId?: string }
  */
 export async function chat(req, res) {
-  const { message, history = [] } = req.body;
+  const { message, history = [], sessionId } = req.body;
 
   if (!message || typeof message !== 'string' || !message.trim()) {
     return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong.' });
+  }
+
+  const cleanMessage = message.trim();
+
+  // Simpan pesan user ke database jika sessionId disertakan
+  if (sessionId) {
+    try {
+      await db.execute({
+        sql: `INSERT OR IGNORE INTO ai_conversations (id, title, is_pinned, category)
+              VALUES (?, 'Percakapan Baru', 0, 'today')`,
+        args: [sessionId]
+      });
+
+      await db.execute({
+        sql: `INSERT INTO chat_history (session_id, sender, message, message_type)
+              VALUES (?, 'user', ?, 'general')`,
+        args: [sessionId, cleanMessage]
+      });
+    } catch (dbErr) {
+      console.warn('[AI DB Chat Save Warning - User]', dbErr.message);
+    }
   }
 
   try {
@@ -80,7 +361,7 @@ export async function chat(req, res) {
           role: h.role === 'ai' || h.role === 'model' ? 'model' : 'user',
           parts: [{ text: h.parts }],
         })),
-      { role: 'user', parts: [{ text: message.trim() }] },
+      { role: 'user', parts: [{ text: cleanMessage }] },
     ];
 
     const ai = getAiClient();
@@ -101,7 +382,6 @@ export async function chat(req, res) {
         config: generateOptions,
       });
     } catch (modelErr) {
-      // Fallback model jika primary model sedang mengalami lonjakan beban sesaat
       console.warn(`[AI Controller] Model ${primaryModel} gagal, mencoba fallback:`, modelErr.message);
       const fallbackModel = primaryModel === 'gemini-3.1-flash-lite' ? 'gemini-3.5-flash-lite' : 'gemini-3.1-flash-lite';
       response = await ai.models.generateContent({
@@ -113,21 +393,51 @@ export async function chat(req, res) {
 
     let reply = response.text?.trim() ?? 'Maaf, saya tidak dapat memproses pertanyaan Anda saat ini.';
 
-    // Rapikan simbol markdown: perbaiki double hash (### ### -> ###) dan spasi berlebih
+    // Rapikan simbol markdown
     reply = reply
       .replace(/^#{1,6}\s+#{1,6}\s*/gm, '### ')
       .replace(/\n{3,}/g, '\n\n')
       .trim();
 
-    const metadata = getRelatedMetadata(message);
+    const metadata = getRelatedMetadata(cleanMessage);
+    const aiMessageId = `ai-${Date.now()}`;
+    const timestampStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+    // Simpan respons AI ke database
+    if (sessionId) {
+      try {
+        await db.execute({
+          sql: `INSERT INTO chat_history (session_id, sender, message, message_type, related_article_ids, show_facility_cta)
+                VALUES (?, 'ai', ?, 'general', ?, ?)`,
+          args: [
+            sessionId,
+            reply,
+            JSON.stringify(metadata.relatedArticleIds || []),
+            metadata.showFacilityCTA ? 1 : 0
+          ]
+        });
+
+        // Update waktu aktif dan perbarui judul jika masih "Percakapan Baru"
+        const titleSnippet = cleanMessage.length > 28 ? cleanMessage.slice(0, 28) + '...' : cleanMessage;
+        await db.execute({
+          sql: `UPDATE ai_conversations
+                SET updated_at = CURRENT_TIMESTAMP,
+                    title = CASE WHEN title = 'Percakapan Baru' THEN ? ELSE title END
+                WHERE id = ?`,
+          args: [titleSnippet, sessionId]
+        });
+      } catch (dbErr) {
+        console.warn('[AI DB Chat Save Warning - AI Response]', dbErr.message);
+      }
+    }
 
     return res.json({
       success: true,
       data: {
-        id: `ai-${Date.now()}`,
+        id: aiMessageId,
         sender: 'ai',
         message: reply,
-        timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        timestamp: timestampStr,
         type: 'general',
         relatedArticleIds: metadata.relatedArticleIds,
         showFacilityCTA: metadata.showFacilityCTA,
@@ -144,7 +454,7 @@ export async function chat(req, res) {
 }
 
 /**
- * Pre-warm connection to Gemini API to eliminate cold-start TLS latency
+ * Pre-warm connection to Gemini API
  */
 export async function warmup() {
   try {

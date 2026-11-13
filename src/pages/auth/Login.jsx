@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { Eye, EyeOff, ArrowLeft, Sparkles, Loader2 } from "lucide-react";
 import Logo from "../../components/common/Logo";
+import { authService } from "../../services/authService";
 
 const STEPS = [
   { num: 1, title: "Masuk ke akun warga Anda" },
@@ -41,29 +42,41 @@ export default function Login() {
           transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] },
         };
 
-  const goToDashboard = (delay) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/user/dashboard");
-    }, delay);
-  };
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!identifier.trim() || !password.trim()) {
       setErrorMessage("Silakan masukkan email/NIK dan kata sandi.");
       return;
     }
     setErrorMessage("");
-    goToDashboard(600);
+    setIsLoading(true);
+
+    try {
+      await authService.login(identifier.trim(), password);
+      navigate("/user/dashboard");
+    } catch (err) {
+      setErrorMessage(err.message || "Email/NIK atau kata sandi tidak sesuai.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleDemoLogin = () => {
-    setIdentifier("nael@semarangkota.go.id");
-    setPassword("password123");
+  const handleDemoLogin = async () => {
+    const demoId = "nael@semarangkota.go.id";
+    const demoPw = "password123";
+    setIdentifier(demoId);
+    setPassword(demoPw);
     setErrorMessage("");
-    goToDashboard(400);
+    setIsLoading(true);
+
+    try {
+      await authService.login(demoId, demoPw);
+      navigate("/user/dashboard");
+    } catch (err) {
+      setErrorMessage(err.message || "Gagal masuk menggunakan akun demo.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputClass =

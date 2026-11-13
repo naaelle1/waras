@@ -92,9 +92,9 @@ export default function Dashboard() {
       </div>
 
       {/* SECTION 2: WELCOME HERO BANNER */}
-      <section className="relative w-full overflow-hidden rounded-3xl bg-[#003B3B] p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(0,59,59,0.15)]">
-        {/* DEKORASI SVG FIGMA */}
-        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+      <section className="relative w-full rounded-3xl bg-[#003B3B] p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(0,59,59,0.15)]">
+        {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
           <svg
             className="w-full h-full object-cover"
             preserveAspectRatio="none"
@@ -138,7 +138,7 @@ export default function Dashboard() {
         </div>
 
         {/* KONTEN UTAMA DI LAYER ATAS (z-10) */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Kolom Kiri: Sapaan & Tombol Pill */}
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
@@ -173,12 +173,12 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* KOLOM KANAN: KARTU VISUAL LOGO/ILUSTRASI FIGMA */}
-          <div className="lg:col-span-5 relative overflow-hidden rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-4 shadow-lg min-h-[220px] flex items-center justify-center">
+          {/* KOLOM KANAN: ILUSTRASI / LOGO SVG LANGSUNG MENIMPA CARD UTAMA (TANPA CARD TAMBAHAN) */}
+          <div className="lg:col-span-5 flex items-end justify-center lg:justify-end -mb-6 sm:-mb-8 lg:-mb-10 translate-y-2 pointer-events-none select-none">
             <img
               src={transhumansSvg}
               alt="Ilustrasi Layanan Medis WARAS"
-              className="w-full max-h-[220px] object-contain drop-shadow-md select-none pointer-events-none"
+              className="w-[270px] sm:w-[320px] lg:w-[365px] h-auto object-contain drop-shadow-md"
             />
           </div>
         </div>

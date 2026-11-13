@@ -4,43 +4,73 @@ import { PhoneCall, ShieldAlert, X, Phone, Ambulance } from "lucide-react";
 
 import ConversationPanel from "../../components/user/ConversationPanel";
 import AIChat from "../../components/user/AIChat";
+import { aiService } from "../../services/aiService";
 
 export default function AI() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get("q");
   const outletContext = useOutletContext();
 
-  const [conversations, setConversations] = useState([
-    {
-      id: "conv-1",
-      title: "Demam & Batuk",
-      category: "today",
-      isPinned: false,
-      messages: [],
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: "conv-2",
-      title: "Informasi Imunisasi",
-      category: "today",
-      isPinned: false,
-      messages: [],
-      updatedAt: new Date().toISOString()
-    },
-    {
-      id: "conv-3",
-      title: "Rujukan BPJS ke RS",
-      category: "yesterday",
-      isPinned: true,
-      messages: [],
-      updatedAt: new Date(Date.now() - 86400000).toISOString()
-    }
-  ]);
-
-  const [activeId, setActiveId] = useState("conv-1");
+  const [conversations, setConversations] = useState([]);
+  const [activeId, setActiveId] = useState("");
   const [isMobileHistoryOpen, setIsMobileHistoryOpen] = useState(false);
   const [pendingPrompt, setPendingPrompt] = useState("");
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
+
+  // 1. Muat seluruh percakapan tersimpan dari Turso Database saat mount
+  useEffect(() => {
+    async function fetchConversations() {
+      try {
+        const list = await aiService.getConversations();
+        if (list && list.length > 0) {
+          setConversations(list.map((c) => ({ ...c, messages: [] })));
+          if (!queryParam) {
+            setActiveId(list[0].id);
+          }
+        } else {
+          const defaultId = "conv-1";
+          const defaultChat = {
+            id: defaultId,
+            title: "Percakapan Baru",
+            category: "today",
+            isPinned: false,
+            messages: [],
+            updatedAt: new Date().toISOString()
+          };
+          setConversations([defaultChat]);
+          setActiveId(defaultId);
+          aiService.createConversation(defaultChat).catch(console.warn);
+        }
+      } catch (err) {
+        console.warn("[AI Page] Gagal memuat percakapan dari DB:", err);
+      }
+    }
+    fetchConversations();
+  }, []);
+
+  // 2. Muat riwayat pesan dari database saat activeId berubah
+  useEffect(() => {
+    if (!activeId) return;
+    let isCurrent = true;
+
+    async function loadMessages() {
+      try {
+        const msgs = await aiService.getMessages(activeId);
+        if (isCurrent) {
+          setConversations((prev) =>
+            prev.map((c) => (c.id === activeId ? { ...c, messages: msgs } : c))
+          );
+        }
+      } catch (err) {
+        console.warn("[AI Page] Gagal memuat pesan untuk sesi:", activeId, err);
+      }
+    }
+
+    loadMessages();
+    return () => {
+      isCurrent = false;
+    };
+  }, [activeId]);
 
   useEffect(() => {
     if (queryParam && queryParam.trim()) {
@@ -57,6 +87,7 @@ export default function AI() {
       setConversations((prev) => [newChat, ...prev]);
       setActiveId(newId);
       setPendingPrompt(promptText);
+      aiService.createConversation(newChat).catch(console.warn);
       // Bersihkan param q dari URL
       setSearchParams({}, { replace: true });
     }
@@ -71,7 +102,7 @@ export default function AI() {
       messages: []
     };
 
-  const handleNewConversation = () => {
+  const handleNewConversation = async () => {
     const newId = `conv-${Date.now()}`;
     const newChat = {
       id: newId,
@@ -84,6 +115,7 @@ export default function AI() {
     setConversations((prev) => [newChat, ...prev]);
     setActiveId(newId);
     setPendingPrompt("");
+    await aiService.createConversation(newChat);
   };
 
   const handleSelectConversation = (id) => {
@@ -111,21 +143,23 @@ export default function AI() {
     );
   };
 
-  const handleDeleteConversation = (id) => {
+  const handleDeleteConversation = async (id) => {
+    await aiService.deleteConversation(id);
     setConversations((prev) => {
       const filtered = prev.filter((c) => c.id !== id);
       if (filtered.length === 0) {
         const freshId = `conv-${Date.now()}`;
+        const freshChat = {
+          id: freshId,
+          title: "Percakapan Baru",
+          category: "today",
+          isPinned: false,
+          messages: [],
+          updatedAt: new Date().toISOString()
+        };
         setActiveId(freshId);
-        return [
-          {
-            id: freshId,
-            title: "Percakapan Baru",
-            category: "today",
-            isPinned: false,
-            messages: []
-          }
-        ];
+        aiService.createConversation(freshChat).catch(console.warn);
+        return [freshChat];
       }
       if (id === activeId) {
         setActiveId(filtered[0].id);
@@ -134,10 +168,15 @@ export default function AI() {
     });
   };
 
-  const handleTogglePin = (id) => {
+  const handleTogglePin = async (id) => {
+    const target = conversations.find((c) => c.id === id);
+    if (!target) return;
+    const nextPinned = !target.isPinned;
+
     setConversations((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, isPinned: !c.isPinned } : c))
+      prev.map((c) => (c.id === id ? { ...c, isPinned: nextPinned } : c))
     );
+    await aiService.updateConversation(id, { isPinned: nextPinned });
   };
 
   const handleOpenMobileNav = () => {
