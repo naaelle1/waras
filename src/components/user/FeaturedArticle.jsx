@@ -16,19 +16,19 @@ export default function FeaturedArticle({ article, onReadMore }) {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-white border border-white/20 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
               UNGGULAN
             </span>
           </div>
         </div>
 
         {/* Right Content Panel */}
-        <div className="lg:col-span-5 bg-[#022022] border-l border-[#37F4B4]/20 text-white p-6 sm:p-8 flex flex-col justify-between relative z-10">
+        <div className="lg:col-span-5 bg-[#022022] border-l border-white/10 text-white p-6 sm:p-8 flex flex-col justify-between relative z-10">
           <div className="space-y-3.5">
             <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-teal-100">
-              <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-[#37F4B4] border border-[#37F4B4]/20">
-                <Tag className="w-3 h-3 text-[#37F4B4]" />
+              <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-teal-200 border border-white/20">
+                <Tag className="w-3 h-3 text-teal-200" />
                 {article.category}
               </span>
               <span>•</span>
@@ -38,7 +38,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
               </span>
             </div>
 
-            <h2 className="font-poppins font-bold text-xl sm:text-2xl leading-snug tracking-tight text-white group-hover:text-[#37F4B4] transition-colors">
+            <h2 className="font-poppins font-bold text-xl sm:text-2xl leading-snug tracking-tight text-white group-hover:text-teal-200 transition-colors">
               {article.title}
             </h2>
 

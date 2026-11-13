@@ -66,9 +66,9 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
 
           <Link
             to="/user/dashboard"
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all"
           >
-            <LayoutDashboard className="w-4 h-4 text-[#37F4B4]" />
+            <LayoutDashboard className="w-4 h-4 text-white" />
             <span>Kembali ke Dashboard</span>
           </Link>
         </div>

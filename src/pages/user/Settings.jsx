@@ -44,24 +44,29 @@ export default function Settings() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12 font-inter">
       {/* HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-poppins font-bold text-2xl text-[#0D2626]">
-            Pengaturan Akun & Preferensi
-          </h1>
-          <p className="text-xs sm:text-sm text-[#526666] mt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <SettingsIcon className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Pengaturan Akun
+            </h1>
+          </div>
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
             Sesuaikan preferensi notifikasi antrean, aksesibilitas tampilan, dan keamanan data Anda.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleSaveSettings}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer self-start sm:self-auto"
-        >
-          <CheckCircle2 className="w-4 h-4 text-[#37F4B4]" />
-          <span>Simpan Perubahan</span>
-        </button>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <button
+            type="button"
+            onClick={handleSaveSettings}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
+          >
+            <CheckCircle2 className="w-4 h-4 text-white" />
+            <span>Simpan Perubahan</span>
+          </button>
+        </div>
       </div>
 
       {savedSuccess && (
@@ -76,7 +81,7 @@ export default function Settings() {
         {/* NOTIFICATIONS */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
               <Bell className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -146,7 +151,7 @@ export default function Settings() {
         {/* ACCESSIBILITY */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
               <Eye className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -199,7 +204,7 @@ export default function Settings() {
         {/* SECURITY & DATA */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
               <Shield className="w-4.5 h-4.5" />
             </div>
             <div>

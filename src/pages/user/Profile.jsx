@@ -11,7 +11,8 @@ import {
   Edit3,
   CheckCircle2,
   Calendar,
-  AlertCircle
+  AlertCircle,
+  Activity
 } from "lucide-react";
 
 export default function Profile() {
@@ -41,16 +42,36 @@ export default function Profile() {
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12 font-inter">
-      {/* HEADER BANNER */}
-      <div className="rounded-3xl bg-[#022022] border border-[#37F4B4]/25 text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="absolute right-0 top-0 -mt-10 -mr-10 w-44 h-44 bg-[#37F4B4]/15 rounded-full blur-2xl pointer-events-none" />
+      {/* SECTION 1: PAGE TITLE */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <User className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Profil Pengguna
+            </h1>
+          </div>
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
+            Informasi identitas kependudukan, kepesertaan BPJS Kesehatan, dan rekam medis warga Kota Semarang.
+          </p>
+        </div>
 
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
+            Kota Semarang • Sistem Aktif
+          </span>
+        </div>
+      </div>
+
+      {/* HEADER BANNER */}
+      <div className="rounded-3xl bg-[#022022] border border-white/10 text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
         <div className="flex items-center gap-4 relative z-10">
-          <div className="w-16 h-16 rounded-2xl bg-[#37F4B4] text-[#022022] flex items-center justify-center font-bold text-2xl shadow-sm shrink-0">
+          <div className="w-16 h-16 rounded-2xl bg-white/15 text-white border border-white/20 flex items-center justify-center font-bold text-2xl shadow-sm shrink-0">
             {profileData.name.charAt(0)}
           </div>
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/15 text-[#37F4B4] border border-[#37F4B4]/20">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/15 text-teal-200 border border-white/20">
               <ShieldCheck className="w-3 h-3" /> NIK Terverifikasi Dukcapil
             </div>
             <h1 className="font-poppins font-bold text-xl sm:text-2xl text-white">
@@ -177,7 +198,7 @@ export default function Profile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
+                  className="px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Simpan Perubahan
                 </button>
@@ -189,13 +210,13 @@ export default function Profile() {
         {/* RIGHT COLUMN: KARTU BPJS & STATUS KESEHATAN (5 COLS) */}
         <div className="lg:col-span-5 space-y-6">
           {/* KARTU BPJS DIGITAL */}
-          <div className="rounded-3xl bg-[#022022] border border-[#37F4B4]/25 text-white p-6 shadow-sm space-y-4">
+          <div className="rounded-3xl bg-[#022022] border border-white/10 text-white p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-white/20 pb-3">
               <div className="flex items-center gap-2">
-                <HeartPulse className="w-5 h-5 text-[#37F4B4]" />
+                <HeartPulse className="w-5 h-5 text-teal-200" />
                 <span className="font-poppins font-bold text-sm">BPJS Kesehatan</span>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#37F4B4] text-[#022022]">
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-600 text-white">
                 {profileData.bpjsStatus}
               </span>
             </div>
@@ -242,7 +263,7 @@ export default function Profile() {
                 <p className="text-[#0D2626]">{profileData.allergies}</p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#022022]/5 border border-[#37F4B4]/25 text-[#022022] space-y-1">
+              <div className="p-3 rounded-xl bg-[#022022]/5 border border-[#022022]/15 text-[#022022] space-y-1">
                 <span className="text-[11px] font-semibold block">
                   Jadwal Skrining Kesehatan:
                 </span>

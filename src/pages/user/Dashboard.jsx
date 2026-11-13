@@ -85,7 +85,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
             <Activity className="w-3.5 h-3.5 text-[#022022]" />
             Kota Semarang • Sistem Aktif
           </span>
@@ -93,10 +93,7 @@ export default function Dashboard() {
       </div>
 
       {/* SECTION 2: WELCOME HERO BANNER */}
-      <section className="relative w-full rounded-3xl bg-[#022022] border border-[#37F4B4]/20 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
-        {/* AMBIENT MINT GLOW ACCENTS */}
-        <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#37F4B4]/10 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-24 right-1/4 w-96 h-96 rounded-full bg-[#37F4B4]/10 blur-[120px]" />
+      <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
 
         {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
@@ -146,8 +143,8 @@ export default function Dashboard() {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Kolom Kiri: Sapaan & Tombol Pill */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-[#37F4B4]/30 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
+              <Sparkles className="w-3.5 h-3.5 text-teal-200" />
               <span>Portal Kesehatan Terpadu Kota Semarang</span>
             </div>
 
@@ -206,7 +203,7 @@ export default function Dashboard() {
               <Link key={idx} to={item.path}>
                 <Card hoverEffect className="h-full flex flex-col justify-between group">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-3 group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all duration-200">
+                    <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-3 group-hover:bg-[#022022] group-hover:text-white transition-all duration-200">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h4 className="font-poppins font-semibold text-base text-[#0D2626] mb-1 group-hover:text-[#022022] transition-colors">
@@ -218,7 +215,7 @@ export default function Dashboard() {
                   </div>
                   <div className="mt-4 flex items-center text-xs font-semibold text-[#022022] group-hover:translate-x-1 transition-transform">
                     <span>Akses Layanan</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1 text-[#022022] group-hover:text-[#37F4B4]" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-1 text-[#022022]" />
                   </div>
                 </Card>
               </Link>
@@ -343,7 +340,7 @@ export default function Dashboard() {
               {/* STRIP TOPIK POPULER AGAR KETINGGIAN KOLOM KANAN SELARAS SEMPURNA */}
               <div className="p-3.5 rounded-2xl bg-white border border-[#E2ECEB] flex flex-wrap items-center justify-between gap-2 shadow-2xs">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-[#022022]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#022022]" />
                   <span>Topik Terhangat:</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-1.5">
@@ -365,13 +362,11 @@ export default function Dashboard() {
       </section>
 
       {/* SECTION 8: COMMUNITY PARTICIPATION / REPORT */}
-      <section className="rounded-3xl bg-[#022022] border border-[#37F4B4]/20 p-6 lg:p-8 text-white shadow-[0_15px_40px_rgba(2,32,34,0.25)] relative overflow-hidden">
-        {/* Ambient mint glow */}
-        <div className="pointer-events-none absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-[#37F4B4]/10 blur-3xl" />
+      <section className="rounded-3xl bg-[#022022] border border-white/10 p-6 lg:p-8 text-white shadow-[0_15px_40px_rgba(2,32,34,0.25)] relative overflow-hidden">
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-2xl bg-white/10 border border-[#37F4B4]/30 text-[#37F4B4] shrink-0 shadow-inner">
-              <Flag className="w-5 h-5 text-[#37F4B4]" />
+            <div className="p-3.5 rounded-2xl bg-white/10 border border-white/20 text-white shrink-0 shadow-inner">
+              <Flag className="w-5 h-5 text-white" />
             </div>
             <div className="space-y-1">
               <h3 className="font-poppins font-semibold text-lg text-white">

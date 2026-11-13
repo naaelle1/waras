@@ -272,7 +272,7 @@ export default function AI() {
                 className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between hover:bg-slate-100 transition-colors group cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/20">
+                  <div className="p-2 rounded-xl bg-[#022022] text-white border border-white/20">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -290,7 +290,7 @@ export default function AI() {
               </a>
 
               {/* RSUP Kariadi & Wongsonegoro */}
-              <div className="p-3.5 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/30 space-y-1.5 text-xs text-slate-700 font-inter">
+              <div className="p-3.5 rounded-2xl bg-[#022022]/5 border border-[#022022]/15 space-y-1.5 text-xs text-slate-700 font-inter">
                 <span className="font-semibold text-[#022022] block">
                   IGD Rumah Sakit Rujukan Utama:
                 </span>

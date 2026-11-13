@@ -7,7 +7,7 @@ export default function Badge({ children, variant = "default", className = "" })
     Sepi: "bg-emerald-50 text-emerald-800 border border-emerald-200",
     Sedang: "bg-amber-50 text-amber-800 border border-amber-200",
     Ramai: "bg-rose-50 text-rose-800 border border-rose-200",
-    teal: "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30",
+    teal: "bg-[#022022]/10 text-[#022022] border border-[#022022]/15",
     outline: "border border-[#E2ECEB] text-[#526666]"
   };
 

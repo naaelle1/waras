@@ -69,7 +69,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
         
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-poppins font-bold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-poppins font-bold bg-[#022022]/10 text-[#022022] border border-[#022022]/15">
               <Sparkles className="w-3.5 h-3.5 text-[#022022]" />
               PANDUAN UTAMA
             </span>
@@ -90,7 +90,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
             <div className="sm:col-span-7 space-y-4">
               {heroData.steps.map((step, idx) => (
                 <div key={idx} className="flex items-start gap-3.5 group/step">
-                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#022022] text-[#37F4B4] font-poppins font-bold text-xs shrink-0 mt-0.5 shadow-xs">
+                  <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#022022] text-white font-poppins font-bold text-xs shrink-0 mt-0.5 shadow-xs">
                     {idx + 1}
                   </span>
                   <p className="font-poppins font-semibold text-sm sm:text-base text-[#0D2626] leading-snug">
@@ -106,7 +106,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
         <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-end">
           <button
             onClick={() => onOpenModal(heroData)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] text-[#37F4B4] font-poppins font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-[#37F4B4]/30 transition-colors shadow-xs active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] text-white font-poppins font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-white/20 transition-colors shadow-xs active:scale-95 cursor-pointer"
           >
             <span>Lihat Detail Langkah Selengkapnya</span>
             <ArrowRight className="w-4 h-4" />
@@ -115,25 +115,22 @@ export default function GuideHero({ heroData, onOpenModal }) {
       </div>
 
       {/* RIGHT SIDE: Rich Emergency CTA Panel */}
-      <div className="lg:col-span-4 rounded-2xl bg-[#022022] border border-[#37F4B4]/25 p-6 sm:p-7 text-white shadow-xs flex flex-col justify-between relative overflow-hidden">
+      <div className="lg:col-span-4 rounded-2xl bg-[#022022] border border-white/10 p-6 sm:p-7 text-white shadow-xs flex flex-col justify-between relative overflow-hidden">
         
         {/* Layered Decorative Background Waves */}
-        <svg className="absolute inset-0 w-full h-full opacity-15 pointer-events-none" viewBox="0 0 300 400" preserveAspectRatio="none">
-          <path d="M -50 150 Q 50 300 350 200 T 400 350 L 400 400 L -50 400 Z" fill="#37F4B4" />
-          <path d="M -50 220 Q 100 100 350 280 L 350 400 L -50 400 Z" fill="#37F4B4" />
+        <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 300 400" preserveAspectRatio="none">
+          <path d="M -50 150 Q 50 300 350 200 T 400 350 L 400 400 L -50 400 Z" fill="white" />
+          <path d="M -50 220 Q 100 100 350 280 L 350 400 L -50 400 Z" fill="white" />
         </svg>
 
-        {/* Ambient Top Glow */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-[#37F4B4]/15 rounded-full blur-2xl pointer-events-none" />
-
         <div className="relative z-10 space-y-6">
-          <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 text-[#37F4B4]">
+          <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 text-white">
             <ShieldAlert className="w-6 h-6 animate-pulse" />
           </div>
 
           <h3 className="font-poppins font-extrabold text-2xl sm:text-3xl leading-snug tracking-tight text-white uppercase">
             PERLU BANTUAN MEDIS SEGERA? <br />
-            <span className="text-[#37F4B4]">CARI ATAU HUBUNGI FASKES TERDEKAT</span>
+            <span className="text-teal-200">CARI ATAU HUBUNGI FASKES TERDEKAT</span>
           </h3>
         </div>
 
@@ -141,7 +138,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
         <div className="relative z-10 pt-8">
           <Link
             to="/user/facilities"
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-[#37F4B4] text-[#022022] font-poppins font-extrabold text-sm hover:bg-white transition-all duration-300 shadow-lg active:scale-95 cursor-pointer group"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white text-[#022022] font-poppins font-extrabold text-sm hover:bg-teal-50 transition-all duration-300 shadow-lg active:scale-95 cursor-pointer group"
           >
             <Hospital className="w-5 h-5 text-[#022022]" />
             <span>CARI FASKES</span>

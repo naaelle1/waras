@@ -85,7 +85,7 @@ export default function FacilityDetail() {
             <div className="absolute top-3 left-3 flex items-center gap-2">
               <Badge
                 variant={isHospital ? "default" : "teal"}
-                className={isHospital ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30" : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20"}
+                className={isHospital ? "bg-[#022022] text-white border border-white/20" : "bg-[#022022]/10 text-[#022022] border border-[#022022]/15"}
               >
                 {facility.category}
               </Badge>
@@ -266,7 +266,7 @@ export default function FacilityDetail() {
               </div>
             )}
 
-            <div className="p-3 bg-[#022022]/5 rounded-xl text-xs text-[#0D2626] space-y-1 border border-[#37F4B4]/25">
+            <div className="p-3 bg-[#022022]/5 rounded-xl text-xs text-[#0D2626] space-y-1 border border-[#022022]/15">
               <p className="font-semibold text-[#022022]">Alamat Lengkap:</p>
               <p className="text-[#526666] leading-relaxed">{facility.address}</p>
             </div>

@@ -22,7 +22,7 @@ export default function MedicalTermSearch({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Cari istilah medis, gejala, atau istilah kesehatan..."
-          className="w-full pl-12 pr-4 py-3 bg-white border border-[#E2ECEB] rounded-xl text-sm sm:text-base text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#37F4B4]/25 focus:border-[#022022] transition-all shadow-xs font-inter"
+          className="w-full pl-12 pr-4 py-3 bg-white border border-[#E2ECEB] rounded-xl text-sm sm:text-base text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#022022]/15 focus:border-[#022022] transition-all shadow-xs font-inter"
           aria-label="Cari istilah medis"
         />
       </div>
@@ -39,8 +39,8 @@ export default function MedicalTermSearch({
               className={clsx(
                 "h-8 px-3 rounded-lg text-xs font-poppins font-semibold transition-all duration-150 shrink-0 cursor-pointer border",
                 isActive
-                  ? "bg-[#022022] text-[#37F4B4] border-[#022022] shadow-2xs"
-                  : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30"
+                  ? "bg-[#022022] text-white border-[#022022] shadow-2xs"
+                  : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#022022]/30"
               )}
             >
               {letter}

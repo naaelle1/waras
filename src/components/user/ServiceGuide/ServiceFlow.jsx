@@ -38,10 +38,10 @@ export default function ServiceFlow({ steps = [] }) {
                 <div className="space-y-3">
                   {/* Step Badge & Icon */}
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#022022] text-[#37F4B4] font-poppins font-bold text-xs">
+                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#022022] text-white font-poppins font-bold text-xs">
                       {item.step}
                     </span>
-                    <div className="p-2 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-colors">
+                    <div className="p-2 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-white transition-colors">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>

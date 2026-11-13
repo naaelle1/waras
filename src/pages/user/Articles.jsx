@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, ShieldCheck } from "lucide-react";
+import { BookOpen, ShieldCheck, Activity } from "lucide-react";
 import FeaturedArticle from "../../components/user/FeaturedArticle";
 import ArticleCategoryFilter from "../../components/user/ArticleCategoryFilter";
 import ArticleCard from "../../components/user/ArticleCard";
@@ -41,18 +41,25 @@ export default function Articles() {
   return (
     <div className="space-y-8 pb-12">
       {/* HEADER HALAMAN */}
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2.5 text-[#022022]">
-          <div className="p-2.5 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs">
-            <BookOpen className="w-6 h-6 text-[#37F4B4]" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <BookOpen className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Artikel Kesehatan
+            </h1>
           </div>
-          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
-            Artikel Kesehatan
-          </h1>
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
+            Informasi dan bacaan kesehatan terpercaya untuk membantu Anda menjaga pola hidup sehat di Kota Semarang.
+          </p>
         </div>
-        <p className="text-xs sm:text-sm text-[#526666] font-inter max-w-2xl">
-          Informasi dan bacaan kesehatan terpercaya untuk membantu Anda menjaga pola hidup sehat di Kota Semarang.
-        </p>
+
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
+            Kota Semarang • Sistem Aktif
+          </span>
+        </div>
       </div>
 
       {/* UNGGULAN */}

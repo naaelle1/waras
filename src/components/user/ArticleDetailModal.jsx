@@ -74,8 +74,8 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
 
           {/* Floating Category Pill */}
           <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs">
-              <Tag className="w-3.5 h-3.5 text-[#37F4B4]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-white border border-white/20 shadow-xs">
+              <Tag className="w-3.5 h-3.5 text-white" />
               {article.category}
             </span>
 
@@ -148,7 +148,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
                 {article.tags.map((t, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 rounded-lg bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20 text-xs font-medium"
+                    className="px-2.5 py-1 rounded-lg bg-[#022022]/10 text-[#022022] border border-[#022022]/15 text-xs font-medium"
                   >
                     #{t}
                   </span>
@@ -170,7 +170,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
               <button
                 type="button"
                 onClick={handleAskAI}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
               >
                 <Bot className="w-3.5 h-3.5 text-[#022022]" />
                 <span>Tanya AI tentang Artikel Ini</span>
@@ -179,9 +179,9 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
               <Link
                 to="/user/facilities"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-semibold text-xs active:scale-[0.98] transition-all"
+                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-semibold text-xs active:scale-[0.98] transition-all"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#37F4B4]" />
+                <MapPin className="w-3.5 h-3.5 text-white" />
                 <span>Cari Faskes Terdekat</span>
               </Link>
             </div>
