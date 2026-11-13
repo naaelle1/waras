@@ -42,8 +42,7 @@ export default function ProductShowcase() {
 
   return (
     <section id="showcase" className="py-20 lg:py-28 px-4 sm:px-6 relative overflow-hidden bg-[#F6FAF9]">
-      {/* Background glow */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-radial from-[#37F4B4]/20 via-transparent to-transparent blur-3xl pointer-events-none -z-10" />
+      {/* Background glow removed */}
 
       <div className="max-w-6xl mx-auto">
         

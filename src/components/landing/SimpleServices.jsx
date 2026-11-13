@@ -34,13 +34,12 @@ const services = [
 
 export default function SimpleServices() {
   return (
-    <section id="panduan" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
+    <section id="panduan" className="scroll-mt-20 px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto">
         
         {/* CENTERED HEADER (Clean, Light Typography) */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold mb-2">
-            <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
+          <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold mb-2 block">
             PELAYANAN KESEHATAN TERPADU
           </span>
           <h2 className="text-2xl sm:text-4xl lg:text-[44px] font-light text-[#022022] tracking-tight leading-[1.12]">
@@ -60,11 +59,11 @@ export default function SimpleServices() {
             return (
               <div
                 key={item.id}
-                className="rounded-3xl bg-white border border-[#37F4B4]/25 p-8 flex flex-col justify-between hover:border-[#37F4B4]/60 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 group"
+                className="rounded-3xl bg-white border border-[#022022]/10 p-8 flex flex-col justify-between hover:border-[#022022]/25 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 group"
               >
                 <div>
                   {/* Top Minimal Round Icon */}
-                  <div className="w-12 h-12 rounded-2xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-6 group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all">
+                  <div className="w-12 h-12 rounded-2xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-6 group-hover:bg-[#022022] group-hover:text-white transition-all">
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
 
@@ -84,7 +83,7 @@ export default function SimpleServices() {
                       className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
                     >
                       <span>{item.linkText}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-1 transition-transform" />
                     </a>
                   ) : (
                     <Link
@@ -92,7 +91,7 @@ export default function SimpleServices() {
                       className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
                     >
                       <span>{item.linkText}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-1 transition-transform" />
                     </Link>
                   )}
                 </div>

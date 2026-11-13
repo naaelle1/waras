@@ -27,8 +27,7 @@ export default function Hero() {
           <div className="lg:col-span-7 xl:col-span-7 space-y-6 sm:space-y-7">
             
             {/* Simple Polos Category Label */}
-            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#022022] font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
+            <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-medium">
               PORTAL LAYANAN PUBLIK KOTA SEMARANG
             </span>
 
@@ -58,10 +57,9 @@ export default function Hero() {
             <div className="pt-2 flex items-center gap-4">
               <Link
                 to="/user/facilities"
-                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
+                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
               >
                 <span>Mulai Sekarang</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
               </Link>
 
               <a
@@ -117,7 +115,7 @@ export default function Hero() {
                 onError={(e) => {
                   e.currentTarget.src = "/images/elements/image-removebg-preview.png";
                 }}
-                className="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto object-contain select-none drop-shadow-[0_15px_30px_rgba(1,71,81,0.12)]"
+                className="max-h-[350px] sm:max-h-[440px] lg:max-h-[500px] w-auto scale-110 sm:scale-115 lg:scale-120 object-contain select-none drop-shadow-[0_20px_35px_rgba(1,71,81,0.14)]"
               />
             </motion.div>
           </div>
