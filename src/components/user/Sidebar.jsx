@@ -56,7 +56,6 @@ const SETTINGS_NAV_ITEMS = [
     name: "Settings",
     path: "/user/settings",
     icon: Settings,
-    trailingIcon: ChevronDown,
   },
 ];
 
@@ -349,7 +348,6 @@ export default function Sidebar({
             <nav className="space-y-1">
               {SETTINGS_NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
-                const TrailingIcon = item.trailingIcon;
                 return (
                   <NavLink
                     key={item.path}
@@ -385,9 +383,6 @@ export default function Sidebar({
                           </span>
                         )}
 
-                        {!isCollapsed && TrailingIcon && (
-                          <TrailingIcon className="ml-auto w-4 h-4 text-current opacity-75" />
-                        )}
 
                         {isCollapsed && (
                           <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#022022] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">

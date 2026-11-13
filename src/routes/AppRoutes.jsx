@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Layouts & Public Pages
 import UserLayout from "../layouts/UserLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import AdminLayout from "../layouts/AdminLayout";
 import Home from "../pages/landing/Home";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
@@ -23,15 +25,28 @@ import Profile from "../pages/user/Profile";
 import Settings from "../pages/user/Settings";
 import Help from "../pages/user/Help";
 
+// Admin Dashboard Pages
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import ManageUsers from "../pages/admin/ManageUsers";
+import ManageFacilities from "../pages/admin/ManageFacilities";
+import ManageArticles from "../pages/admin/ManageArticles";
+import ManageQueues from "../pages/admin/ManageQueues";
+import ManageReports from "../pages/admin/ManageReports";
+import AdminSettings from "../pages/admin/AdminSettings";
+
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Halaman Publik Landing Page & Otentikasi */}
+        {/* Halaman Publik Landing Page */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Halaman Otentikasi dengan Transisi Smooth */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Route>
 
         {/* Portal Aplikasi Dashboard Pengguna WARAS */}
         <Route path="/user" element={<UserLayout />}>
@@ -55,6 +70,18 @@ export default function AppRoutes() {
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
           <Route path="help" element={<Help />} />
+        </Route>
+
+        {/* Portal Aplikasi Dashboard Admin WARAS */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<ManageUsers />} />
+          <Route path="facilities" element={<ManageFacilities />} />
+          <Route path="articles" element={<ManageArticles />} />
+          <Route path="queues" element={<ManageQueues />} />
+          <Route path="reports" element={<ManageReports />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
 
         {/* Fallback Redirect */}

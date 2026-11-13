@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
 import Sidebar from "../components/user/Sidebar";
 import Topbar from "../components/user/Topbar";
+import AnimatedOutlet from "../components/common/AnimatedOutlet";
 
 export default function UserLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -64,7 +65,10 @@ export default function UserLayout() {
             isAIPage ? "h-full overflow-hidden flex" : "max-w-7xl mx-auto pb-12 pt-2"
           )}
         >
-          <Outlet context={{ setIsMobileNavOpen: setIsMobileOpen }} />
+          <AnimatedOutlet
+            context={{ setIsMobileNavOpen: setIsMobileOpen }}
+            disabled={isAIPage}
+          />
         </main>
       </div>
     </div>
