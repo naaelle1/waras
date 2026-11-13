@@ -72,10 +72,10 @@ export default function FeatureStrip() {
                       <Icon className="w-5 h-5 stroke-[2.2]" />
                     </div>
                     <div>
-                      <h4 className="font-poppins text-xs sm:text-sm font-semibold text-[#022022] group-hover:text-[#022022] transition-colors leading-snug">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#022022] group-hover:text-[#022022] transition-colors leading-snug">
                         {item.title}
                       </h4>
-                      <p className="font-inter text-[11px] text-[#647777] font-normal leading-tight mt-0.5">
+                      <p className="text-[11px] text-[#647777] font-normal leading-tight mt-0.5">
                         {item.subtitle}
                       </p>
                     </div>

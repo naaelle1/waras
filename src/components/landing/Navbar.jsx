@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 border-b font-inter transition-[background-color,border-color,box-shadow] duration-300 ease-out ${
+        className={`fixed top-0 inset-x-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ease-out ${
           isScrolled
             ? "bg-white/95 backdrop-blur-md border-[#022022]/10 shadow-[0_8px_30px_rgba(2,32,34,0.10)]"
             : "bg-white border-transparent shadow-none"

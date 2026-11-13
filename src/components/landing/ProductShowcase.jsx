@@ -48,14 +48,14 @@ export default function ProductShowcase() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] text-xs font-semibold mb-3 font-inter">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Interactive Product Experience</span>
           </div>
-          <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#022022] tracking-tight leading-[1.2]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#022022] tracking-tight leading-[1.2]">
             Lihat Cara Kerja WARAS Secara Nyata.
           </h2>
-          <p className="font-inter mt-3 text-[#647777] text-sm sm:text-base font-normal max-w-lg mx-auto">
+          <p className="mt-3 text-[#647777] text-sm sm:text-base font-normal max-w-lg mx-auto">
             Jelajahi antarmuka interaktif yang dirancang bersih, cepat, dan mudah dipahami dalam situasi mendesak sekalipun.
           </p>
         </div>

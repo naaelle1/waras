@@ -87,15 +87,15 @@ function SingleFacilityCard({ facility, speed = 18 }) {
 
         {/* DETAILS SECTION (Clean Plain Text Below, No Floating Badges) */}
         <div className="p-3 pt-4">
-          <h3 className="font-poppins text-base font-medium text-[#022022] group-hover:text-[#022022] transition-colors truncate">
+          <h3 className="text-base font-normal text-[#022022] group-hover:text-[#022022] transition-colors truncate">
             {facility.name}
           </h3>
 
-          <p className="font-inter text-xs text-[#022022]/80 font-medium mt-1">
+          <p className="text-xs text-[#022022]/80 font-medium mt-1">
             {facility.type} • {facility.status}
           </p>
 
-          <div className="font-inter mt-2 flex items-center gap-1.5 text-xs font-light text-[#022022]/60">
+          <div className="mt-2 flex items-center gap-1.5 text-xs font-light text-[#022022]/60">
             <MapPin className="w-3.5 h-3.5 text-[#022022] shrink-0" />
             <span className="truncate">{facility.location}</span>
           </div>
@@ -131,17 +131,17 @@ export default function PopularFacilities() {
             <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold block mb-2">
               JARINGAN FASILITAS AKTIF
             </span>
-            <h2 className="font-poppins text-2xl sm:text-3xl lg:text-4xl font-light text-[#022022] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-[#022022] tracking-tight">
               Fasilitas Kesehatan <span className="font-normal text-[#022022]">Siaga Semarang</span>
             </h2>
-            <p className="font-inter mt-1.5 text-xs sm:text-sm font-light text-[#022022]/65">
+            <p className="mt-1.5 text-xs sm:text-sm font-light text-[#022022]/65">
               3 Faskes utama siaga 24 jam dengan fasilitas penunjang lengkap di Kota Semarang.
             </p>
           </div>
 
           <Link
             to="/user/facilities"
-            className="font-inter inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group shrink-0"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group shrink-0"
           >
             <span>Buka Seluruh Direktori Faskes</span>
             <ArrowUpRight className="w-4 h-4 text-[#022022] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

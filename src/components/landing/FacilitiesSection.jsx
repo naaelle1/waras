@@ -36,24 +36,24 @@ export default function FacilitiesSection() {
           
           {/* LEFT: EDITORIAL HEADLINE & FILTER */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium font-inter">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium">
               <Compass className="w-3.5 h-3.5 text-[#022022]" />
               <span>Peta Wilayah Semarang</span>
             </div>
 
-            <h2 className="font-poppins text-3xl sm:text-5xl lg:text-[50px] font-light text-[#022022] leading-[1.12] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-[50px] font-light text-[#022022] leading-[1.12] tracking-tight">
               Fasilitas Kesehatan, <br />
               <span className="font-normal text-[#022022]">
                 Siaga & Terhubung Langsung.
               </span>
             </h2>
 
-            <p className="font-inter text-[#022022]/75 text-sm sm:text-base font-light leading-relaxed max-w-md">
+            <p className="text-[#022022]/75 text-sm sm:text-base font-light leading-relaxed max-w-md">
               Peta interaktif terhubung dengan 37 Puskesmas dan Rumah Sakit se-Kota Semarang lengkap dengan indikator IGD 24 Jam dan estimasi jarak tempuh secara akurat.
             </p>
 
             {/* Quick Filter Buttons */}
-            <div className="pt-1 flex flex-wrap gap-2 text-xs font-inter">
+            <div className="pt-1 flex flex-wrap gap-2 text-xs">
               <button
                 onClick={() => setFilterType("all")}
                 className={`px-4 py-1.5 rounded-full font-medium transition-all ${

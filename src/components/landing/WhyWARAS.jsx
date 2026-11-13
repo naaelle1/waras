@@ -38,17 +38,17 @@ export default function WhyWARAS() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3 shadow-2xs font-inter">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3 shadow-2xs">
             <HeartPulse className="w-3.5 h-3.5 text-[#022022]" />
             <span>Prinsip Layanan Publik</span>
           </div>
-          <h2 className="font-poppins text-3xl sm:text-5xl lg:text-[52px] font-light text-[#022022] tracking-tight leading-[1.12]">
+          <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-light text-[#022022] tracking-tight leading-[1.12]">
             Dihadirkan untuk Mempermudah, <br />
             <span className="font-normal text-[#022022]">
               Bukan Membingungkan.
             </span>
           </h2>
-          <p className="font-inter mt-4 text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
+          <p className="mt-4 text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
             Platform kesehatan publik Kota Semarang yang berfokus pada ketepatan tindakan dan kejelasan informasi bagi setiap warga.
           </p>
         </div>
@@ -76,19 +76,19 @@ export default function WhyWARAS() {
                     </div>
                   </div>
 
-                  <h3 className="font-poppins text-base sm:text-lg font-normal text-[#022022] tracking-wide">
+                  <h3 className="text-base sm:text-lg font-normal text-[#022022] tracking-wide">
                     {item.title}
                   </h3>
                   <span className="text-xs font-mono text-[#022022]/80 block mt-1">
                     {item.subtitle}
                   </span>
 
-                  <p className="font-inter mt-3 text-xs sm:text-sm text-[#022022]/70 leading-relaxed font-light">
+                  <p className="mt-3 text-xs sm:text-sm text-[#022022]/70 leading-relaxed font-light">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022] font-inter">
+                <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
                   <span>Standar Akses WARAS</span>
                 </div>
               </motion.div>
@@ -97,7 +97,7 @@ export default function WhyWARAS() {
         </div>
 
         {/* MEDICAL DISCLAIMER BADGE (Clean White Frame) */}
-        <div className="mt-14 max-w-2xl mx-auto font-inter">
+        <div className="mt-14 max-w-2xl mx-auto">
           <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#022022]/10 flex items-center gap-3.5 shadow-2xs">
             <Info className="w-5 h-5 text-[#022022] shrink-0" />
             <p className="text-xs text-[#022022]/75 leading-relaxed font-light">
