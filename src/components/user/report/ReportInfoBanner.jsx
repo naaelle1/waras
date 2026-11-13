@@ -5,7 +5,7 @@ export default function ReportInfoBanner() {
   return (
     <div className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/90 p-4 sm:p-5 shadow-[0_8px_30px_rgba(2,32,34,0.04)]">
       <div className="flex items-start gap-3.5">
-        <div className="p-2 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 shrink-0 mt-0.5">
+        <div className="p-2 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 shrink-0 mt-0.5">
           <Info className="w-5 h-5" />
         </div>
         <div className="space-y-1">

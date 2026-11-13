@@ -51,22 +51,22 @@ export default function DashboardAIConsultation({ className = "" }) {
 
   return (
     <div
-      className={`bg-white rounded-2xl border border-[#E2ECEB] p-5 sm:p-6 shadow-xs flex flex-col justify-between h-full transition-all duration-200 hover:border-[#37F4B4]/50 hover:shadow-md ${className}`}
+      className={`bg-white rounded-2xl border border-[#E2ECEB] p-5 sm:p-6 shadow-xs flex flex-col justify-between h-full transition-all duration-200 hover:border-[#022022]/30 hover:shadow-md ${className}`}
     >
       {/* HEADER SECTION */}
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#022022] border border-[#37F4B4]/25 text-[#37F4B4] flex items-center justify-center shadow-xs">
-              <Bot className="w-5 h-5 text-[#37F4B4]" />
+            <div className="w-9 h-9 rounded-xl bg-[#022022] border border-white/20 text-white flex items-center justify-center shadow-xs">
+              <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h4 className="font-poppins font-semibold text-sm sm:text-base text-[#0D2626]">
                   WARAS AI Assistant
                 </h4>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
                   Siaga 24/7
                 </span>
               </div>
@@ -114,7 +114,7 @@ export default function DashboardAIConsultation({ className = "" }) {
       <div className="space-y-2 pt-4">
         <form
           onSubmit={handleSubmit}
-          className="relative flex items-center bg-[#F8FAFA] border border-[#E2ECEB] focus-within:border-[#022022] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#37F4B4]/25 rounded-full p-1.5 transition-all shadow-2xs"
+          className="relative flex items-center bg-[#F8FAFA] border border-[#E2ECEB] focus-within:border-[#022022] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#022022]/15 rounded-full p-1.5 transition-all shadow-2xs"
         >
           <input
             type="text"
@@ -127,10 +127,10 @@ export default function DashboardAIConsultation({ className = "" }) {
           <button
             type="submit"
             disabled={!query.trim()}
-            className="w-8.5 h-8.5 rounded-full bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] disabled:opacity-40 text-white flex items-center justify-center shrink-0 transition-all active:scale-[0.98] cursor-pointer ml-1 group"
+            className="w-8.5 h-8.5 rounded-full bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] disabled:opacity-40 text-white flex items-center justify-center shrink-0 transition-all active:scale-[0.98] cursor-pointer ml-1 group"
             aria-label="Kirim pertanyaan ke WARAS AI"
           >
-            <ArrowUp className="w-4 h-4 stroke-[2.5] text-[#37F4B4] group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUp className="w-4 h-4 stroke-[2.5] text-white group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </form>
 

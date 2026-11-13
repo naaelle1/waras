@@ -39,7 +39,7 @@ export default function HealthInfoTabs() {
               clsx(
                 "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-poppins font-medium transition-all duration-200 shrink-0 select-none",
                 isActive
-                  ? "bg-[#022022] text-[#37F4B4] shadow-sm font-semibold"
+                  ? "bg-[#022022] text-white shadow-sm font-semibold"
                   : "text-[#5F6F70] hover:bg-white/80 hover:text-[#022022]"
               )
             }

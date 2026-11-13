@@ -11,7 +11,7 @@ export default function MedicalTermCard({ term, onSelect, className = "" }) {
       className={clsx(
         "group relative flex flex-col justify-between p-5 rounded-2xl",
         "bg-white border border-[#E2ECEB] shadow-xs",
-        "transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-[#37F4B4]/40",
+        "transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-[#022022]/30",
         "cursor-pointer select-none h-full",
         className
       )}
@@ -19,7 +19,7 @@ export default function MedicalTermCard({ term, onSelect, className = "" }) {
       <div className="space-y-3">
         {/* Header Badge & Phonetic */}
         <div className="flex items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-poppins font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-poppins font-semibold bg-[#022022]/10 text-[#022022] border border-[#022022]/15">
             <Tag className="w-3 h-3 text-[#022022]" />
             {term.category}
           </span>

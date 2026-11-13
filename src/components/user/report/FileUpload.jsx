@@ -78,7 +78,7 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className="p-6 rounded-2xl border-2 border-dashed border-gray-300 hover:border-[#37F4B4] bg-white/50 hover:bg-white/80 transition-all cursor-pointer text-center space-y-2 group"
+          className="p-6 rounded-2xl border-2 border-dashed border-gray-300 hover:border-[#022022]/40 bg-white/50 hover:bg-white/80 transition-all cursor-pointer text-center space-y-2 group"
         >
           <input
             type="file"
@@ -87,7 +87,7 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
             accept="image/*"
             className="hidden"
           />
-          <div className="w-10 h-10 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+          <div className="w-10 h-10 rounded-full bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
             <UploadCloud className="w-5 h-5" />
           </div>
           <div>

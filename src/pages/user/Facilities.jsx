@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { MapPin, Search, Filter, Hospital, RefreshCw } from "lucide-react";
+import { MapPin, Search, Filter, Hospital, RefreshCw, Activity } from "lucide-react";
 
 import SearchBar from "../../components/common/SearchBar";
 import Button from "../../components/common/Button";
@@ -54,16 +54,25 @@ export default function Facilities() {
   return (
     <div className="space-y-8 pb-12">
       {/* SECTION 1 — PAGE HEADER */}
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-[#022022]">
-          <MapPin className="w-7 h-7 stroke-[2.2] text-[#022022]" />
-          <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
-            Fasilitas Kesehatan
-          </h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <MapPin className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Fasilitas Kesehatan
+            </h1>
+          </div>
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
+            Temukan informasi dan lokasi fasilitas kesehatan di Kota Semarang.
+          </p>
         </div>
-        <p className="text-sm text-[#526666] font-inter">
-          Temukan informasi dan lokasi fasilitas kesehatan di Kota Semarang.
-        </p>
+
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
+            Kota Semarang • Sistem Aktif
+          </span>
+        </div>
       </div>
 
       {/* SECTION 2 — SEARCH AND FILTER AREA */}
@@ -85,7 +94,7 @@ export default function Facilities() {
               <select
                 value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
-                className="w-full px-4 py-2.5 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl text-xs sm:text-sm text-[#0D2626] focus:outline-none focus:ring-2 focus:ring-[#37F4B4]/25 focus:border-[#022022] transition-all font-inter appearance-none cursor-pointer"
+                className="w-full px-4 py-2.5 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl text-xs sm:text-sm text-[#0D2626] focus:outline-none focus:ring-2 focus:ring-[#022022]/15 focus:border-[#022022] transition-all font-inter appearance-none cursor-pointer"
               >
                 <option value="Semua">Semua Kecamatan</option>
                 {districts
@@ -126,8 +135,8 @@ export default function Facilities() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-poppins font-semibold transition-all cursor-pointer shrink-0 active:scale-[0.98] ${
                   active
-                    ? "text-[#37F4B4] bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)]"
-                    : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)]"
+                    ? "text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)]"
+                    : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)]"
                 }`}
               >
                 {cat}

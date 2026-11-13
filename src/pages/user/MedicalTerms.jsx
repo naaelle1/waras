@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Filter,
   Sparkles,
-  BookOpen
+  BookOpen,
+  Activity
 } from "lucide-react";
 import MedicalTermSearch from "../../components/user/MedicalTermSearch";
 import MedicalTermCard from "../../components/user/MedicalTermCard";
@@ -121,30 +122,22 @@ export default function MedicalTerms() {
   return (
     <div className="space-y-8 pb-16">
       {/* ── PAGE HEADER ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2.5 text-[#022022]">
-            <div className="p-2.5 rounded-2xl bg-[#022022] text-[#37F4B4] shadow-sm">
-              <Languages className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#022022]">
-                Kamus Istilah Medis
-              </h1>
-              <p className="text-[11px] font-semibold text-[#022022] uppercase tracking-wider mt-0.5">
-                WARAS HEALTHCARE DICTIONARY &bull; 1.485 ISTILAH LENGKAP A-Z
-              </p>
-            </div>
+            <Languages className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Istilah Medis
+            </h1>
           </div>
-          <p className="text-xs sm:text-sm text-[#5F6F70] font-inter max-w-2xl mt-1">
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
             Pahami bahasa medis, diagnosa faskes, resep obat, dan terminologi klinis dengan penjelasan bahasa Indonesia yang mudah dimengerti.
           </p>
         </div>
 
-        {/* Quick Stats Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/20 self-start sm:self-auto">
-          <BookOpen className="w-4 h-4 text-[#022022]" />
-          <span className="text-xs font-semibold text-[#022022] font-inter">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
             Total {medicalTerms.length.toLocaleString("id-ID")} Istilah Terdata
           </span>
         </div>
@@ -177,8 +170,8 @@ export default function MedicalTerms() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`h-7 px-3 rounded-full text-[11px] font-poppins transition-all shrink-0 cursor-pointer active:scale-[0.98] border ${
                     isActive
-                      ? "text-[#37F4B4] bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)] font-semibold"
-                      : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)] font-medium"
+                      ? "text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)] font-semibold"
+                      : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)] font-medium"
                   }`}
                 >
                   {cat}
@@ -290,7 +283,7 @@ export default function MedicalTerms() {
                           onClick={() => handlePageChange(page)}
                           className={`w-9 h-9 rounded-xl text-xs font-poppins font-semibold transition-all cursor-pointer ${
                             currentPage === page
-                              ? "bg-[#022022] text-[#37F4B4] shadow-2xs"
+                              ? "bg-[#022022] text-white shadow-2xs"
                               : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                           }`}
                         >
@@ -316,9 +309,9 @@ export default function MedicalTerms() {
       </section>
 
       {/* ── MEDICAL DISCLAIMER CARD ── */}
-      <section className="rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/20 p-5 sm:p-6 backdrop-blur-md">
+      <section className="rounded-3xl bg-[#022022]/5 border border-[#022022]/15 p-5 sm:p-6 backdrop-blur-md">
         <div className="flex items-start gap-3.5">
-          <div className="p-2 rounded-xl bg-[#022022] text-[#37F4B4] shrink-0 mt-0.5">
+          <div className="p-2 rounded-xl bg-[#022022] text-white shrink-0 mt-0.5">
             <Info className="w-5 h-5" />
           </div>
           <div className="space-y-1">
@@ -335,7 +328,7 @@ export default function MedicalTerms() {
       {/* ── MODAL DETAIL ISTILAH MEDIS ── */}
       {selectedTerm && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 selection:bg-[#022022] selection:text-[#37F4B4]"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 selection:bg-[#022022] selection:text-white"
           onClick={() => setSelectedTerm(null)}
         >
           <div
@@ -354,7 +347,7 @@ export default function MedicalTerms() {
 
             {/* Header Modal */}
             <div className="space-y-2 pr-8">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/10 text-[#022022] border border-[#022022]/15">
                 <span>{selectedTerm.category}</span>
               </div>
 
@@ -378,7 +371,7 @@ export default function MedicalTerms() {
             </div>
 
             {/* Practical Advice Note */}
-            <div className="p-3.5 rounded-xl bg-[#022022]/5 border border-[#37F4B4]/30 text-xs text-[#022022] flex items-center gap-2.5">
+            <div className="p-3.5 rounded-xl bg-[#022022]/5 border border-[#022022]/15 text-xs text-[#022022] flex items-center gap-2.5">
               <Sparkles className="w-4 h-4 shrink-0 text-[#022022]" />
               <span>
                 Istilah ini tercatat resmi dalam sistem edukasi kesehatan terintegrasi WARAS Kota Semarang.
@@ -390,7 +383,7 @@ export default function MedicalTerms() {
               <button
                 type="button"
                 onClick={() => handleAskAI(selectedTerm)}
-                className="w-full sm:flex-1 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-xs active:scale-[0.99] border border-[#37F4B4]/30"
+                className="w-full sm:flex-1 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-[#022022] hover:bg-[#033033] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-xs active:scale-[0.99] border border-white/20"
               >
                 <Bot className="w-4 h-4" />
                 <span>Tanya WARAS AI</span>

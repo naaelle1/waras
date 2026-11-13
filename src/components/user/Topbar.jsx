@@ -110,7 +110,7 @@ export default function Topbar({
           >
             <Bell className="w-4.5 h-4.5 stroke-[1.8]" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#37F4B4] rounded-full ring-2 ring-white" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-600 rounded-full ring-2 ring-white" />
             )}
           </button>
 
@@ -123,7 +123,7 @@ export default function Topbar({
                     Notifikasi
                   </span>
                   {unreadCount > 0 && (
-                    <span className="text-[11px] font-bold px-2 py-0.5 bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30 rounded-full">
+                    <span className="text-[11px] font-bold px-2 py-0.5 bg-[#022022]/10 text-[#022022] border border-[#022022]/15 rounded-full">
                       {unreadCount} baru
                     </span>
                   )}
@@ -149,7 +149,7 @@ export default function Topbar({
                       item.unread ? "bg-[#022022]/5" : ""
                     )}
                   >
-                    <div className="p-2 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20 shrink-0 mt-0.5">
+                    <div className="p-2 rounded-full bg-[#022022]/10 text-[#022022] border border-[#022022]/10 shrink-0 mt-0.5">
                       <Sparkles className="w-4 h-4 text-[#022022]" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -191,7 +191,7 @@ export default function Topbar({
                   e.target.nextSibling.style.display = "flex";
                 }}
               />
-              <div className="hidden w-9 h-9 rounded-full bg-[#022022] text-[#37F4B4] items-center justify-center text-xs font-semibold shadow-sm group-hover:scale-105 transition-transform duration-200">
+              <div className="hidden w-9 h-9 rounded-full bg-[#022022] text-white items-center justify-center text-xs font-bold shadow-sm group-hover:scale-105 transition-transform duration-200">
                 {user.name.charAt(0)}
               </div>
             </div>
@@ -201,7 +201,7 @@ export default function Topbar({
           {isProfileOpen && (
             <div className="absolute right-0 top-full mt-3 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
               <div className="px-4 py-3 border-b border-slate-100 flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 flex items-center justify-center text-[#022022] font-bold text-base shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#022022] text-white flex items-center justify-center font-bold text-base shrink-0 shadow-sm">
                   {user.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">

@@ -18,7 +18,7 @@ export default function Card({
         onClick={onClick}
         className={clsx(
           baseClass,
-          "hover:border-[#37F4B4]/60 hover:shadow-md cursor-pointer",
+          "hover:border-[#022022]/30 hover:shadow-md cursor-pointer",
           className
         )}
       >

@@ -21,7 +21,7 @@ export default function GuideDetailModal({ isOpen, guide, onClose }) {
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-4 border-b border-gray-100">
           <div>
-            <span className="px-3 py-1 rounded-full text-[11px] font-poppins font-bold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25">
+            <span className="px-3 py-1 rounded-full text-[11px] font-poppins font-bold bg-[#022022]/10 text-[#022022] border border-[#022022]/15">
               PANDUAN LENGKAP
             </span>
             <h3 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022] mt-2">
@@ -88,9 +88,9 @@ export default function GuideDetailModal({ isOpen, guide, onClose }) {
 
           <Link
             to="/user/facilities"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 font-poppins font-bold text-xs transition-colors shadow-md"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-white border border-white/20 font-poppins font-bold text-xs transition-colors shadow-md"
           >
-            <Hospital className="w-4 h-4 text-[#37F4B4]" />
+            <Hospital className="w-4 h-4 text-white" />
             <span>Cari Faskes Terdekat</span>
           </Link>
         </div>

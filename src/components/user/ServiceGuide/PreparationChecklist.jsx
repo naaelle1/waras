@@ -21,7 +21,7 @@ export default function PreparationChecklist({ items = [] }) {
             Centang item di bawah untuk mempermudah persiapan kunjungan Anda ke faskes.
           </p>
         </div>
-        <span className="text-xs font-poppins font-semibold px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 self-start sm:self-auto">
+        <span className="text-xs font-poppins font-semibold px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] border border-[#022022]/15 self-start sm:self-auto">
           Tercek: {checkedIds.length} / {items.length}
         </span>
       </div>
@@ -37,7 +37,7 @@ export default function PreparationChecklist({ items = [] }) {
               onClick={() => toggleCheck(item.id)}
               className={`p-5 rounded-2xl border backdrop-blur-md transition-all duration-200 cursor-pointer select-none flex items-start gap-3.5 ${
                 isChecked
-                  ? "bg-[#022022]/5 border-[#37F4B4]/40 shadow-inner"
+                  ? "bg-[#022022]/5 border-[#022022]/20 shadow-inner"
                   : "bg-white/70 border-white/80 shadow-sm hover:shadow-md hover:border-white"
               }`}
             >

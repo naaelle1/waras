@@ -24,7 +24,7 @@ export default function HealthGuideTabs({ activeTab, onTabChange }) {
               className={clsx(
                 "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer border",
                 isActive
-                  ? "bg-[#022022] text-[#37F4B4] border-[#022022] shadow-xs"
+                  ? "bg-[#022022] text-white border-[#022022] shadow-xs"
                   : "bg-white text-[#2B3E3E] border-transparent hover:bg-[#022022]/5 hover:text-[#022022]"
               )}
             >
@@ -37,11 +37,11 @@ export default function HealthGuideTabs({ activeTab, onTabChange }) {
       {/* AI Assistance CTA Pill */}
       <Link
         to="/user/ai"
-        className="group inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#022022] text-[#37F4B4] font-semibold text-xs sm:text-sm shadow-xs hover:bg-[#033033] border border-[#37F4B4]/25 transition-colors"
+        className="group inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#022022] text-white font-semibold text-xs sm:text-sm shadow-xs hover:bg-[#033033] border border-white/20 transition-colors"
       >
-        <Sparkles className="w-4 h-4 text-[#37F4B4]" />
+        <Sparkles className="w-4 h-4 text-white" />
         <span>Belum menemukan topik? Tanya AI</span>
-        <ArrowRight className="w-4 h-4 text-[#37F4B4] transition-transform group-hover:translate-x-0.5" />
+        <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-0.5" />
       </Link>
     </div>
   );

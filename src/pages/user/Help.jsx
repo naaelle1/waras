@@ -16,7 +16,8 @@ import {
   ChevronRight,
   Headphones,
   CheckCircle2,
-  Clock
+  Clock,
+  Activity
 } from "lucide-react";
 
 const FAQ_LIST = [
@@ -85,26 +86,22 @@ export default function Help() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-14 font-inter text-[#0D2626]">
       {/* HEADER SECTION */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-200/60 pb-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#526666] mb-1">
-            <Link to="/user/dashboard" className="hover:text-[#003B3B] transition-colors">
-              Dashboard
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-[#003B3B]">Pusat Bantuan</span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <CircleHelp className="w-6 h-6 stroke-[2.2] text-[#022022]" />
+            <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
+              Pusat Bantuan
+            </h1>
           </div>
-          <h1 className="font-poppins font-bold text-2xl sm:text-3xl tracking-tight text-[#0D2626]">
-            Pusat Bantuan & Panduan Warga
-          </h1>
-          <p className="text-xs sm:text-sm text-[#526666] mt-0.5">
+          <p className="text-xs sm:text-sm text-[#526666] font-inter">
             Pertanyaan umum (FAQ), petunjuk operasional faskes, serta saluran bantuan teknis resmi Kota Semarang.
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#EBF5F5] text-[#003B3B] border border-[#003B3B]/15">
-            <Headphones className="w-4 h-4 text-[#0B6B6B]" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#022022]/15">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
             Layanan Siaga 24/7
           </span>
         </div>

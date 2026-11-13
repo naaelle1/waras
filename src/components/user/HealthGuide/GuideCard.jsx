@@ -5,7 +5,7 @@ export default function GuideCard({ guide, onOpenModal }) {
   if (!guide) return null;
 
   return (
-    <div className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-[#E2ECEB] shadow-xs hover:border-[#37F4B4]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 h-full">
+    <div className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-[#E2ECEB] shadow-xs hover:border-[#022022]/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200 h-full">
       
       <div className="space-y-4">
         {/* Card Title */}
@@ -35,7 +35,7 @@ export default function GuideCard({ guide, onOpenModal }) {
       <div className="pt-5 mt-3 border-t border-gray-100">
         <button
           onClick={() => onOpenModal(guide)}
-          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#022022] text-[#37F4B4] font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-[#37F4B4]/25 transition-colors shadow-xs active:scale-[0.98] cursor-pointer group/btn"
+          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#022022] text-white font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-white/20 transition-colors shadow-xs active:scale-[0.98] cursor-pointer group/btn"
         >
           <span>Pelajari Selengkapnya</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />

@@ -52,13 +52,13 @@ export default function ConversationPanel({
         className={clsx(
           "w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-inter text-xs transition-all cursor-pointer",
           isActive
-            ? "bg-[#022022]/10 text-[#022022] font-semibold border border-[#37F4B4]/30 shadow-2xs"
+            ? "bg-[#022022]/10 text-[#022022] font-semibold border border-[#022022]/15 shadow-2xs"
             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
         )}
       >
         <div className="flex items-center gap-2.5 min-w-0 pr-2">
           {chat.isPinned ? (
-            <Bookmark className="w-3.5 h-3.5 text-[#022022] shrink-0 fill-[#37F4B4]/30" />
+            <Bookmark className="w-3.5 h-3.5 text-[#022022] shrink-0 fill-[#022022]/20" />
           ) : (
             <MessageSquare
               className={clsx(
@@ -173,7 +173,7 @@ export default function ConversationPanel({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari percakapan..."
-                className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 font-inter"
+                className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 font-inter"
                 autoFocus
               />
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
@@ -196,9 +196,9 @@ export default function ConversationPanel({
               onNewConversation();
               onCloseMobile();
             }}
-            className="w-full text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] active:scale-[0.98] transition-all cursor-pointer group"
+            className="w-full text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] active:scale-[0.98] transition-all cursor-pointer group"
           >
-            <SquarePen className="w-4 h-4 text-[#37F4B4]" />
+            <SquarePen className="w-4 h-4 text-white" />
             <span>+ Percakapan Baru</span>
           </button>
         </div>

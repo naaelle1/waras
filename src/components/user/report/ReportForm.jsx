@@ -47,7 +47,7 @@ export default function ReportForm({
               className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none transition-all ${
                 errors.title
                   ? "border-red-400 focus:border-red-500 ring-2 ring-red-100"
-                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25"
+                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15"
               }`}
             />
             {errors.title && (
@@ -69,7 +69,7 @@ export default function ReportForm({
                 name="relatedPage"
                 value={formData.relatedPage}
                 onChange={onInputChange}
-                className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] appearance-none focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all cursor-pointer pr-10"
+                className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] appearance-none focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all cursor-pointer pr-10"
               >
                 {pageOptions.map((page, idx) => (
                   <option key={idx} value={page}>
@@ -93,7 +93,7 @@ export default function ReportForm({
               value={formData.specificItem}
               onChange={onInputChange}
               placeholder="Contoh: Nama Puskesmas, Judul Artikel, atau Fitur Pencarian"
-              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all"
+              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all"
             />
           </div>
 
@@ -118,7 +118,7 @@ export default function ReportForm({
               className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none transition-all resize-none ${
                 errors.description
                   ? "border-red-400 focus:border-red-500 ring-2 ring-red-100"
-                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25"
+                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15"
               }`}
             />
             {errors.description && (
@@ -141,7 +141,7 @@ export default function ReportForm({
               value={formData.suggestedCorrection}
               onChange={onInputChange}
               placeholder="Tuliskan saran atau informasi yang lebih tepat jika Anda mengetahuinya..."
-              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all resize-none"
             />
           </div>
 
@@ -167,7 +167,7 @@ export default function ReportForm({
       {/* PRIVACY NOTICE & SUBMIT BUTTON */}
       <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_rgba(2,32,34,0.04)] flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 shrink-0">
+          <div className="p-2.5 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
@@ -183,7 +183,7 @@ export default function ReportForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 font-poppins font-semibold text-xs sm:text-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer shrink-0"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 font-poppins font-semibold text-xs sm:text-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer shrink-0"
         >
           {isSubmitting ? (
             <>

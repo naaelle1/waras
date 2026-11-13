@@ -42,9 +42,9 @@ const hospitalIcon = new L.DivIcon({
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #37F4B4;
+    color: #ffffff;
     box-shadow: 0 4px 14px rgba(2, 32, 34, 0.65);
-    border: 2px solid #37F4B4;
+    border: 2px solid #ffffff;
     cursor: pointer;
     transition: transform 0.2s ease;
   ">
@@ -201,8 +201,8 @@ export default function MapComponent({
                     <span
                       className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isHospital
-                          ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30"
-                          : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20"
+                          ? "bg-[#022022] text-white border border-white/20"
+                          : "bg-[#022022]/10 text-[#022022] border border-[#022022]/15"
                       }`}
                     >
                       {facility.category}
@@ -228,18 +228,18 @@ export default function MapComponent({
                       href={`https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-white/20 border border-transparent text-white text-xs font-semibold transition-colors"
                     >
-                      <Navigation className="w-3.5 h-3.5 text-[#37F4B4]" />
+                      <Navigation className="w-3.5 h-3.5 text-white" />
                       <span>Petunjuk Arah (Google Maps)</span>
                     </a>
                   ) : (
                     <Link
                       to={`/user/facilities/${facility.id}`}
-                      className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold transition-colors"
+                      className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-white/20 border border-transparent text-white text-xs font-semibold transition-colors"
                     >
                       <span>Lihat Detail</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4]" />
+                      <ArrowRight className="w-3.5 h-3.5 text-white" />
                     </Link>
                   )}
                 </div>
@@ -272,7 +272,7 @@ export default function MapComponent({
           </div>
           <div className="hidden sm:flex items-center gap-3 font-medium text-[11px]">
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#37F4B4]" /> Puskesmas (38)
+              <span className="w-2.5 h-2.5 rounded-full bg-teal-600" /> Puskesmas (38)
             </span>
             <span className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-[#022022]" /> Rumah Sakit (26)

@@ -12,7 +12,7 @@ export default function QueueStatus({ item }) {
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2.5 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all duration-200">
+            <div className="p-2.5 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-white transition-all duration-200">
               <Hospital className="w-4 h-4" />
             </div>
             <div>
