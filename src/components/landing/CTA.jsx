@@ -24,7 +24,7 @@ export default function CTA() {
             <div className="pt-3">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm group"
+                className="inline-flex items-center justify-center gap-2.5 px-8 sm:px-9 py-3.5 sm:py-4 rounded-full text-white bg-gradient-to-b from-[#033436] via-[#022022] to-[#011718] hover:from-[#044447] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-white/20 hover:border-white/35 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_8px_22px_rgba(2,32,34,0.16)] text-xs sm:text-sm font-medium active:scale-[0.98] transition-all duration-200 select-none group"
               >
                 <span>Cari Fasilitas Kesehatan</span>
                 <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-1" />

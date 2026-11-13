@@ -110,7 +110,7 @@ function SingleFacilityCard({ facility, speed = 18 }) {
         </span>
         <Link
           to="/user/facilities"
-          className="inline-flex items-center gap-1 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium text-[#022022] bg-white/80 hover:bg-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_6px_rgba(2,32,34,0.04)] transition-all duration-200 active:scale-[0.98] group"
         >
           <span>Arahkan Rute</span>
           <ArrowUpRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -141,7 +141,7 @@ export default function PopularFacilities() {
 
           <Link
             to="/user/facilities"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[#022022] bg-white/80 hover:bg-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] text-xs sm:text-sm font-medium transition-all duration-200 active:scale-[0.98] select-none group shrink-0"
           >
             <span>Buka Seluruh Direktori Faskes</span>
             <ArrowUpRight className="w-4 h-4 text-[#022022] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

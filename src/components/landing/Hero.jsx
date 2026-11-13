@@ -53,18 +53,18 @@ export default function Hero() {
               WARAS menyederhanakan akses faskes siaga, alur rujukan, dan panduan medis darurat di Kota Semarang agar warga dapat mengambil tindakan tepat tanpa kebingungan.
             </p>
 
-            {/* Action Buttons */}
-            <div className="pt-2 flex items-center gap-4">
+            {/* Action Buttons (Frosted Glass Capsules) */}
+            <div className="pt-2 flex flex-wrap items-center gap-3.5">
               <Link
                 to="/user/facilities"
-                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
+                className="px-8 sm:px-9 py-3.5 sm:py-4 rounded-full text-white bg-gradient-to-b from-[#033436] via-[#022022] to-[#011718] hover:from-[#044447] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-white/20 hover:border-white/35 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_8px_20px_rgba(2,32,34,0.16)] text-xs sm:text-sm font-medium active:scale-[0.98] transition-all duration-200 flex items-center gap-2 select-none group"
               >
                 <span>Mulai Sekarang</span>
               </Link>
 
               <a
                 href="#tentang"
-                className="text-xs sm:text-sm font-light text-[#022022] hover:text-[#033033] transition-colors underline-offset-4 hover:underline"
+                className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-full text-[#022022] bg-white/70 hover:bg-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] text-xs sm:text-sm font-medium active:scale-[0.98] transition-all duration-200 inline-flex items-center gap-1.5 select-none"
               >
                 Pelajari Layanan
               </a>

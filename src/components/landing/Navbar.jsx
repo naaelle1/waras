@@ -55,7 +55,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* RIGHT ACTION BUTTON (Single Crisp Pill Button like Reference) */}
+          {/* RIGHT ACTION BUTTON (Frosted Glass Capsule Button) */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
               to="/login"
@@ -65,7 +65,7 @@ export default function Navbar() {
             </Link>
             <Link
               to="/user/facilities"
-              className="px-6 py-2.5 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] border border-transparent transition-all shadow-sm active:scale-95 group flex items-center gap-1.5"
+              className="px-6 py-2.5 rounded-full text-white bg-gradient-to-b from-[#033436] via-[#022022] to-[#011718] hover:from-[#044447] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-white/20 hover:border-white/35 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.12)] text-xs sm:text-sm font-medium transition-all duration-200 active:scale-[0.98] select-none group flex items-center gap-1.5"
             >
               <span>Cari Faskes</span>
             </Link>
@@ -75,7 +75,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <Link
               to="/user/facilities"
-              className="px-3.5 py-1.5 rounded-full bg-[#022022] text-white text-xs font-light"
+              className="px-4 py-1.5 rounded-full text-white bg-gradient-to-b from-[#033436] via-[#022022] to-[#011718] backdrop-blur-md border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_4px_10px_rgba(2,32,34,0.1)] text-xs font-medium active:scale-[0.98]"
             >
               Cari Faskes
             </Link>

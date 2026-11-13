@@ -80,7 +80,7 @@ export default function SimpleServices() {
                   {item.isExternal ? (
                     <a
                       href={item.linkTo}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium text-[#022022] bg-[#022022]/5 hover:bg-[#022022]/10 backdrop-blur-sm border border-[#022022]/10 hover:border-[#022022]/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_2px_8px_rgba(2,32,34,0.04)] transition-all duration-200 active:scale-[0.98] group"
                     >
                       <span>{item.linkText}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-1 transition-transform" />
@@ -88,7 +88,7 @@ export default function SimpleServices() {
                   ) : (
                     <Link
                       to={item.linkTo}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium text-[#022022] bg-[#022022]/5 hover:bg-[#022022]/10 backdrop-blur-sm border border-[#022022]/10 hover:border-[#022022]/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_2px_8px_rgba(2,32,34,0.04)] transition-all duration-200 active:scale-[0.98] group"
                     >
                       <span>{item.linkText}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-1 transition-transform" />
