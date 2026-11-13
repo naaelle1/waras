@@ -19,28 +19,9 @@ import MedicalTerms from "../pages/user/MedicalTerms";
 import HealthGuide from "../pages/user/HealthGuide";
 import ServicesGuide from "../pages/user/ServicesGuide";
 import ReportProblem from "../pages/user/ReportProblem";
-
-// Placeholder Pages (Temporary)
-const SettingsPage = () => (
-  <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Settings</h2>
-    <p className="text-sm text-[#5F6F70] mt-1">Halaman pengaturan akun sedang disiapkan.</p>
-  </div>
-);
-
-const ProfilePage = () => (
-  <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Profil Saya</h2>
-    <p className="text-sm text-[#5F6F70] mt-1">Halaman profil pengguna sedang disiapkan.</p>
-  </div>
-);
-
-const HelpPage = () => (
-  <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Pusat Bantuan</h2>
-    <p className="text-sm text-[#5F6F70] mt-1">Halaman FAQ dan bantuan sedang disiapkan.</p>
-  </div>
-);
+import Profile from "../pages/user/Profile";
+import Settings from "../pages/user/Settings";
+import Help from "../pages/user/Help";
 
 export default function AppRoutes() {
   return (
@@ -71,9 +52,9 @@ export default function AppRoutes() {
 
           {/* Rute Fitur Tambahan & Akun */}
           <Route path="report-problem" element={<ReportProblem />} />
-          <Route path="settings" element={<SettingsPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="help" element={<HelpPage />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="help" element={<Help />} />
         </Route>
 
         {/* Fallback Redirect */}

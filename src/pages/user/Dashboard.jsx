@@ -147,7 +147,7 @@ export default function Dashboard() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins">
-              Halo, Nael! 👋
+              Halo, Nael!
             </h1>
 
             <p className="text-sm sm:text-base text-teal-100/80 leading-relaxed max-w-xl font-inter">
@@ -269,7 +269,7 @@ export default function Dashboard() {
       {/* SECTION 6 & 7: TANYA WARAS AI & INFO KESEHATAN (SEMPURNA & BALANCED) */}
       <section className="space-y-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
+
           {/* KOLOM KIRI: TANYA WARAS AI */}
           <div className="lg:col-span-5 flex flex-col h-full space-y-3">
             <div>
