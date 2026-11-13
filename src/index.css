@@ -188,14 +188,81 @@
               transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+/* Auth Smooth Page Transition & Floating Effects */
+@keyframes authFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes authFloatUpDelayed {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes authFloatUpSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes authSubtleGlow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.22;
+    transform: scale(1.03);
+  }
+}
+
+.animate-auth-float {
+  animation: authFloatUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-auth-float-delayed {
+  animation: authFloatUpDelayed 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.animate-auth-float-soft {
+  animation: authFloatUpSoft 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-auth-glow {
+  animation: authSubtleGlow 8s ease-in-out infinite;
+}
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .page-transition,
   .hover-lift,
   .press-effect,
   .animate-fade-in,
-  .sidebar-transition {
+  .sidebar-transition,
+  .animate-auth-float,
+  .animate-auth-float-delayed,
+  .animate-auth-float-soft,
+  .animate-auth-glow {
     transition: none !important;
     animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
