@@ -5,22 +5,22 @@ import { AnimatePresence, motion } from "framer-motion";
 const authPageVariants = {
   initial: {
     opacity: 0,
-    x: 30,
+    y: 28,
   },
   enter: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
-      duration: 0.4,
-      ease: [0.25, 0.1, 0.25, 1],
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
   exit: {
     opacity: 0,
-    x: -30,
+    y: -20,
     transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1],
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };

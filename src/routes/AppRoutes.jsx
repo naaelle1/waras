@@ -38,15 +38,11 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Halaman Publik Landing Page */}
+        {/* Halaman Publik Landing Page & Otentikasi (Animasi Floating Up CSS) */}
         <Route path="/" element={<Home />} />
-
-        {/* Halaman Otentikasi dengan Transisi Smooth */}
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Portal Aplikasi Dashboard Pengguna WARAS */}
         <Route path="/user" element={<UserLayout />}>
