@@ -12,10 +12,10 @@ export default function ArticleCategoryFilter({ categories, activeCategory, onSe
             type="button"
             onClick={() => onSelectCategory(cat)}
             className={clsx(
-              "px-4 py-2 rounded-full text-xs sm:text-sm font-poppins font-semibold transition-all duration-200 shrink-0 cursor-pointer border",
+              "px-4 py-2 rounded-full text-xs sm:text-sm font-poppins font-semibold transition-all duration-200 shrink-0 cursor-pointer active:scale-[0.98]",
               isActive
-                ? "bg-[#022022] text-[#37F4B4] border-[#37F4B4]/40 shadow-2xs"
-                : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30"
+                ? "text-[#37F4B4] bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)]"
+                : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)]"
             )}
           >
             {cat}

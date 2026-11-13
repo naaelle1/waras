@@ -24,19 +24,19 @@ export default function FAQ() {
               PUSAT PERTANYAAN
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.12] tracking-tight">
+            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.12] tracking-tight">
               Pertanyaan yang Sering <br />
               <span className="font-normal text-[#022022]">Diajukan Warga.</span>
             </h2>
 
-            <p className="text-[#022022]/70 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
+            <p className="font-inter text-[#022022]/70 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
               Rangkuman jawaban atas pertanyaan umum seputar pencarian faskes, panduan P3K, dan penggunaan platform WARAS.
             </p>
 
             <div className="pt-2">
               <Link
                 to="/user/help"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
+                className="font-inter inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Kunjungi Pusat Bantuan Lengkap</span>
                 <ArrowRight className="w-4 h-4 text-[#022022] group-hover:translate-x-1 transition-transform" />
@@ -45,7 +45,7 @@ export default function FAQ() {
           </div>
 
           {/* RIGHT: MINIMAL ACCORDION WITH CLEAN BORDERS */}
-          <div className="lg:col-span-7 divide-y divide-[#022022]/10 border-t border-b border-[#022022]/10">
+          <div className="lg:col-span-7 divide-y divide-[#022022]/10 border-t border-b border-[#022022]/10 font-inter">
             {faqData.map((item, index) => {
               const isOpen = openIndex === index;
               return (
@@ -57,8 +57,8 @@ export default function FAQ() {
                     aria-expanded={isOpen}
                   >
                     <span
-                      className={`text-base sm:text-lg transition-colors ${
-                        isOpen ? "font-medium text-[#022022]" : "font-light text-[#022022] group-hover:text-[#022022]"
+                      className={`font-poppins text-base sm:text-lg transition-colors ${
+                        isOpen ? "font-medium text-[#022022]" : "font-normal text-[#022022] group-hover:text-[#022022]"
                       }`}
                     >
                       {item.q}
@@ -90,7 +90,7 @@ export default function FAQ() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <p className="pt-3 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed pr-6 sm:pr-10">
+                        <p className="font-inter pt-3 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed pr-6 sm:pr-10">
                           {item.a}
                         </p>
                       </motion.div>

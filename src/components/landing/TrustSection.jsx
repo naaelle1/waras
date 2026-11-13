@@ -17,10 +17,10 @@ export default function TrustSection() {
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Standar Keamanan Informasi</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#022022] tracking-tight">
+            <h2 className="font-poppins text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#022022] tracking-tight">
               Komitmen Layanan & Akurasi
             </h2>
-            <p className="mt-2 text-[#647777] text-xs sm:text-sm font-normal">
+            <p className="font-inter mt-2 text-[#647777] text-xs sm:text-sm font-normal">
               WARAS dirancang untuk mendampingi warga Semarang dengan prinsip kejelasan, kecepatan, dan tanggung jawab medis.
             </p>
           </div>
@@ -39,10 +39,10 @@ export default function TrustSection() {
                 <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] flex items-center justify-center font-bold">
                   <Check className="w-5 h-5 stroke-[2.5]" />
                 </div>
-                <h3 className="text-base font-bold text-[#022022] leading-snug">
+                <h3 className="font-poppins text-base font-bold text-[#022022] leading-snug">
                   {point.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#647777] leading-relaxed">
+                <p className="font-inter text-xs sm:text-sm text-[#647777] leading-relaxed">
                   {point.desc}
                 </p>
               </motion.div>
@@ -56,7 +56,7 @@ export default function TrustSection() {
                 <Info className="w-4 h-4" />
               </div>
               <div className="flex-1">
-                <p className="text-xs sm:text-sm text-[#022022] font-medium leading-relaxed">
+                <p className="font-inter text-xs sm:text-sm text-[#022022] font-medium leading-relaxed">
                   <span className="font-bold">Pemberitahuan Medis: </span>
                   WARAS menyediakan informasi kesehatan dan tidak menggantikan diagnosis atau konsultasi langsung dengan dokter dan tenaga medis.
                 </p>

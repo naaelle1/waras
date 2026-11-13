@@ -175,10 +175,10 @@ export default function MedicalTerms() {
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`h-7 px-2.5 rounded-lg text-[11px] font-poppins font-medium transition-all shrink-0 cursor-pointer border ${
+                  className={`h-7 px-3 rounded-full text-[11px] font-poppins transition-all shrink-0 cursor-pointer active:scale-[0.98] border ${
                     isActive
-                      ? "bg-[#022022] text-[#37F4B4] border-[#022022] shadow-2xs font-semibold"
-                      : "bg-slate-50 text-slate-600 border-slate-200/80 hover:bg-[#022022]/5 hover:text-[#022022]"
+                      ? "text-[#37F4B4] bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)] font-semibold"
+                      : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)] font-medium"
                   }`}
                 >
                   {cat}

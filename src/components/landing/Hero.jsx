@@ -37,7 +37,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-[62px] xl:text-[70px] font-light text-[#022022] leading-[1.12] tracking-tight">
+              <h1 className="font-poppins text-4xl sm:text-6xl lg:text-[62px] xl:text-[70px] font-light text-[#022022] leading-[1.12] tracking-tight">
                 Kesehatan Lebih{" "}
                 <span className="font-normal text-[#022022] block sm:inline">
                   Mudah Diakses,
@@ -49,7 +49,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Subtext */}
-            <p className="text-[#022022]/70 text-base sm:text-lg font-light leading-relaxed max-w-xl">
+            <p className="font-inter text-[#022022]/70 text-base sm:text-lg font-light leading-relaxed max-w-xl">
               WARAS menyederhanakan akses faskes siaga, alur rujukan, dan panduan medis darurat di Kota Semarang agar warga dapat mengambil tindakan tepat tanpa kebingungan.
             </p>
 
@@ -57,7 +57,7 @@ export default function Hero() {
             <div className="pt-2 flex items-center gap-4">
               <Link
                 to="/user/facilities"
-                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
+                className="font-inter px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
               >
                 <span>Mulai Sekarang</span>
               </Link>

@@ -16,7 +16,7 @@ export default function Badge({ children, variant = "default", className = "" })
   return (
     <span
       className={clsx(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold select-none",
+        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-inter font-semibold select-none",
         selectedVariant,
         className
       )}

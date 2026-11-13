@@ -42,11 +42,11 @@ export default function SimpleServices() {
           <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold mb-2 block">
             PELAYANAN KESEHATAN TERPADU
           </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-[44px] font-light text-[#022022] tracking-tight leading-[1.12]">
+          <h2 className="font-poppins text-2xl sm:text-4xl lg:text-[44px] font-light text-[#022022] tracking-tight leading-[1.12]">
             Penanganan Medis Jadi <br />
             <span className="font-normal text-[#022022]">Lebih Sederhana.</span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm font-light text-[#022022]/65 max-w-md mx-auto leading-relaxed">
+          <p className="font-inter mt-3 text-xs sm:text-sm font-light text-[#022022]/65 max-w-md mx-auto leading-relaxed">
             Tidak ada tahapan yang rumit. Dapatkan kepastian informasi, fasilitas, dan pertolongan pertama dalam hitungan detik.
           </p>
         </div>
@@ -67,16 +67,16 @@ export default function SimpleServices() {
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
 
-                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
+                  <h3 className="font-poppins text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="mt-3 text-xs sm:text-sm font-light text-[#022022]/65 leading-relaxed">
+                  <p className="font-inter mt-3 text-xs sm:text-sm font-light text-[#022022]/65 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#022022]/10">
+                <div className="pt-6 mt-6 border-t border-[#022022]/10 font-inter">
                   {item.isExternal ? (
                     <a
                       href={item.linkTo}

@@ -17,6 +17,7 @@ import {
 
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
+import GlassButton from "../../components/ui/GlassButton";
 import QueueStatus from "../../components/user/QueueStatus";
 import FacilityCard from "../../components/user/FacilityCard";
 import ArticleCard from "../../components/user/ArticleCard";
@@ -158,22 +159,25 @@ export default function Dashboard() {
               Temukan fasilitas kesehatan terdekat, pantau antrean terkini secara transparan, atau konsultasikan keluhan awal dengan WARAS AI dalam beberapa detik.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
+            {/* BARIS TOMBOL AKSI UTAMA (TETAP HORIZONTAL KIRI & KANAN DENGAN EFEK GLASS) */}
+            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+              <GlassButton
                 to="/user/facilities"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#022022] shadow-sm hover:bg-[#37F4B4] hover:text-[#022022] transition-all cursor-pointer hover:shadow-md"
+                variant="hero-light"
+                className="px-6 py-3"
+                leftIcon={Search}
               >
-                <Search className="w-4 h-4" />
-                <span>Cari Fasilitas Kesehatan</span>
-              </Link>
+                Cari Fasilitas Kesehatan
+              </GlassButton>
 
-              <Link
+              <GlassButton
                 to="/user/ai"
-                className="inline-flex items-center gap-2 rounded-full bg-[#022022]/80 border border-[#37F4B4]/40 px-5 py-2.5 text-xs sm:text-sm font-medium text-white backdrop-blur-md hover:bg-[#033033] hover:border-[#37F4B4]/70 transition-all cursor-pointer"
+                variant="hero-emerald"
+                className="px-6 py-3"
+                leftIcon={Bot}
               >
-                <Bot className="w-4 h-4 text-[#37F4B4]" />
-                <span>Konsultasi WARAS AI</span>
-              </Link>
+                Konsultasi WARAS AI
+              </GlassButton>
             </div>
           </div>
 
@@ -230,11 +234,14 @@ export default function Dashboard() {
             <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">Status Antrian Hari Ini</h3>
             <p className="text-xs text-[#526666]">Pantau estimasi dan kondisi antrean fasilitas secara transparan.</p>
           </div>
-          <Link to="/user/facilities">
-            <Button variant="ghost" size="sm" rightIcon={ArrowRight}>
-              Lihat Semua Antrian
-            </Button>
-          </Link>
+          <GlassButton
+            to="/user/facilities"
+            variant="card-subtle"
+            className="px-4 py-2 text-xs font-semibold"
+            rightIcon={ArrowRight}
+          >
+            Lihat Semua Antrian
+          </GlassButton>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -251,11 +258,14 @@ export default function Dashboard() {
             <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">Fasilitas Kesehatan Terdekat</h3>
             <p className="text-xs text-[#526666]">Temukan pusat layanan kesehatan di sekitar Kota Semarang.</p>
           </div>
-          <Link to="/user/facilities">
-            <Button variant="ghost" size="sm" rightIcon={ArrowRight}>
-              Lihat Semua Fasilitas
-            </Button>
-          </Link>
+          <GlassButton
+            to="/user/facilities"
+            variant="card-subtle"
+            className="px-4 py-2 text-xs font-semibold"
+            rightIcon={ArrowRight}
+          >
+            Lihat Semua Fasilitas
+          </GlassButton>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -308,11 +318,14 @@ export default function Dashboard() {
                 </p>
               </div>
 
-              <Link to="/user/health-info/articles">
-                <Button variant="ghost" size="sm" rightIcon={ArrowRight}>
-                  Lihat Semua Artikel
-                </Button>
-              </Link>
+              <GlassButton
+                to="/user/health-info/articles"
+                variant="card-subtle"
+                className="px-4 py-2 text-xs font-semibold"
+                rightIcon={ArrowRight}
+              >
+                Lihat Semua Artikel
+              </GlassButton>
             </div>
 
             <div className="flex-1 flex flex-col justify-between space-y-3">
@@ -328,7 +341,7 @@ export default function Dashboard() {
               </div>
 
               {/* STRIP TOPIK POPULER AGAR KETINGGIAN KOLOM KANAN SELARAS SEMPURNA */}
-              <div className="p-3.5 rounded-xl bg-white border border-[#E2ECEB] flex flex-wrap items-center justify-between gap-2 shadow-2xs">
+              <div className="p-3.5 rounded-2xl bg-white border border-[#E2ECEB] flex flex-wrap items-center justify-between gap-2 shadow-2xs">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-[#022022]">
                   <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
                   <span>Topik Terhangat:</span>
@@ -338,9 +351,9 @@ export default function Dashboard() {
                     <Link
                       key={idx}
                       to="/user/health-info/articles"
-                      className="px-2.5 py-1 rounded-lg bg-[#022022]/5 hover:bg-[#022022] text-[#022022] hover:text-[#37F4B4] border border-transparent hover:border-[#37F4B4]/30 text-[11px] font-medium transition-all"
+                      className="group inline-flex items-center rounded-full px-3 py-1 bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] text-[11px] font-medium text-[#022022] transition-all active:scale-[0.98]"
                     >
-                      #{topic}
+                      <span>#{topic}</span>
                     </Link>
                   ))}
                 </div>
@@ -369,12 +382,14 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-          <Link to="/user/report-problem" className="shrink-0">
-            <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#37F4B4] hover:bg-[#4EFEB8] text-[#022022] text-xs sm:text-sm font-semibold shadow-md transition-all cursor-pointer">
-              <span>Laporkan Kesalahan</span>
-              <ArrowRight className="w-4 h-4 text-[#022022]" />
-            </button>
-          </Link>
+          <GlassButton
+            to="/user/report-problem"
+            variant="card-primary"
+            className="px-5 py-2.5 text-xs sm:text-sm font-semibold shrink-0"
+            rightIcon={ArrowRight}
+          >
+            Laporkan Kesalahan
+          </GlassButton>
         </div>
       </section>
 

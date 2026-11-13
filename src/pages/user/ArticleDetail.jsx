@@ -72,7 +72,7 @@ export default function ArticleDetail() {
               alert("Tautan artikel berhasil disalin!");
             }
           }}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#E2ECEB] text-xs font-medium text-[#526666] hover:text-[#022022] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
         >
           <Share2 className="w-3.5 h-3.5" />
           <span>Bagikan</span>
@@ -198,7 +198,7 @@ export default function ArticleDetail() {
 
             <div className="flex items-center gap-3 shrink-0">
               <Button
-                variant="secondary"
+                variant="hero-light"
                 leftIcon={Bot}
                 onClick={handleConsultAI}
               >

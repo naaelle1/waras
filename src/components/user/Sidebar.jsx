@@ -123,7 +123,7 @@ export default function Sidebar({
 
       <aside
         className={clsx(
-          "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out",
+          "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out font-inter",
           "bg-white border border-[#E2ECEB] shadow-xs rounded-2xl",
           isMobileOpen ? "left-3 right-auto" : "-left-full lg:left-3",
           isCollapsed ? "w-19" : "w-67.5"
@@ -181,10 +181,10 @@ export default function Sidebar({
                   e.target.nextSibling.style.display = "block";
                 }}
               />
-              <span className="hidden font-bold text-2xl tracking-wide text-[#022022]">
+              <span className="hidden font-bold text-2xl tracking-wide text-[#022022] font-poppins">
                 waras
               </span>
-              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#5F6F70] uppercase mt-0.5">
+              <span className="text-[10px] font-semibold tracking-[0.18em] text-[#5F6F70] uppercase mt-0.5 font-inter">
                 HEALTHCARE PLATFORM
               </span>
             </div>
@@ -198,7 +198,7 @@ export default function Sidebar({
         <div className="flex-1 overflow-y-auto px-3.5 py-2 space-y-5 scrollbar-thin">
           <div>
             {!isCollapsed && (
-              <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase">
+              <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase font-poppins">
                 MAIN
               </h3>
             )}
@@ -342,7 +342,7 @@ export default function Sidebar({
 
           <div>
             {!isCollapsed && (
-              <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase">
+              <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase font-poppins">
                 SETTINGS
               </h3>
             )}

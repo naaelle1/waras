@@ -70,7 +70,7 @@ export default function ArticleCard({ article, onReadMore, className = "" }) {
       {/* Card Action Footer */}
       <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#022022]">
         <span>Baca Selengkapnya</span>
-        <div className="p-1.5 rounded-lg bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-colors duration-200">
+        <div className="p-1.5 rounded-full bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] border border-[#022022]/10 group-hover:border-[#37F4B4]/40 transition-colors duration-200">
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
         </div>
       </div>

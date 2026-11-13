@@ -91,10 +91,10 @@ export default function GuideHero({ heroData, onOpenModal }) {
         <div className="pt-6 mt-6 border-t border-gray-200/60 flex items-center justify-end">
           <button
             onClick={() => onOpenModal(heroData)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] text-[#37F4B4] font-poppins font-bold text-xs sm:text-sm hover:bg-[#033033] border border-[#37F4B4]/30 transition-all duration-200 shadow-md active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer"
           >
             <span>Lihat Detail Langkah Selengkapnya</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-[#37F4B4]" />
           </button>
         </div>
       </div>
@@ -122,11 +122,11 @@ export default function GuideHero({ heroData, onOpenModal }) {
         <div className="relative z-10 pt-8">
           <Link
             to="/user/facilities"
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-[#37F4B4] text-[#022022] font-poppins font-extrabold text-sm hover:bg-white transition-all duration-300 shadow-lg active:scale-95 cursor-pointer group"
+            className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-poppins font-bold text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group"
           >
-            <Hospital className="w-5 h-5 text-[#022022]" />
+            <Hospital className="w-5 h-5 text-white" />
             <span>CARI FASKES</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

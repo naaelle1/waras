@@ -42,17 +42,17 @@ export default function HowItWorks() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3 font-inter">
             <HeartPulse className="w-3.5 h-3.5 text-[#022022]" />
             <span>Alur Penggunaan Mudah</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
+          <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
             Tiga Langkah Sederhana <br />
             <span className="font-normal text-[#022022]">
               Menuju Penanganan Tepat.
             </span>
           </h2>
-          <p className="mt-3 text-[#022022]/70 text-sm sm:text-base font-light max-w-md mx-auto">
+          <p className="font-inter mt-3 text-[#022022]/70 text-sm sm:text-base font-light max-w-md mx-auto">
             Tidak ada tahapan yang rumit. Akses informasi penting dalam hitungan detik tanpa hambatan teknis.
           </p>
         </div>
@@ -100,17 +100,17 @@ export default function HowItWorks() {
                   </div>
 
                   {/* STEP TITLE */}
-                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
+                  <h3 className="font-poppins text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
                     {step.title}
                   </h3>
 
                   {/* DESCRIPTION */}
-                  <p className="mt-2 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed">
+                  <p className="font-inter mt-2 text-xs sm:text-sm text-[#022022]/70 font-light leading-relaxed">
                     {step.description}
                   </p>
 
                   {/* TAG HIGHLIGHT */}
-                  <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
+                  <div className="font-inter mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                     <span>{step.badge}</span>
                   </div>
@@ -125,7 +125,7 @@ export default function HowItWorks() {
         <div className="mt-14 text-center">
           <Link
             to="/user/dashboard"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
+            className="font-inter inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
           >
             <span>Mulai eksplorasi seluruh panduan kesehatan sekarang</span>
             <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />

@@ -124,10 +124,10 @@ export default function Facilities() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-xs font-poppins font-semibold transition-all cursor-pointer shrink-0 ${
+                className={`px-4 py-1.5 rounded-full text-xs font-poppins font-semibold transition-all cursor-pointer shrink-0 active:scale-[0.98] ${
                   active
-                    ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs"
-                    : "bg-[#F8FAFA] text-[#526666] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30 border border-[#E2ECEB]"
+                    ? "text-[#37F4B4] bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] border border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_4px_12px_rgba(2,32,34,0.15)]"
+                    : "text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)]"
                 }`}
               >
                 {cat}

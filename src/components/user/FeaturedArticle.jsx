@@ -58,10 +58,10 @@ export default function FeaturedArticle({ article, onReadMore }) {
             <button
               type="button"
               onClick={() => onReadMore && onReadMore(article)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#022022] font-semibold text-xs sm:text-sm hover:bg-[#37F4B4] hover:text-[#022022] transition-colors cursor-pointer shadow-xs group/btn"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group/btn"
             >
               <span>Baca Artikel</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+              <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

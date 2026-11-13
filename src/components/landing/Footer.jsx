@@ -5,7 +5,7 @@ import { Globe, Mail, MessageCircle, HeartPulse } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#022022] text-white pt-16 pb-12 px-4 sm:px-8 lg:px-12 border-t border-white/10">
+    <footer className="bg-[#022022] text-white pt-16 pb-12 px-4 sm:px-8 lg:px-12 border-t border-[#37F4B4]/20 font-inter">
       <div className="max-w-[1480px] mx-auto">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-8 pb-12 border-b border-white/15">

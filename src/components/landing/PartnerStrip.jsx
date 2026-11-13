@@ -11,7 +11,7 @@ const partners = [
 
 export default function PartnerStrip() {
   return (
-    <section className="px-4 sm:px-8 lg:px-12 py-8 bg-white border-b border-[#022022]/10">
+    <section className="px-4 sm:px-8 lg:px-12 py-8 bg-white border-b border-[#022022]/10 font-inter">
       <div className="max-w-[1480px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* LEFT TAG */}

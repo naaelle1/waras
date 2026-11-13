@@ -14,19 +14,19 @@ export default function AboutSection() {
               TENTANG PLATFORM WARAS
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.15] tracking-tight">
+            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.15] tracking-tight">
               Satu Wadah untuk <br />
               <span className="font-normal text-[#022022]">Kepastian Informasi Kesehatan</span> Warga.
             </h2>
 
-            <p className="text-sm sm:text-base font-light text-[#022022]/70 leading-relaxed max-w-xl">
+            <p className="font-inter text-sm sm:text-base font-light text-[#022022]/70 leading-relaxed max-w-xl">
               Ketika situasi darurat atau keluhan kesehatan terjadi, kepanikan sering kali diperparah oleh lokasi faskes yang tidak pasti dan istilah medis yang membingungkan. WARAS hadir memberikan kejelasan: fasilitas mana yang sedang siaga, nomor darurat yang harus dihubungi, dan pertolongan pertama yang harus dilakukan.
             </p>
 
             <div className="pt-2">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
+                className="font-inter inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Eksplorasi seluruh fasilitas kesehatan Semarang</span>
                 <ArrowRight className="w-4 h-4 text-[#022022] group-hover:translate-x-1 transition-transform" />
@@ -39,24 +39,24 @@ export default function AboutSection() {
             <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#022022]/10 flex flex-col justify-between">
               <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">01</span>
               <div className="mt-4">
-                <h4 className="text-sm font-normal text-[#022022]">Akurasi Faskes</h4>
-                <p className="text-[11px] font-light text-[#022022]/60 mt-1">Data lokasi, nomor kontak, & IGD siaga terintegrasi resmi.</p>
+                <h4 className="font-poppins text-sm font-medium text-[#022022]">Akurasi Faskes</h4>
+                <p className="font-inter text-[11px] font-light text-[#022022]/60 mt-1">Data lokasi, nomor kontak, & IGD siaga terintegrasi resmi.</p>
               </div>
             </div>
 
             <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#022022]/10 flex flex-col justify-between">
               <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">02</span>
               <div className="mt-4">
-                <h4 className="text-sm font-normal text-[#022022]">Bahasa Awam</h4>
-                <p className="text-[11px] font-light text-[#022022]/60 mt-1">Panduan P3K dan glosarium medis praktis bebas jargon.</p>
+                <h4 className="font-poppins text-sm font-medium text-[#022022]">Bahasa Awam</h4>
+                <p className="font-inter text-[11px] font-light text-[#022022]/60 mt-1">Panduan P3K dan glosarium medis praktis bebas jargon.</p>
               </div>
             </div>
 
             <div className="p-6 rounded-3xl bg-[#022022] border border-[#022022] text-white flex flex-col justify-between shadow-sm">
               <span className="text-2xl sm:text-3xl font-light font-mono text-white">03</span>
               <div className="mt-4">
-                <h4 className="text-sm font-normal text-white">Siaga Publik</h4>
-                <p className="text-[11px] font-light text-white/70 mt-1">Hotline 119 dan rute ambulans tanpa dipungut biaya.</p>
+                <h4 className="font-poppins text-sm font-medium text-white">Siaga Publik</h4>
+                <p className="font-inter text-[11px] font-light text-white/70 mt-1">Hotline 119 dan rute ambulans tanpa dipungut biaya.</p>
               </div>
             </div>
           </div>

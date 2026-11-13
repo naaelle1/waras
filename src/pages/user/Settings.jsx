@@ -57,9 +57,9 @@ export default function Settings() {
         <button
           type="button"
           onClick={handleSaveSettings}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer self-start sm:self-auto"
         >
-          <CheckCircle2 className="w-4 h-4" />
+          <CheckCircle2 className="w-4 h-4 text-[#37F4B4]" />
           <span>Simpan Perubahan</span>
         </button>
       </div>
@@ -223,7 +223,7 @@ export default function Settings() {
             </div>
             <button
               type="button"
-              className="px-4 py-2 rounded-xl bg-white border border-[#E2ECEB] text-xs font-semibold text-[#022022] hover:bg-[#022022]/5 shadow-2xs cursor-pointer"
+              className="px-5 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
             >
               Ubah Sandi
             </button>

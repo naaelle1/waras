@@ -26,10 +26,10 @@ export default function ServiceGuideCTA() {
 
           <Link
             to="/user/facilities"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#37F4B4] text-[#022022] font-poppins font-bold text-xs sm:text-sm hover:bg-white transition-all shadow-md active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer"
           >
             <span>Cari Faskes Terdekat</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-white" />
           </Link>
         </div>
 
@@ -53,7 +53,7 @@ export default function ServiceGuideCTA() {
 
           <Link
             to="/user/ai"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/10 text-white font-poppins font-bold text-xs sm:text-sm hover:bg-white/20 transition-all border border-[#37F4B4]/30 shadow-md active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white bg-gradient-to-br from-teal-300/[0.15] via-[#022022]/60 to-white/[0.03] hover:from-teal-300/[0.22] hover:via-[#033033]/70 hover:to-white/[0.06] backdrop-blur-md border border-teal-200/20 hover:border-teal-200/35 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_8px_20px_rgba(0,0,0,0.12)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-[#37F4B4]" />
             <span>Tanya WARAS AI</span>

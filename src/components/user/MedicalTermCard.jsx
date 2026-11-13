@@ -19,7 +19,7 @@ export default function MedicalTermCard({ term, onSelect, className = "" }) {
       <div className="space-y-3">
         {/* Header Badge & Phonetic */}
         <div className="flex items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-poppins font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-poppins font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25">
             <Tag className="w-3 h-3 text-[#022022]" />
             {term.category}
           </span>

@@ -86,7 +86,7 @@ export default function Topbar({
   };
 
   return (
-    <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none">
+    <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none font-inter">
       {/* SearchBar */}
       <div className="w-56 sm:w-72">
         <SearchBar placeholder="Cari fasilitas atau artikel..." />
@@ -119,7 +119,7 @@ export default function Topbar({
             <div className="absolute -right-10 sm:right-0 top-full mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50">
               <div className="flex items-center justify-between px-4 pb-2.5 border-b border-slate-100">
                 <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-sm text-[#022022]">
+                  <span className="font-poppins font-semibold text-sm text-[#022022]">
                     Notifikasi
                   </span>
                   {unreadCount > 0 && (
@@ -205,7 +205,7 @@ export default function Topbar({
                   {user.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[#022022] truncate">
+                  <p className="font-poppins text-sm font-bold text-[#022022] truncate">
                     {user.name}
                   </p>
                   <p className="text-xs text-[#5F6F70] truncate">{user.role}</p>

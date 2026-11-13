@@ -58,7 +58,7 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
           <button
             type="button"
             onClick={onReset}
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-[#022022] font-poppins font-bold text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Kirim Laporan Lain</span>
@@ -66,9 +66,9 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
 
           <Link
             to="/user/dashboard"
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 font-poppins font-bold text-xs sm:text-sm transition-colors shadow-md shadow-[#022022]/20"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all"
           >
-            <LayoutDashboard className="w-4 h-4" />
+            <LayoutDashboard className="w-4 h-4 text-[#37F4B4]" />
             <span>Kembali ke Dashboard</span>
           </Link>
         </div>

@@ -381,7 +381,7 @@ export default function AIChat({
           <button
             type="button"
             onClick={onNewConversation}
-            className="inline-flex items-center gap-1.5 bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white rounded-full px-4 py-1.5 text-xs font-medium shadow-xs transition-all cursor-pointer active:scale-95 group"
+            className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] transition-all cursor-pointer active:scale-[0.98] group"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
             <span>+ Percakapan Baru</span>
@@ -535,7 +535,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Saya ingin berkonsultasi mengenai gejala demam dan batuk")}
-                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="rounded-full px-4 py-2 text-xs font-medium text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>🌡️</span>
                 <span>Demam & Batuk</span>
@@ -544,7 +544,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Tampilkan rumah sakit rujukan dengan layanan IGD 24 jam di Kota Semarang")}
-                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="rounded-full px-4 py-2 text-xs font-medium text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>🏥</span>
                 <span>IGD 24 Jam Terdekat</span>
@@ -553,7 +553,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Bagaimana informasi dan jadwal imunisasi dasar balita di Semarang?")}
-                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="rounded-full px-4 py-2 text-xs font-medium text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>💉</span>
                 <span>Info Imunisasi Semarang</span>
@@ -562,7 +562,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Bagaimana alur dan syarat rujukan BPJS kesehatan faskes tingkat 1 di Semarang?")}
-                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="rounded-full px-4 py-2 text-xs font-medium text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>📋</span>
                 <span>Alur Rujukan BPJS</span>
@@ -748,10 +748,10 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-                className="text-xs font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200/70 flex items-center gap-1.5 cursor-pointer select-none transition-colors"
+                className="text-xs font-medium text-[#022022] bg-gradient-to-br from-[#022022]/[0.06] via-teal-50/60 to-white/90 hover:from-[#022022]/[0.12] hover:via-teal-100/70 hover:to-white backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#022022]/15 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(2,32,34,0.04)] flex items-center gap-1.5 cursor-pointer select-none transition-all active:scale-[0.98]"
               >
                 <span>{selectedCategory}</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
+                <ChevronDown className="w-3 h-3 text-[#022022]/70" />
               </button>
 
               {showCategoryDropdown && (
@@ -800,7 +800,7 @@ export default function AIChat({
                 type="button"
                 onClick={() => handleSend()}
                 disabled={!inputText.trim() || isLoading}
-                className="bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent disabled:opacity-40 text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition-all ml-1 group"
+                className="text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] active:scale-[0.98] transition-all ml-1 group disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Kirim Pesan"
               >
                 <span>Kirim</span>
@@ -872,7 +872,7 @@ export default function AIChat({
             <button
               type="button"
               onClick={() => setShowGuideModal(false)}
-              className="w-full py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold shadow-xs cursor-pointer"
+              className="w-full py-2.5 rounded-full bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] text-white text-xs font-semibold cursor-pointer active:scale-[0.98] transition-all"
             >
               Saya Mengerti
             </button>

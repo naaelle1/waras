@@ -11,7 +11,7 @@ import Footer from "../../components/landing/Footer";
 
 export default function Home() {
   return (
-      <div className="min-h-screen bg-white font-['Inter',sans-serif] font-light text-[#022022] selection:bg-[#022022] selection:text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-white font-inter text-[#022022] selection:bg-[#022022] selection:text-[#37F4B4] relative overflow-x-hidden">
       {/* 01. NAVBAR */}
       <Navbar />
 

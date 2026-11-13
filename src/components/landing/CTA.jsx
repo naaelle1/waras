@@ -12,26 +12,26 @@ export default function CTA() {
           
           <div className="relative z-10 max-w-2xl mx-auto space-y-5">
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
+            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
               Layanan Kesehatan Publik, <br />
               <span className="font-normal text-[#022022]">Untuk Kita Semua.</span>
             </h2>
 
-            <p className="text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
+            <p className="font-inter text-[#022022]/70 text-sm sm:text-base font-light max-w-lg mx-auto leading-relaxed">
               Mulai temukan fasilitas siaga terdekat, panduan darurat terverifikasi, dan nomor darurat 119 sekarang juga tanpa biaya.
             </p>
 
             <div className="pt-3">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm group"
+                className="font-inter inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent active:scale-95 transition-all shadow-sm group"
               >
                 <span>Cari Fasilitas Kesehatan</span>
                 <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
-            <p className="text-[11px] text-[#022022]/55 font-light pt-2">
+            <p className="font-inter text-[11px] text-[#022022]/55 font-light pt-2">
               100% Layanan Terbuka • Gratis Tanpa Biaya • Terhubung Resmi Kota Semarang
             </p>
 

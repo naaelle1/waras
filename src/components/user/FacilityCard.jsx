@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "../common/Card";
 import Badge from "../common/Badge";
 import Button from "../common/Button";
+import GlassButton from "../ui/GlassButton";
 import { MapPin, Phone, ArrowRight, Hospital, Stethoscope } from "lucide-react";
 
 export default function FacilityCard({ facility }) {
@@ -92,11 +93,14 @@ export default function FacilityCard({ facility }) {
 
       {/* Footer CTA */}
       <div className="p-4 pt-2 border-t border-gray-50">
-        <Link to={`/user/facilities/${facility.id}`}>
-          <Button variant="outline" size="sm" className="w-full" rightIcon={ArrowRight}>
-            Lihat Detail
-          </Button>
-        </Link>
+        <GlassButton
+          to={`/user/facilities/${facility.id}`}
+          variant="card-subtle"
+          className="w-full justify-center py-2.5 text-xs font-semibold"
+          rightIcon={ArrowRight}
+        >
+          Lihat Detail
+        </GlassButton>
       </div>
     </Card>
   );

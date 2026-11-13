@@ -196,7 +196,7 @@ export default function ConversationPanel({
               onNewConversation();
               onCloseMobile();
             }}
-            className="w-full bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all group"
+            className="w-full text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-[#37F4B4]/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] active:scale-[0.98] transition-all cursor-pointer group"
           >
             <SquarePen className="w-4 h-4 text-[#37F4B4]" />
             <span>+ Percakapan Baru</span>
