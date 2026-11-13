@@ -14,7 +14,7 @@ export default function MedicalTermSearch({
     <div className="space-y-4">
       {/* Dictionary Search Input */}
       <div className="relative flex items-center w-full">
-        <div className="absolute left-4 p-2 text-[#003B3B]">
+        <div className="absolute left-4 p-2 text-[#022022]">
           <Search className="w-5 h-5" />
         </div>
         <input
@@ -22,7 +22,7 @@ export default function MedicalTermSearch({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Cari istilah medis, gejala, atau istilah kesehatan..."
-          className="w-full pl-12 pr-4 py-3 bg-white border border-[#E2ECEB] rounded-xl text-sm sm:text-base text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 focus:border-[#003B3B]/40 transition-all shadow-xs font-inter"
+          className="w-full pl-12 pr-4 py-3 bg-white border border-[#E2ECEB] rounded-xl text-sm sm:text-base text-[#0D2626] placeholder-[#809494] focus:outline-none focus:ring-2 focus:ring-[#37F4B4]/25 focus:border-[#022022] transition-all shadow-xs font-inter"
           aria-label="Cari istilah medis"
         />
       </div>
@@ -39,8 +39,8 @@ export default function MedicalTermSearch({
               className={clsx(
                 "h-8 px-3 rounded-lg text-xs font-poppins font-semibold transition-all duration-150 shrink-0 cursor-pointer border",
                 isActive
-                  ? "bg-[#003B3B] text-white border-[#003B3B] shadow-2xs"
-                  : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#EBF5F5] hover:text-[#003B3B] hover:border-[#003B3B]/30"
+                  ? "bg-[#022022] text-[#37F4B4] border-[#022022] shadow-2xs"
+                  : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30"
               )}
             >
               {letter}

@@ -54,14 +54,14 @@ function SingleFacilityCard({ facility, delayOffset = 0 }) {
   }, [facility.images.length, delayOffset]);
 
   return (
-    <div className="group rounded-3xl bg-white border border-[#014751]/10 p-4 sm:p-4.5 hover:border-[#014751]/30 hover:shadow-[0_15px_35px_rgba(1,71,81,0.06)] transition-all duration-300 flex flex-col justify-between">
+    <div className="group rounded-3xl bg-white border border-[#37F4B4]/25 p-4 sm:p-4.5 hover:border-[#37F4B4]/60 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 flex flex-col justify-between">
       <div>
         {/* 
           CLEAN SLIDING IMAGE CONTAINER:
           No floating badges (komponen timbul) on top of the image!
           Purely the smooth sliding image.
         */}
-        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#E6FEFF]/30 select-none">
+        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#022022]/5 select-none">
           <div
             className="flex w-full h-full transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${currentIdx * 100}%)` }}
@@ -88,7 +88,7 @@ function SingleFacilityCard({ facility, delayOffset = 0 }) {
                 key={dotIndex}
                 className={`transition-all duration-300 rounded-full ${
                   dotIndex === currentIdx
-                    ? "w-4 h-1 bg-white shadow-xs"
+                    ? "w-4 h-1 bg-[#37F4B4] shadow-xs"
                     : "w-1 h-1 bg-white/50"
                 }`}
               />
@@ -98,29 +98,29 @@ function SingleFacilityCard({ facility, delayOffset = 0 }) {
 
         {/* DETAILS SECTION (Clean Plain Text Below, No Floating Badges) */}
         <div className="p-3 pt-4">
-          <h3 className="text-base font-normal text-[#022022] group-hover:text-[#014751] transition-colors truncate">
+          <h3 className="text-base font-normal text-[#022022] group-hover:text-[#022022] transition-colors truncate">
             {facility.name}
           </h3>
 
-          <p className="text-xs text-[#014751] font-light mt-1">
+          <p className="text-xs text-[#022022]/80 font-medium mt-1">
             {facility.type} • {facility.status}
           </p>
 
           <div className="mt-2 flex items-center gap-1.5 text-xs font-light text-[#022022]/60">
-            <MapPin className="w-3.5 h-3.5 text-[#014751] shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-[#022022] shrink-0" />
             <span className="truncate">{facility.location}</span>
           </div>
         </div>
       </div>
 
       {/* FOOTER LINK */}
-      <div className="px-3 pb-2 pt-3 border-t border-[#014751]/10 flex items-center justify-between">
+      <div className="px-3 pb-2 pt-3 border-t border-[#022022]/10 flex items-center justify-between">
         <span className="text-[11px] font-light text-[#022022]/50">
           Foto {currentIdx + 1} dari {facility.images.length}
         </span>
         <Link
           to="/user/facilities"
-          className="inline-flex items-center gap-1 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
+          className="inline-flex items-center gap-1 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
         >
           <span>Arahkan Rute</span>
           <ArrowUpRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -132,17 +132,18 @@ function SingleFacilityCard({ facility, delayOffset = 0 }) {
 
 export default function PopularFacilities() {
   return (
-    <section id="fasilitas" className="py-20 bg-white border-t border-[#014751]/10">
+    <section id="fasilitas" className="py-20 bg-white border-t border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* SECTION HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-[#014751] block mb-2">
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold block mb-2">
+              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
               JARINGAN FASILITAS AKTIF
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-[#022022] tracking-tight">
-              Fasilitas Kesehatan <span className="font-normal text-[#014751]">Siaga Semarang</span>
+              Fasilitas Kesehatan <span className="font-normal text-[#022022]">Siaga Semarang</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm font-light text-[#022022]/65">
               3 Faskes utama siaga 24 jam dengan fasilitas penunjang lengkap di Kota Semarang.
@@ -151,7 +152,7 @@ export default function PopularFacilities() {
 
           <Link
             to="/user/facilities"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group shrink-0"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group shrink-0"
           >
             <span>Buka Seluruh Direktori Faskes</span>
             <ArrowUpRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

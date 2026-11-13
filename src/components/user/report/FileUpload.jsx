@@ -42,7 +42,7 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
 
   return (
     <div className="space-y-2">
-      <label className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+      <label className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
         Tambahkan Bukti Pendukung <span className="text-gray-400 font-normal">(Opsional)</span>
       </label>
 
@@ -57,7 +57,7 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
               />
             </div>
             <div className="truncate">
-              <p className="font-poppins font-medium text-xs text-[#062B2B] truncate">
+              <p className="font-poppins font-medium text-xs text-[#022022] truncate">
                 {filePreview.name}
               </p>
               <p className="font-inter text-[11px] text-[#4B5E5E]">{filePreview.size}</p>
@@ -78,7 +78,7 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className="p-6 rounded-2xl border-2 border-dashed border-gray-300 hover:border-[#003B3B] bg-white/50 hover:bg-white/80 transition-all cursor-pointer text-center space-y-2 group"
+          className="p-6 rounded-2xl border-2 border-dashed border-gray-300 hover:border-[#37F4B4] bg-white/50 hover:bg-white/80 transition-all cursor-pointer text-center space-y-2 group"
         >
           <input
             type="file"
@@ -87,11 +87,11 @@ export default function FileUpload({ filePreview, onFileSelect, onFileRemove }) 
             accept="image/*"
             className="hidden"
           />
-          <div className="w-10 h-10 rounded-full bg-[#003B3B]/10 text-[#003B3B] flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+          <div className="w-10 h-10 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
             <UploadCloud className="w-5 h-5" />
           </div>
           <div>
-            <p className="font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+            <p className="font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
               Klik untuk unggah <span className="font-normal text-[#4B5E5E]">atau seret gambar ke sini</span>
             </p>
             <p className="font-inter text-[11px] text-gray-400 mt-0.5">

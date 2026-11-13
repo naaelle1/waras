@@ -27,8 +27,8 @@ export default function ReportCategoryCard({ category, isSelected, onSelect }) {
       onClick={() => onSelect(category.id)}
       className={`group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl text-left transition-all duration-200 cursor-pointer border select-none h-full ${
         isSelected
-          ? "bg-[#EBF5F5] border-[#003B3B] shadow-xs"
-          : "bg-white border-[#E2ECEB] shadow-2xs hover:border-[#003B3B]/30 hover:shadow-xs"
+          ? "bg-[#022022]/5 border-[#022022] shadow-xs"
+          : "bg-white border-[#E2ECEB] shadow-2xs hover:border-[#37F4B4]/40 hover:shadow-xs"
       }`}
     >
       <div className="space-y-3">
@@ -37,8 +37,8 @@ export default function ReportCategoryCard({ category, isSelected, onSelect }) {
           <div
             className={`p-3 rounded-2xl transition-colors ${
               isSelected
-                ? "bg-[#003B3B] text-white shadow-md shadow-[#003B3B]/20"
-                : "bg-[#003B3B]/10 text-[#003B3B] group-hover:bg-[#003B3B] group-hover:text-white"
+                ? "bg-[#022022] text-[#37F4B4] shadow-md shadow-[#022022]/20"
+                : "bg-[#022022]/10 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4]"
             }`}
           >
             <IconComponent className="w-5 h-5" />
@@ -47,7 +47,7 @@ export default function ReportCategoryCard({ category, isSelected, onSelect }) {
           <div
             className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
               isSelected
-                ? "bg-[#003B3B] text-white"
+                ? "bg-[#022022] text-[#37F4B4]"
                 : "border border-gray-300 opacity-40 group-hover:opacity-100"
             }`}
           >
@@ -57,7 +57,7 @@ export default function ReportCategoryCard({ category, isSelected, onSelect }) {
 
         {/* Title and Description */}
         <div>
-          <h3 className="font-poppins font-bold text-sm text-[#062B2B] leading-tight">
+          <h3 className="font-poppins font-bold text-sm text-[#022022] leading-tight">
             {category.title}
           </h3>
           <p className="font-inter text-xs text-[#4B5E5E] leading-relaxed mt-1.5">

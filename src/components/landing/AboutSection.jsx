@@ -4,19 +4,20 @@ import { ShieldCheck, HeartPulse, Hospital, ArrowRight } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section id="tentang" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#014751]/10">
+    <section id="tentang" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* LEFT: MINIMAL EDITORIAL NARRATIVE */}
           <div className="lg:col-span-6 space-y-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#014751]">
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
               TENTANG PLATFORM WARAS
             </span>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.15] tracking-tight">
               Satu Wadah untuk <br />
-              <span className="font-normal text-[#014751]">Kepastian Informasi Kesehatan</span> Warga.
+              <span className="font-normal text-[#022022]">Kepastian Informasi Kesehatan</span> Warga.
             </h2>
 
             <p className="text-sm sm:text-base font-light text-[#022022]/70 leading-relaxed max-w-xl">
@@ -26,7 +27,7 @@ export default function AboutSection() {
             <div className="pt-2">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Eksplorasi seluruh fasilitas kesehatan Semarang</span>
                 <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
@@ -36,23 +37,23 @@ export default function AboutSection() {
 
           {/* RIGHT: 3 CORE PUBLIC HEALTH PILLARS */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            <div className="p-6 rounded-3xl bg-[#E6FEFF]/40 border border-[#014751]/10 flex flex-col justify-between">
-              <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">01</span>
+            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/25 flex flex-col justify-between">
+              <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">01</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-[#022022]">Akurasi Faskes</h4>
                 <p className="text-[11px] font-light text-[#022022]/60 mt-1">Data lokasi, nomor kontak, & IGD siaga terintegrasi resmi.</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#E6FEFF]/40 border border-[#014751]/10 flex flex-col justify-between">
-              <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">02</span>
+            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/25 flex flex-col justify-between">
+              <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">02</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-[#022022]">Bahasa Awam</h4>
                 <p className="text-[11px] font-light text-[#022022]/60 mt-1">Panduan P3K dan glosarium medis praktis bebas jargon.</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#014751] text-white flex flex-col justify-between shadow-sm">
+            <div className="p-6 rounded-3xl bg-[#022022] border border-[#37F4B4]/30 text-white flex flex-col justify-between shadow-sm">
               <span className="text-2xl sm:text-3xl font-light font-mono text-[#37F4B4]">03</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-white">Siaga Publik</h4>

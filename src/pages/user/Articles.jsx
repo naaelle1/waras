@@ -42,9 +42,9 @@ export default function Articles() {
     <div className="space-y-8 pb-12">
       {/* HEADER HALAMAN */}
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2.5 text-[#003B3B]">
-          <div className="p-2.5 rounded-xl bg-[#003B3B] text-white shadow-xs">
-            <BookOpen className="w-6 h-6 text-[#EBF5F5]" />
+        <div className="flex items-center gap-2.5 text-[#022022]">
+          <div className="p-2.5 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs">
+            <BookOpen className="w-6 h-6 text-[#37F4B4]" />
           </div>
           <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
             Artikel Kesehatan

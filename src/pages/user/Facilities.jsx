@@ -55,8 +55,8 @@ export default function Facilities() {
     <div className="space-y-8 pb-12">
       {/* SECTION 1 — PAGE HEADER */}
       <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-[#003B3B]">
-          <MapPin className="w-7 h-7 stroke-[2.2]" />
+        <div className="flex items-center gap-2 text-[#022022]">
+          <MapPin className="w-7 h-7 stroke-[2.2] text-[#022022]" />
           <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
             Fasilitas Kesehatan
           </h1>
@@ -85,7 +85,7 @@ export default function Facilities() {
               <select
                 value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
-                className="w-full px-4 py-2.5 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl text-xs sm:text-sm text-[#0D2626] focus:outline-none focus:ring-2 focus:ring-[#003B3B]/10 transition-all font-inter appearance-none cursor-pointer"
+                className="w-full px-4 py-2.5 bg-[#F8FAFA] border border-[#E2ECEB] rounded-xl text-xs sm:text-sm text-[#0D2626] focus:outline-none focus:ring-2 focus:ring-[#37F4B4]/25 focus:border-[#022022] transition-all font-inter appearance-none cursor-pointer"
               >
                 <option value="Semua">Semua Kecamatan</option>
                 {districts
@@ -126,8 +126,8 @@ export default function Facilities() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-poppins font-semibold transition-all cursor-pointer shrink-0 ${
                   active
-                    ? "bg-[#003B3B] text-white shadow-xs"
-                    : "bg-[#F8FAFA] text-[#526666] hover:bg-[#EBF5F5] hover:text-[#003B3B] border border-[#E2ECEB]"
+                    ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs"
+                    : "bg-[#F8FAFA] text-[#526666] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30 border border-[#E2ECEB]"
                 }`}
               >
                 {cat}

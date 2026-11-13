@@ -272,7 +272,7 @@ export default function AI() {
                 className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between hover:bg-slate-100 transition-colors group cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#003B3B] text-white">
+                  <div className="p-2 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/20">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -284,25 +284,25 @@ export default function AI() {
                     </p>
                   </div>
                 </div>
-                <span className="font-mono font-bold text-[#003B3B] text-sm group-hover:underline">
+                <span className="font-mono font-bold text-[#022022] text-sm group-hover:underline">
                   112
                 </span>
               </a>
 
               {/* RSUP Kariadi & Wongsonegoro */}
-              <div className="p-3.5 rounded-2xl bg-teal-50/60 border border-teal-200/70 space-y-1.5 text-xs text-slate-700 font-inter">
-                <span className="font-semibold text-[#003B3B] block">
+              <div className="p-3.5 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/30 space-y-1.5 text-xs text-slate-700 font-inter">
+                <span className="font-semibold text-[#022022] block">
                   IGD Rumah Sakit Rujukan Utama:
                 </span>
                 <p className="text-[11px] text-slate-600 flex justify-between">
                   <span>RSUP Dr. Kariadi Semarang</span>
-                  <a href="tel:0248413993" className="font-mono font-semibold text-[#003B3B] hover:underline">
+                  <a href="tel:0248413993" className="font-mono font-semibold text-[#022022] hover:underline">
                     (024) 8413993
                   </a>
                 </p>
                 <p className="text-[11px] text-slate-600 flex justify-between">
                   <span>RSUD KRMT Wongsonegoro</span>
-                  <a href="tel:0246711500" className="font-mono font-semibold text-[#003B3B] hover:underline">
+                  <a href="tel:0246711500" className="font-mono font-semibold text-[#022022] hover:underline">
                     (024) 6711500
                   </a>
                 </p>

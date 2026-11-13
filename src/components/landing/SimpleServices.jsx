@@ -34,17 +34,18 @@ const services = [
 
 export default function SimpleServices() {
   return (
-    <section id="panduan" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#014751]/10">
+    <section id="panduan" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto">
         
         {/* CENTERED HEADER (Clean, Light Typography) */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-mono uppercase tracking-wider text-[#014751] block mb-2">
+          <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold mb-2">
+            <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
             PELAYANAN KESEHATAN TERPADU
           </span>
           <h2 className="text-2xl sm:text-4xl lg:text-[44px] font-light text-[#022022] tracking-tight leading-[1.12]">
             Penanganan Medis Jadi <br />
-            <span className="font-normal text-[#014751]">Lebih Sederhana.</span>
+            <span className="font-normal text-[#022022]">Lebih Sederhana.</span>
           </h2>
           <p className="mt-3 text-xs sm:text-sm font-light text-[#022022]/65 max-w-md mx-auto leading-relaxed">
             Tidak ada tahapan yang rumit. Dapatkan kepastian informasi, fasilitas, dan pertolongan pertama dalam hitungan detik.
@@ -59,15 +60,15 @@ export default function SimpleServices() {
             return (
               <div
                 key={item.id}
-                className="rounded-3xl bg-white border border-[#014751]/10 p-8 flex flex-col justify-between hover:border-[#014751]/30 hover:shadow-[0_15px_35px_rgba(1,71,81,0.06)] transition-all duration-300 group"
+                className="rounded-3xl bg-white border border-[#37F4B4]/25 p-8 flex flex-col justify-between hover:border-[#37F4B4]/60 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 group"
               >
                 <div>
                   {/* Top Minimal Round Icon */}
-                  <div className="w-12 h-12 rounded-2xl bg-[#E6FEFF] text-[#014751] flex items-center justify-center mb-6 group-hover:bg-[#014751] group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 rounded-2xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-6 group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all">
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
 
-                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
+                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
                     {item.title}
                   </h3>
 
@@ -76,11 +77,11 @@ export default function SimpleServices() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#014751]/10">
+                <div className="pt-6 mt-6 border-t border-[#022022]/10">
                   {item.isExternal ? (
                     <a
                       href={item.linkTo}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
                     >
                       <span>{item.linkText}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
@@ -88,7 +89,7 @@ export default function SimpleServices() {
                   ) : (
                     <Link
                       to={item.linkTo}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#014751] group-hover:text-[#022022] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#022022] hover:text-[#033033] transition-colors"
                     >
                       <span>{item.linkText}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />

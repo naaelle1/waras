@@ -24,7 +24,7 @@ export default function ReportForm({
         {/* LEFT COLUMN: Input Fields */}
         <div className="lg:col-span-8 rounded-2xl bg-white border border-[#E2ECEB] p-6 sm:p-8 shadow-xs space-y-5">
           <div className="pb-3 border-b border-gray-100">
-            <h3 className="font-poppins font-bold text-lg text-[#062B2B]">
+            <h3 className="font-poppins font-bold text-lg text-[#022022]">
               Detail Laporan
             </h3>
             <p className="font-inter text-xs text-[#4B5E5E] mt-0.5">
@@ -34,7 +34,7 @@ export default function ReportForm({
 
           {/* 1. Report Title (Required) */}
           <div className="space-y-1.5">
-            <label htmlFor="report-title" className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+            <label htmlFor="report-title" className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
               Judul Laporan <span className="text-red-500">*</span>
             </label>
             <input
@@ -44,10 +44,10 @@ export default function ReportForm({
               value={formData.title}
               onChange={onInputChange}
               placeholder="Contoh: Jam pelayanan fasilitas Puskesmas tidak sesuai"
-              className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#062B2B] placeholder-gray-400 focus:outline-none transition-all ${
+              className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none transition-all ${
                 errors.title
                   ? "border-red-400 focus:border-red-500 ring-2 ring-red-100"
-                  : "border-gray-200 focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10"
+                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25"
               }`}
             />
             {errors.title && (
@@ -60,7 +60,7 @@ export default function ReportForm({
 
           {/* 2. Related Page or Feature */}
           <div className="space-y-1.5">
-            <label htmlFor="related-page" className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+            <label htmlFor="related-page" className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
               Halaman atau Fitur Terkait
             </label>
             <div className="relative">
@@ -69,7 +69,7 @@ export default function ReportForm({
                 name="relatedPage"
                 value={formData.relatedPage}
                 onChange={onInputChange}
-                className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#062B2B] appearance-none focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all cursor-pointer pr-10"
+                className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] appearance-none focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all cursor-pointer pr-10"
               >
                 {pageOptions.map((page, idx) => (
                   <option key={idx} value={page}>
@@ -83,7 +83,7 @@ export default function ReportForm({
 
           {/* 3. Specific Content or Facility */}
           <div className="space-y-1.5">
-            <label htmlFor="specific-item" className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+            <label htmlFor="specific-item" className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
               Informasi yang Dilaporkan <span className="text-gray-400 font-normal">(Opsional)</span>
             </label>
             <input
@@ -93,14 +93,14 @@ export default function ReportForm({
               value={formData.specificItem}
               onChange={onInputChange}
               placeholder="Contoh: Nama Puskesmas, Judul Artikel, atau Fitur Pencarian"
-              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#062B2B] placeholder-gray-400 focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all"
             />
           </div>
 
           {/* 4. Problem Description (Required) */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label htmlFor="description" className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+              <label htmlFor="description" className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
                 Jelaskan Masalah <span className="text-red-500">*</span>
               </label>
               <span className="text-[11px] font-inter text-gray-400">
@@ -115,10 +115,10 @@ export default function ReportForm({
               value={formData.description}
               onChange={onInputChange}
               placeholder="Jelaskan kendala atau informasi yang tidak sesuai secara spesifik agar tim kami dapat memverifikasinya..."
-              className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#062B2B] placeholder-gray-400 focus:outline-none transition-all resize-none ${
+              className={`w-full px-4 py-3 rounded-2xl bg-white border text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none transition-all resize-none ${
                 errors.description
                   ? "border-red-400 focus:border-red-500 ring-2 ring-red-100"
-                  : "border-gray-200 focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10"
+                  : "border-gray-200 focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25"
               }`}
             />
             {errors.description && (
@@ -131,7 +131,7 @@ export default function ReportForm({
 
           {/* 5. Suggested Correction */}
           <div className="space-y-1.5">
-            <label htmlFor="suggested-correction" className="block font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+            <label htmlFor="suggested-correction" className="block font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
               Saran Informasi yang Seharusnya <span className="text-gray-400 font-normal">(Opsional)</span>
             </label>
             <textarea
@@ -141,7 +141,7 @@ export default function ReportForm({
               value={formData.suggestedCorrection}
               onChange={onInputChange}
               placeholder="Tuliskan saran atau informasi yang lebih tepat jika Anda mengetahuinya..."
-              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#062B2B] placeholder-gray-400 focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 text-xs sm:text-sm font-inter text-[#022022] placeholder-gray-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 transition-all resize-none"
             />
           </div>
 
@@ -165,13 +165,13 @@ export default function ReportForm({
       </div>
 
       {/* PRIVACY NOTICE & SUBMIT BUTTON */}
-      <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_rgba(0,43,43,0.04)] flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div className="p-6 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_rgba(2,32,34,0.04)] flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-[#003B3B]/10 text-[#003B3B] shrink-0">
+          <div className="p-2.5 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="font-poppins font-bold text-xs sm:text-sm text-[#062B2B]">
+            <h4 className="font-poppins font-bold text-xs sm:text-sm text-[#022022]">
               Jaminan Privasi & Keamanan
             </h4>
             <p className="font-inter text-[11px] sm:text-xs text-[#4B5E5E] mt-0.5">
@@ -183,7 +183,7 @@ export default function ReportForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-[#003B3B] text-white font-poppins font-bold text-xs sm:text-sm hover:bg-[#002B2B] transition-all duration-200 shadow-md shadow-[#003B3B]/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 font-poppins font-bold text-xs sm:text-sm transition-all duration-200 shadow-md shadow-[#022022]/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
         >
           {isSubmitting ? (
             <>

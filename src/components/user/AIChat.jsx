@@ -64,7 +64,7 @@ function renderFormattedMessage(text) {
         if (/^#{1,6}\s+/.test(cleaned)) {
           const heading = cleaned.replace(/^#{1,6}\s+/, "");
           return (
-            <p key={lineIdx} className="font-semibold text-sm sm:text-base text-[#003B3B] pt-1">
+            <p key={lineIdx} className="font-semibold text-sm sm:text-base text-[#022022] pt-1">
               {formatInlineText(heading)}
             </p>
           );
@@ -74,7 +74,7 @@ function renderFormattedMessage(text) {
           const bullet = cleaned.replace(/^[-*•]\s+/, "");
           return (
             <div key={lineIdx} className="flex items-start gap-2.5 pl-1">
-              <span className="text-[#003B3B] font-bold text-sm leading-none mt-1 select-none">•</span>
+              <span className="text-[#022022] font-bold text-sm leading-none mt-1 select-none">•</span>
               <span className="flex-1">{formatInlineText(bullet)}</span>
             </div>
           );
@@ -186,7 +186,7 @@ function TypewriterMessage({ text, isTyping, onTick, onComplete }) {
     <div className="relative">
       {renderFormattedMessage(displayedText)}
       {isCurrentlyTyping && (
-        <span className="inline-block w-1.5 h-3.5 bg-[#003B3B] ml-1 animate-pulse align-middle rounded-xs" />
+        <span className="inline-block w-1.5 h-3.5 bg-[#37F4B4] ml-1 animate-pulse align-middle rounded-xs" />
       )}
     </div>
   );
@@ -341,15 +341,15 @@ export default function AIChat({
             <Menu className="w-5 h-5" />
           </button>
 
-          <div className="w-8 h-8 rounded-lg bg-[#003B3B] text-white flex items-center justify-center shadow-xs shrink-0">
-            <Sparkles className="w-4 h-4 text-teal-200" />
+          <div className="w-8 h-8 rounded-lg bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 flex items-center justify-center shadow-xs shrink-0">
+            <Sparkles className="w-4 h-4 text-[#37F4B4]" />
           </div>
 
           <div className="flex items-center gap-2">
             <span className="font-poppins font-bold text-sm text-slate-900 tracking-tight">
               WARAS Assistant
             </span>
-            <span className="hidden sm:inline-block text-[10px] font-semibold px-2 py-0.5 rounded-md bg-teal-50 text-[#003B3B] border border-teal-200/60 uppercase tracking-wider">
+            <span className="hidden sm:inline-block text-[10px] font-semibold px-2 py-0.5 rounded-md bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30 uppercase tracking-wider">
               Medis AI
             </span>
           </div>
@@ -363,7 +363,7 @@ export default function AIChat({
             onClick={() => setShowGuideModal(true)}
             className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors cursor-pointer"
           >
-            <Stethoscope className="w-3.5 h-3.5 text-[#003B3B]" />
+            <Stethoscope className="w-3.5 h-3.5 text-[#022022]" />
             <span>Panduan Medis</span>
           </button>
 
@@ -381,8 +381,9 @@ export default function AIChat({
           <button
             type="button"
             onClick={onNewConversation}
-            className="inline-flex items-center gap-1.5 bg-[#003B3B] hover:bg-[#002A2A] text-white rounded-full px-4 py-1.5 text-xs font-medium shadow-xs transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-1.5 bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white rounded-full px-4 py-1.5 text-xs font-medium shadow-xs transition-all cursor-pointer active:scale-95 group"
           >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
             <span>+ Percakapan Baru</span>
           </button>
 
@@ -419,8 +420,8 @@ export default function AIChat({
           /* EMPTY STATE: HERO GREETING & BENTO CARDS */
           <div className="w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto min-h-[calc(100vh-250px)]">
             {/* 1. Visual Ikon & Sapaan */}
-            <div className="w-14 h-14 rounded-2xl bg-[#003B3B] text-white shadow-lg shadow-[#003B3B]/15 flex items-center justify-center mb-4">
-              <Sparkles className="w-7 h-7 text-teal-200" />
+            <div className="w-14 h-14 rounded-2xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-lg shadow-[#022022]/15 flex items-center justify-center mb-4">
+              <Sparkles className="w-7 h-7 text-[#37F4B4]" />
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight font-poppins text-center">
@@ -433,14 +434,15 @@ export default function AIChat({
 
             {/* 2. Grid 3 Kartu Bento Utama */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mt-8">
-              {/* Kartu 1: Highlight Gelap #003B3B */}
-              <div className="bg-[#003B3B] text-white rounded-2xl p-5 flex flex-col justify-between shadow-md min-h-[175px]">
-                <div>
+              {/* Kartu 1: Highlight Gelap #022022 & #37F4B4 */}
+              <div className="bg-[#022022] border border-[#37F4B4]/25 text-white rounded-2xl p-5 flex flex-col justify-between shadow-md min-h-[175px] relative overflow-hidden">
+                <div className="pointer-events-none absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-[#37F4B4]/15 blur-2xl" />
+                <div className="relative z-10">
                   <div className="flex items-center justify-between">
                     <span className="font-poppins font-bold text-sm tracking-wide text-white">
                       WARAS AI
                     </span>
-                    <span className="bg-white/15 text-teal-100 text-[11px] font-medium px-2.5 py-0.5 rounded-full backdrop-blur-xs">
+                    <span className="bg-white/10 text-[#37F4B4] border border-[#37F4B4]/30 text-[11px] font-medium px-2.5 py-0.5 rounded-full backdrop-blur-xs">
                       Triase Awal
                     </span>
                   </div>
@@ -449,8 +451,8 @@ export default function AIChat({
                   </p>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-[11px] text-teal-200/80 font-medium pt-3 border-t border-white/10">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
+                <div className="relative z-10 flex items-center gap-1.5 text-[11px] text-[#37F4B4] font-medium pt-3 border-t border-white/10">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#37F4B4]" />
                   <span>Protokol Dinkes Semarang</span>
                 </div>
               </div>
@@ -462,30 +464,30 @@ export default function AIChat({
                     <span className="text-[11px] font-bold tracking-wider uppercase text-slate-400 font-poppins">
                       Panduan Topik Cepat
                     </span>
-                    <Activity className="w-3.5 h-3.5 text-[#003B3B]" />
+                    <Activity className="w-3.5 h-3.5 text-[#022022]" />
                   </div>
 
                   <div className="space-y-1.5">
                     <button
                       type="button"
                       onClick={() => handleSend("Saya ingin konsultasi keluhan demam dan batuk yang belum reda")}
-                      className="w-full text-left text-xs text-slate-700 hover:text-[#003B3B] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
+                      className="w-full text-left text-xs text-slate-700 hover:text-[#022022] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#003B3B]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#022022]" />
                       <span className="truncate">Cek keluhan demam & batuk</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => handleSend("Bagaimana jadwal dan lokasi imunisasi dasar balita di Semarang?")}
-                      className="w-full text-left text-xs text-slate-700 hover:text-[#003B3B] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
+                      className="w-full text-left text-xs text-slate-700 hover:text-[#022022] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                       <span className="truncate">Jadwal imunisasi dasar balita</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => handleSend("Apa saja syarat dan alur rujukan BPJS dari Puskesmas ke RS?")}
-                      className="w-full text-left text-xs text-slate-700 hover:text-[#003B3B] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
+                      className="w-full text-left text-xs text-slate-700 hover:text-[#022022] hover:bg-slate-50 p-1.5 rounded-lg flex items-center gap-2 transition-colors cursor-pointer font-medium"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       <span className="truncate">Syarat & alur rujukan BPJS</span>
@@ -497,7 +499,7 @@ export default function AIChat({
                   <span className="text-slate-400">Topik Umum</span>
                   <Link
                     to="/user/health-info/guides"
-                    className="text-[#003B3B] font-semibold hover:underline cursor-pointer"
+                    className="text-[#022022] font-semibold hover:underline cursor-pointer"
                   >
                     Lihat Semua
                   </Link>
@@ -507,23 +509,23 @@ export default function AIChat({
               {/* Kartu 3: Suggested Prompt di Kanan */}
               <div
                 onClick={() => handleSend("Di mana faskes 24 jam dan IGD terdekat di Semarang yang sedang beroperasi saat ini?")}
-                className="bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between shadow-xs hover:border-[#003B3B]/40 hover:shadow-sm cursor-pointer transition-all min-h-[175px] group"
+                className="bg-white border border-slate-200/90 rounded-2xl p-5 flex flex-col justify-between shadow-xs hover:border-[#37F4B4]/50 hover:shadow-sm cursor-pointer transition-all min-h-[175px] group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-bold tracking-wider uppercase text-slate-400 font-poppins">
                       Rekomendasi Warga
                     </span>
-                    <MapPin className="w-3.5 h-3.5 text-[#003B3B]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#022022]" />
                   </div>
-                  <p className="font-semibold text-xs sm:text-[13px] text-slate-800 group-hover:text-[#003B3B] transition-colors leading-snug font-inter">
+                  <p className="font-semibold text-xs sm:text-[13px] text-slate-800 group-hover:text-[#022022] transition-colors leading-snug font-inter">
                     &ldquo;Di mana faskes 24 jam dan IGD terdekat di Semarang yang sedang beroperasi saat ini?&rdquo;
                   </p>
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
                   <span className="text-slate-400 font-inter">Saran Pertanyaan</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#003B3B] transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:text-[#37F4B4] transition-all group-hover:translate-x-1" />
                 </div>
               </div>
             </div>
@@ -533,7 +535,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Saya ingin berkonsultasi mengenai gejala demam dan batuk")}
-                className="bg-white border border-slate-200/90 hover:border-[#003B3B] text-slate-700 hover:text-[#003B3B] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
               >
                 <span>🌡️</span>
                 <span>Demam & Batuk</span>
@@ -542,7 +544,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Tampilkan rumah sakit rujukan dengan layanan IGD 24 jam di Kota Semarang")}
-                className="bg-white border border-slate-200/90 hover:border-[#003B3B] text-slate-700 hover:text-[#003B3B] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
               >
                 <span>🏥</span>
                 <span>IGD 24 Jam Terdekat</span>
@@ -551,7 +553,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Bagaimana informasi dan jadwal imunisasi dasar balita di Semarang?")}
-                className="bg-white border border-slate-200/90 hover:border-[#003B3B] text-slate-700 hover:text-[#003B3B] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
               >
                 <span>💉</span>
                 <span>Info Imunisasi Semarang</span>
@@ -560,7 +562,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend("Bagaimana alur dan syarat rujukan BPJS kesehatan faskes tingkat 1 di Semarang?")}
-                className="bg-white border border-slate-200/90 hover:border-[#003B3B] text-slate-700 hover:text-[#003B3B] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
+                className="bg-white border border-slate-200/90 hover:border-[#37F4B4]/50 text-slate-700 hover:text-[#022022] text-xs font-medium px-4 py-2 rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer hover:shadow-xs active:scale-95"
               >
                 <span>📋</span>
                 <span>Alur Rujukan BPJS</span>
@@ -583,9 +585,9 @@ export default function AIChat({
                 >
                   {/* Sender Header for AI */}
                   {!isUser && (
-                    <div className="flex items-center gap-2 mb-1.5 text-xs font-poppins font-semibold text-[#003B3B]">
-                      <div className="w-5 h-5 rounded-md bg-[#003B3B] text-white flex items-center justify-center">
-                        <Sparkles className="w-3 h-3 text-teal-200" />
+                    <div className="flex items-center gap-2 mb-1.5 text-xs font-poppins font-semibold text-[#022022]">
+                      <div className="w-5 h-5 rounded-md bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 flex items-center justify-center">
+                        <Sparkles className="w-3 h-3 text-[#37F4B4]" />
                       </div>
                       <span>WARAS Assistant</span>
                     </div>
@@ -595,7 +597,7 @@ export default function AIChat({
                   <div
                     className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed font-inter max-w-[92%] sm:max-w-[85%] ${
                       isUser
-                        ? "bg-[#003B3B] text-white rounded-tr-xs shadow-xs"
+                        ? "bg-[#022022] text-white rounded-tr-xs shadow-xs border border-[#37F4B4]/20"
                         : "bg-white border border-slate-200/90 text-slate-900 rounded-tl-xs shadow-2xs"
                     }`}
                   >
@@ -617,13 +619,13 @@ export default function AIChat({
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mt-3 w-full max-w-sm rounded-2xl bg-teal-50/70 border border-teal-200/70 p-4 flex items-start gap-3 shadow-2xs"
+                      className="mt-3 w-full max-w-sm rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/30 p-4 flex items-start gap-3 shadow-2xs"
                     >
-                      <div className="p-2.5 rounded-xl bg-[#003B3B] text-white shrink-0">
+                      <div className="p-2.5 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/20 shrink-0">
                         <MapPin className="w-4 h-4" />
                       </div>
                       <div className="space-y-1.5 flex-1">
-                        <h4 className="font-poppins font-semibold text-xs text-[#003B3B]">
+                        <h4 className="font-poppins font-semibold text-xs text-[#022022]">
                           Fasilitas Kesehatan Terkait
                         </h4>
                         <p className="text-[11px] text-slate-600 leading-relaxed font-inter">
@@ -631,10 +633,10 @@ export default function AIChat({
                         </p>
                         <Link
                           to="/user/facilities"
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#003B3B] hover:underline pt-0.5"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#022022] hover:underline pt-0.5"
                         >
                           <span>Buka Peta & Antrean Faskes</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3.5 h-3.5 text-[#022022]" />
                         </Link>
                       </div>
                     </motion.div>
@@ -648,15 +650,15 @@ export default function AIChat({
                       transition={{ duration: 0.3 }}
                       className="mt-3.5 w-full space-y-2"
                     >
-                      <div className="flex items-center gap-1.5 text-xs font-semibold text-[#003B3B] font-poppins">
-                        <BookOpen className="w-3.5 h-3.5" />
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-[#022022] font-poppins">
+                        <BookOpen className="w-3.5 h-3.5 text-[#022022]" />
                         <span>Bacaan Edukasi Medis Terkait:</span>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {articles.map((art) => (
                           <Link key={art.id} to={`/user/health-info/articles/${art.id}`}>
-                            <div className="p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#003B3B]/30 shadow-2xs transition-all flex items-start gap-2.5 group h-full">
+                            <div className="p-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#37F4B4]/40 shadow-2xs transition-all flex items-start gap-2.5 group h-full">
                               {art.image && (
                                 <img
                                   src={art.image}
@@ -665,10 +667,10 @@ export default function AIChat({
                                 />
                               )}
                               <div className="min-w-0 flex-1 space-y-0.5">
-                                <span className="text-[10px] font-semibold text-[#003B3B] uppercase tracking-wider block">
+                                <span className="text-[10px] font-semibold text-[#022022] uppercase tracking-wider block">
                                   {art.category}
                                 </span>
-                                <h5 className="font-poppins font-semibold text-xs text-slate-900 truncate group-hover:text-[#003B3B]">
+                                <h5 className="font-poppins font-semibold text-xs text-slate-900 truncate group-hover:text-[#022022]">
                                   {art.title}
                                 </h5>
                                 <p className="text-[11px] text-slate-500 line-clamp-1 font-inter">
@@ -697,17 +699,17 @@ export default function AIChat({
                 className="flex items-center gap-2.5 text-xs font-inter text-slate-600 py-2.5 px-3.5 bg-white border border-slate-200 rounded-xl w-fit shadow-2xs"
               >
                 <div className="relative flex items-center justify-center shrink-0">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#003B3B] animate-ping absolute opacity-60" />
-                  <div className="w-2 h-2 rounded-full bg-[#003B3B]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#37F4B4] animate-ping absolute opacity-60" />
+                  <div className="w-2 h-2 rounded-full bg-[#022022]" />
                 </div>
                 <div className="flex items-center gap-1.5 min-w-0">
-                  <Bot className="w-3.5 h-3.5 text-[#003B3B] shrink-0" />
+                  <Bot className="w-3.5 h-3.5 text-[#022022] shrink-0" />
                   <motion.span
                     key={loadingStatus}
                     initial={{ opacity: 0, x: -3 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="text-[#003B3B] font-medium"
+                    className="text-[#022022] font-medium"
                   >
                     {loadingStatus}
                   </motion.span>
@@ -722,7 +724,7 @@ export default function AIChat({
 
       {/* ── AREA BAWAH: FLOATING COMPOSER BOX 2 BARIS ── */}
       <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 pb-5 pt-2 shrink-0">
-        <div className="bg-white border border-slate-200/90 rounded-2xl p-3 shadow-sm focus-within:border-[#003B3B] focus-within:ring-4 focus-within:ring-[#003B3B]/5 transition-all">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-3 shadow-sm focus-within:border-[#022022] focus-within:ring-4 focus-within:ring-[#37F4B4]/20 transition-all">
           {/* Baris Atas: Textarea */}
           <textarea
             ref={textareaRef}
@@ -762,11 +764,11 @@ export default function AIChat({
                         setSelectedCategory(cat);
                         setShowCategoryDropdown(false);
                       }}
-                      className="w-full text-left px-3 py-2 rounded-lg text-slate-700 hover:bg-teal-50 hover:text-[#003B3B] transition-colors cursor-pointer flex items-center justify-between"
+                      className="w-full text-left px-3 py-2 rounded-lg text-slate-700 hover:bg-[#022022]/5 hover:text-[#022022] transition-colors cursor-pointer flex items-center justify-between"
                     >
                       <span>{cat}</span>
                       {selectedCategory === cat && (
-                        <Check className="w-3.5 h-3.5 text-[#003B3B]" />
+                        <Check className="w-3.5 h-3.5 text-[#022022]" />
                       )}
                     </button>
                   ))}
@@ -798,11 +800,11 @@ export default function AIChat({
                 type="button"
                 onClick={() => handleSend()}
                 disabled={!inputText.trim() || isLoading}
-                className="bg-[#003B3B] hover:bg-[#002A2A] disabled:opacity-40 text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition-all ml-1"
+                className="bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent disabled:opacity-40 text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition-all ml-1 group"
                 aria-label="Kirim Pesan"
               >
                 <span>Kirim</span>
-                <ArrowUp className="w-3.5 h-3.5 stroke-[2.5]" />
+                <ArrowUp className="w-3.5 h-3.5 stroke-[2.5] text-[#37F4B4] group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
           </div>
@@ -833,8 +835,8 @@ export default function AIChat({
             </button>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-teal-50 text-[#003B3B] border border-teal-200/70 flex items-center justify-center font-bold">
-                <Stethoscope className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30 flex items-center justify-center font-bold">
+                <Stethoscope className="w-5 h-5 text-[#022022]" />
               </div>
               <div>
                 <h3 className="font-poppins font-bold text-lg text-slate-900">
@@ -848,13 +850,13 @@ export default function AIChat({
 
             <div className="space-y-3 text-xs text-slate-600 font-inter leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
               <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#003B3B] mt-1.5 shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#022022] mt-1.5 shrink-0" />
                 <p>
                   <strong>Edukasi Awal:</strong> Informasi yang disajikan AI bersumber dari pedoman Kemenkes RI dan Dinas Kesehatan Kota Semarang untuk membantu pemahaman keluhan awal.
                 </p>
               </div>
               <div className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#003B3B] mt-1.5 shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#022022] mt-1.5 shrink-0" />
                 <p>
                   <strong>Bukan Diagnosis Mutlak:</strong> Asisten tidak meresepkan obat keras dan tidak menggantikan pemeriksaan langsung oleh dokter faskes.
                 </p>
@@ -870,7 +872,7 @@ export default function AIChat({
             <button
               type="button"
               onClick={() => setShowGuideModal(false)}
-              className="w-full py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002A2A] text-white text-xs font-semibold shadow-xs cursor-pointer"
+              className="w-full py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold shadow-xs cursor-pointer"
             >
               Saya Mengerti
             </button>

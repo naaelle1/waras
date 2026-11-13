@@ -42,13 +42,13 @@ export default function HowItWorks() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6FEFF] border border-[#014751]/15 text-[#014751] text-xs font-medium mb-3">
-            <HeartPulse className="w-3.5 h-3.5 text-[#014751]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3">
+            <HeartPulse className="w-3.5 h-3.5 text-[#022022]" />
             <span>Alur Penggunaan Mudah</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#022022] tracking-tight leading-[1.15]">
             Tiga Langkah Sederhana <br />
-            <span className="font-normal text-[#014751]">
+            <span className="font-normal text-[#022022]">
               Menuju Penanganan Tepat.
             </span>
           </h2>
@@ -61,13 +61,13 @@ export default function HowItWorks() {
         <div className="relative">
           
           {/* Animated Connecting Line Behind Steps (Desktop) */}
-          <div className="hidden lg:block absolute top-[58px] left-[15%] right-[15%] h-0.5 bg-[#E6FEFF] -z-0">
+          <div className="hidden lg:block absolute top-[58px] left-[15%] right-[15%] h-0.5 bg-[#022022]/10 -z-0">
             <motion.div
               initial={{ width: "0%" }}
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="h-full bg-gradient-to-r from-[#014751] via-[#014751] to-[#37F4B4]"
+              className="h-full bg-gradient-to-r from-[#022022] via-[#022022] to-[#37F4B4]"
             />
           </div>
 
@@ -82,25 +82,25 @@ export default function HowItWorks() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: idx * 0.18 }}
-                  className="relative rounded-3xl bg-white border border-[#014751]/15 p-7 sm:p-8 hover:border-[#014751]/40 hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
+                  className="relative rounded-3xl bg-white border border-[#37F4B4]/20 p-7 sm:p-8 hover:border-[#37F4B4]/50 hover:shadow-[0_20px_45px_rgba(2,32,34,0.08)] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
                 >
                   {/* GIANT TRANSPARENT BACKGROUND NUMBER */}
-                  <span className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-extralight text-[#014751]/[0.06] group-hover:text-[#014751]/[0.1] transition-colors select-none pointer-events-none font-mono">
+                  <span className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-extralight text-[#022022]/[0.06] group-hover:text-[#022022]/[0.1] transition-colors select-none pointer-events-none font-mono">
                     {step.number}
                   </span>
 
                   {/* STEP ICON & NUMBER PILL */}
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#E6FEFF] text-[#014751] flex items-center justify-center group-hover:bg-[#014751] group-hover:text-white transition-all duration-300 shadow-2xs">
+                    <div className="w-12 h-12 rounded-2xl bg-[#022022]/10 text-[#022022] flex items-center justify-center group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all duration-300 shadow-2xs">
                       <Icon className="w-5 h-5 stroke-[2]" />
                     </div>
-                    <span className="text-[11px] font-mono font-medium text-[#014751] bg-[#E6FEFF] px-2.5 py-0.5 rounded-full border border-[#014751]/10">
+                    <span className="text-[11px] font-mono font-medium text-[#022022] bg-[#022022]/10 px-2.5 py-0.5 rounded-full border border-[#37F4B4]/25">
                       {step.label}
                     </span>
                   </div>
 
                   {/* STEP TITLE */}
-                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#014751] transition-colors">
+                  <h3 className="text-xl font-normal text-[#022022] group-hover:text-[#022022] transition-colors">
                     {step.title}
                   </h3>
 
@@ -110,7 +110,7 @@ export default function HowItWorks() {
                   </p>
 
                   {/* TAG HIGHLIGHT */}
-                  <div className="mt-6 pt-4 border-t border-[#014751]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#014751]">
+                  <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                     <span>{step.badge}</span>
                   </div>
@@ -125,7 +125,7 @@ export default function HowItWorks() {
         <div className="mt-14 text-center">
           <Link
             to="/user/dashboard"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
           >
             <span>Mulai eksplorasi seluruh panduan kesehatan sekarang</span>
             <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />

@@ -42,15 +42,15 @@ export default function Profile() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12 font-inter">
       {/* HEADER BANNER */}
-      <div className="rounded-3xl bg-linear-to-r from-[#003B3B] via-[#004242] to-[#002727] text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="absolute right-0 top-0 -mt-10 -mr-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="rounded-3xl bg-[#022022] border border-[#37F4B4]/25 text-white p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="absolute right-0 top-0 -mt-10 -mr-10 w-44 h-44 bg-[#37F4B4]/15 rounded-full blur-2xl pointer-events-none" />
 
         <div className="flex items-center gap-4 relative z-10">
-          <div className="w-16 h-16 rounded-2xl bg-white text-[#003B3B] flex items-center justify-center font-bold text-2xl shadow-sm shrink-0">
+          <div className="w-16 h-16 rounded-2xl bg-[#37F4B4] text-[#022022] flex items-center justify-center font-bold text-2xl shadow-sm shrink-0">
             {profileData.name.charAt(0)}
           </div>
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/15 text-[#DDEEEE]">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/15 text-[#37F4B4] border border-[#37F4B4]/20">
               <ShieldCheck className="w-3 h-3" /> NIK Terverifikasi Dukcapil
             </div>
             <h1 className="font-poppins font-bold text-xl sm:text-2xl text-white">
@@ -66,7 +66,7 @@ export default function Profile() {
           <button
             type="button"
             onClick={() => setIsEditing(!isEditing)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-[#003B3B] hover:bg-[#EBF5F5] font-semibold text-xs shadow-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#37F4B4] text-[#022022] hover:bg-white font-semibold text-xs shadow-xs transition-colors cursor-pointer"
           >
             <Edit3 className="w-4 h-4" />
             <span>{isEditing ? "Batalkan Edit" : "Perbarui Data"}</span>
@@ -87,7 +87,7 @@ export default function Profile() {
         <div className="lg:col-span-7 bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-6">
           <div className="flex items-center justify-between border-b border-gray-100 pb-3">
             <div className="flex items-center gap-2">
-              <User className="w-5 h-5 text-[#003B3B]" />
+              <User className="w-5 h-5 text-[#022022]" />
               <h2 className="font-poppins font-bold text-base text-[#0D2626]">
                 Identitas Kependudukan & Kontak
               </h2>
@@ -177,7 +177,7 @@ export default function Profile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#003B3B] text-white text-xs font-semibold shadow-xs hover:bg-[#002D2D]"
+                  className="px-5 py-2 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
                 >
                   Simpan Perubahan
                 </button>
@@ -189,13 +189,13 @@ export default function Profile() {
         {/* RIGHT COLUMN: KARTU BPJS & STATUS KESEHATAN (5 COLS) */}
         <div className="lg:col-span-5 space-y-6">
           {/* KARTU BPJS DIGITAL */}
-          <div className="rounded-3xl bg-linear-to-br from-[#0B6B6B] to-[#003B3B] text-white p-6 shadow-sm space-y-4">
+          <div className="rounded-3xl bg-[#022022] border border-[#37F4B4]/25 text-white p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-white/20 pb-3">
               <div className="flex items-center gap-2">
-                <HeartPulse className="w-5 h-5 text-[#DDEEEE]" />
+                <HeartPulse className="w-5 h-5 text-[#37F4B4]" />
                 <span className="font-poppins font-bold text-sm">BPJS Kesehatan</span>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-400 text-[#002D2D]">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#37F4B4] text-[#022022]">
                 {profileData.bpjsStatus}
               </span>
             </div>
@@ -228,7 +228,7 @@ export default function Profile() {
           {/* INFORMASI RIWAYAT KESEHATAN & CATATAN */}
           <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <Clock className="w-4 h-4 text-[#003B3B]" />
+              <Clock className="w-4 h-4 text-[#022022]" />
               <h3 className="font-poppins font-bold text-sm text-[#0D2626]">
                 Catatan Medis Penting
               </h3>
@@ -242,7 +242,7 @@ export default function Profile() {
                 <p className="text-[#0D2626]">{profileData.allergies}</p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#EBF5F5] border border-[#003B3B]/15 text-[#003B3B] space-y-1">
+              <div className="p-3 rounded-xl bg-[#022022]/5 border border-[#37F4B4]/25 text-[#022022] space-y-1">
                 <span className="text-[11px] font-semibold block">
                   Jadwal Skrining Kesehatan:
                 </span>

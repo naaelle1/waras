@@ -12,7 +12,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#014751]/10 text-[#022022]">
+    <section id="faq" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10 text-[#022022]">
       <div className="max-w-[1480px] mx-auto">
         
         {/* 2-COLUMN SPLIT LAYOUT */}
@@ -20,13 +20,14 @@ export default function FAQ() {
           
           {/* LEFT: HEADING & DESCRIPTION */}
           <div className="lg:col-span-5 space-y-4 text-left">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#014751]">
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
               PUSAT PERTANYAAN
             </span>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#022022] leading-[1.12] tracking-tight">
               Pertanyaan yang Sering <br />
-              <span className="font-normal text-[#014751]">Diajukan Warga.</span>
+              <span className="font-normal text-[#022022]">Diajukan Warga.</span>
             </h2>
 
             <p className="text-[#022022]/70 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
@@ -36,7 +37,7 @@ export default function FAQ() {
             <div className="pt-2">
               <Link
                 to="/user/help"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#014751] hover:text-[#022022] transition-colors group"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Kunjungi Pusat Bantuan Lengkap</span>
                 <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
@@ -45,7 +46,7 @@ export default function FAQ() {
           </div>
 
           {/* RIGHT: MINIMAL ACCORDION WITH CLEAN BORDERS */}
-          <div className="lg:col-span-7 divide-y divide-[#014751]/10 border-t border-b border-[#014751]/10">
+          <div className="lg:col-span-7 divide-y divide-[#022022]/10 border-t border-b border-[#022022]/10">
             {faqData.map((item, index) => {
               const isOpen = openIndex === index;
               return (
@@ -58,7 +59,7 @@ export default function FAQ() {
                   >
                     <span
                       className={`text-base sm:text-lg transition-colors ${
-                        isOpen ? "font-normal text-[#014751]" : "font-light text-[#022022] group-hover:text-[#014751]"
+                        isOpen ? "font-medium text-[#022022]" : "font-light text-[#022022] group-hover:text-[#022022]"
                       }`}
                     >
                       {item.q}
@@ -68,8 +69,8 @@ export default function FAQ() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
                         isOpen
-                          ? "bg-[#014751] text-white"
-                          : "bg-[#E6FEFF] text-[#014751] group-hover:bg-[#014751] group-hover:text-white"
+                          ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30"
+                          : "bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4]"
                       }`}
                     >
                       {isOpen ? (

@@ -19,7 +19,7 @@ const features = [
     title: "Fasilitas Terdekat",
     subtitle: "Temukan faskes Semarang",
     link: "/user/facilities",
-    color: "#003B3B",
+    color: "#022022",
     bgColor: "#E6F4F1",
   },
   {
@@ -28,7 +28,7 @@ const features = [
     title: "AI Assistant",
     subtitle: "Informasi kesehatan instan",
     link: "/user/ai",
-    color: "#006B5E",
+    color: "#022022",
     bgColor: "#DDF8EC",
   },
   {
@@ -37,7 +37,7 @@ const features = [
     title: "Panduan Layanan",
     subtitle: "Bantuan dan rujukan",
     link: "/user/health-info/guides",
-    color: "#003B3B",
+    color: "#022022",
     bgColor: "#E6F4F1",
   },
 ];
@@ -52,7 +52,7 @@ export default function FeatureStrip() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-3xl bg-white/90 backdrop-blur-xl border border-white/90 shadow-[0_16px_40px_rgba(0,59,59,0.06)] p-3 sm:p-4"
+          className="rounded-3xl bg-white/90 backdrop-blur-xl border border-white/90 shadow-[0_16px_40px_rgba(2,32,34,0.06)] p-3 sm:p-4"
         >
           {/* Desktop Grid / Mobile Horizontal Scroll */}
           <div className="flex md:grid md:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto pb-2 md:pb-0 scrollbar-none snap-x snap-mandatory">
@@ -62,7 +62,7 @@ export default function FeatureStrip() {
                 <Link
                   key={item.id}
                   to={item.link}
-                  className="group min-w-[240px] md:min-w-0 snap-start p-3 sm:p-3.5 rounded-2xl bg-[#F6FAF9]/80 hover:bg-white border border-transparent hover:border-[#8FE3C1]/50 transition-all duration-300 hover:shadow-sm flex items-center justify-between cursor-pointer"
+                  className="group min-w-[240px] md:min-w-0 snap-start p-3 sm:p-3.5 rounded-2xl bg-[#F6FAF9]/80 hover:bg-white border border-transparent hover:border-[#37F4B4]/40 transition-all duration-300 hover:shadow-sm flex items-center justify-between cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <div
@@ -72,7 +72,7 @@ export default function FeatureStrip() {
                       <Icon className="w-5 h-5 stroke-[2.2]" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-[#062F2F] group-hover:text-[#003B3B] transition-colors leading-snug">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#022022] group-hover:text-[#022022] transition-colors leading-snug">
                         {item.title}
                       </h4>
                       <p className="text-[11px] text-[#647777] font-normal leading-tight mt-0.5">
@@ -81,7 +81,7 @@ export default function FeatureStrip() {
                     </div>
                   </div>
 
-                  <div className="w-6 h-6 rounded-full bg-transparent group-hover:bg-[#DDF8EC] flex items-center justify-center text-[#647777] group-hover:text-[#006B5E] transition-all shrink-0">
+                  <div className="w-6 h-6 rounded-full bg-transparent group-hover:bg-[#37F4B4]/20 flex items-center justify-center text-[#647777] group-hover:text-[#022022] transition-all shrink-0">
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </Link>

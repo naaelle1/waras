@@ -14,8 +14,8 @@ export default function ArticleCategoryFilter({ categories, activeCategory, onSe
             className={clsx(
               "px-4 py-2 rounded-full text-xs sm:text-sm font-poppins font-semibold transition-all duration-200 shrink-0 cursor-pointer border",
               isActive
-                ? "bg-[#003B3B] text-white border-[#003B3B] shadow-2xs"
-                : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#EBF5F5] hover:text-[#003B3B] hover:border-[#003B3B]/30"
+                ? "bg-[#022022] text-[#37F4B4] border-[#37F4B4]/40 shadow-2xs"
+                : "bg-white text-[#2B3E3E] border-[#E2ECEB] hover:bg-[#022022]/5 hover:text-[#022022] hover:border-[#37F4B4]/30"
             )}
           >
             {cat}

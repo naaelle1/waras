@@ -23,21 +23,21 @@ import ReportProblem from "../pages/user/ReportProblem";
 // Placeholder Pages (Temporary)
 const SettingsPage = () => (
   <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Settings</h2>
+    <h2 className="text-xl font-bold text-[#022022]">Settings</h2>
     <p className="text-sm text-[#5F6F70] mt-1">Halaman pengaturan akun sedang disiapkan.</p>
   </div>
 );
 
 const ProfilePage = () => (
   <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Profil Saya</h2>
+    <h2 className="text-xl font-bold text-[#022022]">Profil Saya</h2>
     <p className="text-sm text-[#5F6F70] mt-1">Halaman profil pengguna sedang disiapkan.</p>
   </div>
 );
 
 const HelpPage = () => (
   <div className="p-6 bg-white/70 backdrop-blur-md rounded-2xl font-poppins shadow-sm">
-    <h2 className="text-xl font-bold text-[#002B2C]">Pusat Bantuan</h2>
+    <h2 className="text-xl font-bold text-[#022022]">Pusat Bantuan</h2>
     <p className="text-sm text-[#5F6F70] mt-1">Halaman FAQ dan bantuan sedang disiapkan.</p>
   </div>
 );

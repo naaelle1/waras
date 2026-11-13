@@ -27,7 +27,8 @@ export default function Hero() {
           <div className="lg:col-span-7 xl:col-span-7 space-y-6 sm:space-y-7">
             
             {/* Simple Polos Category Label */}
-            <span className="text-xs font-mono uppercase tracking-wider text-[#014751] block">
+            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#022022] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
               PORTAL LAYANAN PUBLIK KOTA SEMARANG
             </span>
 
@@ -39,7 +40,7 @@ export default function Hero() {
             >
               <h1 className="text-4xl sm:text-6xl lg:text-[62px] xl:text-[70px] font-light text-[#022022] leading-[1.12] tracking-tight">
                 Kesehatan Lebih{" "}
-                <span className="font-normal text-[#014751] block sm:inline">
+                <span className="font-normal text-[#022022] block sm:inline">
                   Mudah Diakses,
                 </span>
                 <span className="block font-extralight text-[#022022]/85 mt-1.5">
@@ -57,38 +58,39 @@ export default function Hero() {
             <div className="pt-2 flex items-center gap-4">
               <Link
                 to="/user/facilities"
-                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#014751] active:scale-95 transition-all shadow-sm"
+                className="px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-light hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent active:scale-95 transition-all shadow-sm flex items-center gap-2"
               >
-                Mulai Sekarang
+                <span>Mulai Sekarang</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
               </Link>
 
               <a
                 href="#tentang"
-                className="text-xs sm:text-sm font-light text-[#014751] hover:text-[#022022] transition-colors underline-offset-4 hover:underline"
+                className="text-xs sm:text-sm font-light text-[#022022] hover:text-[#033033] transition-colors underline-offset-4 hover:underline"
               >
                 Pelajari Layanan
               </a>
             </div>
 
             {/* 4 Clean Flat Metrics (Zero Clutter, Sharp Readability) */}
-            <div className="pt-8 border-t border-[#014751]/10 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div className="pt-8 border-t border-[#022022]/10 grid grid-cols-2 sm:grid-cols-4 gap-6">
               <div>
-                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">37</span>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">37</span>
                 <p className="text-xs text-[#022022]/70 font-light mt-0.5">Puskesmas Siaga</p>
               </div>
 
               <div>
-                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">18+</span>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">18+</span>
                 <p className="text-xs text-[#022022]/70 font-light mt-0.5">RSUD & RSUP Rujukan</p>
               </div>
 
               <div>
-                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">119</span>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">119</span>
                 <p className="text-xs text-[#022022]/70 font-light mt-0.5">Hotline Darurat 24 Jam</p>
               </div>
 
               <div>
-                <span className="text-2xl sm:text-3xl font-light font-mono text-[#014751]">100%</span>
+                <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">100%</span>
                 <p className="text-xs text-[#022022]/70 font-light mt-0.5">Akses Terbuka Warga</p>
               </div>
             </div>

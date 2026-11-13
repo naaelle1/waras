@@ -13,7 +13,7 @@ export default function ServiceFlow({ steps = [] }) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#062B2B]">
+        <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">
           Bagaimana Alur Layanan Kesehatan?
         </h2>
         <p className="text-xs sm:text-sm text-[#5F6F70] font-inter">
@@ -22,7 +22,7 @@ export default function ServiceFlow({ steps = [] }) {
       </div>
 
       {/* Responsive Horizontal / Vertical Timeline Container */}
-      <div className="relative p-6 sm:p-8 rounded-3xl bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_10px_35px_rgba(0,43,43,0.05)]">
+      <div className="relative p-6 sm:p-8 rounded-3xl bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_10px_35px_rgba(2,32,34,0.05)]">
         
         {/* Step Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10">
@@ -38,15 +38,15 @@ export default function ServiceFlow({ steps = [] }) {
                 <div className="space-y-3">
                   {/* Step Badge & Icon */}
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#002B2B] text-white font-poppins font-bold text-xs">
+                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#022022] text-[#37F4B4] font-poppins font-bold text-xs">
                       {item.step}
                     </span>
-                    <div className="p-2 rounded-xl bg-[#002B2B]/5 text-[#002B2B] group-hover:bg-[#002B2B] group-hover:text-white transition-colors">
+                    <div className="p-2 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-colors">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="font-poppins font-bold text-sm text-[#062B2B] leading-tight">
+                  <h3 className="font-poppins font-bold text-sm text-[#022022] leading-tight">
                     {item.title}
                   </h3>
 
@@ -57,7 +57,7 @@ export default function ServiceFlow({ steps = [] }) {
 
                 {/* Connector Arrow for Desktop */}
                 {!isLast && (
-                  <div className="hidden md:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 text-[#002B2B]/30">
+                  <div className="hidden md:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 text-[#022022]/30">
                     <span className="font-bold text-lg">→</span>
                   </div>
                 )}
@@ -68,7 +68,7 @@ export default function ServiceFlow({ steps = [] }) {
 
         {/* General Disclaimer Note */}
         <div className="mt-6 pt-4 border-t border-gray-200/60 flex items-center gap-2 text-xs text-[#5F6F70] font-inter">
-          <Info className="w-4 h-4 text-[#002B2B] shrink-0" />
+          <Info className="w-4 h-4 text-[#022022] shrink-0" />
           <span>Alur layanan dapat sedikit bervariasi tergantung pada kebijakan internal faskes dan tingkat kegawatdaruratan pasien.</span>
         </div>
       </div>

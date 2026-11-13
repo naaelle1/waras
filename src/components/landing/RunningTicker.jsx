@@ -17,8 +17,8 @@ export default function RunningTicker({ variant = "light" }) {
     <div
       className={`w-full overflow-hidden border-y py-3.5 transition-colors select-none ${
         isLight
-          ? "bg-[#E6FEFF]/80 border-[#014751]/15 text-[#022022]"
-          : "bg-[#014751] border-[#37F4B4]/20 text-white"
+          ? "bg-[#022022]/5 border-[#37F4B4]/20 text-[#022022]"
+          : "bg-[#022022] border-[#37F4B4]/20 text-white"
       }`}
     >
       <div className="flex w-max animate-marquee">
@@ -32,7 +32,7 @@ export default function RunningTicker({ variant = "light" }) {
             >
               <span
                 className={`w-2 h-2 rounded-full ${
-                  isLight ? "bg-[#014751]" : "bg-[#37F4B4]"
+                  isLight ? "bg-[#022022]" : "bg-[#37F4B4]"
                 } shadow-[0_0_8px_rgba(55,244,180,0.6)]`}
               />
               <span className="text-xs sm:text-sm font-light tracking-wide uppercase">

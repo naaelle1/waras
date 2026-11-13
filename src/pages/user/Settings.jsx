@@ -57,7 +57,7 @@ export default function Settings() {
         <button
           type="button"
           onClick={handleSaveSettings}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer self-start sm:self-auto"
         >
           <CheckCircle2 className="w-4 h-4" />
           <span>Simpan Perubahan</span>
@@ -76,7 +76,7 @@ export default function Settings() {
         {/* NOTIFICATIONS */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
               <Bell className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -103,7 +103,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={notifications.queueAlert}
                 onChange={() => handleToggleNotification("queueAlert")}
-                className="w-4 h-4 rounded text-[#003B3B] accent-[#003B3B] cursor-pointer"
+                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
 
@@ -120,7 +120,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={notifications.emergencyBroadcast}
                 onChange={() => handleToggleNotification("emergencyBroadcast")}
-                className="w-4 h-4 rounded text-[#003B3B] accent-[#003B3B] cursor-pointer"
+                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
 
@@ -137,7 +137,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={notifications.weeklyArticle}
                 onChange={() => handleToggleNotification("weeklyArticle")}
-                className="w-4 h-4 rounded text-[#003B3B] accent-[#003B3B] cursor-pointer"
+                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
           </div>
@@ -146,7 +146,7 @@ export default function Settings() {
         {/* ACCESSIBILITY */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
               <Eye className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -173,7 +173,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={accessibility.reducedMotion}
                 onChange={() => handleToggleAccessibility("reducedMotion")}
-                className="w-4 h-4 rounded text-[#003B3B] accent-[#003B3B] cursor-pointer"
+                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
 
@@ -190,7 +190,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={accessibility.highContrast}
                 onChange={() => handleToggleAccessibility("highContrast")}
-                className="w-4 h-4 rounded text-[#003B3B] accent-[#003B3B] cursor-pointer"
+                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
           </div>
@@ -199,7 +199,7 @@ export default function Settings() {
         {/* SECURITY & DATA */}
         <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
           <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
               <Shield className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -223,7 +223,7 @@ export default function Settings() {
             </div>
             <button
               type="button"
-              className="px-4 py-2 rounded-xl bg-white border border-[#E2ECEB] text-xs font-semibold text-[#003B3B] hover:bg-gray-50 shadow-2xs"
+              className="px-4 py-2 rounded-xl bg-white border border-[#E2ECEB] text-xs font-semibold text-[#022022] hover:bg-[#022022]/5 shadow-2xs cursor-pointer"
             >
               Ubah Sandi
             </button>

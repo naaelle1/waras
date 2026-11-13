@@ -20,7 +20,7 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
 
         {/* Title & Description */}
         <div className="space-y-2">
-          <h3 className="font-poppins font-bold text-xl sm:text-2xl text-[#062B2B]">
+          <h3 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">
             Laporan Berhasil Dikirim
           </h3>
           <p className="font-inter text-xs sm:text-sm text-[#4B5E5E] leading-relaxed">
@@ -32,14 +32,14 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
         <div className="p-4 rounded-2xl bg-gray-50 border border-gray-100 text-left space-y-2.5">
           <div className="flex items-center justify-between text-xs">
             <span className="font-inter text-[#4B5E5E]">ID Referensi:</span>
-            <span className="font-poppins font-bold text-[#062B2B] bg-white px-2 py-0.5 rounded border border-gray-200">
+            <span className="font-poppins font-bold text-[#022022] bg-white px-2 py-0.5 rounded border border-gray-200">
               {resultData.reportId}
             </span>
           </div>
 
           <div className="flex items-center justify-between text-xs">
             <span className="font-inter text-[#4B5E5E]">Waktu Pengiriman:</span>
-            <span className="font-inter font-medium text-[#062B2B]">
+            <span className="font-inter font-medium text-[#022022]">
               {resultData.submittedAt}
             </span>
           </div>
@@ -58,7 +58,7 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
           <button
             type="button"
             onClick={onReset}
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-[#062B2B] font-poppins font-bold text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-[#022022] font-poppins font-bold text-xs sm:text-sm transition-colors cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Kirim Laporan Lain</span>
@@ -66,7 +66,7 @@ export default function ReportSuccessModal({ isOpen, resultData, onReset }) {
 
           <Link
             to="/user/dashboard"
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#003B3B] text-white font-poppins font-bold text-xs sm:text-sm hover:bg-[#002B2B] transition-colors shadow-md shadow-[#003B3B]/20"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 font-poppins font-bold text-xs sm:text-sm transition-colors shadow-md shadow-[#022022]/20"
           >
             <LayoutDashboard className="w-4 h-4" />
             <span>Kembali ke Dashboard</span>
