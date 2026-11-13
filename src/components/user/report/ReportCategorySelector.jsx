@@ -5,7 +5,7 @@ export default function ReportCategorySelector({ categories, selectedCategoryId,
   return (
     <div className="space-y-3">
       <div>
-        <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#062B2B]">
+        <h2 className="font-poppins font-bold text-lg sm:text-xl text-[#022022]">
           Pilih Jenis Masalah
         </h2>
         <p className="text-xs sm:text-sm text-[#4B5E5E] font-inter">

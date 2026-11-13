@@ -74,8 +74,8 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
 
           {/* Floating Category Pill */}
           <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#003B3B] text-white shadow-xs">
-              <Tag className="w-3.5 h-3.5 text-[#DDEEEE]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs">
+              <Tag className="w-3.5 h-3.5 text-[#37F4B4]" />
               {article.category}
             </span>
 
@@ -101,7 +101,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
               {article.title}
             </h2>
             <div className="flex items-center gap-2 text-xs text-[#526666]">
-              <User className="w-3.5 h-3.5 text-[#003B3B]" />
+              <User className="w-3.5 h-3.5 text-[#022022]" />
               <span>Ditinjau oleh: <strong className="text-[#0D2626]">{article.author || "Tim Medis WARAS"}</strong></span>
             </div>
           </div>
@@ -117,13 +117,13 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
             </h4>
             <div className="space-y-2.5">
               <div className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                <CheckCircle2 className="w-4 h-4 text-[#003B3B] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#022022] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-[#0D2626]">Deteksi Cepat:</strong> Perhatikan perubahan fisik sekecil apa pun dan catat waktu kemunculan gejala pertama kali.
                 </div>
               </div>
               <div className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                <CheckCircle2 className="w-4 h-4 text-[#003B3B] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#022022] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-[#0D2626]">Pola Hidup & Hidrasi:</strong> Istirahat yang cukup dan asupan cairan yang teratur sangat membantu pemulihan alami tubuh.
                 </div>
@@ -148,7 +148,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
                 {article.tags.map((t, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 rounded-lg bg-[#EBF5F5] text-[#003B3B] text-xs font-medium"
+                    className="px-2.5 py-1 rounded-lg bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20 text-xs font-medium"
                   >
                     #{t}
                   </span>
@@ -170,18 +170,18 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
               <button
                 type="button"
                 onClick={handleAskAI}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#EBF5F5] hover:bg-[#DDEEEE] text-[#003B3B] font-semibold text-xs transition-colors cursor-pointer border border-[#003B3B]/15"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#022022]/5 hover:bg-[#022022]/10 text-[#022022] font-semibold text-xs transition-colors cursor-pointer border border-[#37F4B4]/30"
               >
-                <Bot className="w-3.5 h-3.5" />
+                <Bot className="w-3.5 h-3.5 text-[#022022]" />
                 <span>Tanya AI tentang Artikel Ini</span>
               </button>
 
               <Link
                 to="/user/facilities"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white font-semibold text-xs transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white font-semibold text-xs transition-colors shadow-xs"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#DDEEEE]" />
+                <MapPin className="w-3.5 h-3.5 text-[#37F4B4]" />
                 <span>Cari Faskes Terdekat</span>
               </Link>
             </div>

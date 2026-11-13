@@ -8,11 +8,11 @@ export default function QueueStatus({ item }) {
   const isModerate = item.queueStatus === "Sedang";
 
   return (
-    <Card hoverEffect className="flex flex-col justify-between h-full">
+    <Card hoverEffect className="flex flex-col justify-between h-full group">
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2.5 rounded-xl bg-[#EBF5F5] text-[#003B3B]">
+            <div className="p-2.5 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all duration-200">
               <Hospital className="w-4 h-4" />
             </div>
             <div>

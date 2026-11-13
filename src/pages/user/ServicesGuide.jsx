@@ -28,11 +28,11 @@ export default function ServicesGuide() {
 
       {/* HEADER HALAMAN */}
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2.5 text-[#062B2B]">
-          <div className="p-2.5 rounded-2xl bg-[#002B2B] text-white shadow-md shadow-[#002B2B]/10">
-            <Compass className="w-6 h-6 text-white" />
+        <div className="flex items-center gap-2.5 text-[#022022]">
+          <div className="p-2.5 rounded-2xl bg-[#022022] text-[#37F4B4] shadow-md shadow-[#022022]/10">
+            <Compass className="w-6 h-6 text-[#37F4B4]" />
           </div>
-          <h1 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#062B2B]">
+          <h1 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#022022]">
             Panduan Layanan
           </h1>
         </div>
@@ -45,7 +45,7 @@ export default function ServicesGuide() {
 
       <section ref={quickGuidesRef} className="space-y-4 pt-2 scroll-mt-6">
         <div className="space-y-1">
-          <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#062B2B]">
+          <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">
             Pilih Panduan
           </h2>
           <p className="text-xs sm:text-sm text-[#5F6F70] font-inter">
@@ -75,9 +75,9 @@ export default function ServicesGuide() {
 
       <ServiceGuideCTA />
 
-      <section className="rounded-2xl bg-[#002B2B]/5 border border-[#002B2B]/10 p-5 backdrop-blur-md">
+      <section className="rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/20 p-5 backdrop-blur-md">
         <div className="flex items-start gap-3">
-          <Info className="w-5 h-5 text-[#002B2B] shrink-0 mt-0.5" />
+          <Info className="w-5 h-5 text-[#022022] shrink-0 mt-0.5" />
           <p className="text-xs sm:text-sm text-[#5F6F70] font-inter leading-relaxed">
             <strong>Penafian Layanan:</strong> Panduan layanan ini disajikan sebagai sarana navigasi umum. Ketentuan operasional, persyaratan berkas, dan pembiayaan tetap mengikuti regulasi masing-masing fasilitas pelayanan kesehatan yang dituju.
           </p>

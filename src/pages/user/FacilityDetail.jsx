@@ -62,7 +62,7 @@ export default function FacilityDetail() {
       <div>
         <button
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 text-xs font-semibold text-[#003B3B] hover:text-[#002D2D] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-[#022022] hover:text-[#033033] transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Fasilitas Kesehatan</span>
@@ -85,7 +85,7 @@ export default function FacilityDetail() {
             <div className="absolute top-3 left-3 flex items-center gap-2">
               <Badge
                 variant={isHospital ? "default" : "teal"}
-                className={isHospital ? "bg-[#003B3B] text-white" : "bg-[#EBF5F5] text-[#003B3B]"}
+                className={isHospital ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30" : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20"}
               >
                 {facility.category}
               </Badge>
@@ -101,7 +101,7 @@ export default function FacilityDetail() {
           <div className="md:col-span-7 lg:col-span-8 p-6 sm:p-7 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs text-[#526666]">
-                <Hospital className="w-4 h-4 text-[#003B3B]" />
+                <Hospital className="w-4 h-4 text-[#022022]" />
                 <span>Kecamatan {facility.district || "Semarang"}</span>
               </div>
 
@@ -110,7 +110,7 @@ export default function FacilityDetail() {
               </h1>
 
               <p className="text-xs sm:text-sm text-[#526666] flex items-start gap-1.5 leading-relaxed max-w-2xl">
-                <MapPin className="w-4 h-4 text-[#003B3B] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#022022] shrink-0 mt-0.5" />
                 <span>{facility.address}</span>
               </p>
             </div>
@@ -155,7 +155,7 @@ export default function FacilityDetail() {
         <div className="lg:col-span-7 space-y-6">
           {/* Main Details Card */}
           <Card className="space-y-4">
-            <h3 className="font-poppins font-semibold text-lg text-[#003B3B] border-b border-[#E2ECEB] pb-3">
+            <h3 className="font-poppins font-semibold text-lg text-[#022022] border-b border-[#E2ECEB] pb-3">
               Informasi Utama
             </h3>
 
@@ -183,7 +183,7 @@ export default function FacilityDetail() {
               {facility.whatsapp && (
                 <div className="space-y-1">
                   <span className="text-[#526666] font-medium">Nomor WhatsApp:</span>
-                  <p className="font-semibold text-[#003B3B]">{facility.whatsapp}</p>
+                  <p className="font-semibold text-[#022022]">{facility.whatsapp}</p>
                 </div>
               )}
 
@@ -201,8 +201,8 @@ export default function FacilityDetail() {
           {/* Services List Card */}
           <Card className="space-y-4">
             <div className="flex items-center gap-2 border-b border-[#E2ECEB] pb-3">
-              <Stethoscope className="w-5 h-5 text-[#003B3B]" />
-              <h3 className="font-poppins font-semibold text-lg text-[#003B3B]">
+              <Stethoscope className="w-5 h-5 text-[#022022]" />
+              <h3 className="font-poppins font-semibold text-lg text-[#022022]">
                 Layanan & Poliklinik
               </h3>
             </div>
@@ -214,7 +214,7 @@ export default function FacilityDetail() {
                     key={index}
                     className="flex items-center gap-2 p-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-medium text-[#0D2626]"
                   >
-                    <ShieldCheck className="w-4 h-4 text-[#003B3B] shrink-0" />
+                    <ShieldCheck className="w-4 h-4 text-[#022022]" />
                     <span className="capitalize">{service}</span>
                   </div>
                 ))}
@@ -231,7 +231,7 @@ export default function FacilityDetail() {
         <div className="lg:col-span-5 space-y-4">
           <Card className="space-y-3 p-4 sm:p-5">
             <div className="flex items-center justify-between border-b border-[#E2ECEB] pb-3">
-              <h3 className="font-poppins font-semibold text-base sm:text-lg text-[#003B3B]">
+              <h3 className="font-poppins font-semibold text-base sm:text-lg text-[#022022]">
                 Peta Lokasi
               </h3>
               {hasCoordinates && (
@@ -239,7 +239,7 @@ export default function FacilityDetail() {
                   href={googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#003B3B] hover:underline"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#022022] hover:underline"
                 >
                   <span>Buka Rute</span>
                   <ExternalLink className="w-3 h-3" />
@@ -266,8 +266,8 @@ export default function FacilityDetail() {
               </div>
             )}
 
-            <div className="p-3 bg-[#EBF5F5] rounded-xl text-xs text-[#0D2626] space-y-1 border border-[#D5EAEA]">
-              <p className="font-semibold text-[#003B3B]">Alamat Lengkap:</p>
+            <div className="p-3 bg-[#022022]/5 rounded-xl text-xs text-[#0D2626] space-y-1 border border-[#37F4B4]/25">
+              <p className="font-semibold text-[#022022]">Alamat Lengkap:</p>
               <p className="text-[#526666] leading-relaxed">{facility.address}</p>
             </div>
           </Card>

@@ -28,7 +28,7 @@ export default function HealthInfoTabs() {
   ];
 
   return (
-    <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_4px_20px_rgba(0,43,43,0.04)] overflow-x-auto scrollbar-thin">
+    <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_4px_20px_rgba(2,32,34,0.04)] overflow-x-auto scrollbar-thin">
       {tabs.map((tab) => {
         const Icon = tab.icon;
         return (
@@ -39,8 +39,8 @@ export default function HealthInfoTabs() {
               clsx(
                 "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-poppins font-medium transition-all duration-200 shrink-0 select-none",
                 isActive
-                  ? "bg-[#002B2C] text-white shadow-sm font-semibold"
-                  : "text-[#5F6F70] hover:bg-white/80 hover:text-[#002B2C]"
+                  ? "bg-[#022022] text-[#37F4B4] shadow-sm font-semibold"
+                  : "text-[#5F6F70] hover:bg-white/80 hover:text-[#022022]"
               )
             }
           >

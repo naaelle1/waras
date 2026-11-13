@@ -72,8 +72,8 @@ export default function Dashboard() {
       {/* SECTION 1: PAGE TITLE */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
         <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-2.5 text-[#003B3B]">
-            <House className="w-6 h-6 stroke-[2.2]" />
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <House className="w-6 h-6 stroke-[2.2] text-[#022022]" />
             <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#0D2626]">
               Dashboard
             </h1>
@@ -84,17 +84,21 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EBF5F5] text-[#003B3B] border border-[#003B3B]/10">
-            <Activity className="w-3.5 h-3.5 text-[#0B6B6B]" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30">
+            <Activity className="w-3.5 h-3.5 text-[#022022]" />
             Kota Semarang • Sistem Aktif
           </span>
         </div>
       </div>
 
       {/* SECTION 2: WELCOME HERO BANNER */}
-      <section className="relative w-full overflow-hidden rounded-3xl bg-[#003B3B] p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(0,59,59,0.15)]">
-        {/* DEKORASI SVG FIGMA */}
-        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+      <section className="relative w-full rounded-3xl bg-[#022022] border border-[#37F4B4]/20 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
+        {/* AMBIENT MINT GLOW ACCENTS */}
+        <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#37F4B4]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -bottom-24 right-1/4 w-96 h-96 rounded-full bg-[#37F4B4]/10 blur-[120px]" />
+
+        {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
           <svg
             className="w-full h-full object-cover"
             preserveAspectRatio="none"
@@ -138,10 +142,10 @@ export default function Dashboard() {
         </div>
 
         {/* KONTEN UTAMA DI LAYER ATAS (z-10) */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Kolom Kiri: Sapaan & Tombol Pill */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-[#37F4B4]/30 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
               <span>Portal Kesehatan Terpadu Kota Semarang</span>
             </div>
@@ -150,14 +154,14 @@ export default function Dashboard() {
               Halo, Nael!
             </h1>
 
-            <p className="text-sm sm:text-base text-teal-100/80 leading-relaxed max-w-xl font-inter">
+            <p className="text-sm sm:text-base text-teal-100/90 leading-relaxed max-w-xl font-inter">
               Temukan fasilitas kesehatan terdekat, pantau antrean terkini secara transparan, atau konsultasikan keluhan awal dengan WARAS AI dalam beberapa detik.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#003B3B] shadow-sm hover:bg-teal-50 transition-all cursor-pointer hover:shadow"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#022022] shadow-sm hover:bg-[#37F4B4] hover:text-[#022022] transition-all cursor-pointer hover:shadow-md"
               >
                 <Search className="w-4 h-4" />
                 <span>Cari Fasilitas Kesehatan</span>
@@ -165,7 +169,7 @@ export default function Dashboard() {
 
               <Link
                 to="/user/ai"
-                className="inline-flex items-center gap-2 rounded-full bg-[#004D4D]/80 border border-teal-400/25 px-5 py-2.5 text-xs sm:text-sm font-medium text-white backdrop-blur-md hover:bg-[#005959] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#022022]/80 border border-[#37F4B4]/40 px-5 py-2.5 text-xs sm:text-sm font-medium text-white backdrop-blur-md hover:bg-[#033033] hover:border-[#37F4B4]/70 transition-all cursor-pointer"
               >
                 <Bot className="w-4 h-4 text-[#37F4B4]" />
                 <span>Konsultasi WARAS AI</span>
@@ -173,12 +177,12 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* KOLOM KANAN: KARTU VISUAL LOGO/ILUSTRASI FIGMA */}
-          <div className="lg:col-span-5 relative overflow-hidden rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-4 shadow-lg min-h-[220px] flex items-center justify-center">
+          {/* KOLOM KANAN: ILUSTRASI / LOGO SVG LANGSUNG MENIMPA CARD UTAMA (TANPA CARD TAMBAHAN) */}
+          <div className="lg:col-span-5 flex items-end justify-center lg:justify-end -mb-6 sm:-mb-8 lg:-mb-10 translate-y-2 pointer-events-none select-none">
             <img
               src={transhumansSvg}
               alt="Ilustrasi Layanan Medis WARAS"
-              className="w-full max-h-[220px] object-contain drop-shadow-md select-none pointer-events-none"
+              className="w-[270px] sm:w-[320px] lg:w-[365px] h-auto object-contain drop-shadow-md"
             />
           </div>
         </div>
@@ -198,19 +202,19 @@ export default function Dashboard() {
               <Link key={idx} to={item.path}>
                 <Card hoverEffect className="h-full flex flex-col justify-between group">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center mb-3 group-hover:bg-[#003B3B] group-hover:text-white transition-all duration-200">
+                    <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-3 group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all duration-200">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <h4 className="font-poppins font-semibold text-base text-[#0D2626] mb-1 group-hover:text-[#003B3B] transition-colors">
+                    <h4 className="font-poppins font-semibold text-base text-[#0D2626] mb-1 group-hover:text-[#022022] transition-colors">
                       {item.title}
                     </h4>
                     <p className="text-xs text-[#526666] leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
-                  <div className="mt-4 flex items-center text-xs font-semibold text-[#003B3B] group-hover:translate-x-1 transition-transform">
+                  <div className="mt-4 flex items-center text-xs font-semibold text-[#022022] group-hover:translate-x-1 transition-transform">
                     <span>Akses Layanan</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-1 text-[#022022] group-hover:text-[#37F4B4]" />
                   </div>
                 </Card>
               </Link>
@@ -273,8 +277,8 @@ export default function Dashboard() {
           {/* KOLOM KIRI: TANYA WARAS AI */}
           <div className="lg:col-span-5 flex flex-col h-full space-y-3">
             <div>
-              <div className="flex items-center gap-2 text-[#003B3B]">
-                <Bot className="w-5 h-5 text-[#003B3B]" />
+              <div className="flex items-center gap-2 text-[#022022]">
+                <Bot className="w-5 h-5 text-[#022022]" />
                 <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">
                   Tanya WARAS AI
                 </h3>
@@ -293,8 +297,8 @@ export default function Dashboard() {
           <div className="lg:col-span-7 flex flex-col h-full space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-2 text-[#003B3B]">
-                  <BookOpen className="w-5 h-5 text-[#003B3B]" />
+                <div className="flex items-center gap-2 text-[#022022]">
+                  <BookOpen className="w-5 h-5 text-[#022022]" />
                   <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">
                     Info Kesehatan Terkini
                   </h3>
@@ -325,8 +329,8 @@ export default function Dashboard() {
 
               {/* STRIP TOPIK POPULER AGAR KETINGGIAN KOLOM KANAN SELARAS SEMPURNA */}
               <div className="p-3.5 rounded-xl bg-white border border-[#E2ECEB] flex flex-wrap items-center justify-between gap-2 shadow-2xs">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#003B3B]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#0B6B6B]" />
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#022022]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
                   <span>Topik Terhangat:</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-1.5">
@@ -334,7 +338,7 @@ export default function Dashboard() {
                     <Link
                       key={idx}
                       to="/user/health-info/articles"
-                      className="px-2.5 py-1 rounded-lg bg-[#EBF5F5] hover:bg-[#DDEEEE] text-[#003B3B] text-[11px] font-medium transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#022022]/5 hover:bg-[#022022] text-[#022022] hover:text-[#37F4B4] border border-transparent hover:border-[#37F4B4]/30 text-[11px] font-medium transition-all"
                     >
                       #{topic}
                     </Link>
@@ -348,25 +352,28 @@ export default function Dashboard() {
       </section>
 
       {/* SECTION 8: COMMUNITY PARTICIPATION / REPORT */}
-      <section className="rounded-2xl bg-[#EBF5F5] border border-[#003B3B]/15 p-6 lg:p-7 shadow-xs">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <section className="rounded-3xl bg-[#022022] border border-[#37F4B4]/20 p-6 lg:p-8 text-white shadow-[0_15px_40px_rgba(2,32,34,0.25)] relative overflow-hidden">
+        {/* Ambient mint glow */}
+        <div className="pointer-events-none absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-[#37F4B4]/10 blur-3xl" />
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-xl bg-[#003B3B] text-white shrink-0 shadow-xs">
-              <Flag className="w-5 h-5 text-[#EBF5F5]" />
+            <div className="p-3.5 rounded-2xl bg-white/10 border border-[#37F4B4]/30 text-[#37F4B4] shrink-0 shadow-inner">
+              <Flag className="w-5 h-5 text-[#37F4B4]" />
             </div>
             <div className="space-y-1">
-              <h3 className="font-poppins font-semibold text-lg text-[#003B3B]">
+              <h3 className="font-poppins font-semibold text-lg text-white">
                 Bantu Kami Menjaga Informasi Tetap Akurat
               </h3>
-              <p className="text-xs lg:text-sm text-[#2B3E3E] leading-relaxed max-w-2xl font-inter">
+              <p className="text-xs lg:text-sm text-teal-100/80 leading-relaxed max-w-2xl font-inter">
                 Menemukan jam operasional yang keliru, nomor telepon tidak aktif, atau perubahan layanan di fasilitas kesehatan? Laporkan untuk pembaruan bersama warga Semarang.
               </p>
             </div>
           </div>
           <Link to="/user/report-problem" className="shrink-0">
-            <Button variant="primary" rightIcon={ArrowRight}>
-              Laporkan Kesalahan
-            </Button>
+            <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#37F4B4] hover:bg-[#4EFEB8] text-[#022022] text-xs sm:text-sm font-semibold shadow-md transition-all cursor-pointer">
+              <span>Laporkan Kesalahan</span>
+              <ArrowRight className="w-4 h-4 text-[#022022]" />
+            </button>
           </Link>
         </div>
       </section>
@@ -374,15 +381,15 @@ export default function Dashboard() {
       {/* SECTION 9: FOOTER */}
       <footer className="pt-6 border-t border-gray-200/60 text-xs text-[#526666] flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <p className="font-semibold text-[#003B3B]">© 2026 WARAS Healthcare Platform • Kota Semarang</p>
+          <p className="font-semibold text-[#022022]">© 2026 WARAS Healthcare Platform • Kota Semarang</p>
           <p className="text-[11px] text-[#809494] mt-0.5">
             Seluruh informasi kesehatan disediakan untuk tujuan edukatif dan tidak menggantikan pemeriksaan dokter secara langsung.
           </p>
         </div>
         <div className="flex items-center gap-4 text-xs font-medium text-[#526666]">
-          <Link to="/user/help" className="hover:text-[#003B3B] transition-colors">Bantuan</Link>
-          <Link to="/user/health-info/articles" className="hover:text-[#003B3B] transition-colors">Artikel</Link>
-          <Link to="/user/facilities" className="hover:text-[#003B3B] transition-colors">Fasilitas</Link>
+          <Link to="/user/help" className="hover:text-[#022022] transition-colors">Bantuan</Link>
+          <Link to="/user/health-info/articles" className="hover:text-[#022022] transition-colors">Artikel</Link>
+          <Link to="/user/facilities" className="hover:text-[#022022] transition-colors">Fasilitas</Link>
         </div>
       </footer>
 

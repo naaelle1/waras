@@ -66,21 +66,42 @@ CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
+  nik TEXT UNIQUE,
+  phone TEXT,
   password_hash TEXT NOT NULL,
   role TEXT DEFAULT 'user',
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME
 );
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_nik ON users(nik);
 
--- 6. Tabel Riwayat Chat AI (Konteks & Percakapan)
+-- 6. Tabel Sesi Percakapan AI
+CREATE TABLE IF NOT EXISTS ai_conversations (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER,
+  title TEXT NOT NULL,
+  is_pinned INTEGER DEFAULT 0,
+  category TEXT DEFAULT 'today',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_ai_conversations_user ON ai_conversations(user_id);
+
+-- 7. Tabel Riwayat Chat AI (Konteks & Percakapan)
 CREATE TABLE IF NOT EXISTS chat_history (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   session_id TEXT NOT NULL,
   sender TEXT NOT NULL,
   message TEXT NOT NULL,
+  message_type TEXT DEFAULT 'general',
+  related_article_ids TEXT,
+  show_facility_cta INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+CREATE INDEX IF NOT EXISTS idx_chat_history_session ON chat_history(session_id);
 
--- 7. Tabel Istilah Medis A-Z (1.485 Istilah Medis Terintegrasi)
+-- 8. Tabel Istilah Medis A-Z (1.485 Istilah Medis Terintegrasi)
 CREATE TABLE IF NOT EXISTS medical_terms (
   id INTEGER PRIMARY KEY,
   term TEXT NOT NULL,

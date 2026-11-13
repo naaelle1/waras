@@ -13,11 +13,11 @@ export default function TrustSection() {
           
           {/* Header Badge */}
           <div className="text-center max-w-xl mx-auto mb-10 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DDF8EC] text-[#006B5E] text-xs font-semibold mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] text-xs font-semibold mb-3">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Standar Keamanan Informasi</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#062F2F] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#022022] tracking-tight">
               Komitmen Layanan & Akurasi
             </h2>
             <p className="mt-2 text-[#647777] text-xs sm:text-sm font-normal">
@@ -34,12 +34,12 @@ export default function TrustSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.12 }}
-                className="space-y-2.5 p-4 rounded-2xl bg-[#F6FAF9]/60 border border-transparent hover:border-[#8FE3C1]/50 hover:bg-white transition-all"
+                className="space-y-2.5 p-4 rounded-2xl bg-[#F6FAF9]/60 border border-transparent hover:border-[#37F4B4]/40 hover:bg-white transition-all"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#DDF8EC] text-[#006B5E] flex items-center justify-center font-bold">
+                <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] flex items-center justify-center font-bold">
                   <Check className="w-5 h-5 stroke-[2.5]" />
                 </div>
-                <h3 className="text-base font-bold text-[#062F2F] leading-snug">
+                <h3 className="text-base font-bold text-[#022022] leading-snug">
                   {point.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#647777] leading-relaxed">
@@ -51,12 +51,12 @@ export default function TrustSection() {
 
           {/* MEDICAL DISCLAIMER BANNER */}
           <div className="mt-10 pt-8 border-t border-[#F0F5F4]">
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#E6F4F1]/60 border border-[#8FE3C1]/40 flex items-start sm:items-center gap-3.5">
-              <div className="w-8 h-8 rounded-xl bg-[#006B5E] text-white flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#E6F4F1]/60 border border-[#37F4B4]/40 flex items-start sm:items-center gap-3.5">
+              <div className="w-8 h-8 rounded-xl bg-[#022022] text-[#37F4B4] flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                 <Info className="w-4 h-4" />
               </div>
               <div className="flex-1">
-                <p className="text-xs sm:text-sm text-[#003B3B] font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#022022] font-medium leading-relaxed">
                   <span className="font-bold">Pemberitahuan Medis: </span>
                   WARAS menyediakan informasi kesehatan dan tidak menggantikan diagnosis atau konsultasi langsung dengan dokter dan tenaga medis.
                 </p>

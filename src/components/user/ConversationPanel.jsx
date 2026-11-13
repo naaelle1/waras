@@ -52,18 +52,18 @@ export default function ConversationPanel({
         className={clsx(
           "w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-inter text-xs transition-all cursor-pointer",
           isActive
-            ? "bg-[#E6F0F0]/80 text-[#003B3B] font-semibold border border-[#003B3B]/10 shadow-2xs"
+            ? "bg-[#022022]/10 text-[#022022] font-semibold border border-[#37F4B4]/30 shadow-2xs"
             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
         )}
       >
         <div className="flex items-center gap-2.5 min-w-0 pr-2">
           {chat.isPinned ? (
-            <Bookmark className="w-3.5 h-3.5 text-[#003B3B] shrink-0 fill-[#003B3B]/20" />
+            <Bookmark className="w-3.5 h-3.5 text-[#022022] shrink-0 fill-[#37F4B4]/30" />
           ) : (
             <MessageSquare
               className={clsx(
                 "w-3.5 h-3.5 shrink-0 transition-colors",
-                isActive ? "text-[#003B3B]" : "text-slate-400 group-hover/item:text-slate-600"
+                isActive ? "text-[#022022]" : "text-slate-400 group-hover/item:text-slate-600"
               )}
             />
           )}
@@ -97,7 +97,7 @@ export default function ConversationPanel({
             }}
             className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
           >
-            <Pin className="w-3.5 h-3.5 text-[#003B3B]" />
+            <Pin className="w-3.5 h-3.5 text-[#022022]" />
             <span>{chat.isPinned ? "Lepas Pin" : "Sematkan Chat"}</span>
           </button>
           <button
@@ -173,7 +173,7 @@ export default function ConversationPanel({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari percakapan..."
-                className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#003B3B] font-inter"
+                className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/25 font-inter"
                 autoFocus
               />
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
@@ -196,9 +196,9 @@ export default function ConversationPanel({
               onNewConversation();
               onCloseMobile();
             }}
-            className="w-full bg-[#003B3B] hover:bg-[#002A2A] text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all"
+            className="w-full bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold py-2.5 px-4 rounded-full flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all group"
           >
-            <SquarePen className="w-4 h-4" />
+            <SquarePen className="w-4 h-4 text-[#37F4B4]" />
             <span>+ Percakapan Baru</span>
           </button>
         </div>
@@ -215,7 +215,7 @@ export default function ConversationPanel({
               {pinnedConversations.length > 0 && (
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-1.5 px-2 text-[10px] font-bold tracking-wider uppercase text-slate-400 font-poppins">
-                    <Bookmark className="w-3 h-3 text-[#003B3B]" />
+                    <Bookmark className="w-3 h-3 text-[#022022]" />
                     <span>Disimpan / Penting</span>
                   </div>
                   <div className="space-y-1">

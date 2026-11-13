@@ -36,14 +36,14 @@ export default function FacilitiesSection() {
           
           {/* LEFT: EDITORIAL HEADLINE & FILTER */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6FEFF] border border-[#014751]/15 text-[#014751] text-xs font-medium">
-              <Compass className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 text-[#022022] text-xs font-medium">
+              <Compass className="w-3.5 h-3.5 text-[#022022]" />
               <span>Peta Wilayah Semarang</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl lg:text-[50px] font-light text-[#022022] leading-[1.12] tracking-tight">
               Fasilitas Kesehatan, <br />
-              <span className="font-normal text-[#014751]">
+              <span className="font-normal text-[#022022]">
                 Siaga & Terhubung Langsung.
               </span>
             </h2>
@@ -58,8 +58,8 @@ export default function FacilitiesSection() {
                 onClick={() => setFilterType("all")}
                 className={`px-4 py-1.5 rounded-full font-medium transition-all ${
                   filterType === "all"
-                    ? "bg-[#014751] text-white shadow-xs"
-                    : "bg-[#E6FEFF]/70 text-[#022022]/70 hover:text-[#014751] hover:bg-[#E6FEFF]"
+                    ? "bg-[#022022] text-[#37F4B4] shadow-xs"
+                    : "bg-[#022022]/5 text-[#022022]/70 hover:text-[#022022] hover:bg-[#022022]/10"
                 }`}
               >
                 Semua Faskes
@@ -68,8 +68,8 @@ export default function FacilitiesSection() {
                 onClick={() => setFilterType("rs")}
                 className={`px-4 py-1.5 rounded-full font-medium transition-all ${
                   filterType === "rs"
-                    ? "bg-[#014751] text-white shadow-xs"
-                    : "bg-[#E6FEFF]/70 text-[#022022]/70 hover:text-[#014751] hover:bg-[#E6FEFF]"
+                    ? "bg-[#022022] text-[#37F4B4] shadow-xs"
+                    : "bg-[#022022]/5 text-[#022022]/70 hover:text-[#022022] hover:bg-[#022022]/10"
                 }`}
               >
                 Rumah Sakit
@@ -78,8 +78,8 @@ export default function FacilitiesSection() {
                 onClick={() => setFilterType("puskesmas")}
                 className={`px-4 py-1.5 rounded-full font-medium transition-all ${
                   filterType === "puskesmas"
-                    ? "bg-[#014751] text-white shadow-xs"
-                    : "bg-[#E6FEFF]/70 text-[#022022]/70 hover:text-[#014751] hover:bg-[#E6FEFF]"
+                    ? "bg-[#022022] text-[#37F4B4] shadow-xs"
+                    : "bg-[#022022]/5 text-[#022022]/70 hover:text-[#022022] hover:bg-[#022022]/10"
                 }`}
               >
                 Puskesmas
@@ -89,7 +89,7 @@ export default function FacilitiesSection() {
             <div className="pt-2">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#014751] text-white text-xs sm:text-sm font-medium hover:bg-[#022022] active:scale-95 transition-all shadow-md shadow-[#014751]/20 group"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs sm:text-sm font-medium active:scale-95 transition-all shadow-md shadow-[#022022]/20 group"
               >
                 <span>Buka Peta Faskes Lengkap</span>
                 <ArrowRight className="w-4 h-4 text-[#37F4B4] transition-transform group-hover:translate-x-1" />
@@ -97,13 +97,13 @@ export default function FacilitiesSection() {
             </div>
 
             {/* Clean Trust points */}
-            <div className="pt-4 border-t border-[#014751]/10 flex flex-wrap items-center gap-4 text-xs font-light text-[#022022]/70">
+            <div className="pt-4 border-t border-[#022022]/10 flex flex-wrap items-center gap-4 text-xs font-light text-[#022022]/70">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#014751]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#022022]" />
                 Sinkronisasi Resmi Dinkes
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#014751]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#022022]" />
                 Navigasi GPS & Jarak Rute
               </span>
             </div>
@@ -111,29 +111,29 @@ export default function FacilitiesSection() {
 
           {/* RIGHT: BRIGHT & CRISP VECTOR MAP VIEWPORT */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-white border border-[#014751]/15 shadow-[0_20px_50px_rgba(2,32,34,0.06)] overflow-hidden relative">
+            <div className="rounded-3xl bg-white border border-[#37F4B4]/20 shadow-[0_20px_50px_rgba(2,32,34,0.06)] overflow-hidden relative">
               
               {/* Map Bar Header (Bright Crisp Clean) */}
-              <div className="px-5 py-3.5 bg-[#E6FEFF]/80 border-b border-[#014751]/10 flex items-center justify-between text-[#022022]">
+              <div className="px-5 py-3.5 bg-[#022022]/5 border-b border-[#022022]/10 flex items-center justify-between text-[#022022]">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#37F4B4] shadow-[0_0_8px_#37F4B4] animate-pulse" />
-                  <span className="text-xs font-medium tracking-wide text-[#014751]">
+                  <span className="text-xs font-medium tracking-wide text-[#022022]">
                     Peta Interaktif Layanan Kesehatan Semarang
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#014751] bg-white px-2.5 py-0.5 rounded-full border border-[#014751]/10">
+                <span className="text-[10px] font-mono text-[#022022] bg-white px-2.5 py-0.5 rounded-full border border-[#37F4B4]/20">
                   37 Titik Faskes
                 </span>
               </div>
 
               {/* Vector Map Viewport (Bright Style) */}
-              <div className="relative w-full h-[380px] sm:h-[440px] bg-gradient-to-b from-[#E6FEFF]/20 via-white to-[#E6FEFF]/30 overflow-hidden select-none">
+              <div className="relative w-full h-[380px] sm:h-[440px] bg-gradient-to-b from-[#022022]/5 via-white to-[#022022]/10 overflow-hidden select-none">
                 
                 {/* Subtle Coordinate Grid Overlay */}
                 <div
                   className="absolute inset-0 opacity-[0.06] pointer-events-none"
                   style={{
-                    backgroundImage: `linear-gradient(#014751 1px, transparent 1px), linear-gradient(90deg, #014751 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(#37F4B4 1px, transparent 1px), linear-gradient(90deg, #37F4B4 1px, transparent 1px)`,
                     backgroundSize: "36px 36px",
                   }}
                 />
@@ -144,10 +144,10 @@ export default function FacilitiesSection() {
                   viewBox="0 0 800 500"
                   preserveAspectRatio="none"
                 >
-                  <path d="M 0 90 Q 220 120 400 80 T 800 100 L 800 0 L 0 0 Z" fill="#E6FEFF" />
-                  <path d="M 100 110 C 260 240, 390 190, 530 270 S 710 390, 770 460" stroke="#014751" strokeWidth="2.5" fill="none" strokeDasharray="6 4" />
-                  <path d="M 40 330 C 190 270, 410 310, 590 230 S 710 170, 780 140" stroke="#014751" strokeWidth="1.8" fill="none" opacity="0.5" />
-                  <circle cx="410" cy="240" r="160" stroke="#014751" strokeWidth="1" fill="none" opacity="0.15" />
+                  <path d="M 0 90 Q 220 120 400 80 T 800 100 L 800 0 L 0 0 Z" fill="#022022" opacity="0.05" />
+                  <path d="M 100 110 C 260 240, 390 190, 530 270 S 710 390, 770 460" stroke="#022022" strokeWidth="2.5" fill="none" strokeDasharray="6 4" />
+                  <path d="M 40 330 C 190 270, 410 310, 590 230 S 710 170, 780 140" stroke="#022022" strokeWidth="1.8" fill="none" opacity="0.5" />
+                  <circle cx="410" cy="240" r="160" stroke="#022022" strokeWidth="1" fill="none" opacity="0.15" />
                 </svg>
 
                 {/* ANIMATED LOCATION PINS */}
@@ -165,8 +165,8 @@ export default function FacilitiesSection() {
                         <div
                           className={`w-7 h-7 rounded-full flex items-center justify-center shadow-md transition-all ${
                             isSelected
-                              ? "bg-[#014751] text-[#37F4B4] ring-4 ring-[#E6FEFF] scale-110"
-                              : "bg-white text-[#014751] border border-[#014751]/20 hover:bg-[#014751] hover:text-white"
+                              ? "bg-[#022022] text-[#37F4B4] ring-4 ring-[#37F4B4]/30 scale-110"
+                              : "bg-white text-[#022022] border border-[#022022]/20 hover:bg-[#022022] hover:text-[#37F4B4]"
                           }`}
                         >
                           <MapPin className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -182,13 +182,13 @@ export default function FacilitiesSection() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     key={filtered[activePin].name}
-                    className="absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs p-4 rounded-2xl bg-white border border-[#014751]/15 shadow-xl z-30"
+                    className="absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs p-4 rounded-2xl bg-white border border-[#37F4B4]/20 shadow-xl z-30"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="px-2.5 py-0.5 rounded-full bg-[#E6FEFF] text-[#014751] text-[10px] font-medium border border-[#014751]/15">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#022022]/10 text-[#022022] text-[10px] font-medium border border-[#37F4B4]/25">
                         {filtered[activePin].type}
                       </span>
-                      <span className="text-[10px] font-medium text-[#014751] flex items-center gap-1">
+                      <span className="text-[10px] font-medium text-[#022022] flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
                         IGD 24 Jam Siaga
                       </span>
@@ -201,13 +201,13 @@ export default function FacilitiesSection() {
                       Wilayah: {filtered[activePin].zone}
                     </p>
 
-                    <div className="mt-3 pt-2.5 border-t border-[#014751]/10 flex items-center justify-between">
-                      <span className="text-xs font-normal text-[#014751] font-mono">
+                    <div className="mt-3 pt-2.5 border-t border-[#022022]/10 flex items-center justify-between">
+                      <span className="text-xs font-normal text-[#022022] font-mono">
                         {filtered[activePin].dist}
                       </span>
                       <Link
                         to="/user/facilities"
-                        className="inline-flex items-center gap-1 text-[11px] font-medium text-[#014751] hover:text-[#022022]"
+                        className="inline-flex items-center gap-1 text-[11px] font-medium text-[#022022] hover:text-[#033033]"
                       >
                         <span>Arahkan Rute</span>
                         <Navigation className="w-3 h-3 text-[#37F4B4]" />

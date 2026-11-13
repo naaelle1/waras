@@ -18,17 +18,17 @@ export default function HealthGuideSection() {
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
-            <span className="text-xs font-poppins font-bold text-[#003B3B] uppercase tracking-wider px-3 py-1 rounded-full bg-[#003B3B]/10">
+            <span className="text-xs font-poppins font-bold text-[#022022] uppercase tracking-wider px-3 py-1 rounded-full bg-[#022022]/10 border border-[#37F4B4]/25">
               Pertolongan Pertama
             </span>
-            <h2 className="font-poppins font-bold text-2xl sm:text-4xl text-[#062C2C]">
+            <h2 className="font-poppins font-bold text-2xl sm:text-4xl text-[#022022]">
               Panduan Kesehatan Situasi Sehari-hari
             </h2>
           </div>
 
           <Link
             to="/user/dashboard"
-            className="inline-flex items-center gap-2 text-xs font-poppins font-bold text-[#003B3B] hover:underline cursor-pointer shrink-0"
+            className="inline-flex items-center gap-2 text-xs font-poppins font-bold text-[#022022] hover:underline cursor-pointer shrink-0"
           >
             <span>Lihat Semua Panduan</span>
             <ArrowRight className="w-4 h-4" />
@@ -47,15 +47,15 @@ export default function HealthGuideSection() {
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="p-3 rounded-2xl bg-[#003B3B]/10 text-[#003B3B] group-hover:bg-[#003B3B] group-hover:text-white transition-colors">
+                    <div className="p-3 rounded-2xl bg-[#022022]/10 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-colors">
                       <IconComp className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-poppins font-bold px-2.5 py-0.5 rounded-full bg-gray-200/60 text-[#062C2C]">
+                    <span className="text-[10px] font-poppins font-bold px-2.5 py-0.5 rounded-full bg-gray-200/60 text-[#022022]">
                       {guide.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-poppins font-bold text-base text-[#062C2C] group-hover:text-[#003B3B] transition-colors">
+                  <h3 className="font-poppins font-bold text-base text-[#022022] group-hover:text-[#022022] transition-colors">
                     {guide.title}
                   </h3>
 
@@ -64,7 +64,7 @@ export default function HealthGuideSection() {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-poppins font-bold text-[#003B3B]">
+                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-poppins font-bold text-[#022022]">
                   <span>Baca Langkah</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </div>

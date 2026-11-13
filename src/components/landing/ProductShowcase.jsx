@@ -43,17 +43,17 @@ export default function ProductShowcase() {
   return (
     <section id="showcase" className="py-20 lg:py-28 px-4 sm:px-6 relative overflow-hidden bg-[#F6FAF9]">
       {/* Background glow */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-radial from-[#8FE3C1]/20 via-transparent to-transparent blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-radial from-[#37F4B4]/20 via-transparent to-transparent blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto">
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DDF8EC] text-[#006B5E] text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Interactive Product Experience</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#062F2F] tracking-tight leading-[1.2]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#022022] tracking-tight leading-[1.2]">
             Lihat Cara Kerja WARAS Secara Nyata.
           </h2>
           <p className="mt-3 text-[#647777] text-sm sm:text-base font-normal max-w-lg mx-auto">
@@ -74,7 +74,7 @@ export default function ProductShowcase() {
                   onClick={() => setActiveSlide(index)}
                   className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl cursor-pointer transition-all duration-300 border text-left ${
                     isActive
-                      ? "bg-white border-[#8FE3C1] shadow-[0_12px_32px_rgba(0,59,59,0.08)] scale-[1.02]"
+                      ? "bg-white border-[#37F4B4] shadow-[0_12px_32px_rgba(2,32,34,0.08)] scale-[1.02]"
                       : "bg-white/60 border-transparent hover:bg-white/80 hover:border-[#E2ECEB]"
                   }`}
                 >
@@ -82,20 +82,20 @@ export default function ProductShowcase() {
                     <span
                       className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full ${
                         isActive
-                          ? "bg-[#DDF8EC] text-[#006B5E]"
+                          ? "bg-[#022022]/10 text-[#022022]"
                           : "bg-gray-100 text-gray-500"
                       }`}
                     >
                       0{index + 1}
                     </span>
-                    <span className="text-[11px] font-semibold text-[#006B5E]">
+                    <span className="text-[11px] font-semibold text-[#022022]">
                       {slide.badge}
                     </span>
                   </div>
 
                   <h3
                     className={`text-base sm:text-lg font-bold transition-colors ${
-                      isActive ? "text-[#003B3B]" : "text-[#062F2F]"
+                      isActive ? "text-[#022022]" : "text-[#022022]/80"
                     }`}
                   >
                     {slide.title}
@@ -106,7 +106,7 @@ export default function ProductShowcase() {
                   </p>
 
                   {isActive && (
-                    <div className="mt-3.5 pt-3 border-t border-[#F0F5F4] flex items-center justify-between text-xs font-semibold text-[#003B3B]">
+                    <div className="mt-3.5 pt-3 border-t border-[#F0F5F4] flex items-center justify-between text-xs font-semibold text-[#022022]">
                       <span>Sedang Ditampilkan</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
@@ -118,10 +118,10 @@ export default function ProductShowcase() {
 
           {/* RIGHT COLUMN: DYNAMIC PRODUCT UI MOCKUP WINDOW */}
           <div className="lg:col-span-7 sticky top-24">
-            <div className="rounded-3xl bg-white border border-[#E2ECEB] shadow-[0_20px_50px_rgba(0,59,59,0.1)] overflow-hidden">
+            <div className="rounded-3xl bg-white border border-[#E2ECEB] shadow-[0_20px_50px_rgba(2,32,34,0.1)] overflow-hidden">
               
               {/* Window Header / Browser Bar */}
-              <div className="px-5 py-3.5 bg-[#003B3B] text-white flex items-center justify-between border-b border-emerald-950/20">
+              <div className="px-5 py-3.5 bg-[#022022] text-white flex items-center justify-between border-b border-emerald-950/20">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-400/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
@@ -130,8 +130,8 @@ export default function ProductShowcase() {
                     waras.semarangkota.go.id / {productShowcaseSlides[activeSlide].id}
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-[#8FE3C1] font-bold bg-white/10 px-2.5 py-1 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FE3C1] animate-pulse" />
+                <div className="flex items-center gap-1.5 text-[10px] text-[#37F4B4] font-bold bg-white/10 px-2.5 py-1 rounded-full border border-[#37F4B4]/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
                   Live Preview
                 </div>
               </div>
@@ -151,11 +151,11 @@ export default function ProductShowcase() {
                     >
                       <div className="flex items-center justify-between pb-3 border-b border-[#F0F5F4]">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-xl bg-[#003B3B] text-[#8FE3C1] flex items-center justify-center font-bold text-xs">
+                          <div className="w-8 h-8 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 flex items-center justify-center font-bold text-xs">
                             <Bot className="w-4 h-4" />
                           </div>
                           <div>
-                            <h4 className="text-xs font-bold text-[#062F2F]">WARAS AI Consultant</h4>
+                            <h4 className="text-xs font-bold text-[#022022]">WARAS AI Consultant</h4>
                             <p className="text-[10px] text-[#647777]">Asisten Cerdas Penanganan Awal</p>
                           </div>
                         </div>
@@ -174,8 +174,8 @@ export default function ProductShowcase() {
                             <div
                               className={`max-w-[85%] p-3.5 rounded-2xl ${
                                 msg.sender === "user"
-                                  ? "bg-[#003B3B] text-white rounded-tr-xs"
-                                  : "bg-[#F6FAF9] border border-[#E2ECEB] text-[#062F2F] rounded-tl-xs"
+                                  ? "bg-[#022022] text-white rounded-tr-xs border border-[#37F4B4]/20"
+                                  : "bg-[#F6FAF9] border border-[#E2ECEB] text-[#022022] rounded-tl-xs"
                               }`}
                             >
                               <p className="leading-relaxed">{msg.text}</p>
@@ -211,7 +211,7 @@ export default function ProductShowcase() {
                                   },
                                 ]);
                               }}
-                              className="px-2.5 py-1 rounded-full bg-[#F6FAF9] hover:bg-[#DDF8EC] hover:text-[#006B5E] text-[#062F2F] text-[11px] font-medium border border-[#E2ECEB] transition-colors"
+                              className="px-2.5 py-1 rounded-full bg-[#F6FAF9] hover:bg-[#022022]/10 hover:text-[#022022] text-[#022022] text-[11px] font-medium border border-[#E2ECEB] transition-colors"
                             >
                               + {prompt}
                             </button>
@@ -228,7 +228,7 @@ export default function ProductShowcase() {
                         />
                         <Link
                           to="/user/ai"
-                          className="px-3.5 py-2 rounded-xl bg-[#003B3B] text-white text-xs font-bold flex items-center gap-1 hover:bg-[#006B5E] transition-colors"
+                          className="px-3.5 py-2 rounded-xl bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-bold flex items-center gap-1 hover:bg-[#033033] transition-colors"
                         >
                           <span>Kirim</span>
                           <Send className="w-3.5 h-3.5" />
@@ -250,17 +250,17 @@ export default function ProductShowcase() {
                       {/* Search & Filter Header */}
                       <div className="flex gap-2">
                         <div className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl bg-[#F6FAF9] border border-[#E2ECEB] text-xs">
-                          <Search className="w-3.5 h-3.5 text-[#006B5E]" />
-                          <span className="text-[#062F2F] font-medium">Semarang Tengah & Selatan</span>
+                          <Search className="w-3.5 h-3.5 text-[#022022]" />
+                          <span className="text-[#022022] font-medium">Semarang Tengah & Selatan</span>
                         </div>
-                        <span className="px-3 py-2 rounded-xl bg-[#DDF8EC] text-[#006B5E] text-xs font-bold">
+                        <span className="px-3 py-2 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 text-xs font-bold">
                           3 Faskes Dekat
                         </span>
                       </div>
 
                       {/* Filter Badges */}
                       <div className="flex gap-1.5 text-[11px]">
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#003B3B] text-white font-medium">
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#022022] text-[#37F4B4] font-medium">
                           Semua Faskes
                         </span>
                         <span className="px-2.5 py-0.5 rounded-full bg-gray-100 text-[#647777] font-medium">
@@ -273,14 +273,14 @@ export default function ProductShowcase() {
 
                       {/* Mockup Facility List */}
                       <div className="space-y-2.5">
-                        <div className="p-3.5 rounded-2xl bg-[#F6FAF9] border border-[#8FE3C1]/50 flex items-center justify-between">
+                        <div className="p-3.5 rounded-2xl bg-[#F6FAF9] border border-[#37F4B4]/30 flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-[#DDF8EC] text-[#006B5E] flex items-center justify-center font-bold">
+                            <div className="w-10 h-10 rounded-xl bg-[#022022]/10 text-[#022022] flex items-center justify-center font-bold">
                               <Hospital className="w-5 h-5" />
                             </div>
                             <div>
                               <div className="flex items-center gap-1.5">
-                                <h4 className="text-xs font-bold text-[#062F2F]">RSUP Dr. Kariadi</h4>
+                                <h4 className="text-xs font-bold text-[#022022]">RSUP Dr. Kariadi</h4>
                                 <span className="px-1.5 py-0.5 rounded-sm bg-emerald-100 text-emerald-800 text-[9px] font-bold">
                                   Tipe A
                                 </span>
@@ -292,10 +292,10 @@ export default function ProductShowcase() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className="text-xs font-bold text-[#003B3B] block">1.8 km</span>
+                            <span className="text-xs font-bold text-[#022022] block">1.8 km</span>
                             <Link
                               to="/user/facilities"
-                              className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold text-[#006B5E] hover:underline"
+                              className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold text-[#022022] hover:underline"
                             >
                               <span>Rute</span>
                               <Navigation className="w-2.5 h-2.5" />
@@ -305,12 +305,12 @@ export default function ProductShowcase() {
 
                         <div className="p-3.5 rounded-2xl bg-[#F6FAF9] border border-[#E2ECEB] flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-white border border-[#E2ECEB] text-[#003B3B] flex items-center justify-center font-bold">
+                            <div className="w-10 h-10 rounded-xl bg-white border border-[#E2ECEB] text-[#022022] flex items-center justify-center font-bold">
                               <Hospital className="w-5 h-5" />
                             </div>
                             <div>
                               <div className="flex items-center gap-1.5">
-                                <h4 className="text-xs font-bold text-[#062F2F]">Puskesmas Pandanaran</h4>
+                                <h4 className="text-xs font-bold text-[#022022]">Puskesmas Pandanaran</h4>
                                 <span className="px-1.5 py-0.5 rounded-sm bg-blue-100 text-blue-800 text-[9px] font-bold">
                                   Tingkat 1
                                 </span>
@@ -322,10 +322,10 @@ export default function ProductShowcase() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className="text-xs font-bold text-[#003B3B] block">1.1 km</span>
+                            <span className="text-xs font-bold text-[#022022] block">1.1 km</span>
                             <Link
                               to="/user/facilities"
-                              className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold text-[#006B5E] hover:underline"
+                              className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold text-[#022022] hover:underline"
                             >
                               <span>Rute</span>
                               <Navigation className="w-2.5 h-2.5" />
@@ -337,7 +337,7 @@ export default function ProductShowcase() {
                       <div className="pt-2">
                         <Link
                           to="/user/facilities"
-                          className="w-full py-2.5 rounded-xl bg-[#003B3B] text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#006B5E] transition-colors"
+                          className="w-full py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                         >
                           <span>Buka Peta Interaktif Lengkap</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -358,10 +358,10 @@ export default function ProductShowcase() {
                     >
                       <div className="flex items-center justify-between pb-3 border-b border-[#F0F5F4]">
                         <div className="flex items-center gap-2">
-                          <BookOpen className="w-4 h-4 text-[#006B5E]" />
-                          <h4 className="text-xs font-bold text-[#062F2F]">Artikel & Glosarium Terkurasi</h4>
+                          <BookOpen className="w-4 h-4 text-[#022022]" />
+                          <h4 className="text-xs font-bold text-[#022022]">Artikel & Glosarium Terkurasi</h4>
                         </div>
-                        <span className="text-[10px] text-[#006B5E] font-bold bg-[#DDF8EC] px-2.5 py-0.5 rounded-full">
+                        <span className="text-[10px] text-[#022022] font-bold bg-[#022022]/10 border border-[#37F4B4]/25 px-2.5 py-0.5 rounded-full">
                           Dokter Reviewed
                         </span>
                       </div>
@@ -374,7 +374,7 @@ export default function ProductShowcase() {
                             </span>
                             <span className="text-[10px] text-[#647777]">3 menit baca</span>
                           </div>
-                          <h5 className="text-sm font-bold text-[#062F2F]">
+                          <h5 className="text-sm font-bold text-[#022022]">
                             Pertolongan Pertama Tersedak: Manuver Heimlich yang Benar
                           </h5>
                           <p className="text-xs text-[#647777] leading-relaxed">
@@ -389,7 +389,7 @@ export default function ProductShowcase() {
                             </span>
                             <span className="text-[10px] text-[#647777]">4 menit baca</span>
                           </div>
-                          <h5 className="text-sm font-bold text-[#062F2F]">
+                          <h5 className="text-sm font-bold text-[#022022]">
                             Fase Kritis Demam Berdarah dan Gejala yang Wajib Diwaspadai
                           </h5>
                           <p className="text-xs text-[#647777] leading-relaxed">
@@ -401,7 +401,7 @@ export default function ProductShowcase() {
                       <div className="pt-2">
                         <Link
                           to="/user/health-info/articles"
-                          className="w-full py-2.5 rounded-xl bg-[#003B3B] text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#006B5E] transition-colors"
+                          className="w-full py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                         >
                           <span>Jelajahi Arsip Artikel Kesehatan</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -422,8 +422,8 @@ export default function ProductShowcase() {
                     >
                       <div className="flex items-center justify-between pb-3 border-b border-[#F0F5F4]">
                         <div className="flex items-center gap-2">
-                          <ShieldCheck className="w-4 h-4 text-[#006B5E]" />
-                          <h4 className="text-xs font-bold text-[#062F2F]">Alur Panduan Rujukan & BPJS</h4>
+                          <ShieldCheck className="w-4 h-4 text-[#022022]" />
+                          <h4 className="text-xs font-bold text-[#022022]">Alur Panduan Rujukan & BPJS</h4>
                         </div>
                         <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
                           SOP Terverifikasi
@@ -433,45 +433,45 @@ export default function ProductShowcase() {
                       {/* Workflow steps */}
                       <div className="space-y-2.5">
                         <div className="p-3 rounded-xl bg-[#F6FAF9] border border-[#E2ECEB] flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-lg bg-[#003B3B] text-white flex items-center justify-center font-bold text-xs shrink-0">
+                          <div className="w-7 h-7 rounded-lg bg-[#022022] text-[#37F4B4] flex items-center justify-center font-bold text-xs shrink-0">
                             1
                           </div>
                           <div>
-                            <h5 className="text-xs font-bold text-[#062F2F]">Kunjungan FKTP (Faskes Tingkat 1)</h5>
+                            <h5 className="text-xs font-bold text-[#022022]">Kunjungan FKTP (Faskes Tingkat 1)</h5>
                             <p className="text-[11px] text-[#647777]">Datangi Puskesmas/Klinik terdaftar dengan membawa KTP & KIS.</p>
                           </div>
                         </div>
 
                         <div className="p-3 rounded-xl bg-[#F6FAF9] border border-[#E2ECEB] flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-lg bg-[#006B5E] text-white flex items-center justify-center font-bold text-xs shrink-0">
+                          <div className="w-7 h-7 rounded-lg bg-[#022022] text-[#37F4B4] flex items-center justify-center font-bold text-xs shrink-0">
                             2
                           </div>
                           <div>
-                            <h5 className="text-xs font-bold text-[#062F2F]">Pemeriksaan & Surat Rujukan</h5>
+                            <h5 className="text-xs font-bold text-[#022022]">Pemeriksaan & Surat Rujukan</h5>
                             <p className="text-[11px] text-[#647777]">Bila memerlukan spesialis, dokter faskes 1 menerbitkan surat rujukan berjenjang.</p>
                           </div>
                         </div>
 
                         <div className="p-3 rounded-xl bg-[#F6FAF9] border border-[#E2ECEB] flex items-center gap-3">
-                          <div className="w-7 h-7 rounded-lg bg-[#8FE3C1] text-[#003B3B] flex items-center justify-center font-bold text-xs shrink-0">
+                          <div className="w-7 h-7 rounded-lg bg-[#37F4B4] text-[#022022] flex items-center justify-center font-bold text-xs shrink-0">
                             3
                           </div>
                           <div>
-                            <h5 className="text-xs font-bold text-[#062F2F]">Kunjungan Rumah Sakit Lanjutan</h5>
+                            <h5 className="text-xs font-bold text-[#022022]">Kunjungan Rumah Sakit Lanjutan</h5>
                             <p className="text-[11px] text-[#647777]">Tunjukkan barcode rujukan di loket pendaftaran RS rujukan yang ditunjuk.</p>
                           </div>
                         </div>
                       </div>
 
                       {/* Emergency Callout */}
-                      <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#003B3B] to-[#004D4D] text-white flex items-center justify-between">
+                      <div className="p-3.5 rounded-2xl bg-[#022022] border border-[#37F4B4]/25 text-white flex items-center justify-between">
                         <div>
-                          <p className="text-xs font-bold text-[#8FE3C1]">Kondisi Gawat Darurat?</p>
+                          <p className="text-xs font-bold text-[#37F4B4]">Kondisi Gawat Darurat?</p>
                           <p className="text-[10px] text-emerald-100/80">Langsung ke IGD RS terdekat tanpa surat rujukan.</p>
                         </div>
                         <a
                           href="tel:119"
-                          className="px-3 py-1.5 rounded-lg bg-[#8FE3C1] text-[#003B3B] text-xs font-bold flex items-center gap-1 shrink-0"
+                          className="px-3 py-1.5 rounded-lg bg-[#37F4B4] text-[#022022] text-xs font-bold flex items-center gap-1 shrink-0"
                         >
                           <PhoneCall className="w-3.5 h-3.5" />
                           <span>119</span>
@@ -489,7 +489,7 @@ export default function ProductShowcase() {
                   </span>
                   <Link
                     to="/user/dashboard"
-                    className="font-bold text-[#003B3B] hover:text-[#006B5E] transition-colors"
+                    className="font-bold text-[#022022] hover:text-[#033033] transition-colors"
                   >
                     Buka Dashboard →
                   </Link>

@@ -41,11 +41,11 @@ export default function ArticleDetail() {
     <div className="space-y-8 pb-16 max-w-5xl mx-auto">
       {/* BREADCRUMB */}
       <nav className="flex items-center gap-2 text-xs font-medium text-[#526666]">
-        <Link to="/user/dashboard" className="hover:text-[#003B3B] transition-colors">
+        <Link to="/user/dashboard" className="hover:text-[#022022] transition-colors">
           Dashboard
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-        <Link to="/user/health-info/articles" className="hover:text-[#003B3B] transition-colors">
+        <Link to="/user/health-info/articles" className="hover:text-[#022022] transition-colors">
           Artikel Kesehatan
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
@@ -58,7 +58,7 @@ export default function ArticleDetail() {
       <div className="flex items-center justify-between">
         <Link
           to="/user/health-info/articles"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#003B3B] hover:text-[#002D2D] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#022022] hover:text-[#033033] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Daftar Artikel</span>
@@ -72,7 +72,7 @@ export default function ArticleDetail() {
               alert("Tautan artikel berhasil disalin!");
             }
           }}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#E2ECEB] text-xs font-medium text-[#526666] hover:text-[#003B3B] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#E2ECEB] text-xs font-medium text-[#526666] hover:text-[#022022] transition-colors cursor-pointer"
         >
           <Share2 className="w-3.5 h-3.5" />
           <span>Bagikan</span>
@@ -90,8 +90,8 @@ export default function ArticleDetail() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
           <div className="absolute bottom-6 left-6 right-6 space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#003B3B] text-white">
-              <Tag className="w-3 h-3 text-[#DDEEEE]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs">
+              <Tag className="w-3 h-3 text-[#37F4B4]" />
               {article.category}
             </span>
 
@@ -120,7 +120,7 @@ export default function ArticleDetail() {
 
         {/* ARTICLE BODY */}
         <div className="p-6 sm:p-10 space-y-6 font-inter text-sm sm:text-base text-[#2B3E3E] leading-relaxed">
-          <div className="p-4 sm:p-5 rounded-xl bg-[#F8FAFA] border-l-4 border-[#003B3B] text-[#0D2626] font-medium leading-relaxed">
+          <div className="p-4 sm:p-5 rounded-xl bg-[#F8FAFA] border-l-4 border-[#022022] text-[#0D2626] font-medium leading-relaxed">
             {article.description}
           </div>
 
@@ -134,8 +134,8 @@ export default function ArticleDetail() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-2">
               <div className="p-4 rounded-xl bg-white border border-[#E2ECEB] space-y-1.5">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#003B3B]">
-                  <CheckCircle2 className="w-4 h-4 text-[#003B3B]" />
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#022022]">
+                  <CheckCircle2 className="w-4 h-4 text-[#022022]" />
                   <span>Pencegahan Sejak Dini</span>
                 </div>
                 <p className="text-xs text-[#526666] leading-relaxed">
@@ -144,8 +144,8 @@ export default function ArticleDetail() {
               </div>
 
               <div className="p-4 rounded-xl bg-white border border-[#E2ECEB] space-y-1.5">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#003B3B]">
-                  <CheckCircle2 className="w-4 h-4 text-[#003B3B]" />
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#022022]">
+                  <CheckCircle2 className="w-4 h-4 text-[#022022]" />
                   <span>Hidrasi & Pola Makan</span>
                 </div>
                 <p className="text-xs text-[#526666] leading-relaxed">
@@ -173,7 +173,7 @@ export default function ArticleDetail() {
               {article.tags.map((t, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 rounded-full bg-[#EBF5F5] text-[#003B3B] text-xs font-semibold"
+                  className="px-3 py-1 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20 text-xs font-semibold"
                 >
                   #{t}
                 </span>
@@ -182,10 +182,10 @@ export default function ArticleDetail() {
           )}
 
           {/* BOTTOM CTA: CONSULT AI OR FIND FASKES */}
-          <div className="mt-8 p-6 rounded-2xl bg-[#003B3B] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mt-8 p-6 rounded-2xl bg-[#022022] border border-[#37F4B4]/20 shadow-md text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#DDEEEE]">
-                <Sparkles className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#37F4B4]">
+                <Sparkles className="w-4 h-4 text-[#37F4B4]" />
                 <span>Konsultasi Cepat AI</span>
               </div>
               <h3 className="font-poppins font-semibold text-lg text-white">

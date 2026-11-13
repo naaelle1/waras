@@ -26,11 +26,11 @@ export default function HealthGuide() {
 
       {/* PAGE HEADER */}
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2.5 text-[#062B2B]">
-          <div className="p-2.5 rounded-2xl bg-[#003B3B] text-white shadow-md shadow-[#003B3B]/10">
-            <BookOpen className="w-6 h-6 text-white" />
+        <div className="flex items-center gap-2.5 text-[#022022]">
+          <div className="p-2.5 rounded-2xl bg-[#022022] text-[#37F4B4] shadow-md shadow-[#022022]/10">
+            <BookOpen className="w-6 h-6 text-[#37F4B4]" />
           </div>
-          <h1 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#062B2B]">
+          <h1 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#022022]">
             Panduan Kesehatan
           </h1>
         </div>
@@ -51,7 +51,7 @@ export default function HealthGuide() {
       />
 
       <section className="space-y-5 pt-2">
-        <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#062B2B]">
+        <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">
           {activeCategoryData.caseTitle}
         </h2>
 
@@ -66,9 +66,9 @@ export default function HealthGuide() {
         </div>
       </section>
 
-      <section className="rounded-2xl bg-[#003B3B]/5 border border-[#003B3B]/10 p-5 backdrop-blur-md">
+      <section className="rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/20 p-5 backdrop-blur-md">
         <div className="flex items-start gap-3">
-          <Info className="w-5 h-5 text-[#003B3B] shrink-0 mt-0.5" />
+          <Info className="w-5 h-5 text-[#022022] shrink-0 mt-0.5" />
           <p className="text-xs sm:text-sm text-[#4B5E5E] font-inter leading-relaxed">
             <strong>Penafian Edukasi:</strong> Informasi dan panduan di halaman ini bertujuan sebagai pertolongan awal edukatif dan tidak menggantikan perawatan atau diagnosis langsung oleh tenaga kesehatan medis profesional.
           </p>

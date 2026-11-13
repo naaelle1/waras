@@ -180,11 +180,11 @@ export default function Profile() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-200/60 pb-4">
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold text-[#526666] mb-1">
-            <Link to="/user/dashboard" className="hover:text-[#003B3B] transition-colors">
+            <Link to="/user/dashboard" className="hover:text-[#022022] transition-colors">
               Dashboard
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-[#003B3B]">Profil Warga</span>
+            <span className="text-[#022022] font-semibold">Profil Warga</span>
           </div>
           <h1 className="font-poppins font-bold text-2xl sm:text-3xl tracking-tight text-[#0D2626]">
             Profil Saya & Rekam Layanan
@@ -195,7 +195,7 @@ export default function Profile() {
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#EBF5F5] text-[#003B3B] border border-[#003B3B]/15">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30">
             <ShieldCheck className="w-4 h-4 text-[#0B6B6B]" />
             Dukcapil & BPJS Terhubung
           </span>
@@ -227,8 +227,8 @@ export default function Profile() {
       )}
 
       {/* SECTION HERO BANNER - CITIZEN CARD */}
-      <section className="relative w-full overflow-hidden rounded-3xl bg-[#003B3B] p-6 sm:p-8 text-white shadow-[0_20px_50px_rgba(0,59,59,0.15)]">
-        {/* SVG Decorative Curves (Consistent with Dashboard Hero) */}
+      <section className="relative w-full overflow-hidden rounded-3xl bg-[#022022] border border-[#37F4B4]/25 p-6 sm:p-8 text-white shadow-[0_20px_50px_rgba(2,32,34,0.18)]">
+        {/* SVG Decorative Curves */}
         <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden opacity-20">
           <svg
             className="w-full h-full object-cover"
@@ -243,23 +243,23 @@ export default function Profile() {
             />
           </svg>
         </div>
-        <div className="absolute -right-16 -top-16 w-64 h-64 bg-teal-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#37F4B4]/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           {/* Avatar and Basic Citizen Info */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
             <div className="relative group">
-              <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl bg-white text-[#003B3B] flex items-center justify-center font-bold font-poppins text-3xl sm:text-4xl shadow-md border-2 border-white/30 shrink-0">
+              <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl bg-[#37F4B4] text-[#022022] flex items-center justify-center font-bold font-poppins text-3xl sm:text-4xl shadow-md border-2 border-white/30 shrink-0">
                 {profileData.name.charAt(0)}
               </div>
-              <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-[#003B3B] flex items-center justify-center text-white shadow-xs" title="Akun Warga Aktif">
+              <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-[#022022] flex items-center justify-center text-white shadow-xs" title="Akun Warga Aktif">
                 <Check className="w-3.5 h-3.5 stroke-[3]" />
               </span>
             </div>
 
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/15 text-[#DDEEEE] backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/15 text-[#37F4B4] border border-[#37F4B4]/20 backdrop-blur-sm">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#37F4B4]" /> NIK Terverifikasi Dukcapil
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#0B6B6B]/60 text-white border border-white/10">
@@ -273,19 +273,19 @@ export default function Profile() {
 
               <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-teal-100/85">
                 <span className="flex items-center gap-1.5 font-mono">
-                  <User className="w-3.5 h-3.5 text-teal-300" />
+                  <User className="w-3.5 h-3.5 text-[#37F4B4]" />
                   NIK: {maskedNik}
                 </span>
                 <button
                   type="button"
                   onClick={() => setShowNik(!showNik)}
-                  className="text-[11px] underline text-teal-200 hover:text-white transition-colors cursor-pointer"
+                  className="text-[11px] underline text-[#37F4B4] hover:text-white transition-colors cursor-pointer"
                 >
                   {showNik ? "Sembunyikan" : "Tampilkan"}
                 </button>
                 <span className="text-white/40">•</span>
                 <span className="flex items-center gap-1">
-                  <Hospital className="w-3.5 h-3.5 text-teal-300" />
+                  <Hospital className="w-3.5 h-3.5 text-[#37F4B4]" />
                   {profileData.faskesPrimer}
                 </span>
               </div>
@@ -297,9 +297,9 @@ export default function Profile() {
             <button
               type="button"
               onClick={() => setShowQrModal(true)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-xs"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-[#37F4B4]/30 text-white font-semibold text-xs transition-all duration-200 cursor-pointer shadow-xs"
             >
-              <QrCode className="w-4 h-4 text-teal-200" />
+              <QrCode className="w-4 h-4 text-[#37F4B4]" />
               <span>Kartu Pasien QR</span>
             </button>
 
@@ -307,7 +307,7 @@ export default function Profile() {
               <button
                 type="button"
                 onClick={handleStartEditing}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#003B3B] hover:bg-[#EBF5F5] font-semibold text-xs transition-all duration-200 cursor-pointer shadow-sm hover:shadow"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#37F4B4] hover:bg-white text-[#022022] font-semibold text-xs transition-all duration-200 cursor-pointer shadow-sm hover:shadow"
               >
                 <Edit3 className="w-4 h-4" />
                 <span>Perbarui Data</span>
@@ -353,14 +353,14 @@ export default function Profile() {
       </section>
 
       {/* FILTER TABS */}
-      <div className="flex items-center gap-1.5 p-1.5 bg-[#EBF5F5]/60 rounded-2xl border border-[#E2ECEB] w-full sm:w-fit overflow-x-auto text-xs font-semibold">
+      <div className="flex items-center gap-1.5 p-1.5 bg-[#022022]/5 rounded-2xl border border-[#E2ECEB] w-full sm:w-fit overflow-x-auto text-xs font-semibold">
         <button
           type="button"
           onClick={() => setActiveTab("all")}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "all"
-              ? "bg-[#003B3B] text-white shadow-xs font-bold"
-              : "text-[#526666] hover:text-[#003B3B] hover:bg-white/60"
+              ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs font-bold"
+              : "text-[#526666] hover:text-[#022022] hover:bg-white/60"
           }`}
         >
           Semua Data Terpadu
@@ -370,8 +370,8 @@ export default function Profile() {
           onClick={() => setActiveTab("identity")}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "identity"
-              ? "bg-[#003B3B] text-white shadow-xs font-bold"
-              : "text-[#526666] hover:text-[#003B3B] hover:bg-white/60"
+              ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs font-bold"
+              : "text-[#526666] hover:text-[#022022] hover:bg-white/60"
           }`}
         >
           Data Kependudukan & KTP
@@ -381,8 +381,8 @@ export default function Profile() {
           onClick={() => setActiveTab("medical")}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "medical"
-              ? "bg-[#003B3B] text-white shadow-xs font-bold"
-              : "text-[#526666] hover:text-[#003B3B] hover:bg-white/60"
+              ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs font-bold"
+              : "text-[#526666] hover:text-[#022022] hover:bg-white/60"
           }`}
         >
           BPJS & Rekam Medis
@@ -392,8 +392,8 @@ export default function Profile() {
           onClick={() => setActiveTab("visits")}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "visits"
-              ? "bg-[#003B3B] text-white shadow-xs font-bold"
-              : "text-[#526666] hover:text-[#003B3B] hover:bg-white/60"
+              ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 shadow-xs font-bold"
+              : "text-[#526666] hover:text-[#022022] hover:bg-white/60"
           }`}
         >
           Riwayat Pelayanan ({recentVisits.length})
@@ -409,7 +409,7 @@ export default function Profile() {
             <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-6">
               <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
                     <User className="w-5 h-5" />
                   </div>
                   <div>
@@ -450,7 +450,7 @@ export default function Profile() {
                         required
                         value={editForm.name}
                         onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/20 transition-all"
                       />
                     </div>
 
@@ -482,7 +482,7 @@ export default function Profile() {
                         required
                         value={editForm.email}
                         onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/20 transition-all"
                       />
                     </div>
 
@@ -495,7 +495,7 @@ export default function Profile() {
                         required
                         value={editForm.phone}
                         onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/20 transition-all"
                       />
                     </div>
                   </div>
@@ -509,7 +509,7 @@ export default function Profile() {
                         type="text"
                         value={editForm.address}
                         onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/20 transition-all"
                       />
                     </div>
 
@@ -520,7 +520,7 @@ export default function Profile() {
                       <select
                         value={editForm.district}
                         onChange={(e) => setEditForm({ ...editForm, district: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#003B3B] focus:ring-2 focus:ring-[#003B3B]/10 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#37F4B4]/20 transition-all"
                       >
                         <option value="Semarang Selatan">Semarang Selatan</option>
                         <option value="Semarang Tengah">Semarang Tengah</option>
@@ -582,7 +582,7 @@ export default function Profile() {
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
                     >
                       Simpan Perubahan Data
                     </button>
@@ -604,7 +604,7 @@ export default function Profile() {
                           <button
                             type="button"
                             onClick={() => setShowNik(!showNik)}
-                            className="p-1 text-gray-500 hover:text-[#003B3B] transition-colors cursor-pointer"
+                            className="p-1 text-gray-500 hover:text-[#022022] transition-colors cursor-pointer"
                             title={showNik ? "Sembunyikan NIK" : "Lihat NIK"}
                           >
                             {showNik ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -612,7 +612,7 @@ export default function Profile() {
                           <button
                             type="button"
                             onClick={() => handleCopy(profileData.nik, "nik")}
-                            className="p-1 text-gray-500 hover:text-[#003B3B] transition-colors cursor-pointer"
+                            className="p-1 text-gray-500 hover:text-[#022022] transition-colors cursor-pointer"
                             title="Salin NIK"
                           >
                             {copiedField === "nik" ? (
@@ -636,7 +636,7 @@ export default function Profile() {
                         <button
                           type="button"
                           onClick={() => handleCopy(profileData.kk, "kk")}
-                          className="p-1 text-gray-500 hover:text-[#003B3B] transition-colors cursor-pointer"
+                          className="p-1 text-gray-500 hover:text-[#022022] transition-colors cursor-pointer"
                           title="Salin No KK"
                         >
                           {copiedField === "kk" ? (
@@ -652,7 +652,7 @@ export default function Profile() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] space-y-1">
                       <span className="text-[11px] font-semibold text-[#526666] flex items-center gap-1.5">
-                        <Mail className="w-3.5 h-3.5 text-[#003B3B]" /> Alamat Email Terdaftar
+                        <Mail className="w-3.5 h-3.5 text-[#022022]" /> Alamat Email Terdaftar
                       </span>
                       <p className="text-xs sm:text-sm font-bold text-[#0D2626]">
                         {profileData.email}
@@ -661,7 +661,7 @@ export default function Profile() {
 
                     <div className="p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] space-y-1">
                       <span className="text-[11px] font-semibold text-[#526666] flex items-center gap-1.5">
-                        <Phone className="w-3.5 h-3.5 text-[#003B3B]" /> Nomor WhatsApp / Seluler
+                        <Phone className="w-3.5 h-3.5 text-[#022022]" /> Nomor WhatsApp / Seluler
                       </span>
                       <p className="text-xs sm:text-sm font-bold text-[#0D2626]">
                         {profileData.phone}
@@ -671,7 +671,7 @@ export default function Profile() {
 
                   <div className="p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] space-y-1">
                     <span className="text-[11px] font-semibold text-[#526666] flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#003B3B]" /> Alamat Domisili KTP
+                      <MapPin className="w-3.5 h-3.5 text-[#022022]" /> Alamat Domisili KTP
                     </span>
                     <p className="text-xs sm:text-sm font-semibold text-[#0D2626] leading-relaxed">
                       {profileData.address}, Kel. {profileData.kelurahan}, Kec. {profileData.district}, {profileData.city} ({profileData.postalCode})
@@ -694,7 +694,7 @@ export default function Profile() {
                       </p>
                       <a
                         href={`tel:${profileData.emergencyPhone}`}
-                        className="font-mono font-bold text-[#003B3B] hover:underline"
+                        className="font-mono font-bold text-[#022022] hover:underline"
                       >
                         {profileData.emergencyPhone}
                       </a>
@@ -710,7 +710,7 @@ export default function Profile() {
             <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-5">
               <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -725,7 +725,7 @@ export default function Profile() {
 
                 <Link
                   to="/user/facilities"
-                  className="text-xs font-semibold text-[#003B3B] hover:underline inline-flex items-center gap-1"
+                  className="text-xs font-semibold text-[#022022] hover:underline inline-flex items-center gap-1"
                 >
                   <span>Cek Jadwal Poli</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -737,19 +737,19 @@ export default function Profile() {
                   <div
                     key={visit.id}
                     onClick={() => setSelectedVisitModal(visit)}
-                    className="p-4 rounded-2xl bg-[#F8FAFA] hover:bg-[#EBF5F5]/40 border border-[#E2ECEB] hover:border-[#003B3B]/30 transition-all cursor-pointer group space-y-3"
+                    className="p-4 rounded-2xl bg-[#F8FAFA] hover:bg-[#022022]/5 border border-[#E2ECEB] hover:border-[#37F4B4]/50 transition-all cursor-pointer group space-y-3"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#003B3B]/10 text-[#003B3B]">
+                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#022022]/10 text-[#022022]">
                             {visit.poly}
                           </span>
                           <span className="text-xs text-[#526666] font-medium">
                             {visit.date} • {visit.time}
                           </span>
                         </div>
-                        <h4 className="font-poppins font-bold text-sm text-[#0D2626] group-hover:text-[#003B3B] transition-colors">
+                        <h4 className="font-poppins font-bold text-sm text-[#0D2626] group-hover:text-[#022022] transition-colors">
                           {visit.faskes}
                         </h4>
                         <p className="text-xs text-[#526666]">
@@ -766,7 +766,7 @@ export default function Profile() {
                       <span className="text-[#526666] truncate max-w-xs sm:max-w-md">
                         Diagnosa: <strong className="text-[#0D2626] font-medium">{visit.diagnosis}</strong>
                       </span>
-                      <span className="text-[11px] font-bold text-[#003B3B] group-hover:translate-x-0.5 transition-transform shrink-0 flex items-center gap-1">
+                      <span className="text-[11px] font-bold text-[#022022] group-hover:translate-x-0.5 transition-transform shrink-0 flex items-center gap-1">
                         Detail <ChevronRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
@@ -783,28 +783,28 @@ export default function Profile() {
           {(activeTab === "all" || activeTab === "medical") && (
             <div className="space-y-4">
               {/* VIRTUAL JKN-KIS CARD */}
-              <div className="relative rounded-3xl bg-linear-to-br from-[#0B6B6B] via-[#004242] to-[#002727] text-white p-6 sm:p-7 shadow-lg overflow-hidden border border-white/20">
+              <div className="relative rounded-3xl bg-[#022022] border border-[#37F4B4]/25 text-white p-6 sm:p-7 shadow-lg overflow-hidden">
                 {/* Hologram & Background Decor */}
-                <div className="absolute top-0 right-0 -mr-8 -mt-8 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute top-0 right-0 -mr-8 -mt-8 w-48 h-48 bg-[#37F4B4]/15 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-300/10 rounded-full blur-xl pointer-events-none" />
 
                 {/* Card Top Row */}
                 <div className="flex items-center justify-between border-b border-white/20 pb-3 relative z-10">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <HeartPulse className="w-4 h-4 text-emerald-300" />
+                      <HeartPulse className="w-4 h-4 text-[#37F4B4]" />
                     </div>
                     <div>
                       <span className="font-poppins font-bold text-xs tracking-wider uppercase block">
                         BPJS Kesehatan
                       </span>
-                      <span className="text-[9px] text-teal-200 tracking-widest block uppercase">
+                      <span className="text-[9px] text-[#37F4B4] tracking-widest block uppercase">
                         Kartu Indonesia Sehat
                       </span>
                     </div>
                   </div>
 
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-400 text-[#002727] font-bold text-[10px] shadow-xs">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#37F4B4] text-[#022022] font-bold text-[10px] shadow-xs">
                     {profileData.bpjsStatus}
                   </span>
                 </div>
@@ -836,7 +836,7 @@ export default function Profile() {
                         title="Salin Nomor BPJS"
                       >
                         {copiedField === "bpjs" ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-300" />
+                          <Check className="w-3.5 h-3.5 text-[#37F4B4]" />
                         ) : (
                           <Copy className="w-3.5 h-3.5" />
                         )}
@@ -863,16 +863,16 @@ export default function Profile() {
               </div>
 
               {/* ACTION BUTTON PINDAH FASKES / INFO */}
-              <div className="p-4 rounded-2xl bg-[#EBF5F5] border border-[#003B3B]/15 text-xs flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/25 text-xs flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <span className="font-bold text-[#003B3B] block">Ingin Ubah Faskes Tingkat 1?</span>
+                  <span className="font-bold text-[#022022] block">Ingin Ubah Faskes Tingkat 1?</span>
                   <p className="text-[11px] text-[#526666]">
                     Perubahan puskesmas domisili dapat dilakukan via aplikasi Mobile JKN.
                   </p>
                 </div>
                 <Link
                   to="/user/facilities"
-                  className="px-3 py-1.5 rounded-xl bg-[#003B3B] text-white font-semibold text-[11px] hover:bg-[#002D2D] transition-colors shrink-0"
+                  className="px-3 py-1.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 font-semibold text-[11px] transition-colors shrink-0"
                 >
                   Cari Faskes
                 </Link>
@@ -884,7 +884,7 @@ export default function Profile() {
           {(activeTab === "all" || activeTab === "medical") && (
             <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 shadow-xs space-y-4">
               <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
-                <div className="w-9 h-9 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center font-bold">
+                <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
                   <Activity className="w-4.5 h-4.5" />
                 </div>
                 <div>
@@ -956,14 +956,14 @@ export default function Profile() {
             <div className="space-y-2 text-xs">
               <Link
                 to="/user/ai"
-                className="flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFA] hover:bg-[#EBF5F5] border border-[#E2ECEB] transition-all group"
+                className="flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFA] hover:bg-[#022022]/5 border border-[#E2ECEB] transition-all group"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-[#003B3B]/10 text-[#003B3B] flex items-center justify-center font-bold">
-                    <Sparkles className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 flex items-center justify-center font-bold">
+                    <Sparkles className="w-4 h-4 text-[#0B6B6B]" />
                   </div>
                   <div>
-                    <span className="font-bold text-[#0D2626] group-hover:text-[#003B3B] transition-colors block">
+                    <span className="font-bold text-[#0D2626] group-hover:text-[#022022] transition-colors block">
                       Konsultasi WARAS AI
                     </span>
                     <span className="text-[11px] text-[#526666]">Tanyakan analisis awal keluhan Anda</span>
@@ -974,14 +974,14 @@ export default function Profile() {
 
               <Link
                 to="/user/report-problem"
-                className="flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFA] hover:bg-[#EBF5F5] border border-[#E2ECEB] transition-all group"
+                className="flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFA] hover:bg-[#022022]/5 border border-[#E2ECEB] transition-all group"
               >
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
                     <AlertCircle className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-bold text-[#0D2626] group-hover:text-[#003B3B] transition-colors block">
+                    <span className="font-bold text-[#0D2626] group-hover:text-[#022022] transition-colors block">
                       Koreksi Data / Lapor Kendala
                     </span>
                     <span className="text-[11px] text-[#526666]">Bila NIK atau BPJS tidak sesuai</span>
@@ -1007,7 +1007,7 @@ export default function Profile() {
             </button>
 
             <div className="text-center space-y-1">
-              <span className="text-[11px] font-bold text-[#003B3B] uppercase tracking-wider px-3 py-1 bg-[#EBF5F5] rounded-full inline-block">
+              <span className="text-[11px] font-bold text-[#022022] uppercase tracking-wider px-3 py-1 bg-[#022022]/10 border border-[#37F4B4]/25 rounded-full inline-block">
                 Pemerintah Kota Semarang
               </span>
               <h3 className="font-poppins font-bold text-xl text-[#0D2626]">
@@ -1019,12 +1019,12 @@ export default function Profile() {
             </div>
 
             {/* QR Code Container */}
-            <div className="p-6 rounded-3xl bg-[#F8FAFA] border-2 border-dashed border-[#003B3B]/20 flex flex-col items-center justify-center space-y-3">
+            <div className="p-6 rounded-3xl bg-[#F8FAFA] border-2 border-dashed border-[#022022]/20 flex flex-col items-center justify-center space-y-3">
               <div className="w-44 h-44 bg-white p-3 rounded-2xl shadow-sm border border-gray-200 flex items-center justify-center relative">
                 {/* Simulated QR Code with Lucide SVG */}
-                <QrCode className="w-36 h-36 text-[#003B3B]" strokeWidth={1.5} />
+                <QrCode className="w-36 h-36 text-[#022022]" strokeWidth={1.5} />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-9 h-9 rounded-lg bg-[#003B3B] text-white flex items-center justify-center font-bold text-xs shadow-md">
+                  <div className="w-9 h-9 rounded-lg bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/25 flex items-center justify-center font-bold text-xs shadow-md">
                     W
                   </div>
                 </div>
@@ -1040,8 +1040,8 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-teal-50/60 border border-teal-100 text-[11px] text-[#003B3B] flex items-center gap-2">
-              <Info className="w-4 h-4 text-[#003B3B] shrink-0" />
+            <div className="p-3 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/25 text-[11px] text-[#022022] flex items-center gap-2">
+              <Info className="w-4 h-4 text-[#022022] shrink-0" />
               <span>Valid untuk antrean poli rawat jalan seluruh Puskesmas & RSUD Kota Semarang.</span>
             </div>
 
@@ -1059,7 +1059,7 @@ export default function Profile() {
               <button
                 type="button"
                 onClick={() => setShowQrModal(false)}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
               >
                 <span>Tutup</span>
               </button>
@@ -1081,7 +1081,7 @@ export default function Profile() {
             </button>
 
             <div className="space-y-1">
-              <span className="text-[11px] font-bold text-[#003B3B] uppercase tracking-wider px-2.5 py-0.5 bg-[#EBF5F5] rounded-full inline-block">
+              <span className="text-[11px] font-bold text-[#022022] uppercase tracking-wider px-2.5 py-0.5 bg-[#022022]/10 border border-[#37F4B4]/25 rounded-full inline-block">
                 {selectedVisitModal.poly} • {selectedVisitModal.type}
               </span>
               <h3 className="font-poppins font-bold text-xl text-[#0D2626]">
@@ -1116,7 +1116,7 @@ export default function Profile() {
             {/* Diagnosis */}
             <div className="space-y-1">
               <span className="text-xs font-semibold text-[#526666]">Diagnosa Medis:</span>
-              <div className="p-3 rounded-xl bg-[#EBF5F5] border border-[#003B3B]/10 text-xs font-bold text-[#003B3B]">
+              <div className="p-3 rounded-xl bg-[#022022]/5 border border-[#37F4B4]/25 text-xs font-bold text-[#022022]">
                 {selectedVisitModal.diagnosis}
               </div>
             </div>
@@ -1124,12 +1124,12 @@ export default function Profile() {
             {/* Resep Obat */}
             <div className="space-y-1.5">
               <span className="text-xs font-semibold text-[#526666] flex items-center gap-1.5">
-                <Pill className="w-3.5 h-3.5 text-[#003B3B]" /> Resep Terapi & Anjuran Obat:
+                <Pill className="w-3.5 h-3.5 text-[#022022]" /> Resep Terapi & Anjuran Obat:
               </span>
               <div className="p-3 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] space-y-2">
                 {selectedVisitModal.medications.map((med, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs text-[#0D2626]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#003B3B] mt-1.5 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#022022] mt-1.5 shrink-0" />
                     <span>{med}</span>
                   </div>
                 ))}
@@ -1146,7 +1146,7 @@ export default function Profile() {
               <button
                 type="button"
                 onClick={() => setSelectedVisitModal(null)}
-                className="px-5 py-2.5 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] border border-[#37F4B4]/25 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
               >
                 Tutup Ringkasan
               </button>

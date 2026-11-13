@@ -16,29 +16,29 @@ export default function FeaturedArticle({ article, onReadMore }) {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#003B3B] text-white shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#DDEEEE]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#37F4B4]" />
               UNGGULAN
             </span>
           </div>
         </div>
 
         {/* Right Content Panel */}
-        <div className="lg:col-span-5 bg-[#003B3B] text-white p-6 sm:p-8 flex flex-col justify-between relative z-10">
+        <div className="lg:col-span-5 bg-[#022022] border-l border-[#37F4B4]/20 text-white p-6 sm:p-8 flex flex-col justify-between relative z-10">
           <div className="space-y-3.5">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-[#DDEEEE]">
-              <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10">
-                <Tag className="w-3 h-3" />
+            <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-teal-100">
+              <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-[#37F4B4] border border-[#37F4B4]/20">
+                <Tag className="w-3 h-3 text-[#37F4B4]" />
                 {article.category}
               </span>
-              <span>â€¢</span>
+              <span>•</span>
               <span className="flex items-center gap-1 text-gray-200">
                 <Clock className="w-3 h-3" />
                 {article.readingTime || "5 min baca"}
               </span>
             </div>
 
-            <h2 className="font-poppins font-bold text-xl sm:text-2xl leading-snug tracking-tight text-white group-hover:text-[#DDEEEE] transition-colors">
+            <h2 className="font-poppins font-bold text-xl sm:text-2xl leading-snug tracking-tight text-white group-hover:text-[#37F4B4] transition-colors">
               {article.title}
             </h2>
 
@@ -58,7 +58,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
             <button
               type="button"
               onClick={() => onReadMore && onReadMore(article)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#003B3B] font-semibold text-xs sm:text-sm hover:bg-[#EBF5F5] transition-colors cursor-pointer shadow-xs group/btn"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#022022] font-semibold text-xs sm:text-sm hover:bg-[#37F4B4] hover:text-[#022022] transition-colors cursor-pointer shadow-xs group/btn"
             >
               <span>Baca Artikel</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />

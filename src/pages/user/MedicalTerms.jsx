@@ -123,15 +123,15 @@ export default function MedicalTerms() {
       {/* ── PAGE HEADER ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-2.5 text-[#002B2C]">
-            <div className="p-2.5 rounded-2xl bg-[#003B3B] text-white shadow-sm">
+          <div className="flex items-center gap-2.5 text-[#022022]">
+            <div className="p-2.5 rounded-2xl bg-[#022022] text-[#37F4B4] shadow-sm">
               <Languages className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#002B2C]">
+              <h1 className="font-poppins font-bold text-2xl lg:text-3xl tracking-tight text-[#022022]">
                 Kamus Istilah Medis
               </h1>
-              <p className="text-[11px] font-semibold text-[#003B3B] uppercase tracking-wider mt-0.5">
+              <p className="text-[11px] font-semibold text-[#022022] uppercase tracking-wider mt-0.5">
                 WARAS HEALTHCARE DICTIONARY &bull; 1.485 ISTILAH LENGKAP A-Z
               </p>
             </div>
@@ -142,9 +142,9 @@ export default function MedicalTerms() {
         </div>
 
         {/* Quick Stats Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#003B3B]/5 border border-[#003B3B]/10 self-start sm:self-auto">
-          <BookOpen className="w-4 h-4 text-[#003B3B]" />
-          <span className="text-xs font-semibold text-[#003B3B] font-inter">
+        <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#022022]/5 border border-[#37F4B4]/20 self-start sm:self-auto">
+          <BookOpen className="w-4 h-4 text-[#022022]" />
+          <span className="text-xs font-semibold text-[#022022] font-inter">
             Total {medicalTerms.length.toLocaleString("id-ID")} Istilah Terdata
           </span>
         </div>
@@ -163,7 +163,7 @@ export default function MedicalTerms() {
         {/* Category Pills Bar */}
         <div className="pt-2 border-t border-slate-100 flex items-center gap-2">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 shrink-0">
-            <Filter className="w-3.5 h-3.5 text-[#003B3B]" />
+            <Filter className="w-3.5 h-3.5 text-[#022022]" />
             <span className="hidden sm:inline">Kategori:</span>
           </div>
 
@@ -177,8 +177,8 @@ export default function MedicalTerms() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`h-7 px-2.5 rounded-lg text-[11px] font-poppins font-medium transition-all shrink-0 cursor-pointer border ${
                     isActive
-                      ? "bg-[#003B3B] text-white border-[#003B3B] shadow-2xs font-semibold"
-                      : "bg-slate-50 text-slate-600 border-slate-200/80 hover:bg-[#EBF5F5] hover:text-[#003B3B]"
+                      ? "bg-[#022022] text-[#37F4B4] border-[#022022] shadow-2xs font-semibold"
+                      : "bg-slate-50 text-slate-600 border-slate-200/80 hover:bg-[#022022]/5 hover:text-[#022022]"
                   }`}
                 >
                   {cat}
@@ -196,12 +196,12 @@ export default function MedicalTerms() {
             Menampilkan <strong>{paginatedTerms.length}</strong> dari{" "}
             <strong>{filteredTerms.length.toLocaleString("id-ID")}</strong> istilah medis
             {selectedLetter !== "SEMUA" && (
-              <span className="ml-1 text-[#003B3B] font-semibold">
+              <span className="ml-1 text-[#022022] font-semibold">
                 (Huruf &quot;{selectedLetter}&quot;)
               </span>
             )}
             {selectedCategory !== "Semua Kategori" && (
-              <span className="ml-1 text-[#003B3B] font-semibold">
+              <span className="ml-1 text-[#022022] font-semibold">
                 &bull; {selectedCategory}
               </span>
             )}
@@ -217,7 +217,7 @@ export default function MedicalTerms() {
                 setSelectedLetter("SEMUA");
                 setSelectedCategory("Semua Kategori");
               }}
-              className="text-[#003B3B] font-semibold hover:underline cursor-pointer self-start sm:self-auto"
+              className="text-[#022022] font-semibold hover:underline cursor-pointer self-start sm:self-auto"
             >
               Reset Semua Filter
             </button>
@@ -236,8 +236,8 @@ export default function MedicalTerms() {
           </div>
         ) : (
           <div className="p-12 text-center rounded-3xl bg-white border border-[#E2ECEB] space-y-3">
-            <SearchX className="w-12 h-12 text-[#4F8B8C] mx-auto" />
-            <h3 className="font-poppins font-semibold text-base text-[#002B2C]">
+            <SearchX className="w-12 h-12 text-[#022022]/60 mx-auto" />
+            <h3 className="font-poppins font-semibold text-base text-[#022022]">
               Istilah Medis Tidak Ditemukan
             </h3>
             <p className="text-xs sm:text-sm text-[#5F6F70] max-w-md mx-auto font-inter">
@@ -290,7 +290,7 @@ export default function MedicalTerms() {
                           onClick={() => handlePageChange(page)}
                           className={`w-9 h-9 rounded-xl text-xs font-poppins font-semibold transition-all cursor-pointer ${
                             currentPage === page
-                              ? "bg-[#003B3B] text-white shadow-2xs"
+                              ? "bg-[#022022] text-[#37F4B4] shadow-2xs"
                               : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                           }`}
                         >
@@ -316,13 +316,13 @@ export default function MedicalTerms() {
       </section>
 
       {/* ── MEDICAL DISCLAIMER CARD ── */}
-      <section className="rounded-3xl bg-[#002B2C]/5 border border-[#002B2C]/10 p-5 sm:p-6 backdrop-blur-md">
+      <section className="rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/20 p-5 sm:p-6 backdrop-blur-md">
         <div className="flex items-start gap-3.5">
-          <div className="p-2 rounded-xl bg-[#003B3B] text-white shrink-0 mt-0.5">
-            <Info className="w-5 h-5 text-teal-200" />
+          <div className="p-2 rounded-xl bg-[#022022] text-[#37F4B4] shrink-0 mt-0.5">
+            <Info className="w-5 h-5" />
           </div>
           <div className="space-y-1">
-            <h4 className="font-poppins font-semibold text-sm text-[#002B2C]">
+            <h4 className="font-poppins font-semibold text-sm text-[#022022]">
               Penafian Edukasi Klinis
             </h4>
             <p className="text-xs sm:text-sm text-[#5F6F70] font-inter leading-relaxed">
@@ -335,7 +335,7 @@ export default function MedicalTerms() {
       {/* ── MODAL DETAIL ISTILAH MEDIS ── */}
       {selectedTerm && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 selection:bg-[#003B3B] selection:text-white"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 selection:bg-[#022022] selection:text-[#37F4B4]"
           onClick={() => setSelectedTerm(null)}
         >
           <div
@@ -354,7 +354,7 @@ export default function MedicalTerms() {
 
             {/* Header Modal */}
             <div className="space-y-2 pr-8">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#003B3B] border border-teal-200/70">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30">
                 <span>{selectedTerm.category}</span>
               </div>
 
@@ -378,8 +378,8 @@ export default function MedicalTerms() {
             </div>
 
             {/* Practical Advice Note */}
-            <div className="p-3.5 rounded-xl bg-teal-50/70 border border-teal-200/60 text-xs text-[#003B3B] flex items-center gap-2.5">
-              <Sparkles className="w-4 h-4 shrink-0 text-[#003B3B]" />
+            <div className="p-3.5 rounded-xl bg-[#022022]/5 border border-[#37F4B4]/30 text-xs text-[#022022] flex items-center gap-2.5">
+              <Sparkles className="w-4 h-4 shrink-0 text-[#022022]" />
               <span>
                 Istilah ini tercatat resmi dalam sistem edukasi kesehatan terintegrasi WARAS Kota Semarang.
               </span>
@@ -390,7 +390,7 @@ export default function MedicalTerms() {
               <button
                 type="button"
                 onClick={() => handleAskAI(selectedTerm)}
-                className="w-full sm:flex-1 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-[#003B3B] hover:bg-[#002B2B] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-xs active:scale-[0.99]"
+                className="w-full sm:flex-1 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-[#022022] hover:bg-[#033033] text-[#37F4B4] text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-xs active:scale-[0.99] border border-[#37F4B4]/30"
               >
                 <Bot className="w-4 h-4" />
                 <span>Tanya WARAS AI</span>

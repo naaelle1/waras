@@ -16,10 +16,10 @@ export default function Features() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-poppins font-bold text-[#003B3B] uppercase tracking-wider px-3 py-1 rounded-full bg-[#003B3B]/10">
+          <span className="text-xs font-poppins font-bold text-[#022022] uppercase tracking-wider px-3 py-1 rounded-full bg-[#022022]/10 border border-[#37F4B4]/25">
             Fitur Unggulan
           </span>
-          <h2 className="font-poppins font-bold text-2xl sm:text-4xl text-[#062C2C]">
+          <h2 className="font-poppins font-bold text-2xl sm:text-4xl text-[#022022]">
             Semua yang Anda Butuhkan untuk Akses Kesehatan
           </h2>
           <p className="font-inter text-sm sm:text-base text-[#587070]">
@@ -37,8 +37,8 @@ export default function Features() {
                 key={feature.id}
                 className={`group p-8 rounded-3xl transition-all duration-300 border flex flex-col justify-between space-y-6 cursor-pointer ${
                   feature.isFeatured
-                    ? "bg-linear-to-br from-[#003B3B] via-[#002B2B] to-[#001F1F] text-white border-transparent shadow-xl shadow-[#003B3B]/15"
-                    : "bg-white/70 backdrop-blur-xl border-white/80 text-[#062C2C] shadow-[0_10px_30px_rgba(0,43,43,0.05)] hover:shadow-xl hover:-translate-y-1 hover:border-white"
+                    ? "bg-linear-to-br from-[#022022] via-[#033033] to-[#011414] text-white border-[#37F4B4]/20 shadow-xl shadow-[#022022]/15"
+                    : "bg-white/70 backdrop-blur-xl border-white/80 text-[#022022] shadow-[0_10px_30px_rgba(2,32,34,0.05)] hover:shadow-xl hover:-translate-y-1 hover:border-white"
                 }`}
               >
                 <div className="space-y-4">
@@ -46,8 +46,8 @@ export default function Features() {
                     <div
                       className={`p-4 rounded-2xl ${
                         feature.isFeatured
-                          ? "bg-white/10 text-[#A9D6C8]"
-                          : "bg-[#003B3B] text-white"
+                          ? "bg-white/10 text-[#37F4B4]"
+                          : "bg-[#022022] text-[#37F4B4]"
                       } shadow-md`}
                     >
                       <IconComp className="w-6 h-6" />
@@ -55,8 +55,8 @@ export default function Features() {
                     <span
                       className={`text-xs font-poppins font-bold px-3 py-1 rounded-full ${
                         feature.isFeatured
-                          ? "bg-white/20 text-[#A9D6C8]"
-                          : "bg-[#003B3B]/10 text-[#003B3B]"
+                          ? "bg-white/15 text-[#37F4B4] border border-[#37F4B4]/30"
+                          : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25"
                       }`}
                     >
                       {feature.tag}
@@ -80,7 +80,7 @@ export default function Features() {
                   <span>Eksplorasi Fitur</span>
                   <ArrowRight
                     className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${
-                      feature.isFeatured ? "text-[#A9D6C8]" : "text-[#003B3B]"
+                      feature.isFeatured ? "text-[#37F4B4]" : "text-[#022022] group-hover:text-[#37F4B4]"
                     }`}
                   />
                 </div>

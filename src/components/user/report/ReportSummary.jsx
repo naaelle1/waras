@@ -5,8 +5,8 @@ export default function ReportSummary({ categoryTitle, title, relatedPage, isCom
   return (
     <div className="rounded-2xl bg-white border border-[#E2ECEB] p-6 shadow-xs space-y-5 lg:sticky lg:top-6">
       <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
-        <FileText className="w-5 h-5 text-[#003B3B]" />
-        <h3 className="font-poppins font-bold text-base text-[#062B2B]">
+        <FileText className="w-5 h-5 text-[#022022]" />
+        <h3 className="font-poppins font-bold text-base text-[#022022]">
           Ringkasan Laporan
         </h3>
       </div>
@@ -15,10 +15,10 @@ export default function ReportSummary({ categoryTitle, title, relatedPage, isCom
         {/* Category Item */}
         <div className="space-y-1">
           <div className="flex items-center gap-1.5 text-[11px] font-poppins font-semibold text-[#4B5E5E] uppercase tracking-wider">
-            <Tag className="w-3.5 h-3.5 text-[#003B3B]" />
+            <Tag className="w-3.5 h-3.5 text-[#022022]" />
             <span>Kategori</span>
           </div>
-          <p className="font-poppins font-semibold text-xs sm:text-sm text-[#062B2B]">
+          <p className="font-poppins font-semibold text-xs sm:text-sm text-[#022022]">
             {categoryTitle || "Belum dipilih"}
           </p>
         </div>
@@ -26,10 +26,10 @@ export default function ReportSummary({ categoryTitle, title, relatedPage, isCom
         {/* Title Item */}
         <div className="space-y-1">
           <div className="flex items-center gap-1.5 text-[11px] font-poppins font-semibold text-[#4B5E5E] uppercase tracking-wider">
-            <FileText className="w-3.5 h-3.5 text-[#003B3B]" />
+            <FileText className="w-3.5 h-3.5 text-[#022022]" />
             <span>Judul Laporan</span>
           </div>
-          <p className="font-inter text-xs sm:text-sm text-[#062B2B] font-medium line-clamp-2">
+          <p className="font-inter text-xs sm:text-sm text-[#022022] font-medium line-clamp-2">
             {title ? title : <span className="text-gray-400 italic">Belum diisi</span>}
           </p>
         </div>
@@ -37,10 +37,10 @@ export default function ReportSummary({ categoryTitle, title, relatedPage, isCom
         {/* Related Page */}
         <div className="space-y-1">
           <div className="flex items-center gap-1.5 text-[11px] font-poppins font-semibold text-[#4B5E5E] uppercase tracking-wider">
-            <MapPin className="w-3.5 h-3.5 text-[#003B3B]" />
+            <MapPin className="w-3.5 h-3.5 text-[#022022]" />
             <span>Halaman / Fitur</span>
           </div>
-          <p className="font-inter text-xs sm:text-sm text-[#062B2B] font-medium">
+          <p className="font-inter text-xs sm:text-sm text-[#022022] font-medium">
             {relatedPage}
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function ReportSummary({ categoryTitle, title, relatedPage, isCom
         {/* Status Draft */}
         <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-[11px] font-poppins font-semibold text-[#4B5E5E] uppercase tracking-wider">
-            <Clock className="w-3.5 h-3.5 text-[#003B3B]" />
+            <Clock className="w-3.5 h-3.5 text-[#022022]" />
             <span>Status Draf</span>
           </div>
           <span

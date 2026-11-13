@@ -28,7 +28,7 @@ const pillars = [
 
 export default function WhyWARAS() {
   return (
-    <section className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#E6FEFF]/30 text-[#022022]">
+    <section className="py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden bg-[#022022]/[0.02] text-[#022022]">
       {/* BACKGROUND WING WATERMARK */}
       <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[650px] h-auto pointer-events-none opacity-[0.05] select-none -z-0">
         <img src="/Wing.svg" alt="" className="w-full h-auto object-contain" />
@@ -38,13 +38,13 @@ export default function WhyWARAS() {
         
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#014751]/15 text-[#014751] text-xs font-medium mb-3 shadow-2xs">
-            <HeartPulse className="w-3.5 h-3.5 text-[#014751]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#37F4B4]/30 text-[#022022] text-xs font-medium mb-3 shadow-2xs">
+            <HeartPulse className="w-3.5 h-3.5 text-[#022022]" />
             <span>Prinsip Layanan Publik</span>
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-light text-[#022022] tracking-tight leading-[1.12]">
             Dihadirkan untuk Mempermudah, <br />
-            <span className="font-normal text-[#014751]">
+            <span className="font-normal text-[#022022]">
               Bukan Membingungkan.
             </span>
           </h2>
@@ -64,14 +64,14 @@ export default function WhyWARAS() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="p-8 rounded-3xl bg-white border border-[#014751]/15 hover:border-[#014751]/40 hover:shadow-[0_20px_45px_rgba(2,32,34,0.06)] transition-all duration-300 group flex flex-col justify-between"
+                className="p-8 rounded-3xl bg-white border border-[#022022]/10 hover:border-[#37F4B4]/50 hover:shadow-[0_20px_45px_rgba(2,32,34,0.06)] transition-all duration-300 group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-4xl sm:text-5xl font-light font-mono text-[#014751]">
+                    <span className="text-4xl sm:text-5xl font-light font-mono text-[#022022]">
                       {item.number}
                     </span>
-                    <div className="w-11 h-11 rounded-2xl bg-[#E6FEFF] text-[#014751] flex items-center justify-center group-hover:bg-[#014751] group-hover:text-white transition-all">
+                    <div className="w-11 h-11 rounded-2xl bg-[#022022]/5 text-[#022022] flex items-center justify-center group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
@@ -79,7 +79,7 @@ export default function WhyWARAS() {
                   <h3 className="text-base sm:text-lg font-normal text-[#022022] tracking-wide">
                     {item.title}
                   </h3>
-                  <span className="text-xs font-mono text-[#014751] block mt-1">
+                  <span className="text-xs font-mono text-[#022022]/80 block mt-1">
                     {item.subtitle}
                   </span>
 
@@ -88,7 +88,7 @@ export default function WhyWARAS() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#014751]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#014751]">
+                <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                   <span>Standar Akses WARAS</span>
                 </div>
@@ -99,8 +99,8 @@ export default function WhyWARAS() {
 
         {/* MEDICAL DISCLAIMER BADGE (Clean White Frame) */}
         <div className="mt-14 max-w-2xl mx-auto">
-          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#014751]/15 flex items-center gap-3.5 shadow-2xs">
-            <Info className="w-5 h-5 text-[#014751] shrink-0" />
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#022022]/10 flex items-center gap-3.5 shadow-2xs">
+            <Info className="w-5 h-5 text-[#022022] shrink-0" />
             <p className="text-xs text-[#022022]/75 leading-relaxed font-light">
               <strong className="text-[#022022] font-medium">Pemberitahuan Medis: </strong>
               WARAS menyediakan panduan pertolongan pertama dan direktori informasi kesehatan umum. Dalam kondisi gawat darurat yang mengancam jiwa, segera hubungi ambulans 119 atau kunjungi IGD rumah sakit terdekat.

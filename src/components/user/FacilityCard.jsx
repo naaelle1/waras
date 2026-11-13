@@ -24,7 +24,7 @@ export default function FacilityCard({ facility }) {
           <div className="absolute top-3 left-3 flex items-center gap-1.5">
             <Badge
               variant={isHospital ? "default" : "teal"}
-              className={isHospital ? "bg-[#003B3B] text-white" : "bg-[#EBF5F5] text-[#003B3B]"}
+              className={isHospital ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30" : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20"}
             >
               {facility.category}
             </Badge>
@@ -43,7 +43,7 @@ export default function FacilityCard({ facility }) {
           </h4>
 
           <p className="text-xs text-[#526666] flex items-start gap-1.5 line-clamp-2 leading-relaxed">
-            <MapPin className="w-3.5 h-3.5 text-[#003B3B] shrink-0 mt-0.5" />
+            <MapPin className="w-3.5 h-3.5 text-[#022022] shrink-0 mt-0.5" />
             <span>{facility.address}</span>
           </p>
 
@@ -66,8 +66,8 @@ export default function FacilityCard({ facility }) {
           {/* Services List Preview */}
           {facility.services && facility.services.length > 0 && (
             <div className="pt-2 border-t border-gray-100">
-              <div className="flex items-center gap-1 text-[11px] font-semibold text-[#003B3B] mb-1">
-                <Stethoscope className="w-3 h-3" />
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-[#022022] mb-1">
+                <Stethoscope className="w-3 h-3 text-[#022022]" />
                 <span>Layanan Utama:</span>
               </div>
               <div className="flex flex-wrap gap-1">

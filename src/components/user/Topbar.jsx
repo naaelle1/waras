@@ -103,14 +103,14 @@ export default function Topbar({
               setIsProfileOpen(false);
             }}
             className={clsx(
-              "relative flex items-center justify-center w-9 h-9 rounded-full text-[#062D2D]",
-              "hover:bg-[#002B2B]/5 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
+              "relative flex items-center justify-center w-9 h-9 rounded-full text-[#022022]",
+              "hover:bg-[#022022]/5 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
             )}
             aria-label="Lihat notifikasi"
           >
             <Bell className="w-4.5 h-4.5 stroke-[1.8]" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#002B2B] rounded-full ring-2 ring-white" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#37F4B4] rounded-full ring-2 ring-white" />
             )}
           </button>
 
@@ -119,11 +119,11 @@ export default function Topbar({
             <div className="absolute -right-10 sm:right-0 top-full mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50">
               <div className="flex items-center justify-between px-4 pb-2.5 border-b border-slate-100">
                 <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-sm text-[#062D2D]">
+                  <span className="font-semibold text-sm text-[#022022]">
                     Notifikasi
                   </span>
                   {unreadCount > 0 && (
-                    <span className="text-[11px] font-bold px-2 py-0.5 bg-[#002B2B]/10 text-[#002B2B] rounded-full">
+                    <span className="text-[11px] font-bold px-2 py-0.5 bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/30 rounded-full">
                       {unreadCount} baru
                     </span>
                   )}
@@ -132,7 +132,7 @@ export default function Topbar({
                   <button
                     type="button"
                     onClick={handleMarkAllAsRead}
-                    className="flex items-center space-x-1 text-xs font-medium text-[#5F6F70] hover:text-[#002B2B] transition-colors"
+                    className="flex items-center space-x-1 text-xs font-medium text-[#5F6F70] hover:text-[#022022] transition-colors"
                   >
                     <CheckCheck className="w-3.5 h-3.5" />
                     <span>Tandai dibaca</span>
@@ -146,14 +146,14 @@ export default function Topbar({
                     key={item.id}
                     className={clsx(
                       "p-3.5 flex items-start space-x-3 hover:bg-slate-50 transition-colors cursor-pointer",
-                      item.unread ? "bg-[#002B2B]/5" : ""
+                      item.unread ? "bg-[#022022]/5" : ""
                     )}
                   >
-                    <div className="p-2 rounded-full bg-[#002B2B]/10 text-[#002B2B] shrink-0 mt-0.5">
-                      <Sparkles className="w-4 h-4" />
+                    <div className="p-2 rounded-full bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20 shrink-0 mt-0.5">
+                      <Sparkles className="w-4 h-4 text-[#022022]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-[#062D2D] truncate mb-0.5">
+                      <p className="text-xs font-semibold text-[#022022] truncate mb-0.5">
                         {item.title}
                       </p>
                       <p className="text-xs text-[#5F6F70] line-clamp-2 leading-relaxed">
@@ -191,7 +191,7 @@ export default function Topbar({
                   e.target.nextSibling.style.display = "flex";
                 }}
               />
-              <div className="hidden w-9 h-9 rounded-full bg-[#002B2B] text-white items-center justify-center text-xs font-semibold shadow-sm group-hover:scale-105 transition-transform duration-200">
+              <div className="hidden w-9 h-9 rounded-full bg-[#022022] text-[#37F4B4] items-center justify-center text-xs font-semibold shadow-sm group-hover:scale-105 transition-transform duration-200">
                 {user.name.charAt(0)}
               </div>
             </div>
@@ -201,11 +201,11 @@ export default function Topbar({
           {isProfileOpen && (
             <div className="absolute right-0 top-full mt-3 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
               <div className="px-4 py-3 border-b border-slate-100 flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-[#002B2B]/10 flex items-center justify-center text-[#002B2B] font-bold text-base shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 flex items-center justify-center text-[#022022] font-bold text-base shrink-0">
                   {user.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[#062D2D] truncate">
+                  <p className="text-sm font-bold text-[#022022] truncate">
                     {user.name}
                   </p>
                   <p className="text-xs text-[#5F6F70] truncate">{user.role}</p>
@@ -219,7 +219,7 @@ export default function Topbar({
                     setIsProfileOpen(false);
                     navigate("/user/profile");
                   }}
-                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#062D2D] hover:bg-[#002B2B]/5 transition-colors"
+                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#022022] hover:bg-[#022022]/5 transition-colors"
                 >
                   <div className="flex items-center space-x-2.5">
                     <User className="w-4 h-4 text-[#5F6F70]" />
@@ -234,7 +234,7 @@ export default function Topbar({
                     setIsProfileOpen(false);
                     navigate("/user/settings");
                   }}
-                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#062D2D] hover:bg-[#002B2B]/5 transition-colors"
+                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#022022] hover:bg-[#022022]/5 transition-colors"
                 >
                   <div className="flex items-center space-x-2.5">
                     <Settings className="w-4 h-4 text-[#5F6F70]" />
@@ -249,7 +249,7 @@ export default function Topbar({
                     setIsProfileOpen(false);
                     navigate("/user/help");
                   }}
-                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#062D2D] hover:bg-[#002B2B]/5 transition-colors"
+                  className="w-full px-4 py-2.5 flex items-center justify-between text-xs font-medium text-[#022022] hover:bg-[#022022]/5 transition-colors"
                 >
                   <div className="flex items-center space-x-2.5">
                     <CircleHelp className="w-4 h-4 text-[#5F6F70]" />

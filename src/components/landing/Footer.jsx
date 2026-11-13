@@ -5,7 +5,7 @@ import { Globe, Mail, MessageCircle, HeartPulse } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#014751] text-white pt-16 pb-12 px-4 sm:px-8 lg:px-12 border-t border-white/10">
+    <footer className="bg-[#022022] text-white pt-16 pb-12 px-4 sm:px-8 lg:px-12 border-t border-[#37F4B4]/20">
       <div className="max-w-[1480px] mx-auto">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-8 pb-12 border-b border-white/15">
@@ -27,14 +27,14 @@ export default function Footer() {
                 href="https://dinkes.semarangkota.go.id"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#014751] flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#022022] flex items-center justify-center transition-colors"
                 aria-label="Website Dinkes"
               >
                 <Globe className="w-4 h-4" />
               </a>
               <a
                 href="mailto:info@waras.semarang.go.id"
-                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#014751] flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#022022] flex items-center justify-center transition-colors"
                 aria-label="Email WARAS"
               >
                 <Mail className="w-4 h-4" />
@@ -43,7 +43,7 @@ export default function Footer() {
                 href="https://wa.me/628112345678"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#014751] flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 text-white hover:bg-[#37F4B4] hover:text-[#022022] flex items-center justify-center transition-colors"
                 aria-label="WhatsApp Hotline"
               >
                 <MessageCircle className="w-4 h-4" />

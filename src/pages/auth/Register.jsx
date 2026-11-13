@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { authService } from "../../services/authService";
 import {
   Eye,
   EyeOff,
@@ -45,7 +46,7 @@ export default function Register() {
     if (errorMessage) setErrorMessage("");
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (
       !formData.fullName.trim() ||
@@ -80,22 +81,28 @@ export default function Register() {
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setErrorMessage("");
+
+    try {
+      await authService.register(formData);
       setSuccessMessage("Pendaftaran akun berhasil! Mengalihkan ke dashboard warga...");
       setTimeout(() => {
         navigate("/user/dashboard");
-      }, 900);
-    }, 700);
+      }, 700);
+    } catch (err) {
+      setErrorMessage(err.message || "Gagal melakukan pendaftaran. Silakan periksa kembali data Anda.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-900 selection:bg-[#003B3B] selection:text-white">
+    <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-900 selection:bg-[#022022] selection:text-[#37F4B4]">
       {/* ── PANEL KIRI: 50% FULL-HEIGHT BRANDING & STEP CARDS ── */}
-      <aside className="lg:col-span-1 bg-[#002424] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-10 lg:p-12 xl:p-14 min-h-[560px] lg:min-h-screen">
-        {/* Layered rich teal gradient background (sesuai warna masuk akun yang disukai user) */}
-        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_35%,#0B6B6B_0%,#004242_38%,#002424_75%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_15%_100%,rgba(221,238,238,0.14)_0%,transparent_70%)]" />
+      <aside className="lg:col-span-1 bg-[#022022] text-white relative overflow-hidden flex flex-col justify-between p-8 sm:p-10 lg:p-12 xl:p-14 min-h-[560px] lg:min-h-screen">
+        {/* Layered rich teal gradient background kombinasi #022022 dan aksen glow #37F4B4 */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_35%,rgba(55,244,180,0.18)_0%,#053638_40%,#022022_85%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_15%_100%,rgba(55,244,180,0.12)_0%,transparent_70%)]" />
 
         {/* Wave Pattern Overlay from Mask Group.svg at bottom */}
         <img
@@ -110,7 +117,7 @@ export default function Register() {
         <div className="relative z-10">
           <Link to="/" aria-label="WARAS - Beranda" className="inline-flex flex-col items-start gap-1.5 group w-fit">
             <Logo tone="dark" className="h-9 transition-transform duration-200 group-hover:scale-105 origin-left" />
-            <span className="text-[10px] font-semibold tracking-[0.2em] text-teal-200/90 uppercase">
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-[#37F4B4] uppercase">
               HEALTHCARE PLATFORM
             </span>
           </Link>
@@ -118,15 +125,15 @@ export default function Register() {
 
         {/* MIDDLE SECTION: Mengisi area tengah dengan Widget Jaringan Layanan Kesehatan Semarang */}
         <div className="relative z-10 py-6 my-auto max-w-lg">
-          <div className="rounded-2xl bg-white/[0.07] backdrop-blur-md border border-white/12 p-5 sm:p-6 space-y-4 shadow-xl shadow-black/10">
+          <div className="rounded-2xl bg-white/[0.06] backdrop-blur-md border border-[#37F4B4]/20 p-5 sm:p-6 space-y-4 shadow-xl shadow-black/15">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-teal-200">
+                <span className="w-2 h-2 rounded-full bg-[#37F4B4] animate-pulse" />
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#37F4B4]">
                   Layanan Terpadu Warga Semarang
                 </span>
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-400/20 text-teal-200 border border-teal-300/20">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#37F4B4]/15 text-[#37F4B4] border border-[#37F4B4]/30">
                 Resmi Dinkes
               </span>
             </div>
@@ -136,15 +143,15 @@ export default function Register() {
             </p>
 
             <div className="grid grid-cols-3 gap-2.5 pt-2 border-t border-white/10 text-center">
-              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-[#37F4B4]/15">
                 <span className="block text-base sm:text-lg font-bold font-poppins text-white">37</span>
                 <span className="text-[10px] text-teal-200/80 font-medium">Puskesmas</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-[#37F4B4]/15">
                 <span className="block text-base sm:text-lg font-bold font-poppins text-white">14</span>
                 <span className="text-[10px] text-teal-200/80 font-medium">RS Rujukan</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/8">
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-[#37F4B4]/15">
                 <span className="block text-base sm:text-lg font-bold font-poppins text-white">24/7</span>
                 <span className="text-[10px] text-teal-200/80 font-medium">WARAS AI</span>
               </div>
@@ -167,13 +174,13 @@ export default function Register() {
 
           {/* 3 Step Bento Cards Row */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {/* Step 1: Active White Card */}
-            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-[22px] p-4 sm:p-5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5">
-              <div className="w-7 h-7 rounded-full bg-[#003B3B] text-white flex items-center justify-center text-xs font-bold shadow-2xs">
+            {/* Step 1: Active White Card with #37F4B4 accent */}
+            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-[22px] p-4 sm:p-5 shadow-xl shadow-black/20 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 border-2 border-[#37F4B4]/60">
+              <div className="w-7 h-7 rounded-full bg-[#022022] text-[#37F4B4] flex items-center justify-center text-xs font-bold shadow-2xs">
                 1
               </div>
               <div className="pt-3">
-                <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-snug font-poppins">
+                <p className="text-xs sm:text-sm font-semibold text-[#022022] leading-snug font-poppins">
                   Daftar akun
                   <br />
                   warga baru
@@ -182,8 +189,8 @@ export default function Register() {
             </div>
 
             {/* Step 2: Glassmorphism Inactive Card */}
-            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
-              <div className="w-7 h-7 rounded-full bg-white/15 text-white/90 flex items-center justify-center text-xs font-semibold">
+            <div className="bg-white/[0.07] backdrop-blur-md border border-[#37F4B4]/15 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12] hover:border-[#37F4B4]/30">
+              <div className="w-7 h-7 rounded-full bg-white/15 text-[#37F4B4] flex items-center justify-center text-xs font-semibold">
                 2
               </div>
               <div className="pt-3">
@@ -196,8 +203,8 @@ export default function Register() {
             </div>
 
             {/* Step 3: Glassmorphism Inactive Card */}
-            <div className="bg-white/[0.08] backdrop-blur-md border border-white/12 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]">
-              <div className="w-7 h-7 rounded-full bg-white/15 text-white/90 flex items-center justify-center text-xs font-semibold">
+            <div className="bg-white/[0.07] backdrop-blur-md border border-[#37F4B4]/15 text-white rounded-2xl sm:rounded-[22px] p-4 sm:p-5 flex flex-col justify-between min-h-[125px] sm:min-h-[135px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12] hover:border-[#37F4B4]/30">
+              <div className="w-7 h-7 rounded-full bg-white/15 text-[#37F4B4] flex items-center justify-center text-xs font-semibold">
                 3
               </div>
               <div className="pt-3">
@@ -218,14 +225,14 @@ export default function Register() {
         <div className="w-full flex items-center justify-between pb-6">
           <Link
             to="/login"
-            className="text-xs sm:text-sm font-semibold text-slate-500 hover:text-[#003B3B] flex items-center gap-1.5 transition-colors"
+            className="text-xs sm:text-sm font-semibold text-slate-500 hover:text-[#022022] flex items-center gap-1.5 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Kembali ke Halaman Masuk</span>
           </Link>
 
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/70 text-[#003B3B] text-xs font-semibold shadow-2xs">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#003B3B]" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#022022]/5 border border-[#37F4B4]/40 text-[#022022] text-xs font-semibold shadow-2xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#022022]" />
             <span>Registrasi Pasien Resmi</span>
           </span>
         </div>
@@ -239,8 +246,8 @@ export default function Register() {
         >
           {/* Header Form */}
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#003B3B] border border-teal-200/60 shadow-2xs">
-              <UserPlus className="w-3.5 h-3.5 text-[#003B3B]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30 shadow-2xs">
+              <UserPlus className="w-3.5 h-3.5 text-[#022022]" />
               <span>Pendaftaran Warga Baru</span>
             </div>
             <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight">
@@ -282,7 +289,7 @@ export default function Register() {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Sesuai KTP"
-                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                 </div>
               </div>
@@ -300,7 +307,7 @@ export default function Register() {
                     value={formData.nik}
                     onChange={handleChange}
                     placeholder="3374xxxxxxxxxxxx"
-                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                 </div>
               </div>
@@ -320,7 +327,7 @@ export default function Register() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="nama@email.com"
-                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                 </div>
               </div>
@@ -337,7 +344,7 @@ export default function Register() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="0812xxxxxxxx"
-                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-3.5 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                 </div>
               </div>
@@ -357,7 +364,7 @@ export default function Register() {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Min. 8 karakter"
-                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                   <button
                     type="button"
@@ -386,7 +393,7 @@ export default function Register() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Ulangi kata sandi"
-                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#003B3B] focus:ring-4 focus:ring-[#003B3B]/10 transition-all font-inter"
+                    className="w-full pl-10 pr-9 h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-4 focus:ring-[#37F4B4]/25 transition-all font-inter"
                   />
                   <button
                     type="button"
@@ -412,7 +419,7 @@ export default function Register() {
                   name="termsAccepted"
                   checked={formData.termsAccepted}
                   onChange={handleChange}
-                  className="mt-0.5 w-4 h-4 rounded text-[#003B3B] focus:ring-[#003B3B] border-slate-300"
+                  className="mt-0.5 w-4 h-4 rounded text-[#022022] focus:ring-[#37F4B4] accent-[#022022] border-slate-300"
                 />
                 <span className="text-xs text-slate-600 leading-relaxed font-inter">
                   Saya menyatakan data di atas adalah benar sesuai KTP resmi dan menyetujui ketentuan integrasi data rekam medis terpadu Kota Semarang.
@@ -424,14 +431,14 @@ export default function Register() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 inline-flex items-center justify-center gap-2 px-5 rounded-xl bg-[#003B3B] hover:bg-[#002A2A] disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-[0.99] mt-2"
+              className="w-full h-11 inline-flex items-center justify-center gap-2 px-5 rounded-xl bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent disabled:opacity-60 text-white text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-[0.99] mt-2 group"
             >
               {isLoading ? (
                 <span>Memproses Pendaftaran...</span>
               ) : (
                 <>
                   <span>Daftar Akun WARAS</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
             </button>
@@ -443,7 +450,7 @@ export default function Register() {
               Sudah memiliki akun terdaftar?{" "}
               <Link
                 to="/login"
-                className="font-semibold text-[#003B3B] hover:underline"
+                className="font-semibold text-[#022022] hover:text-[#033033] hover:underline"
               >
                 Masuk ke akun
               </Link>

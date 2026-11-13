@@ -11,12 +11,12 @@ const partners = [
 
 export default function PartnerStrip() {
   return (
-    <section className="px-4 sm:px-8 lg:px-12 py-8 bg-white border-b border-[#014751]/10">
+    <section className="px-4 sm:px-8 lg:px-12 py-8 bg-white border-b border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* LEFT TAG */}
         <div className="flex items-center gap-2.5 text-xs font-light text-[#022022]/60 shrink-0">
-          <ShieldCheck className="w-4 h-4 text-[#014751]" />
+          <ShieldCheck className="w-4 h-4 text-[#022022]" />
           <span>Integrasi Jaringan Publik Resmi:</span>
         </div>
 
@@ -25,7 +25,7 @@ export default function PartnerStrip() {
           {partners.map((partner) => (
             <span
               key={partner}
-              className="hover:text-[#014751] transition-colors cursor-default tracking-wide"
+              className="hover:text-[#022022] hover:font-normal transition-colors cursor-default tracking-wide"
             >
               {partner}
             </span>

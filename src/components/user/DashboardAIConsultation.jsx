@@ -51,22 +51,22 @@ export default function DashboardAIConsultation({ className = "" }) {
 
   return (
     <div
-      className={`bg-white rounded-2xl border border-[#E2ECEB] p-5 sm:p-6 shadow-xs flex flex-col justify-between h-full transition-all duration-200 hover:border-[#003B3B]/25 ${className}`}
+      className={`bg-white rounded-2xl border border-[#E2ECEB] p-5 sm:p-6 shadow-xs flex flex-col justify-between h-full transition-all duration-200 hover:border-[#37F4B4]/50 hover:shadow-md ${className}`}
     >
       {/* HEADER SECTION */}
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#003B3B] text-white flex items-center justify-center shadow-xs">
-              <Bot className="w-5 h-5 text-[#EBF5F5]" />
+            <div className="w-9 h-9 rounded-xl bg-[#022022] border border-[#37F4B4]/25 text-[#37F4B4] flex items-center justify-center shadow-xs">
+              <Bot className="w-5 h-5 text-[#37F4B4]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h4 className="font-poppins font-semibold text-sm sm:text-base text-[#0D2626]">
                   WARAS AI Assistant
                 </h4>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#022022]/5 text-[#022022] border border-[#37F4B4]/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4] animate-pulse" />
                   Siaga 24/7
                 </span>
               </div>
@@ -78,7 +78,7 @@ export default function DashboardAIConsultation({ className = "" }) {
 
           <Link
             to="/user/ai"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[#003B3B] hover:text-[#002D2D] hover:underline transition-colors shrink-0"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#022022] hover:text-[#033033] hover:underline transition-colors shrink-0"
           >
             <span className="hidden sm:inline">Buka Chat Penuh</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -98,13 +98,13 @@ export default function DashboardAIConsultation({ className = "" }) {
                 key={idx}
                 type="button"
                 onClick={() => handleConsult(item.text)}
-                className="group p-3 rounded-xl bg-[#F8FAFA] hover:bg-[#EBF5F5] border border-[#E2ECEB] hover:border-[#003B3B]/30 transition-all duration-150 text-left flex items-start gap-2.5 cursor-pointer active:scale-[0.99]"
+                className="group p-3 rounded-xl bg-[#F8FAFA] hover:bg-[#022022]/5 border border-[#E2ECEB] hover:border-[#37F4B4]/50 transition-all duration-150 text-left flex items-start gap-2.5 cursor-pointer active:scale-[0.99]"
               >
-                <div className="p-1.5 rounded-lg bg-white text-[#003B3B] border border-[#E2ECEB] group-hover:scale-105 group-hover:bg-[#003B3B] group-hover:text-white transition-all shrink-0 shadow-2xs">
+                <div className="p-1.5 rounded-lg bg-white text-[#022022] border border-[#E2ECEB] group-hover:scale-105 group-hover:bg-[#022022] group-hover:text-[#37F4B4] transition-all shrink-0 shadow-2xs">
                   <Icon className="w-3.5 h-3.5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-[11px] font-semibold text-[#003B3B] block leading-tight">
+                  <span className="text-[11px] font-semibold text-[#022022] block leading-tight">
                     {item.label}
                   </span>
                   <span className="text-xs text-[#2B3E3E] font-medium leading-snug line-clamp-2 mt-0.5 font-inter">
@@ -121,7 +121,7 @@ export default function DashboardAIConsultation({ className = "" }) {
       <div className="space-y-2 pt-4">
         <form
           onSubmit={handleSubmit}
-          className="relative flex items-center bg-[#F8FAFA] border border-[#E2ECEB] focus-within:border-[#003B3B]/40 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#003B3B]/10 rounded-xl p-1.5 transition-all shadow-2xs"
+          className="relative flex items-center bg-[#F8FAFA] border border-[#E2ECEB] focus-within:border-[#022022] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#37F4B4]/25 rounded-xl p-1.5 transition-all shadow-2xs"
         >
           <input
             type="text"
@@ -134,15 +134,15 @@ export default function DashboardAIConsultation({ className = "" }) {
           <button
             type="submit"
             disabled={!query.trim()}
-            className="w-8 h-8 rounded-lg bg-[#003B3B] hover:bg-[#002D2D] disabled:opacity-40 text-white flex items-center justify-center shrink-0 transition-colors shadow-xs cursor-pointer ml-1"
+            className="w-8 h-8 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent disabled:opacity-40 text-white flex items-center justify-center shrink-0 transition-colors shadow-xs cursor-pointer ml-1 group"
             aria-label="Kirim pertanyaan ke WARAS AI"
           >
-            <ArrowUp className="w-4 h-4 stroke-[2.5]" />
+            <ArrowUp className="w-4 h-4 stroke-[2.5] text-[#37F4B4] group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </form>
 
         <div className="flex items-center gap-1.5 text-[11px] text-[#738787] font-inter px-1">
-          <Info className="w-3.5 h-3.5 text-[#0B6B6B] shrink-0" />
+          <Info className="w-3.5 h-3.5 text-[#022022] shrink-0" />
           <span className="line-clamp-1">
             WARAS AI bersifat edukasi awal, bukan pengganti diagnosis resmi tenaga medis.
           </span>

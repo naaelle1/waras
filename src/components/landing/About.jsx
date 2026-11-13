@@ -45,12 +45,12 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 space-y-5"
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF5F5] text-[#003B3B] text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B6B]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#022022]/5 border border-[#37F4B4]/25 text-[#022022] text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[#022022]" />
               <span>Tentang Inisiatif WARAS</span>
             </div>
 
-            <h2 className="font-poppins font-extrabold text-2xl sm:text-4xl text-[#0D2626] tracking-tight leading-tight">
+            <h2 className="font-poppins font-extrabold text-2xl sm:text-4xl text-[#022022] tracking-tight leading-tight">
               Mewujudkan Warga Semarang yang Sehat, Tenang, dan Terlayani.
             </h2>
 
@@ -65,10 +65,10 @@ export default function About() {
             <div className="pt-2">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#022022] hover:bg-[#033033] border border-[#37F4B4]/20 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors"
               >
                 <span>Lihat Jaringan Fasilitas Semarang</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-[#37F4B4]" />
               </Link>
             </div>
           </motion.div>
@@ -86,13 +86,13 @@ export default function About() {
               return (
                 <div
                   key={i}
-                  className="p-5 rounded-2xl bg-white border border-[#E2ECEB] shadow-xs flex items-start gap-4 hover:border-[#003B3B]/30 hover:shadow-md transition-all duration-200"
+                  className="p-5 rounded-2xl bg-white border border-[#E2ECEB] shadow-xs flex items-start gap-4 hover:border-[#37F4B4]/40 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-[#EBF5F5] text-[#003B3B] flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 rounded-xl bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4] flex items-center justify-center shrink-0 transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="font-poppins font-semibold text-base text-[#0D2626]">
+                    <h3 className="font-poppins font-semibold text-base text-[#022022]">
                       {v.title}
                     </h3>
                     <p className="font-inter text-xs sm:text-sm text-[#526666] leading-relaxed">

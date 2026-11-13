@@ -3,13 +3,13 @@ import { Info } from "lucide-react";
 
 export default function ReportInfoBanner() {
   return (
-    <div className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/90 p-4 sm:p-5 shadow-[0_8px_30px_rgba(0,43,43,0.04)]">
+    <div className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/90 p-4 sm:p-5 shadow-[0_8px_30px_rgba(2,32,34,0.04)]">
       <div className="flex items-start gap-3.5">
-        <div className="p-2 rounded-xl bg-[#003B3B]/10 text-[#003B3B] shrink-0 mt-0.5">
+        <div className="p-2 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/25 shrink-0 mt-0.5">
           <Info className="w-5 h-5" />
         </div>
         <div className="space-y-1">
-          <h4 className="font-poppins font-bold text-sm text-[#062B2B]">
+          <h4 className="font-poppins font-bold text-sm text-[#022022]">
             Membantu Meningkatkan Kualitas WARAS
           </h4>
           <p className="text-xs sm:text-sm text-[#4B5E5E] font-inter leading-relaxed">

@@ -10,6 +10,7 @@ import express from 'express';
 import cors from 'cors';
 
 import aiRoutes from './routes/ai.js';
+import authRoutes from './routes/auth.js';
 import facilitiesRoutes from './routes/facilities.js';
 import articlesRoutes from './routes/articles.js';
 import reportsRoutes from './routes/reports.js';
@@ -35,6 +36,7 @@ app.use(cors({
 app.use(express.json());
 
 // ── Routes ──────────────────────────────────────────────────────────────────
+app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/facilities', facilitiesRoutes);
 app.use('/api/articles', articlesRoutes);

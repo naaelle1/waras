@@ -35,16 +35,16 @@ const puskesmasIcon = new L.DivIcon({
 const hospitalIcon = new L.DivIcon({
   className: "custom-leaflet-marker",
   html: `<div style="
-    background-color: #003B3B;
+    background-color: #022022;
     width: 34px;
     height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    box-shadow: 0 4px 14px rgba(0, 59, 59, 0.55);
-    border: 2px solid white;
+    color: #37F4B4;
+    box-shadow: 0 4px 14px rgba(2, 32, 34, 0.65);
+    border: 2px solid #37F4B4;
     cursor: pointer;
     transition: transform 0.2s ease;
   ">
@@ -201,8 +201,8 @@ export default function MapComponent({
                     <span
                       className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isHospital
-                          ? "bg-[#003B3B] text-white"
-                          : "bg-[#EBF5F5] text-[#003B3B]"
+                          ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30"
+                          : "bg-[#022022]/10 text-[#022022] border border-[#37F4B4]/20"
                       }`}
                     >
                       {facility.category}
@@ -219,7 +219,7 @@ export default function MapComponent({
                   </h4>
 
                   <p className="text-xs text-[#526666] mb-3 flex items-start gap-1">
-                    <MapPin className="w-3.5 h-3.5 shrink-0 text-[#003B3B] mt-0.5" />
+                    <MapPin className="w-3.5 h-3.5 shrink-0 text-[#022022] mt-0.5" />
                     <span className="line-clamp-2">{facility.address}</span>
                   </p>
 
@@ -228,18 +228,18 @@ export default function MapComponent({
                       href={`https://www.google.com/maps/dir/?api=1&destination=${facility.latitude},${facility.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold transition-colors"
                     >
-                      <Navigation className="w-3.5 h-3.5" />
+                      <Navigation className="w-3.5 h-3.5 text-[#37F4B4]" />
                       <span>Petunjuk Arah (Google Maps)</span>
                     </a>
                   ) : (
                     <Link
                       to={`/user/facilities/${facility.id}`}
-                      className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#003B3B] hover:bg-[#002D2D] text-white text-xs font-semibold transition-colors"
+                      className="inline-flex items-center justify-center gap-1 w-full px-3 py-1.5 rounded-lg bg-[#022022] hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent text-white text-xs font-semibold transition-colors"
                     >
                       <span>Lihat Detail</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#37F4B4]" />
                     </Link>
                   )}
                 </div>
@@ -255,7 +255,7 @@ export default function MapComponent({
           onClick={handleGetLocation}
           disabled={isLocating}
           title="Tampilkan Lokasi Saya"
-          className="p-2.5 rounded-xl bg-white hover:bg-gray-50 text-[#003B3B] border border-[#E2ECEB] shadow-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+          className="p-2.5 rounded-xl bg-white hover:bg-gray-50 text-[#022022] border border-[#E2ECEB] shadow-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
         >
           <Navigation className={`w-4 h-4 ${isLocating ? "animate-spin text-blue-600" : ""}`} />
         </button>
@@ -265,17 +265,17 @@ export default function MapComponent({
       {!isSingle && (
         <div className="absolute bottom-3 left-3 right-3 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-[#E2ECEB] shadow-xs flex items-center justify-between text-xs text-[#526666]">
           <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-[#003B3B]" />
+            <Info className="w-4 h-4 text-[#022022]" />
             <span>
               Menampilkan <strong>{mappedFacilities.length}</strong> fasilitas kesehatan terpetakan di Semarang.
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-3 font-medium text-[11px]">
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#0B5D5D]" /> Puskesmas (38)
+              <span className="w-2.5 h-2.5 rounded-full bg-[#37F4B4]" /> Puskesmas (38)
             </span>
             <span className="flex items-center gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#003B3B]" /> Rumah Sakit (26)
+              <span className="w-2.5 h-2.5 rounded-full bg-[#022022]" /> Rumah Sakit (26)
             </span>
           </div>
         </div>
