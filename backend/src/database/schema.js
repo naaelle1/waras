@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS chat_history (
   message_type TEXT DEFAULT 'general',
   related_article_ids TEXT,
   show_facility_cta INTEGER DEFAULT 0,
+  attachment_data TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_chat_history_session ON chat_history(session_id);

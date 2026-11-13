@@ -11,13 +11,14 @@ export const aiService = {
    * @param {string} userMessage
    * @param {Array}  history  - riwayat pesan untuk konteks multi-turn
    * @param {string} sessionId - ID sesi percakapan
+   * @param {object|null} attachment - lampiran gambar { mimeType, data, name }
    */
-  async sendMessage(userMessage, history = [], sessionId = null) {
+  async sendMessage(userMessage, history = [], sessionId = null, attachment = null) {
     const tryFetch = async () => {
       const res = await fetch(`${API_BASE}/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, history, sessionId }),
+        body: JSON.stringify({ message: userMessage, history, sessionId, attachment }),
       });
 
       if (!res.ok) {

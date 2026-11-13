@@ -34,12 +34,35 @@ export default function ConversationPanel({
   );
 
   // Categorize conversations
+  const isToday = (dateStr) => {
+    if (!dateStr) return true;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return true;
+    return d.toDateString() === new Date().toDateString();
+  };
+
+  const isYesterday = (dateStr) => {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return false;
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return d.toDateString() === yesterday.toDateString();
+  };
+
   const pinnedConversations = filtered.filter((c) => c.isPinned);
-  const todayConversations = filtered.filter(
-    (c) => !c.isPinned && (c.category === "today" || !c.category)
+  const unpinned = filtered.filter((c) => !c.isPinned);
+
+  const todayConversations = unpinned.filter(
+    (c) => isToday(c.updatedAt || c.createdAt) || c.category === "today"
   );
-  const yesterdayConversations = filtered.filter(
-    (c) => !c.isPinned && c.category === "yesterday"
+  const yesterdayConversations = unpinned.filter(
+    (c) =>
+      !todayConversations.includes(c) &&
+      (isYesterday(c.updatedAt || c.createdAt) || c.category === "yesterday")
+  );
+  const previousConversations = unpinned.filter(
+    (c) => !todayConversations.includes(c) && !yesterdayConversations.includes(c)
   );
 
   const renderConversationItem = (chat, isActive) => (
@@ -240,7 +263,7 @@ export default function ConversationPanel({
                 </div>
               )}
 
-              {/* Kategori 3: Kemarin & Sebelumnya */}
+              {/* Kategori 3: Kemarin */}
               {yesterdayConversations.length > 0 && (
                 <div className="space-y-1.5">
                   <div className="px-2 text-[10px] font-bold tracking-wider uppercase text-slate-400 font-poppins">
@@ -248,6 +271,20 @@ export default function ConversationPanel({
                   </div>
                   <div className="space-y-1">
                     {yesterdayConversations.map((chat) =>
+                      renderConversationItem(chat, chat.id === activeId)
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Kategori 4: Sebelumnya */}
+              {previousConversations.length > 0 && (
+                <div className="space-y-1.5">
+                  <div className="px-2 text-[10px] font-bold tracking-wider uppercase text-slate-400 font-poppins">
+                    Sebelumnya
+                  </div>
+                  <div className="space-y-1">
+                    {previousConversations.map((chat) =>
                       renderConversationItem(chat, chat.id === activeId)
                     )}
                   </div>

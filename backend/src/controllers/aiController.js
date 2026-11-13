@@ -107,7 +107,7 @@ async function ensureDefaultConversations() {
     {
       id: 'conv-3',
       title: 'Rujukan BPJS ke RS',
-      is_pinned: 1,
+      is_pinned: 0,
       category: 'yesterday',
       messages: [
         {
@@ -188,7 +188,7 @@ export async function createConversation(req, res) {
     const conversationId = id || `conv-${Date.now()}`;
 
     await db.execute({
-      sql: `INSERT INTO ai_conversations (id, title, is_pinned, category)
+      sql: `INSERT OR IGNORE INTO ai_conversations (id, title, is_pinned, category)
             VALUES (?, ?, ?, ?)`,
       args: [conversationId, title, isPinned ? 1 : 0, category]
     });
@@ -219,7 +219,7 @@ export async function getMessages(req, res) {
     const { id } = req.params;
 
     const result = await db.execute({
-      sql: `SELECT id, session_id, sender, message, message_type, related_article_ids, show_facility_cta, created_at
+      sql: `SELECT id, session_id, sender, message, message_type, related_article_ids, show_facility_cta, attachment_data, created_at
             FROM chat_history
             WHERE session_id = ?
             ORDER BY id ASC`,
@@ -236,14 +236,32 @@ export async function getMessages(req, res) {
         relatedArticleIds = [];
       }
 
+      let attachment = null;
+      try {
+        if (row.attachment_data) {
+          attachment = JSON.parse(row.attachment_data);
+        }
+      } catch (_e) {
+        attachment = null;
+      }
+
+      let timestamp = "";
+      try {
+        const dateStr = typeof row.created_at === "string" ? row.created_at.replace(" ", "T") : row.created_at;
+        timestamp = new Date(dateStr).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+      } catch (_e) {
+        timestamp = new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+      }
+
       return {
         id: `msg-${row.id}`,
         sender: row.sender,
         message: row.message,
-        timestamp: new Date(row.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        timestamp,
         type: row.message_type || 'general',
         relatedArticleIds,
-        showFacilityCTA: Boolean(row.show_facility_cta)
+        showFacilityCTA: Boolean(row.show_facility_cta),
+        attachment
       };
     });
 
@@ -320,16 +338,31 @@ export async function deleteConversation(req, res) {
 
 /**
  * POST /api/ai/chat
- * Body: { message: string, history?: Array<{role, parts}>, sessionId?: string }
+ * Body: { message: string, history?: Array<{role, parts}>, sessionId?: string, attachment?: { mimeType: string, data: string, name?: string } }
  */
 export async function chat(req, res) {
-  const { message, history = [], sessionId } = req.body;
+  const { message, history = [], sessionId, attachment } = req.body;
 
-  if (!message || typeof message !== 'string' || !message.trim()) {
-    return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong.' });
+  let cleanMessage = (message && typeof message === 'string') ? message.trim() : '';
+  if (!cleanMessage && attachment) {
+    cleanMessage = 'Tolong periksa foto keluhan kesehatan ini dan berikan informasi atau sarannya.';
   }
 
-  const cleanMessage = message.trim();
+  if (!cleanMessage && !attachment) {
+    return res.status(400).json({ success: false, message: 'Pesan atau foto keluhan tidak boleh kosong.' });
+  }
+
+  // Siapkan attachment data jika ada
+  let attachmentJson = null;
+  let hasValidAttachment = false;
+  if (attachment && attachment.data && attachment.mimeType) {
+    hasValidAttachment = true;
+    attachmentJson = JSON.stringify({
+      mimeType: attachment.mimeType,
+      data: attachment.data,
+      name: attachment.name || 'foto-keluhan.jpg'
+    });
+  }
 
   // Simpan pesan user ke database jika sessionId disertakan
   if (sessionId) {
@@ -341,9 +374,9 @@ export async function chat(req, res) {
       });
 
       await db.execute({
-        sql: `INSERT INTO chat_history (session_id, sender, message, message_type)
-              VALUES (?, 'user', ?, 'general')`,
-        args: [sessionId, cleanMessage]
+        sql: `INSERT INTO chat_history (session_id, sender, message, message_type, attachment_data)
+              VALUES (?, 'user', ?, 'general', ?)`,
+        args: [sessionId, cleanMessage, attachmentJson]
       });
     } catch (dbErr) {
       console.warn('[AI DB Chat Save Warning - User]', dbErr.message);
@@ -351,7 +384,19 @@ export async function chat(req, res) {
   }
 
   try {
-    const primaryModel = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
+    const primaryModel = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+
+    // Format parts untuk pesan user saat ini (teks + gambar jika ada)
+    const currentUserParts = [];
+    if (hasValidAttachment) {
+      currentUserParts.push({
+        inlineData: {
+          mimeType: attachment.mimeType,
+          data: attachment.data,
+        }
+      });
+    }
+    currentUserParts.push({ text: cleanMessage });
 
     // Format riwayat chat untuk Gemini
     const contents = [
@@ -361,7 +406,7 @@ export async function chat(req, res) {
           role: h.role === 'ai' || h.role === 'model' ? 'model' : 'user',
           parts: [{ text: h.parts }],
         })),
-      { role: 'user', parts: [{ text: cleanMessage }] },
+      { role: 'user', parts: currentUserParts },
     ];
 
     const ai = getAiClient();
@@ -383,7 +428,7 @@ export async function chat(req, res) {
       });
     } catch (modelErr) {
       console.warn(`[AI Controller] Model ${primaryModel} gagal, mencoba fallback:`, modelErr.message);
-      const fallbackModel = primaryModel === 'gemini-3.1-flash-lite' ? 'gemini-3.5-flash-lite' : 'gemini-3.1-flash-lite';
+      const fallbackModel = primaryModel === 'gemini-3.5-flash-lite' ? 'gemini-3.1-flash-lite' : 'gemini-3.5-flash-lite';
       response = await ai.models.generateContent({
         model: fallbackModel,
         contents,

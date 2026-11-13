@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams, useOutletContext } from "react-router-dom";
 import { PhoneCall, ShieldAlert, X, Phone, Ambulance } from "lucide-react";
 
@@ -16,19 +16,70 @@ export default function AI() {
   const [isMobileHistoryOpen, setIsMobileHistoryOpen] = useState(false);
   const [pendingPrompt, setPendingPrompt] = useState("");
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState(false);
+  const [isLoadingConversations, setIsLoadingConversations] = useState(true);
+  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
-  // 1. Muat seluruh percakapan tersimpan dari Turso Database saat mount
+  const queryHandledRef = useRef(false);
+
+  // 1. Tangani queryParam jika pengguna datang dari Dashboard atau link lain (?q=...)
   useEffect(() => {
+    if (queryParam && queryParam.trim() && !queryHandledRef.current) {
+      queryHandledRef.current = true;
+      const promptText = queryParam.trim();
+      const newId = `conv-${Date.now()}`;
+      const newChat = {
+        id: newId,
+        title: promptText.length > 28 ? promptText.slice(0, 28) + "..." : promptText,
+        category: "today",
+        isPinned: false,
+        messages: [],
+        updatedAt: new Date().toISOString()
+      };
+      setConversations((prev) => [newChat, ...prev.filter((c) => c.id !== newId)]);
+      setActiveId(newId);
+      setPendingPrompt(promptText);
+      localStorage.setItem("waras_active_ai_session", newId);
+      aiService.createConversation(newChat).catch(console.warn);
+      setSearchParams({}, { replace: true });
+    }
+  }, [queryParam, setSearchParams]);
+
+  // 2. Muat seluruh percakapan tersimpan dari Database saat mount
+  useEffect(() => {
+    let isCurrent = true;
+
     async function fetchConversations() {
       try {
+        setIsLoadingConversations(true);
         const list = await aiService.getConversations();
+        if (!isCurrent) return;
+
         if (list && list.length > 0) {
-          setConversations(list.map((c) => ({ ...c, messages: [] })));
-          if (!queryParam) {
-            setActiveId(list[0].id);
-          }
+          setConversations((prev) => {
+            // Pertahankan sesi baru/pending di prev yang belum masuk ke database
+            const existingIds = new Set(list.map((c) => c.id));
+            const pending = prev.filter((c) => !existingIds.has(c.id));
+            return [
+              ...pending,
+              ...list.map((c) => {
+                const inPrev = prev.find((p) => p.id === c.id);
+                return { ...c, messages: inPrev?.messages || [] };
+              })
+            ];
+          });
+
+          // Tentukan sesi aktif: jika belum ada, pakai yang tersimpan di localStorage atau sesi paling baru
+          setActiveId((prevActiveId) => {
+            if (prevActiveId) return prevActiveId;
+            if (queryParam) return prevActiveId;
+            const saved = localStorage.getItem("waras_active_ai_session");
+            if (saved && list.some((c) => c.id === saved)) {
+              return saved;
+            }
+            return list[0].id;
+          });
         } else {
-          const defaultId = "conv-1";
+          const defaultId = `conv-${Date.now()}`;
           const defaultChat = {
             id: defaultId,
             title: "Percakapan Baru",
@@ -39,19 +90,38 @@ export default function AI() {
           };
           setConversations([defaultChat]);
           setActiveId(defaultId);
+          localStorage.setItem("waras_active_ai_session", defaultId);
           aiService.createConversation(defaultChat).catch(console.warn);
         }
       } catch (err) {
         console.warn("[AI Page] Gagal memuat percakapan dari DB:", err);
+      } finally {
+        if (isCurrent) {
+          setIsLoadingConversations(false);
+        }
       }
     }
+
     fetchConversations();
+    return () => {
+      isCurrent = false;
+    };
   }, []);
 
-  // 2. Muat riwayat pesan dari database saat activeId berubah
+  // 3. Muat riwayat pesan dari database saat activeId berubah (hanya jika belum ada di memori)
   useEffect(() => {
     if (!activeId) return;
+    localStorage.setItem("waras_active_ai_session", activeId);
     let isCurrent = true;
+
+    // Jika pesan sudah dimuat di memori, tidak perlu fetch ulang yang menyebabkan flicker
+    const targetConv = conversations.find((c) => c.id === activeId);
+    if (targetConv && targetConv.messages && targetConv.messages.length > 0) {
+      setIsLoadingMessages(false);
+      return;
+    }
+
+    setIsLoadingMessages(true);
 
     async function loadMessages() {
       try {
@@ -63,6 +133,10 @@ export default function AI() {
         }
       } catch (err) {
         console.warn("[AI Page] Gagal memuat pesan untuk sesi:", activeId, err);
+      } finally {
+        if (isCurrent) {
+          setIsLoadingMessages(false);
+        }
       }
     }
 
@@ -72,30 +146,9 @@ export default function AI() {
     };
   }, [activeId]);
 
-  useEffect(() => {
-    if (queryParam && queryParam.trim()) {
-      const promptText = queryParam.trim();
-      const newId = `conv-${Date.now()}`;
-      const newChat = {
-        id: newId,
-        title: promptText.slice(0, 26) + "...",
-        category: "today",
-        isPinned: false,
-        messages: [],
-        updatedAt: new Date().toISOString()
-      };
-      setConversations((prev) => [newChat, ...prev]);
-      setActiveId(newId);
-      setPendingPrompt(promptText);
-      aiService.createConversation(newChat).catch(console.warn);
-      // Bersihkan param q dari URL
-      setSearchParams({}, { replace: true });
-    }
-  }, [queryParam, setSearchParams]);
-
   const activeConversation =
     conversations.find((c) => c.id === activeId) || {
-      id: activeId,
+      id: activeId || `conv-${Date.now()}`,
       title: "Percakapan Baru",
       category: "today",
       isPinned: false,
@@ -112,35 +165,59 @@ export default function AI() {
       messages: [],
       updatedAt: new Date().toISOString()
     };
-    setConversations((prev) => [newChat, ...prev]);
+    setConversations((prev) => {
+      const pinned = prev.filter((c) => c.isPinned);
+      const unpinned = prev.filter((c) => !c.isPinned);
+      return [...pinned, newChat, ...unpinned];
+    });
     setActiveId(newId);
     setPendingPrompt("");
+    setIsLoadingMessages(false);
+    localStorage.setItem("waras_active_ai_session", newId);
     await aiService.createConversation(newChat);
   };
 
   const handleSelectConversation = (id) => {
+    if (id === activeId) return;
     setActiveId(id);
     setPendingPrompt("");
+    localStorage.setItem("waras_active_ai_session", id);
   };
 
   const handleUpdateMessages = (updatedMessages, firstUserMessageText) => {
-    setConversations((prev) =>
-      prev.map((c) => {
-        if (c.id === activeId) {
-          const title =
-            c.title === "Percakapan Baru" && firstUserMessageText
-              ? firstUserMessageText.slice(0, 26) + "..."
-              : c.title;
-          return {
-            ...c,
-            title,
-            messages: updatedMessages,
-            updatedAt: new Date().toISOString()
-          };
-        }
-        return c;
-      })
-    );
+    setConversations((prev) => {
+      const target = prev.find((c) => c.id === activeId);
+      if (!target) return prev;
+
+      const title =
+        target.title === "Percakapan Baru" && firstUserMessageText
+          ? (firstUserMessageText.length > 28
+              ? firstUserMessageText.slice(0, 28) + "..."
+              : firstUserMessageText)
+          : target.title;
+
+      const updatedChat = {
+        ...target,
+        title,
+        messages: updatedMessages,
+        updatedAt: new Date().toISOString()
+      };
+
+      // Simpan judul baru ke database jika baru pertama kali diisi
+      if (target.title === "Percakapan Baru" && firstUserMessageText) {
+        aiService.updateConversation(activeId, { title }).catch(console.warn);
+      }
+
+      // Pindahkan sesi yang baru saja aktif ke urutan paling atas
+      const remaining = prev.filter((c) => c.id !== activeId);
+      if (updatedChat.isPinned) {
+        return [updatedChat, ...remaining];
+      } else {
+        const pinned = remaining.filter((c) => c.isPinned);
+        const unpinned = remaining.filter((c) => !c.isPinned);
+        return [...pinned, updatedChat, ...unpinned];
+      }
+    });
   };
 
   const handleDeleteConversation = async (id) => {
@@ -158,11 +235,14 @@ export default function AI() {
           updatedAt: new Date().toISOString()
         };
         setActiveId(freshId);
+        localStorage.setItem("waras_active_ai_session", freshId);
         aiService.createConversation(freshChat).catch(console.warn);
         return [freshChat];
       }
       if (id === activeId) {
-        setActiveId(filtered[0].id);
+        const nextId = filtered[0].id;
+        setActiveId(nextId);
+        localStorage.setItem("waras_active_ai_session", nextId);
       }
       return filtered;
     });
@@ -173,9 +253,12 @@ export default function AI() {
     if (!target) return;
     const nextPinned = !target.isPinned;
 
-    setConversations((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, isPinned: nextPinned } : c))
-    );
+    setConversations((prev) => {
+      const updated = prev.map((c) => (c.id === id ? { ...c, isPinned: nextPinned } : c));
+      const pinned = updated.filter((c) => c.isPinned);
+      const unpinned = updated.filter((c) => !c.isPinned);
+      return [...pinned, ...unpinned];
+    });
     await aiService.updateConversation(id, { isPinned: nextPinned });
   };
 
@@ -195,6 +278,8 @@ export default function AI() {
         onNewConversation={handleNewConversation}
         onOpenHistoryMobile={() => setIsMobileHistoryOpen(true)}
         onOpenMobileNav={handleOpenMobileNav}
+        isLoadingConversations={isLoadingConversations}
+        isLoadingMessages={isLoadingMessages}
       />
 
       {/* ── 3. SIDEBAR KANAN: RIWAYAT PERCAKAPAN AI (DOCKED RIGHT) ── */}

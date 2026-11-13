@@ -21,7 +21,8 @@ import {
   X,
   Stethoscope,
   Activity,
-  HeartHandshake
+  HeartHandshake,
+  Image as ImageIcon
 } from "lucide-react";
 
 import { aiService } from "../../services/aiService";
@@ -97,6 +98,21 @@ function renderFormattedMessage(text) {
 // Status loading variatif kontekstual
 function getLoadingStatusList(query) {
   const q = (query || "").toLowerCase();
+
+  if (
+    q.includes("foto") ||
+    q.includes("gambar") ||
+    q.includes("gatal") ||
+    q.includes("ruam") ||
+    q.includes("bintik") ||
+    q.includes("kulit")
+  ) {
+    return [
+      "Menganalisis foto keluhan & kondisi visual...",
+      "Mengecek pola ruam & indikasi pemicu...",
+      "Menyiapkan observasi awal & langkah perawatan mandiri...",
+    ];
+  }
 
   if (
     q.includes("faskes") ||
@@ -206,7 +222,9 @@ export default function AIChat({
   initialPrompt = "",
   onNewConversation = () => {},
   onOpenHistoryMobile = () => {},
-  onOpenMobileNav = () => {}
+  onOpenMobileNav = () => {},
+  isLoadingMessages = false,
+  isLoadingConversations = false
 }) {
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -216,10 +234,13 @@ export default function AIChat({
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showGuideModal, setShowGuideModal] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [selectedAttachment, setSelectedAttachment] = useState(null);
+  const [viewingImage, setViewingImage] = useState(null);
 
   const activeQueryRef = useRef("");
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
   const hasTriggeredInitial = useRef(false);
 
   const messages = activeConversation?.messages || [];
@@ -252,10 +273,55 @@ export default function AIChat({
     setTimeout(() => setToastMessage(""), 2500);
   };
 
-  const handleSend = async (textToSend) => {
-    const messageContent = textToSend || inputText;
-    if (!messageContent.trim() || isLoading) return;
+  const handleFileSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
+    if (!file.type.startsWith("image/")) {
+      showToast("Hanya file gambar (JPG, PNG, WEBP) yang didukung.");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      showToast("Ukuran foto maksimal 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result;
+      const base64Data = typeof result === "string" ? result.split(",")[1] : "";
+      setSelectedAttachment({
+        name: file.name,
+        mimeType: file.type || "image/jpeg",
+        data: base64Data,
+        previewUrl: result,
+        sizeFormatted: `${Math.round(file.size / 1024)} KB`,
+      });
+      showToast("Foto keluhan berhasil dilampirkan.");
+    };
+    reader.onerror = () => {
+      showToast("Gagal membaca file gambar.");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveAttachment = () => {
+    setSelectedAttachment(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleSend = async (textToSend, attachmentToSend) => {
+    const rawText = textToSend !== undefined ? textToSend : inputText;
+    const attachment = attachmentToSend !== undefined ? attachmentToSend : selectedAttachment;
+    const trimmed = rawText ? rawText.trim() : "";
+
+    if ((!trimmed && !attachment) || isLoading) return;
+
+    const messageContent =
+      trimmed || "Tolong periksa foto keluhan kesehatan ini dan berikan informasi atau sarannya.";
     activeQueryRef.current = messageContent;
 
     const userMsg = {
@@ -263,12 +329,22 @@ export default function AIChat({
       sender: "user",
       message: messageContent,
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      attachment: attachment
+        ? {
+            name: attachment.name,
+            mimeType: attachment.mimeType,
+            data: attachment.data,
+            previewUrl: attachment.previewUrl,
+          }
+        : null,
     };
 
     const updatedMessages = [...messages, userMsg];
     onUpdateMessages(updatedMessages, messageContent);
 
-    if (!textToSend) setInputText("");
+    if (textToSend === undefined) setInputText("");
+    setSelectedAttachment(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
     setIsLoading(true);
 
     try {
@@ -279,7 +355,12 @@ export default function AIChat({
           parts: m.message,
         }));
 
-      const aiResponse = await aiService.sendMessage(messageContent, history, activeConversation?.id);
+      const aiResponse = await aiService.sendMessage(
+        messageContent,
+        history,
+        activeConversation?.id,
+        attachment ? { mimeType: attachment.mimeType, data: attachment.data, name: attachment.name } : null
+      );
       setAnimatingMessageId(aiResponse.id);
       onUpdateMessages([...updatedMessages, aiResponse], messageContent);
     } catch (err) {
@@ -416,7 +497,22 @@ export default function AIChat({
 
       {/* ── AREA TENGAH: CHAT CANVAS / BENTO PROMPTS (SCROLLABLE) ── */}
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 scrollbar-thin">
-        {messages.length === 0 ? (
+        {(isLoadingConversations || isLoadingMessages) ? (
+          /* SKELETON LOADING STATE (ELIMINATES FLICKERING) */
+          <div className="w-full max-w-md mx-auto my-auto min-h-[calc(100vh-320px)] flex flex-col items-center justify-center p-6 space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#022022]/10 border border-[#37F4B4]/30 flex items-center justify-center animate-pulse">
+              <Sparkles className="w-6 h-6 text-[#022022]" />
+            </div>
+            <div className="text-center space-y-1.5">
+              <p className="text-sm font-semibold text-[#022022] font-poppins animate-pulse">
+                Memuat riwayat konsultasi...
+              </p>
+              <p className="text-xs text-slate-400 font-inter">
+                Menghubungkan ke basis data WARAS Assistant
+              </p>
+            </div>
+          </div>
+        ) : messages.length === 0 ? (
           /* EMPTY STATE: HERO GREETING & BENTO CARDS */
           <div className="w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto min-h-[calc(100vh-250px)]">
             {/* 1. Visual Ikon & Sapaan */}
@@ -529,8 +625,17 @@ export default function AIChat({
               </div>
             </div>
 
-            {/* 3. Baris 4 Pill Aksi Cepat Horizontal */}
+            {/* 3. Baris Pill Aksi Cepat Horizontal */}
             <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5 w-full">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="rounded-full px-4 py-2 text-xs font-semibold text-[#022022] bg-gradient-to-br from-teal-500/[0.18] via-teal-100/80 to-white/95 hover:from-teal-500/[0.28] hover:via-teal-200/80 hover:to-white backdrop-blur-md border border-teal-500/30 hover:border-teal-600/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(20,184,166,0.12)] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer"
+              >
+                <span>📷</span>
+                <span>Cek Foto Gatal / Ruam</span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => handleSend("Saya ingin berkonsultasi mengenai gejala demam dan batuk")}
@@ -600,6 +705,34 @@ export default function AIChat({
                         : "bg-white border border-slate-200/90 text-slate-900 rounded-tl-xs shadow-2xs"
                     }`}
                   >
+                    {isUser && msg.attachment && (
+                      <div className="mb-3 overflow-hidden rounded-xl border border-white/20 bg-black/25">
+                        {(() => {
+                          const imgSrc =
+                            msg.attachment.previewUrl ||
+                            (msg.attachment.data?.startsWith("data:")
+                              ? msg.attachment.data
+                              : `data:${msg.attachment.mimeType || "image/jpeg"};base64,${msg.attachment.data}`);
+                          return (
+                            <div>
+                              <img
+                                src={imgSrc}
+                                alt={msg.attachment.name || "Foto keluhan"}
+                                className="w-full max-h-64 object-cover rounded-t-xl cursor-pointer hover:opacity-95 transition-opacity"
+                                onClick={() => setViewingImage(imgSrc)}
+                              />
+                              <div className="px-3 py-1.5 text-[11px] text-white/90 bg-black/40 flex items-center justify-between">
+                                <span className="truncate flex items-center gap-1.5 font-medium">
+                                  <ImageIcon className="w-3.5 h-3.5 text-teal-300 shrink-0" />
+                                  <span className="truncate">{msg.attachment.name || "Foto keluhan"}</span>
+                                </span>
+                                <span className="text-[10px] text-teal-200/90 shrink-0 ml-2">Klik perbesar</span>
+                              </div>
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    )}
                     {isUser ? (
                       <p className="whitespace-pre-line font-medium">{msg.message}</p>
                     ) : (
@@ -723,7 +856,49 @@ export default function AIChat({
 
       {/* ── AREA BAWAH: FLOATING COMPOSER BOX 2 BARIS ── */}
       <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 pb-5 pt-2 shrink-0">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileSelect}
+          accept="image/png,image/jpeg,image/jpg,image/webp"
+          className="hidden"
+        />
+
         <div className="bg-white border border-slate-200/90 rounded-2xl p-3 shadow-sm focus-within:border-[#022022] focus-within:ring-4 focus-within:ring-[#022022]/15 transition-all">
+          {/* Pratinjau Foto Lampiran Sebelum Dikirim */}
+          {selectedAttachment && (
+            <div className="mb-2.5 px-3 py-2 rounded-xl bg-teal-50/80 border border-teal-200/90 flex items-center justify-between animate-in fade-in zoom-in-95 duration-150">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <img
+                  src={selectedAttachment.previewUrl}
+                  alt="Pratinjau"
+                  className="w-10 h-10 rounded-lg object-cover border border-teal-300/80 shrink-0"
+                />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#022022] bg-teal-200/70 px-1.5 py-0.5 rounded-md">
+                      Foto Terlampir
+                    </span>
+                    <span className="text-xs font-medium text-slate-800 truncate max-w-[180px] sm:max-w-xs">
+                      {selectedAttachment.name}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-teal-800 font-inter">
+                    {selectedAttachment.sizeFormatted} • Siap dianalisis oleh AI
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleRemoveAttachment}
+                className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-white transition-colors cursor-pointer"
+                title="Hapus foto"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+
           {/* Baris Atas: Textarea */}
           <textarea
             ref={textareaRef}
@@ -736,7 +911,11 @@ export default function AIChat({
                 handleSend();
               }
             }}
-            placeholder="Ceritakan keluhan atau tanyakan informasi kesehatan..."
+            placeholder={
+              selectedAttachment
+                ? "Tulis keterangan foto (misal: gatal sejak kapan, area mana saja)..."
+                : "Ceritakan keluhan atau tanyakan informasi kesehatan..."
+            }
             className="w-full text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none resize-none px-2 py-1.5 font-inter leading-relaxed max-h-32"
           />
 
@@ -779,9 +958,13 @@ export default function AIChat({
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                onClick={() => showToast("Fitur lampiran dokumen/foto sedang disiapkan.")}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                title="Lampirkan rujukan atau berkas"
+                onClick={() => fileInputRef.current?.click()}
+                className={`p-1.5 rounded-full transition-colors cursor-pointer ${
+                  selectedAttachment
+                    ? "bg-[#022022] text-white hover:bg-[#033b3b]"
+                    : "text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                }`}
+                title="Lampirkan foto keluhan (ruam, gatal, kemasan obat)"
               >
                 <Paperclip className="w-4 h-4" />
               </button>
@@ -798,7 +981,7 @@ export default function AIChat({
               <button
                 type="button"
                 onClick={() => handleSend()}
-                disabled={!inputText.trim() || isLoading}
+                disabled={(!inputText.trim() && !selectedAttachment) || isLoading}
                 className="text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-1.5 bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] active:scale-[0.98] transition-all ml-1 group disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Kirim Pesan"
               >
@@ -814,6 +997,33 @@ export default function AIChat({
           WARAS Assistant memberikan edukasi umum dan bukan pengganti diagnosis resmi tenaga kesehatan.
         </p>
       </div>
+
+      {/* ── MODAL LIGHTBOX FOTO PREVIEW ── */}
+      {viewingImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 selection:bg-teal-500 selection:text-white"
+          onClick={() => setViewingImage(null)}
+        >
+          <div
+            className="relative max-w-3xl max-h-[90vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setViewingImage(null)}
+              className="absolute -top-12 right-0 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors cursor-pointer"
+              aria-label="Tutup pratinjau"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <img
+              src={viewingImage}
+              alt="Foto Keluhan Detail"
+              className="max-h-[85vh] max-w-full rounded-2xl shadow-2xl object-contain border border-white/20"
+            />
+          </div>
+        </div>
+      )}
 
       {/* ── MODAL PANDUAN MEDIS & SOP TRIASE ── */}
       {showGuideModal && (
