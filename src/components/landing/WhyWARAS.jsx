@@ -89,7 +89,6 @@ export default function WhyWARAS() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-[#022022]/10 flex items-center gap-1.5 text-[11px] font-medium text-[#022022]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#37F4B4]" />
                   <span>Standar Akses WARAS</span>
                 </div>
               </motion.div>

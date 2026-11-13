@@ -4,14 +4,13 @@ import { ShieldCheck, HeartPulse, Hospital, ArrowRight } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section id="tentang" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
+    <section id="tentang" className="scroll-mt-20 px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10">
       <div className="max-w-[1480px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* LEFT: MINIMAL EDITORIAL NARRATIVE */}
           <div className="lg:col-span-6 space-y-6">
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
+            <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
               TENTANG PLATFORM WARAS
             </span>
 
@@ -30,14 +29,14 @@ export default function AboutSection() {
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Eksplorasi seluruh fasilitas kesehatan Semarang</span>
-                <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#022022] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
           {/* RIGHT: 3 CORE PUBLIC HEALTH PILLARS */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/25 flex flex-col justify-between">
+            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#022022]/10 flex flex-col justify-between">
               <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">01</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-[#022022]">Akurasi Faskes</h4>
@@ -45,7 +44,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#37F4B4]/25 flex flex-col justify-between">
+            <div className="p-6 rounded-3xl bg-[#022022]/5 border border-[#022022]/10 flex flex-col justify-between">
               <span className="text-2xl sm:text-3xl font-light font-mono text-[#022022]">02</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-[#022022]">Bahasa Awam</h4>
@@ -53,8 +52,8 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#022022] border border-[#37F4B4]/30 text-white flex flex-col justify-between shadow-sm">
-              <span className="text-2xl sm:text-3xl font-light font-mono text-[#37F4B4]">03</span>
+            <div className="p-6 rounded-3xl bg-[#022022] border border-[#022022] text-white flex flex-col justify-between shadow-sm">
+              <span className="text-2xl sm:text-3xl font-light font-mono text-white">03</span>
               <div className="mt-4">
                 <h4 className="text-sm font-normal text-white">Siaga Publik</h4>
                 <p className="text-[11px] font-light text-white/70 mt-1">Hotline 119 dan rute ambulans tanpa dipungut biaya.</p>

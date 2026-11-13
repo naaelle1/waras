@@ -12,7 +12,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10 text-[#022022]">
+    <section id="faq" className="scroll-mt-20 px-4 sm:px-8 lg:px-12 py-20 bg-white border-t border-[#022022]/10 text-[#022022]">
       <div className="max-w-[1480px] mx-auto">
         
         {/* 2-COLUMN SPLIT LAYOUT */}
@@ -20,8 +20,7 @@ export default function FAQ() {
           
           {/* LEFT: HEADING & DESCRIPTION */}
           <div className="lg:col-span-5 space-y-4 text-left">
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#37F4B4]" />
+            <span className="text-xs font-mono uppercase tracking-wider text-[#022022] font-semibold">
               PUSAT PERTANYAAN
             </span>
 
@@ -40,7 +39,7 @@ export default function FAQ() {
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#022022] hover:text-[#033033] transition-colors group"
               >
                 <span>Kunjungi Pusat Bantuan Lengkap</span>
-                <ArrowRight className="w-4 h-4 text-[#37F4B4] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#022022] group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -69,8 +68,8 @@ export default function FAQ() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
                         isOpen
-                          ? "bg-[#022022] text-[#37F4B4] border border-[#37F4B4]/30"
-                          : "bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-[#37F4B4]"
+                          ? "bg-[#022022] text-white border border-[#022022]"
+                          : "bg-[#022022]/5 text-[#022022] group-hover:bg-[#022022] group-hover:text-white"
                       }`}
                     >
                       {isOpen ? (

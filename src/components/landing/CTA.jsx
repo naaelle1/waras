@@ -8,7 +8,7 @@ export default function CTA() {
       <div className="max-w-[1480px] mx-auto">
         
         {/* CLEAN SEAMLESS CTA CONTAINER (Seiras dengan halaman di atasnya, tanpa warna nabrak & tanpa tag pengganggu) */}
-        <div className="relative rounded-3xl sm:rounded-[2.5rem] bg-gradient-to-b from-[#F5FCFC] to-[#EDF9F9] border border-[#37F4B4]/25 p-10 sm:p-14 lg:p-16 text-center overflow-hidden">
+        <div className="relative rounded-3xl sm:rounded-[2.5rem] bg-gradient-to-b from-[#F5FCFC] to-[#EDF9F9] border border-[#022022]/10 p-10 sm:p-14 lg:p-16 text-center overflow-hidden">
           
           <div className="relative z-10 max-w-2xl mx-auto space-y-5">
             
@@ -24,10 +24,10 @@ export default function CTA() {
             <div className="pt-3">
               <Link
                 to="/user/facilities"
-                className="inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] hover:border-[#37F4B4]/40 border border-transparent active:scale-95 transition-all shadow-sm group"
+                className="inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-full bg-[#022022] text-white text-xs sm:text-sm font-medium hover:bg-[#033033] border border-transparent active:scale-95 transition-all shadow-sm group"
               >
                 <span>Cari Fasilitas Kesehatan</span>
-                <ArrowRight className="w-4 h-4 text-[#37F4B4] transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
