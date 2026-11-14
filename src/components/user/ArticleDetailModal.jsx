@@ -6,7 +6,6 @@ import {
   Tag,
   User,
   Calendar,
-  Sparkles,
   MapPin,
   Bot,
   AlertCircle,
@@ -42,17 +41,17 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#001F1F]/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-[#001F1F]/60 backdrop-blur-sm transition-opacity duration-200"
         onClick={onClose}
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-2xl rounded-2xl bg-white border border-[#E2ECEB] shadow-2xl z-10 space-y-5 max-h-[90vh] overflow-y-auto scrollbar-thin">
+      <div className="relative w-full max-w-2xl rounded-3xl bg-white border border-[#E2ECEB] shadow-2xl z-10 max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         {/* Header Image Banner */}
-        <div className="relative h-56 sm:h-64 w-full bg-gray-100 overflow-hidden">
+        <div className="relative h-52 sm:h-64 w-full bg-slate-100 shrink-0 overflow-hidden">
           <img
             src={
               article.image ||
@@ -66,25 +65,25 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
             }}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/15" />
 
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-white text-[#022022] shadow-sm flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
             aria-label="Tutup artikel"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
           </button>
 
-          {/* Floating Category Pill */}
-          <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-white border border-white/20 shadow-xs">
-              <Tag className="w-3.5 h-3.5 text-white" />
+          {/* Floating Category & Reading Meta */}
+          <div className="absolute bottom-3.5 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#022022] text-white border border-white/20 shadow-xs font-poppins">
+              <Tag className="w-3.5 h-3.5 text-teal-200" />
               {article.category}
             </span>
 
-            <div className="flex items-center gap-2 text-xs text-white/90 font-inter">
+            <div className="flex items-center gap-2 text-xs text-white/95 font-inter backdrop-blur-md bg-black/30 px-3 py-1 rounded-full border border-white/10">
               <span className="flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />
                 {article.date || "Terbaru"}
@@ -99,92 +98,111 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
         </div>
 
         {/* Content Body */}
-        <div className="px-6 pb-6 space-y-5">
-          {/* Title & Author */}
+        <div className="p-5 sm:p-6 lg:p-7 space-y-5 overflow-y-auto scrollbar-thin">
+          {/* Title & Author Meta */}
           <div className="space-y-2 border-b border-gray-100 pb-4">
-            <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#0D2626] leading-snug">
+            <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#0D2626] leading-snug tracking-tight">
               {article.title}
             </h2>
-            <div className="flex items-center gap-2 text-xs text-[#526666]">
-              <User className="w-3.5 h-3.5 text-[#022022]" />
-              <span>Ditinjau oleh: <strong className="text-[#0D2626]">{article.author || "Tim Medis WARAS"}</strong></span>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-[#526666] font-inter">
+              <div className="flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-[#022022]" />
+                <span>
+                  Ditinjau oleh: <strong className="text-[#0D2626] font-semibold">{article.author || "Tim Medis WARAS"}</strong>
+                </span>
+              </div>
+              <span className="text-gray-300 hidden sm:inline">•</span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-800 text-[11px] font-medium border border-teal-200/60">
+                <CheckCircle2 className="w-3 h-3 text-teal-600" />
+                Terverifikasi Klinis
+              </span>
             </div>
           </div>
 
-          {/* Main Description */}
-          <div className="space-y-4 font-inter text-sm text-[#526666] leading-relaxed">
-            <p className="text-base text-[#0D2626] font-medium leading-relaxed bg-[#F8FAFA] p-4 rounded-xl border border-[#E2ECEB]">
-              {article.description}
-            </p>
+          {/* Main Description Callout */}
+          <div className="p-4 sm:p-4.5 rounded-2xl bg-[#022022]/[0.03] border border-[#022022]/10 text-xs sm:text-sm text-[#0D2626] leading-relaxed font-inter font-normal">
+            {article.description}
+          </div>
 
-            <h4 className="font-poppins font-semibold text-base text-[#0D2626] pt-2">
+          {/* Poin Penting & Panduan Kesehatan */}
+          <div className="space-y-2.5 pt-1">
+            <h4 className="font-poppins font-semibold text-sm sm:text-base text-[#0D2626]">
               Poin Penting & Panduan Kesehatan:
             </h4>
-            <div className="space-y-2.5">
-              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                <CheckCircle2 className="w-4 h-4 text-[#022022] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-[#0D2626]">Deteksi Cepat:</strong> Perhatikan perubahan fisik sekecil apa pun dan catat waktu kemunculan gejala pertama kali.
+            <div className="space-y-2">
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-[#E2ECEB] shadow-2xs hover:border-[#022022]/20 transition-colors">
+                <div className="p-1.5 rounded-lg bg-[#022022]/5 text-[#022022] shrink-0 mt-0.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#022022]" />
+                </div>
+                <div className="text-xs sm:text-sm font-inter text-[#526666] leading-relaxed">
+                  <strong className="text-[#0D2626] font-semibold">Deteksi Cepat:</strong> Perhatikan perubahan fisik sekecil apa pun dan catat waktu kemunculan gejala pertama kali.
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                <CheckCircle2 className="w-4 h-4 text-[#022022] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-[#0D2626]">Pola Hidup & Hidrasi:</strong> Istirahat yang cukup dan asupan cairan yang teratur sangat membantu pemulihan alami tubuh.
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-[#E2ECEB] shadow-2xs hover:border-[#022022]/20 transition-colors">
+                <div className="p-1.5 rounded-lg bg-[#022022]/5 text-[#022022] shrink-0 mt-0.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#022022]" />
+                </div>
+                <div className="text-xs sm:text-sm font-inter text-[#526666] leading-relaxed">
+                  <strong className="text-[#0D2626] font-semibold">Pola Hidup & Hidrasi:</strong> Istirahat yang cukup dan asupan cairan yang teratur sangat membantu pemulihan alami tubuh.
                 </div>
               </div>
             </div>
-
-            {/* Warning Box */}
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-              <div className="text-xs text-amber-900 space-y-1">
-                <span className="font-semibold block">Kapan Harus Segera ke Dokter?</span>
-                <p>
-                  Jika gejala berlangsung lebih dari 3 hari, demam tidak kunjung turun setelah konsumsi parasetamol, atau muncul tanda sesak napas dan penurunan kesadaran, segera kunjungi IGD atau Puskesmas terdekat.
-                </p>
-              </div>
-            </div>
-
-            {/* Tags */}
-            {article.tags && article.tags.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 pt-2">
-                <span className="text-xs text-[#526666] font-medium">Tag Terkait:</span>
-                {article.tags.map((t, idx) => (
-                  <span
-                    key={idx}
-                    className="px-2.5 py-1 rounded-lg bg-[#022022]/10 text-[#022022] border border-[#022022]/15 text-xs font-medium"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
+
+          {/* Warning Advisory Box */}
+          <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/90 flex items-start gap-3 text-xs sm:text-sm text-amber-950 font-inter">
+            <div className="p-1 rounded-lg bg-amber-100 text-amber-800 shrink-0 mt-0.5">
+              <AlertCircle className="w-4 h-4 text-amber-700" />
+            </div>
+            <div className="space-y-1 leading-relaxed">
+              <span className="font-poppins font-semibold text-xs sm:text-sm text-amber-900 block">
+                Kapan Harus Segera ke Dokter?
+              </span>
+              <p className="text-xs text-amber-900/90 font-light">
+                Jika gejala berlangsung lebih dari 3 hari, demam tidak kunjung turun setelah konsumsi parasetamol, atau muncul tanda sesak napas dan penurunan kesadaran, segera kunjungi IGD atau Puskesmas terdekat.
+              </p>
+            </div>
+          </div>
+
+          {/* Tags */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+              <span className="text-xs text-[#526666] font-medium mr-1 font-inter">Topik Terkait:</span>
+              {article.tags.map((t, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-0.5 rounded-full bg-[#022022]/5 text-[#022022] border border-[#022022]/10 text-xs font-medium font-inter"
+                >
+                  #{t}
+                </span>
+              ))}
+            </div>
+          )}
 
           {/* Modal Footer Actions */}
           <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <button
+              type="button"
               onClick={onClose}
-              className="order-last sm:order-first px-5 py-2.5 sm:py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer text-center"
+              className="order-last sm:order-first px-5 py-2.5 rounded-full border border-gray-200 hover:bg-gray-50 text-[#526666] hover:text-[#022022] font-semibold text-xs transition-colors cursor-pointer text-center font-inter"
             >
               Tutup
             </button>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={handleAskAI}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#022022]/5 hover:bg-[#022022]/10 text-[#022022] border border-[#022022]/15 font-semibold text-xs transition-colors cursor-pointer active:scale-[0.99] font-inter"
               >
-                <Bot className="w-3.5 h-3.5 text-[#022022]" />
+                <Bot className="w-4 h-4 text-[#022022]" />
                 <span>Tanya AI tentang Artikel Ini</span>
               </button>
 
               <Link
                 to="/user/facilities"
                 onClick={onClose}
-                className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 sm:py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-semibold text-xs active:scale-[0.98] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] hover:bg-[#033033] text-white font-semibold text-xs shadow-xs transition-colors active:scale-[0.99] font-inter"
               >
                 <MapPin className="w-3.5 h-3.5 text-white" />
                 <span>Cari Faskes Terdekat</span>
@@ -196,4 +214,3 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
     </div>
   );
 }
-

@@ -11,7 +11,7 @@ export default function PreparationChecklist({ items = [] }) {
   };
 
   return (
-    <div className="space-y-5">
+    <div id="section-persiapan" className="space-y-5 scroll-mt-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">

@@ -87,7 +87,7 @@ export default function Dashboard() {
       title: "Cek Antrian",
       desc: "Lihat informasi status dan ketersediaan antrean terkini.",
       icon: Clock,
-      path: "/user/facilities"
+      targetId: "section-antrian"
     },
     {
       title: "Tanya WARAS AI",
@@ -245,25 +245,48 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickAccessItems.map((item, idx) => {
             const Icon = item.icon;
+            const cardContent = (
+              <Card hoverEffect className="h-full flex flex-col justify-between group cursor-pointer">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-3 group-hover:bg-[#022022] group-hover:text-white transition-all duration-200">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-poppins font-semibold text-base text-[#0D2626] mb-1 group-hover:text-[#022022] transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-[#526666] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+                <div className="mt-4 flex items-center text-xs font-semibold text-[#022022] group-hover:translate-x-1 transition-transform">
+                  <span>Akses Layanan</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1 text-[#022022]" />
+                </div>
+              </Card>
+            );
+
+            if (item.targetId) {
+              return (
+                <a
+                  key={idx}
+                  href={`#${item.targetId}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(item.targetId);
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                  className="block h-full text-left"
+                >
+                  {cardContent}
+                </a>
+              );
+            }
+
             return (
-              <Link key={idx} to={item.path}>
-                <Card hoverEffect className="h-full flex flex-col justify-between group">
-                  <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#022022]/5 text-[#022022] flex items-center justify-center mb-3 group-hover:bg-[#022022] group-hover:text-white transition-all duration-200">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h4 className="font-poppins font-semibold text-base text-[#0D2626] mb-1 group-hover:text-[#022022] transition-colors">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-[#526666] leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                  <div className="mt-4 flex items-center text-xs font-semibold text-[#022022] group-hover:translate-x-1 transition-transform">
-                    <span>Akses Layanan</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1 text-[#022022]" />
-                  </div>
-                </Card>
+              <Link key={idx} to={item.path} className="block h-full">
+                {cardContent}
               </Link>
             );
           })}
@@ -271,7 +294,7 @@ export default function Dashboard() {
       </section>
 
       {/* SECTION 4: STATUS ANTRIAN HARI INI */}
-      <section className="space-y-4">
+      <section id="section-antrian" className="space-y-4 scroll-mt-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">Status Antrian Hari Ini</h3>

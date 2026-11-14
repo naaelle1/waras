@@ -47,8 +47,9 @@ export default function Topbar({
   const location = useLocation();
 
   // Rute di mana SearchBar disembunyikan sesuai permintaan:
-  // fasilitas kesehatan, panduan kesehatan, istilah medis, panduan layanan, laporkan kesalahan, settings, help, dan profil.
+  // dashboard, fasilitas kesehatan, panduan kesehatan, istilah medis, panduan layanan, laporkan kesalahan, settings, help, dan profil.
   const HIDE_SEARCH_PATHS = [
+    "/user/dashboard",
     "/user/facilities",
     "/user/health-info/guides",
     "/user/health-info/medical-terms",

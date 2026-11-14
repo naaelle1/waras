@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Compass, Info, Activity } from "lucide-react";
-// Hapus import HealthInfoTabs
 import ServiceGuideHero from "../../components/user/ServiceGuide/ServiceGuideHero";
 import QuickGuideCard from "../../components/user/ServiceGuide/QuickGuideCard";
 import ServiceFlow from "../../components/user/ServiceGuide/ServiceFlow";
 import FeaturedGuide from "../../components/user/ServiceGuide/FeaturedGuide";
 import PreparationChecklist from "../../components/user/ServiceGuide/PreparationChecklist";
 import ServiceGuideCTA from "../../components/user/ServiceGuide/ServiceGuideCTA";
+import ServiceGuideModal from "../../components/user/ServiceGuide/ServiceGuideModal";
 
 import {
   quickGuidesData,
@@ -17,15 +18,55 @@ import {
 
 export default function ServicesGuide() {
   const quickGuidesRef = useRef(null);
+  const navigate = useNavigate();
+  const [activeModalType, setActiveModalType] = useState(null);
 
   const handleScrollToGuides = () => {
     quickGuidesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleQuickGuideSelect = (guide) => {
+    if (!guide) return;
+    if (guide.id === "mau-berobat") {
+      navigate(
+        `/user/ai?q=${encodeURIComponent(
+          "Rekomendasi fasilitas kesehatan untuk kondisi saya: Mau berobat ke mana?"
+        )}`
+      );
+    } else if (guide.id === "jaminan-kesehatan") {
+      setActiveModalType("jaminan-kesehatan");
+    } else if (guide.id === "persiapan-berobat") {
+      const el = document.getElementById("section-persiapan");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (guide.id === "layanan-darurat") {
+      setActiveModalType("layanan-darurat");
+    }
+  };
+
+  const handleFeaturedGuideSelect = (item) => {
+    if (!item) return;
+    if (item.id === "featured-faskes-choice" || item.id === "mau-berobat") {
+      navigate(
+        `/user/ai?q=${encodeURIComponent(
+          "Panduan memilih faskes: Kapan harus ke Puskesmas, Klinik Pratama, atau Rumah Sakit?"
+        )}`
+      );
+    } else if (item.id === "sup-1" || item.id === "persiapan-berobat") {
+      const el = document.getElementById("section-persiapan");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (item.id === "sup-2" || item.id === "layanan-darurat") {
+      setActiveModalType("layanan-darurat");
+    } else if (item.id === "jaminan-kesehatan") {
+      setActiveModalType("jaminan-kesehatan");
+    }
+  };
+
   return (
     <div className="space-y-10 pb-12">
-      {/* <HealthInfoTabs /> HAPUS BARIS INI */}
-
       {/* HEADER HALAMAN */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200/60 pb-4">
         <div className="flex flex-col gap-1">
@@ -50,6 +91,7 @@ export default function ServicesGuide() {
 
       <ServiceGuideHero onScrollToGuides={handleScrollToGuides} />
 
+      {/* SECTION PILIH PANDUAN */}
       <section ref={quickGuidesRef} className="space-y-4 pt-2 scroll-mt-6">
         <div className="space-y-1">
           <h2 className="font-poppins font-bold text-xl sm:text-2xl text-[#022022]">
@@ -65,23 +107,28 @@ export default function ServicesGuide() {
             <QuickGuideCard
               key={guide.id}
               guide={guide}
-              onSelect={(g) => console.log("Selected guide:", g.id)}
+              onSelect={handleQuickGuideSelect}
             />
           ))}
         </div>
       </section>
 
+      {/* ALUR LAYANAN KESEHATAN */}
       <ServiceFlow steps={serviceFlowSteps} />
 
+      {/* PANDUAN POPULER */}
       <FeaturedGuide
         featuredData={featuredGuideData}
-        onSelectGuide={(g) => console.log("Selected guide:", g)}
+        onSelectGuide={handleFeaturedGuideSelect}
       />
 
+      {/* PERSIAPAN SEBELUM BEROBAT */}
       <PreparationChecklist items={preparationChecklistData} />
 
+      {/* BOTTOM CTA BANNER */}
       <ServiceGuideCTA />
 
+      {/* PENAFIAN LAYANAN */}
       <section className="rounded-2xl bg-[#022022]/5 border border-[#022022]/15 p-5 backdrop-blur-md">
         <div className="flex items-start gap-3">
           <Info className="w-5 h-5 text-[#022022] shrink-0 mt-0.5" />
@@ -90,6 +137,13 @@ export default function ServicesGuide() {
           </p>
         </div>
       </section>
+
+      {/* SERVICE GUIDE MODAL POPUP (Jaminan Kesehatan & Layanan Darurat) */}
+      <ServiceGuideModal
+        isOpen={Boolean(activeModalType)}
+        type={activeModalType}
+        onClose={() => setActiveModalType(null)}
+      />
     </div>
   );
 }
