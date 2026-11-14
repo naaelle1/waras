@@ -26,6 +26,7 @@ import ArticleDetailModal from "../../components/user/ArticleDetailModal";
 import MapComponent from "../../components/user/MapComponent";
 
 import { authService } from "../../services/authService";
+import { queueService } from "../../services/queueService";
 import { facilities as facilitiesData } from "../../data/facilities";
 import { articlesData } from "../../data/articles";
 import { queueData } from "../../data/queueData";
@@ -34,6 +35,7 @@ import transhumansSvg from "../../assets/Transhumans Experiments.svg";
 export default function Dashboard() {
   const [currentUser, setCurrentUser] = useState(() => authService.getCurrentUser());
   const [selectedArticleModal, setSelectedArticleModal] = useState(null);
+  const [queues, setQueues] = useState(queueData);
 
   useEffect(() => {
     let mounted = true;
@@ -42,6 +44,13 @@ export default function Dashboard() {
         setCurrentUser(u);
       }
     });
+
+    queueService.getAll().then((data) => {
+      if (mounted && Array.isArray(data) && data.length > 0) {
+        setQueues(data.slice(0, 3));
+      }
+    }).catch(console.warn);
+
     return () => {
       mounted = false;
     };
@@ -279,7 +288,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {queueData.map((q) => (
+          {queues.map((q) => (
             <QueueStatus key={q.id} item={q} />
           ))}
         </div>

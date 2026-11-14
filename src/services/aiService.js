@@ -1,6 +1,16 @@
 import { articles } from "../data/articles";
+import { authService } from "./authService";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
+function getAuthHeaders(extra = {}) {
+  const headers = { "Content-Type": "application/json", ...extra };
+  const token = authService.getToken();
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return headers;
+}
 
 /**
  * AI Service untuk WARAS Assistant — terhubung ke backend Gemini API dan Turso DB.
@@ -17,7 +27,7 @@ export const aiService = {
     const tryFetch = async () => {
       const res = await fetch(`${API_BASE}/ai/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ message: userMessage, history, sessionId, attachment }),
       });
 
@@ -47,42 +57,19 @@ export const aiService = {
   },
 
   /**
-   * Mengambil daftar seluruh sesi percakapan dari database
+   * Mengambil daftar seluruh sesi percakapan dari database sesuai akun yang sedang login
    */
   async getConversations() {
     try {
-      const res = await fetch(`${API_BASE}/ai/conversations`);
+      const res = await fetch(`${API_BASE}/ai/conversations`, {
+        headers: getAuthHeaders(),
+      });
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
       const json = await res.json();
       return json.data || [];
     } catch (err) {
-      console.warn("[aiService] Gagal memuat percakapan dari DB, menggunakan fallback lokal:", err.message);
-      return [
-        {
-          id: "conv-1",
-          title: "Demam & Batuk",
-          category: "today",
-          isPinned: false,
-          messages: [],
-          updatedAt: new Date().toISOString()
-        },
-        {
-          id: "conv-2",
-          title: "Informasi Imunisasi",
-          category: "today",
-          isPinned: false,
-          messages: [],
-          updatedAt: new Date().toISOString()
-        },
-        {
-          id: "conv-3",
-          title: "Rujukan BPJS ke RS",
-          category: "yesterday",
-          isPinned: true,
-          messages: [],
-          updatedAt: new Date(Date.now() - 86400000).toISOString()
-        }
-      ];
+      console.warn("[aiService] Gagal memuat percakapan dari DB:", err.message);
+      return [];
     }
   },
 
@@ -91,7 +78,9 @@ export const aiService = {
    */
   async getMessages(conversationId) {
     try {
-      const res = await fetch(`${API_BASE}/ai/conversations/${conversationId}/messages`);
+      const res = await fetch(`${API_BASE}/ai/conversations/${conversationId}/messages`, {
+        headers: getAuthHeaders(),
+      });
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
       const json = await res.json();
       return json.data || [];
@@ -108,7 +97,7 @@ export const aiService = {
     try {
       const res = await fetch(`${API_BASE}/ai/conversations`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders(),
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
@@ -134,7 +123,7 @@ export const aiService = {
     try {
       const res = await fetch(`${API_BASE}/ai/conversations/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders(),
         body: JSON.stringify(updates),
       });
       return res.ok;
@@ -151,6 +140,7 @@ export const aiService = {
     try {
       const res = await fetch(`${API_BASE}/ai/conversations/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
       });
       return res.ok;
     } catch (err) {

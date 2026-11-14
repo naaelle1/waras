@@ -7,8 +7,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load .env dari root backend
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// Load .env: Cek backend/.env, project root .env, dan process.cwd()/.env
+const backendEnv = path.resolve(__dirname, '../../.env');
+const rootEnv = path.resolve(__dirname, '../../../.env');
+
+if (fs.existsSync(backendEnv)) dotenv.config({ path: backendEnv });
+if (fs.existsSync(rootEnv)) dotenv.config({ path: rootEnv });
+dotenv.config();
 
 const isRemoteTurso = Boolean(
   process.env.TURSO_DATABASE_URL &&

@@ -5,11 +5,17 @@ import { PhoneCall, ShieldAlert, X, Phone, Ambulance } from "lucide-react";
 import ConversationPanel from "../../components/user/ConversationPanel";
 import AIChat from "../../components/user/AIChat";
 import { aiService } from "../../services/aiService";
+import { authService } from "../../services/authService";
 
 export default function AI() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get("q");
   const outletContext = useOutletContext();
+
+  const currentUser = authService.getCurrentUser();
+  const storageKey = currentUser?.id
+    ? `waras_active_ai_session_${currentUser.id}`
+    : "waras_active_ai_session_guest";
 
   const [conversations, setConversations] = useState([]);
   const [activeId, setActiveId] = useState("");
@@ -38,13 +44,13 @@ export default function AI() {
       setConversations((prev) => [newChat, ...prev.filter((c) => c.id !== newId)]);
       setActiveId(newId);
       setPendingPrompt(promptText);
-      localStorage.setItem("waras_active_ai_session", newId);
+      localStorage.setItem(storageKey, newId);
       aiService.createConversation(newChat).catch(console.warn);
       setSearchParams({}, { replace: true });
     }
-  }, [queryParam, setSearchParams]);
+  }, [queryParam, setSearchParams, storageKey]);
 
-  // 2. Muat seluruh percakapan tersimpan dari Database saat mount
+  // 2. Muat seluruh percakapan tersimpan dari Database saat mount atau user berganti
   useEffect(() => {
     let isCurrent = true;
 
@@ -72,7 +78,7 @@ export default function AI() {
           setActiveId((prevActiveId) => {
             if (prevActiveId) return prevActiveId;
             if (queryParam) return prevActiveId;
-            const saved = localStorage.getItem("waras_active_ai_session");
+            const saved = localStorage.getItem(storageKey);
             if (saved && list.some((c) => c.id === saved)) {
               return saved;
             }
@@ -90,7 +96,7 @@ export default function AI() {
           };
           setConversations([defaultChat]);
           setActiveId(defaultId);
-          localStorage.setItem("waras_active_ai_session", defaultId);
+          localStorage.setItem(storageKey, defaultId);
           aiService.createConversation(defaultChat).catch(console.warn);
         }
       } catch (err) {
@@ -106,12 +112,12 @@ export default function AI() {
     return () => {
       isCurrent = false;
     };
-  }, []);
+  }, [currentUser?.id, storageKey]);
 
   // 3. Muat riwayat pesan dari database saat activeId berubah (hanya jika belum ada di memori)
   useEffect(() => {
     if (!activeId) return;
-    localStorage.setItem("waras_active_ai_session", activeId);
+    localStorage.setItem(storageKey, activeId);
     let isCurrent = true;
 
     // Jika pesan sudah dimuat di memori, tidak perlu fetch ulang yang menyebabkan flicker
@@ -144,7 +150,7 @@ export default function AI() {
     return () => {
       isCurrent = false;
     };
-  }, [activeId]);
+  }, [activeId, storageKey]);
 
   const activeConversation =
     conversations.find((c) => c.id === activeId) || {
@@ -173,7 +179,7 @@ export default function AI() {
     setActiveId(newId);
     setPendingPrompt("");
     setIsLoadingMessages(false);
-    localStorage.setItem("waras_active_ai_session", newId);
+    localStorage.setItem(storageKey, newId);
     await aiService.createConversation(newChat);
   };
 
@@ -181,7 +187,7 @@ export default function AI() {
     if (id === activeId) return;
     setActiveId(id);
     setPendingPrompt("");
-    localStorage.setItem("waras_active_ai_session", id);
+    localStorage.setItem(storageKey, id);
   };
 
   const handleUpdateMessages = (updatedMessages, firstUserMessageText) => {
@@ -235,14 +241,14 @@ export default function AI() {
           updatedAt: new Date().toISOString()
         };
         setActiveId(freshId);
-        localStorage.setItem("waras_active_ai_session", freshId);
+        localStorage.setItem(storageKey, freshId);
         aiService.createConversation(freshChat).catch(console.warn);
         return [freshChat];
       }
       if (id === activeId) {
         const nextId = filtered[0].id;
         setActiveId(nextId);
-        localStorage.setItem("waras_active_ai_session", nextId);
+        localStorage.setItem(storageKey, nextId);
       }
       return filtered;
     });

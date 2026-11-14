@@ -61,3 +61,16 @@ export function verifyToken(token) {
     return null;
   }
 }
+
+/**
+ * Ekstrak dan verifikasi token dari header Authorization: Bearer <token>
+ */
+export function authenticateUser(req) {
+  if (!req || !req.headers) return null;
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return null;
+  }
+  const token = authHeader.split(' ')[1];
+  return verifyToken(token);
+}

@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { getSystemInstruction, AI_CONFIG } from '../config/aiInstructions.js';
 import { db } from '../config/db.js';
+import { authenticateUser } from '../utils/auth.js';
 
 let aiClient = null;
 
@@ -150,17 +151,34 @@ async function ensureDefaultConversations() {
 
 /**
  * GET /api/ai/conversations
- * Mengambil daftar sesi percakapan dari Turso DB
+ * Mengambil daftar sesi percakapan sesuai akun yang sedang login (user_id)
  */
-export async function getConversations(_req, res) {
+export async function getConversations(req, res) {
   try {
-    await ensureDefaultConversations();
+    const user = authenticateUser(req);
+    let result;
 
-    const result = await db.execute(`
-      SELECT id, title, is_pinned, category, created_at, updated_at
-      FROM ai_conversations
-      ORDER BY is_pinned DESC, updated_at DESC
-    `);
+    if (user && user.id) {
+      // Ambil percakapan khusus milik akun ini
+      result = await db.execute({
+        sql: `
+          SELECT id, title, is_pinned, category, created_at, updated_at
+          FROM ai_conversations
+          WHERE user_id = ?
+          ORDER BY is_pinned DESC, updated_at DESC
+        `,
+        args: [user.id]
+      });
+    } else {
+      // Untuk sesi tamu / tanpa token autentikasi
+      result = await db.execute(`
+        SELECT id, title, is_pinned, category, created_at, updated_at
+        FROM ai_conversations
+        WHERE user_id IS NULL
+        ORDER BY is_pinned DESC, updated_at DESC
+        LIMIT 5
+      `);
+    }
 
     const conversations = result.rows.map((row) => ({
       id: row.id,
@@ -180,17 +198,19 @@ export async function getConversations(_req, res) {
 
 /**
  * POST /api/ai/conversations
- * Membuat sesi percakapan baru di database
+ * Membuat sesi percakapan baru di database yang terikat ke user_id
  */
 export async function createConversation(req, res) {
   try {
+    const user = authenticateUser(req);
+    const userId = user?.id || null;
     const { id, title = 'Percakapan Baru', isPinned = false, category = 'today' } = req.body;
     const conversationId = id || `conv-${Date.now()}`;
 
     await db.execute({
-      sql: `INSERT OR IGNORE INTO ai_conversations (id, title, is_pinned, category)
-            VALUES (?, ?, ?, ?)`,
-      args: [conversationId, title, isPinned ? 1 : 0, category]
+      sql: `INSERT OR IGNORE INTO ai_conversations (id, user_id, title, is_pinned, category)
+            VALUES (?, ?, ?, ?, ?)`,
+      args: [conversationId, userId, title, isPinned ? 1 : 0, category]
     });
 
     return res.status(201).json({
@@ -212,11 +232,29 @@ export async function createConversation(req, res) {
 
 /**
  * GET /api/ai/conversations/:id/messages
- * Mengambil seluruh riwayat pesan untuk percakapan tertentu
+ * Mengambil seluruh riwayat pesan untuk percakapan tertentu (dengan verifikasi hak akses akun)
  */
 export async function getMessages(req, res) {
   try {
     const { id } = req.params;
+    const user = authenticateUser(req);
+
+    // Cek kepemilikan percakapan
+    const convCheck = await db.execute({
+      sql: 'SELECT user_id FROM ai_conversations WHERE id = ?',
+      args: [id]
+    });
+
+    if (convCheck.rows.length > 0) {
+      const convUserId = convCheck.rows[0].user_id;
+      // Jika percakapan memiliki user_id, hanya akun pemilik atau admin yang berhak membaca
+      if (convUserId && (!user || (user.id !== convUserId && user.role !== 'admin'))) {
+        return res.status(403).json({
+          success: false,
+          message: 'Anda tidak memiliki hak akses untuk membaca riwayat percakapan ini.'
+        });
+      }
+    }
 
     const result = await db.execute({
       sql: `SELECT id, session_id, sender, message, message_type, related_article_ids, show_facility_cta, attachment_data, created_at
@@ -274,11 +312,12 @@ export async function getMessages(req, res) {
 
 /**
  * PATCH /api/ai/conversations/:id
- * Mengubah status pin atau judul percakapan
+ * Mengubah status pin atau judul percakapan milik akun sendiri
  */
 export async function updateConversation(req, res) {
   try {
     const { id } = req.params;
+    const user = authenticateUser(req);
     const { title, isPinned } = req.body;
 
     const fields = [];
@@ -298,10 +337,16 @@ export async function updateConversation(req, res) {
     }
 
     fields.push('updated_at = CURRENT_TIMESTAMP');
+    let whereClause = 'WHERE id = ?';
     args.push(id);
 
+    if (user && user.id && user.role !== 'admin') {
+      whereClause += ' AND (user_id = ? OR user_id IS NULL)';
+      args.push(user.id);
+    }
+
     await db.execute({
-      sql: `UPDATE ai_conversations SET ${fields.join(', ')} WHERE id = ?`,
+      sql: `UPDATE ai_conversations SET ${fields.join(', ')} ${whereClause}`,
       args
     });
 
@@ -314,15 +359,24 @@ export async function updateConversation(req, res) {
 
 /**
  * DELETE /api/ai/conversations/:id
- * Menghapus sesi percakapan beserta seluruh pesannya dari database
+ * Menghapus sesi percakapan beserta seluruh pesannya milik akun sendiri
  */
 export async function deleteConversation(req, res) {
   try {
     const { id } = req.params;
+    const user = authenticateUser(req);
+
+    let whereClause = 'WHERE id = ?';
+    const args = [id];
+
+    if (user && user.id && user.role !== 'admin') {
+      whereClause += ' AND (user_id = ? OR user_id IS NULL)';
+      args.push(user.id);
+    }
 
     await db.execute({
-      sql: 'DELETE FROM ai_conversations WHERE id = ?',
-      args: [id]
+      sql: `DELETE FROM ai_conversations ${whereClause}`,
+      args
     });
     await db.execute({
       sql: 'DELETE FROM chat_history WHERE session_id = ?',
@@ -342,6 +396,8 @@ export async function deleteConversation(req, res) {
  */
 export async function chat(req, res) {
   const { message, history = [], sessionId, attachment } = req.body;
+  const user = authenticateUser(req);
+  const userId = user?.id || null;
 
   let cleanMessage = (message && typeof message === 'string') ? message.trim() : '';
   if (!cleanMessage && attachment) {
@@ -364,13 +420,13 @@ export async function chat(req, res) {
     });
   }
 
-  // Simpan pesan user ke database jika sessionId disertakan
+  // Simpan pesan user ke database jika sessionId disertakan (terikat ke userId)
   if (sessionId) {
     try {
       await db.execute({
-        sql: `INSERT OR IGNORE INTO ai_conversations (id, title, is_pinned, category)
-              VALUES (?, 'Percakapan Baru', 0, 'today')`,
-        args: [sessionId]
+        sql: `INSERT OR IGNORE INTO ai_conversations (id, user_id, title, is_pinned, category)
+              VALUES (?, ?, 'Percakapan Baru', 0, 'today')`,
+        args: [sessionId, userId]
       });
 
       await db.execute({
@@ -462,14 +518,15 @@ export async function chat(req, res) {
           ]
         });
 
-        // Update waktu aktif dan perbarui judul jika masih "Percakapan Baru"
+        // Update waktu aktif, kepemilikan akun, dan perbarui judul jika masih "Percakapan Baru"
         const titleSnippet = cleanMessage.length > 28 ? cleanMessage.slice(0, 28) + '...' : cleanMessage;
         await db.execute({
           sql: `UPDATE ai_conversations
                 SET updated_at = CURRENT_TIMESTAMP,
+                    user_id = COALESCE(user_id, ?),
                     title = CASE WHEN title = 'Percakapan Baru' THEN ? ELSE title END
                 WHERE id = ?`,
-          args: [titleSnippet, sessionId]
+          args: [userId, titleSnippet, sessionId]
         });
       } catch (dbErr) {
         console.warn('[AI DB Chat Save Warning - AI Response]', dbErr.message);
