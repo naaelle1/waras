@@ -49,7 +49,16 @@ app.use('/api/terms', termsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/admin', adminRoutes);
 
-// ── Health Check ────────────────────────────────────────────────────────────
+// ── Health Check & Root ─────────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.json({
+    status: 'ok',
+    project: 'WARAS Backend API',
+    database: dbMode,
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
@@ -75,14 +84,19 @@ seedDatabase().catch((err) => {
   console.warn('[Database] Peringatan saat inisialisasi database:', err.message);
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
-  console.log(`   Database     : ${dbMode}`);
-  console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite'}`);
-  console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
+// Hanya jalankan listener mandiri jika BUKAN di environment serverless Vercel
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`✅ WARAS Backend berjalan di http://localhost:${PORT}`);
+    console.log(`   Database     : ${dbMode}`);
+    console.log(`   Model Gemini : ${process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite'}`);
+    console.log(`   Frontend URL : ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
 
-  // Warmup koneksi HTTPS TLS & model di background agar respon pertama pengguna langsung cepat
-  import('./controllers/aiController.js').then(({ warmup }) => {
-    if (typeof warmup === 'function') warmup();
-  }).catch(() => {});
-});
+    // Warmup koneksi HTTPS TLS & model di background agar respon pertama pengguna langsung cepat
+    import('./controllers/aiController.js').then(({ warmup }) => {
+      if (typeof warmup === 'function') warmup();
+    }).catch(() => {});
+  });
+}
+
+export default app;

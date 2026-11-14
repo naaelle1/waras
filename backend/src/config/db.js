@@ -20,12 +20,20 @@ const isRemoteTurso = Boolean(
   process.env.TURSO_DATABASE_URL.startsWith('libsql://')
 );
 
-// Tentukan path lokal absolut jika menggunakan SQLite file
-const localDbDir = path.resolve(__dirname, '../../data');
-if (!fs.existsSync(localDbDir)) {
-  fs.mkdirSync(localDbDir, { recursive: true });
+// Tentukan path lokal jika menggunakan SQLite file (hanya jika tidak memakai Turso remote)
+let localDbPath = '';
+if (!isRemoteTurso) {
+  const localDbDir = path.resolve(__dirname, '../../data');
+  try {
+    if (!fs.existsSync(localDbDir)) {
+      fs.mkdirSync(localDbDir, { recursive: true });
+    }
+    localDbPath = path.join(localDbDir, 'waras.db');
+  } catch (_err) {
+    // Fallback aman untuk environment serverless yang read-only seperti Vercel
+    localDbPath = '/tmp/waras.db';
+  }
 }
-const localDbPath = path.join(localDbDir, 'waras.db');
 
 const dbUrl = isRemoteTurso ? process.env.TURSO_DATABASE_URL : `file:${localDbPath}`;
 const authToken = isRemoteTurso ? process.env.TURSO_AUTH_TOKEN : undefined;
