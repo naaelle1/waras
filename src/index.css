@@ -391,8 +391,6 @@ html.high-contrast a:focus-visible,
 html.high-contrast input:focus-visible {
   outline: 2px solid #022022 !important;
   outline-offset: 2px !important;
-<<<<<<< HEAD
-=======
 }
 
 /* Dynamic Accessibility Overrides (Toggled from Settings) */
@@ -412,5 +410,4 @@ html.reduced-motion * {
   animation-duration: 0.001ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.001ms !important;
->>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
 }

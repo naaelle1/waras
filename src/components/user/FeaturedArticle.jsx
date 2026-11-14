@@ -13,6 +13,11 @@ export default function FeaturedArticle({ article, onReadMore }) {
           <img
             src={article.image}
             alt={article.title}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src =
+                "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=1200";
+            }}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-4 left-4 z-10">

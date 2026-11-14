@@ -28,7 +28,7 @@ export const articles = [
     title: "5 Ciri-Ciri Burnout dan Cara Sederhana Mengatasinya",
     category: "Kesehatan Mental",
     description: "Kelelahan emosional akibat stres pekerjaan kronis sering tidak disadari. Simak tips praktis menjaga kesehatan mental di lingkungan kerja padat.",
-    image: "https://images.unsplash.com/photo-1499209974431-9dac3cea0047?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&q=80&w=800",
     readingTime: "6 menit baca",
     date: "06 Mar 2026",
     author: "Anisa Rahma, M.Psi",

@@ -60,9 +60,6 @@ export default function Settings() {
   } = useAccessibility();
 
   const [activeTab, setActiveTab] = useState("all"); // "all" | "notifications" | "accessibility" | "security" | "privacy"
-<<<<<<< HEAD
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-=======
   const [settings, setSettings] = useState(() => ({
     ...DEFAULT_SETTINGS,
     accessibility: {
@@ -71,7 +68,6 @@ export default function Settings() {
       highContrast,
     },
   }));
->>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
@@ -134,8 +130,6 @@ export default function Settings() {
     }));
   };
 
-<<<<<<< HEAD
-=======
   // Handler toggle aksesibilitas
   const handleToggleAccessibility = (key) => {
     setSettings((prev) => {
@@ -151,8 +145,6 @@ export default function Settings() {
       };
     });
   };
-
->>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
   // Handler ukuran font
   const handleFontSizeChange = (size) => {
     setSettings((prev) => ({
@@ -576,22 +568,9 @@ export default function Settings() {
             <div className="space-y-3">
               <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
                 <div className="space-y-0.5 max-w-xl pr-3">
-<<<<<<< HEAD
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
-                      Mode Kontras Tinggi (High Contrast)
-                    </span>
-                    {highContrast && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
-                        Aktif
-                      </span>
-                    )}
-                  </div>
-=======
                   <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
                     Mode Kontras Tinggi (High Contrast)
                   </span>
->>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
                   <span className="text-[11px] sm:text-xs text-[#526666] block">
                     Mempertegas garis pembatas tabel, kartu antrean, dan ketajaman teks bagi kenyamanan penglihatan.
                   </span>
@@ -606,22 +585,9 @@ export default function Settings() {
 
               <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
                 <div className="space-y-0.5 max-w-xl pr-3">
-<<<<<<< HEAD
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
-                      Kurangi Efek Animasi (Reduced Motion)
-                    </span>
-                    {reducedMotion && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
-                        Aktif
-                      </span>
-                    )}
-                  </div>
-=======
                   <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
                     Kurangi Efek Animasi (Reduced Motion)
                   </span>
->>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
                   <span className="text-[11px] sm:text-xs text-[#526666] block">
                     Menonaktifkan pergerakan paralaks transisi antar halaman untuk menghemat daya dan kenyamanan visual.
                   </span>
