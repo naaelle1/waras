@@ -2,6 +2,7 @@ import { db } from '../config/db.js';
 import { initDatabase } from './init.js';
 import { facilities } from '../data/facilities.js';
 import { medicalTerms } from '../data/medicalTerms.js';
+import { hashPassword } from '../utils/auth.js';
 
 const initialArticles = [
   {
@@ -156,9 +157,9 @@ export async function seedDatabase() {
   const countUsers = await db.execute('SELECT COUNT(*) as count FROM users');
   if (countUsers.rows[0].count === 0) {
     await db.execute({
-      sql: `INSERT INTO users (name, email, password_hash, role)
-            VALUES (?, ?, ?, ?)`,
-      args: ['Admin WARAS Semarang', 'admin@waras.semarangkota.go.id', 'hashed_admin_pass', 'admin']
+      sql: `INSERT INTO users (name, email, password_hash, role, status)
+            VALUES (?, ?, ?, ?, 'Aktif')`,
+      args: ['Admin WARAS Semarang', 'admin@waras.semarangkota.go.id', hashPassword('admin123'), 'admin']
     });
     console.log('[Database Seed] User admin awal dibuat.');
   }

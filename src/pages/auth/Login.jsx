@@ -433,13 +433,35 @@ export default function Login() {
           </button>
 
           {/* Switch to Register */}
-          <div className="pt-3.5 sm:pt-4 border-t border-slate-100 text-center">
+          <div className="pt-3.5 sm:pt-4 border-t border-slate-100 text-center space-y-3">
             <p className="text-xs sm:text-sm text-slate-500 font-inter font-light">
               Belum memiliki akun warga?{" "}
               <Link to="/register" className="font-normal text-[#022022] hover:underline underline underline-offset-4 decoration-slate-300 font-inter">
                 Daftar akun baru
               </Link>
             </p>
+
+            {/* Quick Demo Fill for Admin */}
+            <div className="p-2.5 rounded-xl bg-slate-50/80 border border-slate-200/80 flex items-center justify-between text-[11px] text-slate-600 font-inter">
+              <div className="flex items-center gap-1.5 text-left">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                <span>
+                  <strong className="text-[#022022] font-medium">Akun Admin:</strong>{" "}
+                  <code className="text-[#022022] bg-white px-1 py-0.5 rounded border border-slate-200 text-[10px]">admin</code> / <code className="text-[#022022] bg-white px-1 py-0.5 rounded border border-slate-200 text-[10px]">admin123</code>
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIdentifier("admin");
+                  setPassword("admin123");
+                  setErrorMessage("");
+                }}
+                className="text-[11px] font-medium text-[#022022] bg-white hover:bg-[#37F4B4]/20 px-2 py-0.5 rounded-lg border border-slate-200 shadow-2xs transition-colors cursor-pointer shrink-0"
+              >
+                Isi Cepat
+              </button>
+            </div>
           </div>
         </div>
 

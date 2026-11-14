@@ -148,10 +148,14 @@ export async function login(req, res) {
 
     const cleanId = identifier.trim();
 
-    // Cari berdasarkan Email atau NIK
+    // Cari berdasarkan Email, NIK, atau username/alias admin
     const queryResult = await db.execute({
-      sql: 'SELECT * FROM users WHERE LOWER(email) = LOWER(?) OR nik = ? LIMIT 1',
-      args: [cleanId, cleanId]
+      sql: `SELECT * FROM users 
+            WHERE LOWER(email) = LOWER(?) 
+               OR nik = ? 
+               OR (LOWER(?) IN ('admin', 'admin@waras.id') AND role = 'admin')
+            LIMIT 1`,
+      args: [cleanId, cleanId, cleanId]
     });
 
     if (queryResult.rows.length === 0) {
