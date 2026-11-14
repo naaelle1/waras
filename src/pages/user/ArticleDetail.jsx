@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -12,49 +12,20 @@ import {
   CheckCircle2,
   AlertTriangle,
   ChevronRight,
-  Sparkles,
-  Loader2
+  Sparkles
 } from "lucide-react";
 
 import Button from "../../components/common/Button";
 import ArticleCard from "../../components/user/ArticleCard";
-import { articleService } from "../../services/articleService";
-import { articles as localFallbackArticles } from "../../data/articles";
+import { articles } from "../../data/articles";
 
 export default function ArticleDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [article, setArticle] = useState(() => {
-    return localFallbackArticles.find((a) => a.id === parseInt(id, 10)) || localFallbackArticles[0];
-  });
-  const [allArticles, setAllArticles] = useState(localFallbackArticles);
-  const [isLoading, setIsLoading] = useState(false);
+  const article = articles.find((a) => a.id === parseInt(id, 10)) || articles[0];
 
-  useEffect(() => {
-    let mounted = true;
-    async function loadData() {
-      if (!id) return;
-      try {
-        const [detailData, listData] = await Promise.all([
-          articleService.getById(id),
-          articleService.getAll(),
-        ]);
-        if (mounted) {
-          if (detailData) setArticle(detailData);
-          if (Array.isArray(listData)) setAllArticles(listData);
-        }
-      } catch (err) {
-        console.warn("[ArticleDetail] Gagal memuat artikel dari database:", err);
-      }
-    }
-    loadData();
-    return () => {
-      mounted = false;
-    };
-  }, [id]);
-
-  const relatedArticles = allArticles
+  const relatedArticles = articles
     .filter((a) => a.id !== article.id)
     .slice(0, 3);
 
