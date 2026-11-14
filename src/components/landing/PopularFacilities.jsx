@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, ArrowUpRight } from "lucide-react";
-import { useAccessibility } from "../../context/AccessibilityContext";
 
 const facilities = [
   {
@@ -44,34 +43,30 @@ const facilities = [
 
 function SingleFacilityCard({ facility, delayOffset = 0 }) {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const { reducedMotion } = useAccessibility();
 
-  // Auto-slide image satu per satu secara halus setiap 3.5 detik (pause saat di-hover atau saat reduced motion aktif)
+  // Auto-slide image satu per satu secara halus setiap 3.2 detik
   useEffect(() => {
-    if (isHovered || reducedMotion) return;
     const timer = setInterval(() => {
       setCurrentIdx((prev) => (prev + 1) % facility.images.length);
-    }, 3500 + delayOffset);
+    }, 3200 + delayOffset);
 
     return () => clearInterval(timer);
-  }, [facility.images.length, delayOffset, isHovered, reducedMotion]);
+  }, [facility.images.length, delayOffset]);
 
   return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group rounded-3xl bg-white border border-[#022022]/10 p-4 sm:p-4.5 hover:border-[#022022]/25 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 flex flex-col justify-between"
-    >
+    <div className="group rounded-3xl bg-white border border-[#022022]/10 p-4 sm:p-4.5 hover:border-[#022022]/25 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 flex flex-col justify-between">
       <div>
         {/* 
           SLIDING IMAGE CONTAINER:
-          Slide berganti satu per satu dengan transisi halus dan dot indicator (bukan roll film).
+          Slide berganti satu per satu dengan transisi halus dan dot indicator.
         */}
         <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#022022]/5 select-none">
           <div
-            className="flex w-full h-full transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${currentIdx * 100}%)` }}
+            className="facility-slider-track flex w-full h-full duration-700 ease-out"
+            style={{
+              transform: `translateX(-${currentIdx * 100}%)`,
+              transition: "transform 700ms cubic-bezier(0.25, 1, 0.5, 1)",
+            }}
           >
             {facility.images.map((imgSrc, imgIndex) => (
               <div key={imgIndex} className="w-full h-full shrink-0 relative">
@@ -89,7 +84,7 @@ function SingleFacilityCard({ facility, delayOffset = 0 }) {
           </div>
 
           {/* Minimal Subtle Dot Indicator */}
-          <div className="absolute bottom-2.5 inset-x-0 flex items-center justify-center gap-1.5 z-10">
+          <div className="absolute bottom-2.5 inset-x-0 flex items-center justify-center gap-1.5 z-10 pointer-events-auto">
             {facility.images.map((_, dotIndex) => (
               <button
                 key={dotIndex}
