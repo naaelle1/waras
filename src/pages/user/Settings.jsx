@@ -25,35 +25,17 @@ import {
 } from "lucide-react";
 import { useAccessibility } from "../../context/AccessibilityContext";
 
-<<<<<<< HEAD
-export default function Settings() {
-  const {
-    reducedMotion,
-    highContrast,
-    toggleReducedMotion,
-    toggleHighContrast,
-  } = useAccessibility();
-
-  const [notifications, setNotifications] = useState({
-=======
 const DEFAULT_SETTINGS = {
   notifications: {
->>>>>>> dbcc62f (feat: perbaikan setting)
     queueAlert: true,
     emergencyBroadcast: true,
     weeklyArticle: false,
     dinkesAnnouncements: true,
-<<<<<<< HEAD
-  });
-
-=======
     waNotification: true,
     emailNotification: true,
     soundAlert: true,
   },
   accessibility: {
-    reducedMotion: false,
-    highContrast: false,
     fontSize: "normal", // "normal" | "medium" | "large"
     theme: "light",     // "light" | "system"
   },
@@ -68,9 +50,17 @@ const DEFAULT_SETTINGS = {
 const STORAGE_KEY = "waras_user_settings";
 
 export default function Settings() {
+  const {
+    reducedMotion,
+    highContrast,
+    toggleReducedMotion,
+    toggleHighContrast,
+    setReducedMotion,
+    setHighContrast,
+  } = useAccessibility();
+
   const [activeTab, setActiveTab] = useState("all"); // "all" | "notifications" | "accessibility" | "security" | "privacy"
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
->>>>>>> dbcc62f (feat: perbaikan setting)
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
@@ -110,25 +100,9 @@ export default function Settings() {
     }
   }, []);
 
-  // 2. Terapkan efek aksesibilitas secara langsung ke DOM
+  // 2. Terapkan font scaling langsung ke DOM
   useEffect(() => {
     const root = document.documentElement;
-
-    // High Contrast
-    if (settings.accessibility.highContrast) {
-      root.classList.add("high-contrast");
-    } else {
-      root.classList.remove("high-contrast");
-    }
-
-    // Reduced Motion
-    if (settings.accessibility.reducedMotion) {
-      root.classList.add("reduced-motion");
-    } else {
-      root.classList.remove("reduced-motion");
-    }
-
-    // Font Size
     if (settings.accessibility.fontSize === "large") {
       root.style.fontSize = "18px";
     } else if (settings.accessibility.fontSize === "medium") {
@@ -136,7 +110,7 @@ export default function Settings() {
     } else {
       root.style.fontSize = "";
     }
-  }, [settings.accessibility]);
+  }, [settings.accessibility.fontSize]);
 
   // Handler toggle notifikasi
   const handleToggleNotification = (key) => {
@@ -145,23 +119,6 @@ export default function Settings() {
       notifications: {
         ...prev.notifications,
         [key]: !prev.notifications[key],
-      },
-    }));
-  };
-
-<<<<<<< HEAD
-  const handleSaveSettings = (e) => {
-    e.preventDefault();
-    setSavedSuccess(true);
-    setTimeout(() => setSavedSuccess(false), 2500);
-=======
-  // Handler toggle aksesibilitas
-  const handleToggleAccessibility = (key) => {
-    setSettings((prev) => ({
-      ...prev,
-      accessibility: {
-        ...prev.accessibility,
-        [key]: !prev.accessibility[key],
       },
     }));
   };
@@ -175,7 +132,6 @@ export default function Settings() {
         fontSize: size,
       },
     }));
->>>>>>> dbcc62f (feat: perbaikan setting)
   };
 
   // Handler toggle privasi
@@ -208,7 +164,8 @@ export default function Settings() {
     if (window.confirm("Kembalikan semua preferensi ke pengaturan bawaan awal?")) {
       setSettings(DEFAULT_SETTINGS);
       localStorage.removeItem(STORAGE_KEY);
-      document.documentElement.classList.remove("high-contrast", "reduced-motion");
+      setReducedMotion(false);
+      setHighContrast(false);
       document.documentElement.style.fontSize = "";
       setToastMessage("Pengaturan telah dikembalikan ke kondisi bawaan awal.");
       setSavedSuccess(true);
@@ -372,172 +329,19 @@ export default function Settings() {
           <button
             type="button"
             onClick={() => setSavedSuccess(false)}
-            className="text-emerald-700 hover:text-emerald-900 p-1 rounded"
+            className="text-emerald-700 hover:text-emerald-900 p-1 rounded cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
-<<<<<<< HEAD
-      {/* SECTIONS */}
-      <div className="space-y-6">
-        {/* NOTIFICATIONS */}
-        <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
-              <Bell className="w-4.5 h-4.5" />
-            </div>
-            <div>
-              <h2 className="font-poppins font-bold text-base text-[#0D2626]">
-                Notifikasi Layanan & Antrean
-              </h2>
-              <p className="text-xs text-[#526666]">
-                Kelola pesan peringatan yang dikirimkan ke nomor WhatsApp dan email Anda.
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-3 pt-1">
-            <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
-              <div className="space-y-0.5 max-w-lg">
-                <span className="text-xs font-bold text-[#0D2626] block">
-                  Peringatan Antrean Mendekat (Puskesmas)
-                </span>
-                <span className="text-[11px] text-[#526666] block">
-                  Dapatkan notifikasi jika antrean poli Anda tersisa 3 nomor lagi.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={notifications.queueAlert}
-                onChange={() => handleToggleNotification("queueAlert")}
-                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
-              />
-            </label>
-
-            <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
-              <div className="space-y-0.5 max-w-lg">
-                <span className="text-xs font-bold text-[#0D2626] block">
-                  Pemberitahuan Darurat Kesehatan Semarang
-                </span>
-                <span className="text-[11px] text-[#526666] block">
-                  Peringatan siaga DBD, cuaca ekstrem, atau layanan puskesmas darurat 24 jam.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={notifications.emergencyBroadcast}
-                onChange={() => handleToggleNotification("emergencyBroadcast")}
-                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
-              />
-            </label>
-
-            <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
-              <div className="space-y-0.5 max-w-lg">
-                <span className="text-xs font-bold text-[#0D2626] block">
-                  Rangkuman Artikel Kesehatan Mingguan
-                </span>
-                <span className="text-[11px] text-[#526666] block">
-                  Kumpulan tips nutrisi, pola tidur, dan panduan P3K keluarga terverifikasi dokter.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={notifications.weeklyArticle}
-                onChange={() => handleToggleNotification("weeklyArticle")}
-                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
-              />
-            </label>
-          </div>
-        </div>
-
-        {/* ACCESSIBILITY */}
-        <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
-              <Eye className="w-4.5 h-4.5" />
-            </div>
-            <div>
-              <h2 className="font-poppins font-bold text-base text-[#0D2626]">
-                Aksesibilitas & Tampilan
-              </h2>
-              <p className="text-xs text-[#526666]">
-                Kenyamanan visual saat membaca artikel dan grafik antrean.
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-3 pt-1">
-            <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
-              <div className="space-y-0.5 max-w-lg">
-                <span className="text-xs font-bold text-[#0D2626] block">
-                  Kurangi Efek Animasi (Reduced Motion)
-                </span>
-                <span className="text-[11px] text-[#526666] block">
-                  Menonaktifkan pergerakan paralaks 3D dan transisi melayang untuk kenyamanan peramban.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={reducedMotion}
-                onChange={toggleReducedMotion}
-                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
-              />
-            </label>
-
-            <label className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] cursor-pointer hover:bg-gray-50 transition-colors">
-              <div className="space-y-0.5 max-w-lg">
-                <span className="text-xs font-bold text-[#0D2626] block">
-                  Mode Kontras Tinggi (High Contrast)
-                </span>
-                <span className="text-[11px] text-[#526666] block">
-                  Mempertegas garis pembatas tabel dan kartu antrean faskes.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={highContrast}
-                onChange={toggleHighContrast}
-                className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
-              />
-            </label>
-          </div>
-        </div>
-
-        {/* SECURITY & DATA */}
-        <div className="bg-white rounded-3xl border border-[#E2ECEB] p-6 sm:p-7 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 border-b border-gray-100 pb-3">
-            <div className="w-9 h-9 rounded-xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
-              <Shield className="w-4.5 h-4.5" />
-            </div>
-            <div>
-              <h2 className="font-poppins font-bold text-base text-[#0D2626]">
-                Keamanan & Akun
-              </h2>
-              <p className="text-xs text-[#526666]">
-                Perlindungan data riwayat konsultasi dan privasi kependudukan.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-[#F8FAFA] border border-[#E2ECEB] gap-4">
-            <div className="space-y-1">
-              <span className="text-xs font-bold text-[#0D2626] block">
-                Kata Sandi Akun Warga
-              </span>
-              <span className="text-[11px] text-[#526666] block">
-                Terakhir diubah 30 hari yang lalu melalui portal verifikasi.
-              </span>
-            </div>
-=======
       {/* ── RESPONSIVE MENU TABS ── */}
       <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           return (
->>>>>>> dbcc62f (feat: perbaikan setting)
             <button
               key={tab.id}
               type="button"
@@ -746,7 +550,7 @@ export default function Settings() {
                     <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
                       Mode Kontras Tinggi (High Contrast)
                     </span>
-                    {settings.accessibility.highContrast && (
+                    {highContrast && (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
                         Aktif
                       </span>
@@ -758,8 +562,8 @@ export default function Settings() {
                 </div>
                 <input
                   type="checkbox"
-                  checked={settings.accessibility.highContrast}
-                  onChange={() => handleToggleAccessibility("highContrast")}
+                  checked={highContrast}
+                  onChange={toggleHighContrast}
                   className="w-4.5 h-4.5 rounded text-[#022022] accent-[#022022] cursor-pointer"
                 />
               </label>
@@ -770,7 +574,7 @@ export default function Settings() {
                     <span className="text-xs sm:text-sm font-semibold text-[#0D2626] block">
                       Kurangi Efek Animasi (Reduced Motion)
                     </span>
-                    {settings.accessibility.reducedMotion && (
+                    {reducedMotion && (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
                         Aktif
                       </span>
@@ -782,8 +586,8 @@ export default function Settings() {
                 </div>
                 <input
                   type="checkbox"
-                  checked={settings.accessibility.reducedMotion}
-                  onChange={() => handleToggleAccessibility("reducedMotion")}
+                  checked={reducedMotion}
+                  onChange={toggleReducedMotion}
                   className="w-4.5 h-4.5 rounded text-[#022022] accent-[#022022] cursor-pointer"
                 />
               </label>
@@ -857,7 +661,7 @@ export default function Settings() {
                     setSavedSuccess(true);
                     setTimeout(() => setSavedSuccess(false), 2500);
                   }}
-                  className="text-xs text-rose-600 hover:text-rose-700 hover:underline font-medium text-left sm:text-right"
+                  className="text-xs text-rose-600 hover:text-rose-700 hover:underline font-medium text-left sm:text-right cursor-pointer"
                 >
                   Keluar dari Perangkat Lain
                 </button>

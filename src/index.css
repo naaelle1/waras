@@ -267,12 +267,13 @@
   }
 }
 
-<<<<<<< HEAD
 /* ==========================================================================
    AKSESIBILITAS: KURANGI EFEK ANIMASI (REDUCED MOTION)
    ========================================================================== */
 html.waras-reduced-motion,
+html.reduced-motion,
 html.waras-reduced-motion *,
+html.reduced-motion *,
 html.waras-reduced-motion *::before,
 html.waras-reduced-motion *::after {
   animation: none !important;
@@ -287,13 +288,18 @@ html.waras-reduced-motion *::after {
 
 html.waras-reduced-motion *:hover,
 html.waras-reduced-motion *:active,
-html.waras-reduced-motion *:focus {
+html.waras-reduced-motion *:focus,
+html.reduced-motion *:hover,
+html.reduced-motion *:active,
+html.reduced-motion *:focus {
   transform: none !important;
   transition: none !important;
 }
 
 html.waras-reduced-motion .animate-marquee,
-html.waras-reduced-motion .animate-marquee-slow {
+html.waras-reduced-motion .animate-marquee-slow,
+html.reduced-motion .animate-marquee,
+html.reduced-motion .animate-marquee-slow {
   animation: none !important;
   transform: none !important;
 }
@@ -302,30 +308,41 @@ html.waras-reduced-motion .animate-marquee-slow {
    AKSESIBILITAS: MODE KONTRAS TINGGI (HIGH CONTRAST)
    Sederhana, bersih, dan nyaman di mata (tanpa over line/garis bertumpuk)
    ========================================================================== */
-/* Pertegas garis pembatas kartu & container yang memang memiliki border */
+html.high-contrast {
+  filter: contrast(115%);
+}
+
 .waras-high-contrast [class*="border-[#E2ECEB]"],
 .waras-high-contrast [class*="border-[#E0ECEB]"],
 .waras-high-contrast [class*="border-gray-200"],
 .waras-high-contrast [class*="border-gray-100"],
 .waras-high-contrast [class*="border-slate-200"],
-.waras-high-contrast [class*="border-slate-100"] {
+.waras-high-contrast [class*="border-slate-100"],
+html.high-contrast .glass-card,
+html.high-contrast .glass-card-light,
+html.high-contrast [class*="border-[#E2ECEB]"] {
   border-color: #022022 !important;
+  border-width: 1.5px !important;
 }
 
 /* Garis pemisah (*divider*) lebih jelas */
 .waras-high-contrast .border-b,
-.waras-high-contrast .border-t {
+.waras-high-contrast .border-t,
+html.high-contrast .border-b,
+html.high-contrast .border-t {
   border-color: #022022 !important;
 }
 
 /* Pembatas tabel & header antrean faskes yang rapi dan tegas */
-.waras-high-contrast table th {
+.waras-high-contrast table th,
+html.high-contrast table th {
   border-bottom: 2px solid #022022 !important;
   color: #022022 !important;
   font-weight: 700 !important;
 }
 
-.waras-high-contrast table td {
+.waras-high-contrast table td,
+html.high-contrast table td {
   border-bottom: 1px solid #022022 !important;
 }
 
@@ -336,45 +353,36 @@ html.waras-reduced-motion .animate-marquee-slow {
 .waras-high-contrast .text-slate-500,
 .waras-high-contrast .text-slate-400,
 .waras-high-contrast .text-gray-500,
-.waras-high-contrast .text-gray-400 {
+.waras-high-contrast .text-gray-400,
+html.high-contrast [class*="text-[#526666]"],
+html.high-contrast [class*="text-[#566E70]"] {
   color: #022022 !important;
 }
 
 /* Form inputs & controls dengan garis pembatas jelas */
 .waras-high-contrast input:not([type="checkbox"]):not([type="radio"]),
 .waras-high-contrast select,
-.waras-high-contrast textarea {
+.waras-high-contrast textarea,
+html.high-contrast input:not([type="checkbox"]):not([type="radio"]),
+html.high-contrast select,
+html.high-contrast textarea {
   border-color: #022022 !important;
   color: #000000 !important;
 }
 
 .waras-high-contrast input[type="checkbox"],
-.waras-high-contrast input[type="radio"] {
+.waras-high-contrast input[type="radio"],
+html.high-contrast input[type="checkbox"],
+html.high-contrast input[type="radio"] {
   outline: 1.5px solid #022022 !important;
 }
 
 .waras-high-contrast button:focus-visible,
 .waras-high-contrast a:focus-visible,
-.waras-high-contrast input:focus-visible {
+.waras-high-contrast input:focus-visible,
+html.high-contrast button:focus-visible,
+html.high-contrast a:focus-visible,
+html.high-contrast input:focus-visible {
   outline: 2px solid #022022 !important;
   outline-offset: 2px !important;
-=======
-/* Dynamic Accessibility Overrides (Toggled from Settings) */
-html.high-contrast {
-  filter: contrast(120%);
-}
-
-html.high-contrast .glass-card,
-html.high-contrast .glass-card-light,
-html.high-contrast [class*="border-[#E2ECEB]"] {
-  border-color: #022022 !important;
-  border-width: 1.5px !important;
-}
-
-html.reduced-motion,
-html.reduced-motion * {
-  animation-duration: 0.001ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.001ms !important;
->>>>>>> dbcc62f (feat: perbaikan setting)
 }
