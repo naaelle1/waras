@@ -11,42 +11,10 @@ import {
   Mail,
   UserCheck,
   Sparkles,
-  Loader2
+  Loader2,
+  X
 } from "lucide-react";
 import { authService } from "../../services/authService";
-
-const STEPS = [
-  {
-    num: 1,
-    title: (
-      <>
-        Masuk ke Akun
-        <br />
-        Warga Anda
-      </>
-    )
-  },
-  {
-    num: 2,
-    title: (
-      <>
-        Pantau Antrean
-        <br />
-        Faskes Terdekat
-      </>
-    )
-  },
-  {
-    num: 3,
-    title: (
-      <>
-        Konsultasi Awal
-        <br />
-        dengan WARAS AI
-      </>
-    )
-  }
-];
 
 function GoogleIcon() {
   return (
@@ -91,8 +59,13 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      await authService.login(identifier.trim(), password);
-      navigate("/user/dashboard");
+      const result = await authService.login(identifier.trim(), password);
+      // Jika login sebagai admin, arahkan ke dashboard admin
+      if (result?.user?.role === "admin" || identifier.toLowerCase().includes("admin")) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
     } catch (err) {
       setErrorMessage(err.message || "Email/NIK atau kata sandi tidak sesuai.");
     } finally {
@@ -109,8 +82,12 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      await authService.login(demoId, demoPw);
-      navigate("/user/dashboard");
+      const result = await authService.login(demoId, demoPw);
+      if (result?.user?.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
     } catch (err) {
       setErrorMessage(err.message || "Gagal masuk menggunakan akun demo.");
     } finally {
@@ -120,10 +97,10 @@ export default function Login() {
 
   return (
     <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-900 selection:bg-[#022022] selection:text-white">
-      {/* ── PANEL KIRI: 50% FULL-HEIGHT BRANDING & EDITORIAL COMPOSITION (Senada Warna Card Dashboard #022022) ── */}
-      <aside className="lg:col-span-1 bg-[#022022] text-white relative overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-10 xl:p-12 min-h-[540px] lg:min-h-screen">
-        {/* Wave Pattern Overlay from Mask Group.svg at bottom (Persis Card Dashboard) */}
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center">
+      {/* ── PANEL KIRI: 50% FULL-HEIGHT BRANDING & EDITORIAL COMPOSITION (#022022) ── */}
+      <aside className="lg:col-span-1 bg-[#022022] text-white relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 lg:p-10 xl:p-12 min-h-[460px] lg:min-h-screen">
+        {/* Wave Pattern Overlay from Mask Group.svg at bottom */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center opacity-90">
           <img
             src="/images/mask-group.svg"
             alt=""
@@ -133,16 +110,16 @@ export default function Login() {
           />
         </div>
 
-        {/* TOP: Brand Logo & Title (Diperbesar & Warna Putih Bersih) */}
+        {/* TOP: Brand Logo & Title */}
         <div className="relative z-10">
           <Link
             to="/"
             aria-label="WARAS - Beranda"
-            className="inline-flex flex-col items-start gap-2 group w-fit"
+            className="inline-flex flex-col items-start gap-1.5 group w-fit"
           >
             <Logo
               tone="light"
-              className="h-10 sm:h-11 lg:h-12 transition-transform duration-200 group-hover:scale-105 origin-left"
+              className="h-9 sm:h-10 lg:h-11 transition-transform duration-200 group-hover:scale-105 origin-left"
             />
             <span className="text-[10px] font-semibold tracking-[0.24em] text-teal-100/90 uppercase font-inter">
               HEALTHCARE PLATFORM
@@ -150,14 +127,14 @@ export default function Login() {
           </Link>
         </div>
 
-        {/* MIDDLE SECTION: Editorial Typography & Fluid Composition (Inspirasi Image 4) */}
-        <div className="relative z-10 py-4 my-auto max-w-xl space-y-4 sm:space-y-5 animate-auth-float">
-          <div className="space-y-2 sm:space-y-2.5">
-            <span className="text-[11px] font-semibold tracking-[0.25em] text-teal-100/90 uppercase font-inter block">
+        {/* MIDDLE SECTION: Editorial Typography & Fluid Composition */}
+        <div className="relative z-10 py-4 my-auto max-w-xl space-y-3.5 sm:space-y-4">
+          <div className="space-y-1.5 sm:space-y-2">
+            <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.22em] text-teal-100/90 uppercase font-inter block">
               PELAYANAN KESEHATAN PUBLIK KOTA SEMARANG
             </span>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.1] font-poppins text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-[40px] xl:text-[44px] font-normal leading-[1.12] font-poppins text-white tracking-tight">
               Kesehatan yang
               <br />
               <span className="font-serif italic text-teal-200 font-light">inklusif</span> dan
@@ -170,11 +147,11 @@ export default function Login() {
             Platform integrasi satu pintu untuk antrean faskes, rujukan rumah sakit, dan asisten medis cerdas bagi seluruh masyarakat Kota Semarang.
           </p>
 
-          {/* Action pill button with circular companion arrow (mirip tombol Image 4) */}
+          {/* Action pill button */}
           <div className="pt-1 flex items-center gap-3">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#022022] hover:bg-teal-50 font-poppins font-semibold text-xs sm:text-sm shadow-md shadow-black/10 transition-all duration-200 active:scale-[0.98] group"
+              className="inline-flex items-center gap-2 px-4.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white text-[#022022] hover:bg-teal-50 font-poppins font-semibold text-xs sm:text-sm shadow-md shadow-black/10 transition-all duration-200 active:scale-[0.98] group"
             >
               <span>Jelajahi Portal WARAS</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#022022] group-hover:translate-x-1 transition-transform" />
@@ -182,30 +159,30 @@ export default function Login() {
           </div>
         </div>
 
-        {/* BOTTOM SECTION: Minimalist Flex Typography Stats with Inter Light & Underline */}
-        <div className="relative z-10 pt-4 sm:pt-6 mt-auto animate-auth-float-delayed">
-          <div className="flex items-start justify-between gap-4 sm:gap-8">
-            <div className="flex-1 pb-2 sm:pb-2.5 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
-              <span className="block text-2xl sm:text-3xl lg:text-[34px] font-light font-inter text-white tracking-tight leading-none">
+        {/* BOTTOM SECTION: Stats with Underline */}
+        <div className="relative z-10 pt-3 sm:pt-4 mt-auto">
+          <div className="flex items-start justify-between gap-3 sm:gap-6">
+            <div className="flex-1 pb-2 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
+              <span className="block text-xl sm:text-2xl lg:text-[28px] font-light font-inter text-white tracking-tight leading-none">
                 37+
               </span>
-              <span className="block text-[11px] sm:text-xs font-light font-inter text-teal-100/80 leading-tight pt-1.5">
+              <span className="block text-[10px] sm:text-[11px] font-light font-inter text-teal-100/80 leading-tight pt-1">
                 Puskesmas Siaga
               </span>
             </div>
-            <div className="flex-1 pb-2 sm:pb-2.5 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
-              <span className="block text-2xl sm:text-3xl lg:text-[34px] font-light font-inter text-white tracking-tight leading-none">
+            <div className="flex-1 pb-2 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
+              <span className="block text-xl sm:text-2xl lg:text-[28px] font-light font-inter text-white tracking-tight leading-none">
                 14
               </span>
-              <span className="block text-[11px] sm:text-xs font-light font-inter text-teal-100/80 leading-tight pt-1.5">
+              <span className="block text-[10px] sm:text-[11px] font-light font-inter text-teal-100/80 leading-tight pt-1">
                 RS Rujukan Utama
               </span>
             </div>
-            <div className="flex-1 pb-2 sm:pb-2.5 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
-              <span className="block text-2xl sm:text-3xl lg:text-[34px] font-light font-inter text-white tracking-tight leading-none">
+            <div className="flex-1 pb-2 border-b border-white/20 group hover:border-teal-200/50 transition-colors">
+              <span className="block text-xl sm:text-2xl lg:text-[28px] font-light font-inter text-white tracking-tight leading-none">
                 24/7
               </span>
-              <span className="block text-[11px] sm:text-xs font-light font-inter text-teal-100/80 leading-tight pt-1.5">
+              <span className="block text-[10px] sm:text-[11px] font-light font-inter text-teal-100/80 leading-tight pt-1">
                 WARAS AI Tanggap
               </span>
             </div>
@@ -213,34 +190,33 @@ export default function Login() {
         </div>
       </aside>
 
-      {/* ── PANEL KANAN: 50% FULL-HEIGHT SPACIOUS & WIDE FORM (Pas di viewport tanpa membuat scroll) ── */}
-      <main className="lg:col-span-1 bg-white min-h-screen lg:h-screen lg:overflow-hidden flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-6 sm:py-7">
+      {/* ── PANEL KANAN: SPACIOUS & RESPONSIVE FORM (Bebas Potong & Overflow Lancar) ── */}
+      <main className="lg:col-span-1 bg-white min-h-screen lg:h-screen overflow-y-auto flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-14 py-4 sm:py-5">
         {/* Top Navigation Bar */}
-        <div className="w-full max-w-[520px] xl:max-w-[560px] mx-auto flex items-center justify-between pb-2 sm:pb-3 animate-auth-float-soft">
+        <div className="w-full max-w-[500px] xl:max-w-[520px] mx-auto flex items-center justify-between pb-1 shrink-0">
           <Link
             to="/"
-            className="text-xs sm:text-sm font-light text-slate-500 hover:text-[#022022] flex items-center gap-1.5 transition-colors font-inter"
+            className="text-xs sm:text-sm font-light text-slate-500 hover:text-[#022022] flex items-center gap-1.5 transition-colors font-inter py-1"
           >
             <ArrowLeft className="w-4 h-4 stroke-[1.5]" />
             <span>Kembali ke Beranda</span>
           </Link>
 
-          {/* Text Only - Tanpa card/pill, font-light & font-inter (sesuai instruksi Image 2) */}
           <div className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 font-inter font-light">
-            <ShieldCheck className="w-4 h-4 text-slate-400 stroke-[1.5]" />
+            <ShieldCheck className="w-4 h-4 text-emerald-600 stroke-[1.5]" />
             <span>Portal Pasien Resmi</span>
           </div>
         </div>
 
-        {/* Centered Spacious Form Container (Proporsional & Pas tanpa scroll) */}
-        <div className="w-full max-w-[520px] xl:max-w-[560px] mx-auto my-auto py-2 space-y-4 sm:space-y-5 animate-auth-float">
+        {/* Centered Spacious Form Container */}
+        <div className="w-full max-w-[500px] xl:max-w-[520px] mx-auto my-auto py-2 space-y-3.5 sm:space-y-4">
           {/* Header Form */}
-          <div className="space-y-1.5 sm:space-y-2">
+          <div className="space-y-1 sm:space-y-1.5">
             <div className="flex items-center gap-1.5 text-xs font-inter font-light text-slate-500">
-              <UserCheck className="w-4 h-4 text-slate-400 stroke-[1.5]" />
+              <UserCheck className="w-4 h-4 text-[#022022] stroke-[1.5]" />
               <span>Portal Masuk Warga</span>
             </div>
-            <h1 className="font-inter font-light text-2xl sm:text-[32px] text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-poppins font-normal text-2xl sm:text-[28px] text-slate-900 tracking-tight leading-tight">
               Masuk ke Akun
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 font-inter font-light leading-relaxed">
@@ -250,42 +226,55 @@ export default function Login() {
 
           {/* Notification Alert Box */}
           {errorMessage && (
-            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-light font-inter flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
-              <span>{errorMessage}</span>
+            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-light font-inter flex items-center justify-between gap-2 transition-all">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+                <span className="truncate">{errorMessage}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setErrorMessage("")}
+                className="text-rose-500 hover:text-rose-700 p-0.5 rounded cursor-pointer shrink-0"
+                aria-label="Tutup pesan error"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-3 sm:space-y-3.5">
+          <form onSubmit={handleLogin} className="space-y-2.5 sm:space-y-3">
             {/* Email / NIK */}
-            <div className="space-y-1 sm:space-y-1.5">
+            <div className="space-y-1">
               <label
                 htmlFor="identifier"
-                className="block text-xs sm:text-sm font-light text-slate-700 font-inter"
+                className="block text-xs sm:text-sm font-medium text-slate-700 font-inter"
               >
                 Email atau NIK Kependudukan
               </label>
               <div className="relative flex items-center">
-                <Mail className="w-4 h-4 absolute left-4 text-slate-400 stroke-[1.5]" />
+                <Mail className="w-4 h-4 absolute left-3.5 text-slate-400 stroke-[1.5]" />
                 <input
                   id="identifier"
                   type="text"
                   autoComplete="username"
                   value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
+                  onChange={(e) => {
+                    setIdentifier(e.target.value);
+                    if (errorMessage) setErrorMessage("");
+                  }}
                   placeholder="cth. nael@semarangkota.go.id"
-                  className="w-full pl-11 pr-4 h-11 sm:h-11.5 rounded-2xl bg-slate-50/80 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 placeholder:font-light focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all font-inter font-light"
+                  className="w-full pl-10 pr-4 h-10 sm:h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 placeholder:font-light focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all font-inter"
                 />
               </div>
             </div>
 
             {/* Password */}
-            <div className="space-y-1 sm:space-y-1.5">
+            <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-xs sm:text-sm font-light text-slate-700 font-inter"
+                  className="block text-xs sm:text-sm font-medium text-slate-700 font-inter"
                 >
                   Kata Sandi
                 </label>
@@ -297,20 +286,23 @@ export default function Login() {
                 </Link>
               </div>
               <div className="relative flex items-center">
-                <Lock className="w-4 h-4 absolute left-4 text-slate-400 stroke-[1.5]" />
+                <Lock className="w-4 h-4 absolute left-3.5 text-slate-400 stroke-[1.5]" />
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errorMessage) setErrorMessage("");
+                  }}
                   placeholder="Masukkan kata sandi akun"
-                  className="w-full pl-11 pr-11 h-11 sm:h-11.5 rounded-2xl bg-slate-50/80 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 placeholder:font-light focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all font-inter font-light"
+                  className="w-full pl-10 pr-10 h-10 sm:h-11 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 placeholder:font-light focus:bg-white focus:outline-none focus:border-[#022022] focus:ring-2 focus:ring-[#022022]/15 transition-all font-inter"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-4 text-slate-400 hover:text-slate-600 cursor-pointer p-1"
+                  className="absolute right-3 text-slate-400 hover:text-slate-600 cursor-pointer p-1"
                   aria-label={showPassword ? "Sembunyikan kata sandi" : "Lihat kata sandi"}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4 stroke-[1.5]" /> : <Eye className="w-4 h-4 stroke-[1.5]" />}
@@ -320,7 +312,7 @@ export default function Login() {
             </div>
 
             {/* Remember me checkbox */}
-            <div className="pt-1">
+            <div className="pt-0.5">
               <label className="flex items-center gap-2 cursor-pointer select-none">
                 <input
                   type="checkbox"
@@ -338,7 +330,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 sm:h-11.5 inline-flex items-center justify-center gap-2 px-6 rounded-2xl bg-[#022022] hover:bg-[#033033] border border-[#022022] disabled:opacity-60 text-white text-xs sm:text-sm font-normal tracking-wide shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.99] mt-3 sm:mt-3.5 group font-inter"
+              className="w-full h-10.5 sm:h-11 inline-flex items-center justify-center gap-2 px-6 rounded-xl bg-[#022022] hover:bg-[#033033] border border-[#022022] disabled:opacity-60 text-white text-xs sm:text-sm font-medium tracking-wide shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.99] mt-2 group font-inter"
             >
               {isLoading ? (
                 <>
@@ -347,7 +339,7 @@ export default function Login() {
                 </>
               ) : (
                 <>
-                  <span className="font-light">Masuk ke Akun</span>
+                  <span>Masuk ke Akun</span>
                   <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform stroke-[1.5]" />
                 </>
               )}
@@ -355,19 +347,19 @@ export default function Login() {
           </form>
 
           {/* Social / Quick Login Divider */}
-          <div className="flex items-center gap-3 my-3.5 sm:my-4">
+          <div className="flex items-center gap-3 my-2.5 sm:my-3">
             <span className="h-px flex-1 bg-slate-200" />
             <span className="text-[11px] text-slate-400 font-inter font-light">atau masuk dengan</span>
             <span className="h-px flex-1 bg-slate-200" />
           </div>
 
           {/* Social Buttons: Google & Akun Demo */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={handleDemoLogin}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-11.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-light text-slate-700 transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
+              className="inline-flex items-center justify-center gap-2 h-10 sm:h-10.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-medium text-slate-700 transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
             >
               <GoogleIcon />
               <span>Google</span>
@@ -376,7 +368,7 @@ export default function Login() {
               type="button"
               onClick={handleDemoLogin}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-11.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-light text-slate-700 transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
+              className="inline-flex items-center justify-center gap-2 h-10 sm:h-10.5 rounded-xl border border-[#022022]/15 bg-[#E6FEFF]/50 hover:bg-[#E6FEFF] text-xs sm:text-sm font-medium text-[#022022] transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#022022] stroke-[1.5]" />
               <span>Akun Demo</span>
@@ -384,10 +376,10 @@ export default function Login() {
           </div>
 
           {/* Switch to Register */}
-          <div className="pt-3.5 sm:pt-4 border-t border-slate-100 text-center">
+          <div className="pt-2 sm:pt-3 border-t border-slate-100 text-center">
             <p className="text-xs text-slate-500 font-inter font-light">
               Belum memiliki akun warga?{" "}
-              <Link to="/register" className="font-normal text-[#022022] hover:underline underline underline-offset-4 decoration-slate-300 font-inter">
+              <Link to="/register" className="font-medium text-[#022022] hover:underline underline underline-offset-4 decoration-slate-300 font-inter">
                 Daftar akun baru
               </Link>
             </p>
@@ -395,7 +387,7 @@ export default function Login() {
         </div>
 
         {/* Small Bottom Footer */}
-        <div className="w-full max-w-[520px] xl:max-w-[560px] mx-auto text-center pt-2 text-[11px] text-slate-400 font-inter font-light">
+        <div className="w-full max-w-[500px] xl:max-w-[520px] mx-auto text-center pt-1 pb-1 text-[11px] text-slate-400 font-inter font-light shrink-0">
           &copy; 2026 WARAS &mdash; Dinas Kesehatan Kota Semarang. Hak cipta dilindungi.
         </div>
       </main>

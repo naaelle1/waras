@@ -123,8 +123,8 @@ export default function ForgotPassword() {
         </div>
       </aside>
 
-      {/* ── PANEL KANAN: 50% FULL-HEIGHT SPACIOUS & WIDE FORM (Pas di viewport tanpa membuat scroll) ── */}
-      <main className="lg:col-span-1 bg-white min-h-screen lg:h-screen lg:overflow-hidden flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-6 sm:py-7">
+      {/* ── PANEL KANAN: SPACIOUS & WIDE FORM (Bebas Potong & Overflow Lancar) ── */}
+      <main className="lg:col-span-1 bg-white min-h-screen lg:h-screen overflow-y-auto flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-4 sm:py-6">
         {/* Top Navigation Bar */}
         <div className="w-full max-w-[520px] xl:max-w-[560px] mx-auto flex items-center justify-between pb-2 sm:pb-3 animate-auth-float-soft">
           <Link
