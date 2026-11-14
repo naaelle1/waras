@@ -267,6 +267,7 @@
   }
 }
 
+<<<<<<< HEAD
 /* ==========================================================================
    AKSESIBILITAS: KURANGI EFEK ANIMASI (REDUCED MOTION)
    ========================================================================== */
@@ -357,4 +358,23 @@ html.waras-reduced-motion .animate-marquee-slow {
 .waras-high-contrast input:focus-visible {
   outline: 2px solid #022022 !important;
   outline-offset: 2px !important;
+=======
+/* Dynamic Accessibility Overrides (Toggled from Settings) */
+html.high-contrast {
+  filter: contrast(120%);
+}
+
+html.high-contrast .glass-card,
+html.high-contrast .glass-card-light,
+html.high-contrast [class*="border-[#E2ECEB]"] {
+  border-color: #022022 !important;
+  border-width: 1.5px !important;
+}
+
+html.reduced-motion,
+html.reduced-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+>>>>>>> dbcc62f (feat: perbaikan setting)
 }
