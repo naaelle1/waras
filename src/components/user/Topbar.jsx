@@ -83,13 +83,6 @@ export default function Topbar({
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   useEffect(() => {
-    const active = authService.getCurrentUser();
-    if (active) {
-      setCurrentUser(active);
-    }
-  }, []);
-
-  useEffect(() => {
     function handleClickOutside(event) {
       if (
         notificationRef.current &&
