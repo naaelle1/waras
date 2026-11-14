@@ -146,6 +146,123 @@ export async function updateUserStatus(req, res) {
 }
 
 /**
+ * PUT /api/users/:id
+ * Mengupdate data profil, NIK, peran, dan status pengguna oleh Administrator
+ */
+export async function updateUser(req, res) {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const {
+      name,
+      email,
+      nik,
+      phone,
+      role,
+      status,
+      address,
+      district,
+      bpjsNumber,
+      bpjsStatus
+    } = req.body;
+
+    const userCheck = await db.execute({
+      sql: 'SELECT * FROM users WHERE id = ? LIMIT 1',
+      args: [id]
+    });
+
+    if (userCheck.rows.length === 0) {
+      return res.status(404).json({ success: false, message: 'Pengguna tidak ditemukan.' });
+    }
+
+    const existingUser = userCheck.rows[0];
+
+    // Lindungi role admin utama id 1
+    let finalRole = role || existingUser.role;
+    let finalStatus = status || existingUser.status;
+    if (existingUser.id === 1 && (finalRole !== 'admin' || finalStatus === 'Nonaktif')) {
+      finalRole = 'admin';
+      finalStatus = 'Aktif';
+    }
+
+    // Periksa duplikasi email jika diubah
+    if (email && email.trim().toLowerCase() !== (existingUser.email || '').toLowerCase()) {
+      const emailDup = await db.execute({
+        sql: 'SELECT id FROM users WHERE LOWER(email) = LOWER(?) AND id != ? LIMIT 1',
+        args: [email.trim(), id]
+      });
+      if (emailDup.rows.length > 0) {
+        return res.status(409).json({ success: false, message: 'Alamat email sudah digunakan oleh pengguna lain.' });
+      }
+    }
+
+    // Periksa duplikasi NIK jika diubah
+    if (nik && nik.trim() !== (existingUser.nik || '')) {
+      const nikDup = await db.execute({
+        sql: 'SELECT id FROM users WHERE nik = ? AND id != ? LIMIT 1',
+        args: [nik.trim(), id]
+      });
+      if (nikDup.rows.length > 0) {
+        return res.status(409).json({ success: false, message: 'NIK sudah terdaftar pada akun lain.' });
+      }
+    }
+
+    await db.execute({
+      sql: `UPDATE users
+            SET name = COALESCE(?, name),
+                email = COALESCE(?, email),
+                nik = COALESCE(?, nik),
+                phone = COALESCE(?, phone),
+                role = COALESCE(?, role),
+                status = COALESCE(?, status),
+                address = COALESCE(?, address),
+                district = COALESCE(?, district),
+                bpjs_number = COALESCE(?, bpjs_number),
+                bpjs_status = COALESCE(?, bpjs_status),
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?`,
+      args: [
+        name ? name.trim() : null,
+        email ? email.trim().toLowerCase() : null,
+        nik ? nik.trim() : null,
+        phone ? phone.trim() : null,
+        finalRole,
+        finalStatus,
+        address !== undefined ? address : null,
+        district !== undefined ? district : null,
+        bpjsNumber !== undefined ? bpjsNumber : null,
+        bpjsStatus !== undefined ? bpjsStatus : null,
+        id
+      ]
+    });
+
+    const updatedUser = {
+      ...existingUser,
+      id,
+      name: name ? name.trim() : existingUser.name,
+      email: email ? email.trim().toLowerCase() : existingUser.email,
+      nik: nik ? nik.trim() : existingUser.nik,
+      phone: phone ? phone.trim() : existingUser.phone,
+      role: finalRole,
+      status: finalStatus,
+      address: address !== undefined ? address : existingUser.address,
+      district: district !== undefined ? district : existingUser.district,
+      bpjsNumber: bpjsNumber !== undefined ? bpjsNumber : existingUser.bpjs_number,
+      bpjsStatus: bpjsStatus !== undefined ? bpjsStatus : existingUser.bpjs_status,
+      registered: existingUser.created_at ? existingUser.created_at.split(' ')[0] : '2026-01-01'
+    };
+
+    return res.json({
+      success: true,
+      message: 'Data pengguna berhasil diperbarui.',
+      data: updatedUser
+    });
+  } catch (err) {
+    console.error('[Users Controller updateUser]', err);
+    return res.status(500).json({ success: false, message: 'Gagal memperbarui data pengguna.' });
+  }
+}
+
+/**
  * DELETE /api/users/:id
  * Menghapus akun pengguna dari database
  */

@@ -34,6 +34,32 @@ export const userService = {
   },
 
   /**
+   * Mengupdate data lengkap pengguna (Nama, NIK, Email, No HP, Role, BPJS, dll.)
+   */
+  async updateUser(id, userData) {
+    try {
+      const token = authService.getToken();
+      const res = await fetch(`${API_BASE}/users/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const json = await res.json();
+      if (res.ok && json.success) {
+        return json.data;
+      }
+      throw new Error(json.message || "Gagal memperbarui data pengguna.");
+    } catch (err) {
+      console.error("[userService.updateUser]", err);
+      throw err;
+    }
+  },
+
+  /**
    * Toggle atau update status pengguna ('Aktif' | 'Nonaktif')
    */
   async updateStatus(id, status) {
