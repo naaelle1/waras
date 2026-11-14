@@ -1,10 +1,11 @@
-import React from "react";
-import { Users, Hospital, FileText, Flag, ArrowRight, UserPlus, PenLine, AlertTriangle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Users, Hospital, FileText, Flag, ArrowRight, UserPlus, PenLine, AlertTriangle, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import StatCard from "../../components/admin/StatCard";
+import { adminService } from "../../services/adminService";
 
-const registrationTrend = [
+const initialRegistrationTrend = [
   { month: "Jan", users: 820 },
   { month: "Feb", users: 932 },
   { month: "Mar", users: 1050 },
@@ -19,7 +20,7 @@ const registrationTrend = [
   { month: "Des", users: 2296 },
 ];
 
-const recentActivity = [
+const initialRecentActivity = [
   { id: 1, type: "user", icon: UserPlus, message: "Pengguna baru terdaftar: Dewi Lestari", time: "5 menit lalu", color: "text-emerald-500" },
   { id: 2, type: "report", icon: AlertTriangle, message: "Laporan baru: Data faskes tidak akurat", time: "12 menit lalu", color: "text-yellow-500" },
   { id: 3, type: "article", icon: PenLine, message: 'Artikel diperbarui: "Panduan Gizi Balita"', time: "30 menit lalu", color: "text-blue-500" },
@@ -36,16 +37,62 @@ const quickActions = [
 ];
 
 export default function AdminDashboard() {
+  const [stats, setStats] = useState({
+    totalUsers: 12458,
+    activeUsers: 12100,
+    totalFacilities: 64,
+    totalArticles: 127,
+    totalReports: 23,
+    pendingReports: 5,
+    recentActivity: initialRecentActivity,
+    registrationTrend: initialRegistrationTrend
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadStats = async () => {
+    setIsLoading(true);
+    const data = await adminService.getDashboardStats();
+    if (data) {
+      setStats((prev) => ({
+        ...prev,
+        ...data,
+        recentActivity: (data.recentActivity && data.recentActivity.length > 0)
+          ? data.recentActivity.map((item) => ({
+              ...item,
+              icon: item.type === "user" ? UserPlus : item.type === "report" ? AlertTriangle : PenLine
+            }))
+          : initialRecentActivity,
+        registrationTrend: data.registrationTrend || initialRegistrationTrend
+      }));
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    loadStats();
+  }, []);
+
   return (
     <div className="space-y-6 font-inter">
       {/* Welcome Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-[#022022] font-poppins">
-          Selamat Datang, Admin
-        </h1>
-        <p className="text-[#566E70] text-sm mt-1">
-          Berikut ringkasan data platform WARAS hari ini.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-[#022022] font-poppins">
+            Selamat Datang, Admin
+          </h1>
+          <p className="text-[#566E70] text-sm mt-1">
+            Berikut ringkasan data platform WARAS hari ini secara real-time.
+          </p>
+        </div>
+
+        <button
+          onClick={loadStats}
+          disabled={isLoading}
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors shadow-2xs cursor-pointer self-start sm:self-auto"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
+          <span>Segarkan Data</span>
+        </button>
       </div>
 
       {/* Stat Cards */}
@@ -53,30 +100,30 @@ export default function AdminDashboard() {
         <StatCard
           icon={Users}
           label="Total Pengguna"
-          value="12.458"
-          trend="12% bulan ini"
+          value={stats.totalUsers.toLocaleString("id-ID")}
+          trend={`${stats.activeUsers || stats.totalUsers} aktif`}
           trendUp
         />
         <StatCard
           icon={Hospital}
           label="Total Faskes"
-          value="51"
-          trend="3 baru"
+          value={stats.totalFacilities.toLocaleString("id-ID")}
+          trend="Semua aktif di Semarang"
           trendUp
         />
         <StatCard
           icon={FileText}
-          label="Artikel Aktif"
-          value="127"
-          trend="8 baru minggu ini"
+          label="Artikel Edukasi"
+          value={stats.totalArticles.toLocaleString("id-ID")}
+          trend="Tersedia di web"
           trendUp
         />
         <StatCard
           icon={Flag}
           label="Laporan Masuk"
-          value="23"
-          trend="5 menunggu"
-          trendUp={false}
+          value={stats.totalReports.toLocaleString("id-ID")}
+          trend={`${stats.pendingReports} menunggu peninjauan`}
+          trendUp={stats.pendingReports === 0}
         />
       </div>
 
@@ -89,11 +136,11 @@ export default function AdminDashboard() {
               Tren Pendaftaran Pengguna
             </h2>
             <span className="bg-[#E6FEFF] text-[#022022] rounded-full px-3 py-1 text-xs font-medium">
-              2024
+              2026
             </span>
           </div>
           <ResponsiveContainer width="100%" height={260}>
-            <LineChart data={registrationTrend}>
+            <LineChart data={stats.registrationTrend || initialRegistrationTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="#E2ECEB" />
               <XAxis
                 dataKey="month"
@@ -135,11 +182,11 @@ export default function AdminDashboard() {
             Aktivitas Terbaru
           </h2>
           <div className="space-y-3">
-            {recentActivity.map((activity) => {
-              const Icon = activity.icon;
+            {stats.recentActivity.map((activity) => {
+              const Icon = activity.icon || UserPlus;
               return (
                 <div key={activity.id} className="flex items-start gap-3">
-                  <div className={`mt-0.5 ${activity.color}`}>
+                  <div className={`mt-0.5 ${activity.color || "text-emerald-500"}`}>
                     <Icon className="w-4 h-4" strokeWidth={2} />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -167,7 +214,7 @@ export default function AdminDashboard() {
               <Link
                 key={action.label}
                 to={action.to}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#022022] text-white hover:bg-[#033033] transition-colors group"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#022022] text-white hover:bg-[#033033] transition-colors group cursor-pointer"
               >
                 <Icon className="w-5 h-5 text-[#37F4B4]" strokeWidth={2} />
                 <span className="text-sm font-medium truncate">{action.label}</span>

@@ -51,6 +51,8 @@ CREATE TABLE IF NOT EXISTS reports (
   attachment TEXT,
   user_id INTEGER,
   status TEXT DEFAULT 'Menunggu Peninjauan',
+  admin_response TEXT,
+  responded_at DATETIME,
   submitted_at TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

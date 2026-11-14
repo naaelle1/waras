@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
-import { Search, Download, Eye, Pencil, ShieldCheck, ShieldOff, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Search, Download, Eye, Pencil, ShieldCheck, ShieldOff, ChevronLeft, ChevronRight, Loader2, RefreshCw } from "lucide-react";
+import { userService } from "../../services/userService";
 
 const mockUsers = [
   { id: 1, name: "Dewi Lestari", nik: "3374015503900001", email: "dewi.lestari@email.com", phone: "081234567890", status: "Aktif", registered: "2024-11-01" },
@@ -20,13 +21,30 @@ export default function ManageUsers() {
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("Semua");
   const [page, setPage] = useState(1);
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadUsers = async () => {
+    setIsLoading(true);
+    const res = await userService.getAllUsers();
+    if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
+      setUsers(res.data);
+    } else {
+      setUsers(mockUsers);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
   const filtered = useMemo(() => {
     return users.filter((u) => {
       const matchSearch =
-        u.name.toLowerCase().includes(search.toLowerCase()) ||
-        u.nik.includes(search);
+        (u.name || "").toLowerCase().includes(search.toLowerCase()) ||
+        (u.nik || "").includes(search) ||
+        (u.email || "").toLowerCase().includes(search.toLowerCase());
       const matchStatus =
         filterStatus === "Semua" || u.status === filterStatus;
       return matchSearch && matchStatus;
@@ -36,14 +54,29 @@ export default function ManageUsers() {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  const toggleStatus = (id) => {
+  const toggleStatus = async (id) => {
+    const current = users.find((u) => u.id === id);
+    if (!current) return;
+    const newStatus = current.status === "Aktif" ? "Nonaktif" : "Aktif";
+
+    // Optimistic UI update
     setUsers((prev) =>
       prev.map((u) =>
-        u.id === id
-          ? { ...u, status: u.status === "Aktif" ? "Nonaktif" : "Aktif" }
-          : u
+        u.id === id ? { ...u, status: newStatus } : u
       )
     );
+
+    try {
+      await userService.updateStatus(id, newStatus);
+    } catch (err) {
+      alert(err.message || "Gagal memperbarui status akun.");
+      // Revert if error
+      setUsers((prev) =>
+        prev.map((u) =>
+          u.id === id ? { ...u, status: current.status } : u
+        )
+      );
+    }
   };
 
   return (

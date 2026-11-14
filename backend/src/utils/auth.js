@@ -74,3 +74,18 @@ export function authenticateUser(req) {
   const token = authHeader.split(' ')[1];
   return verifyToken(token);
 }
+
+/**
+ * Middleware Express untuk membatasi akses hanya untuk Administrator
+ */
+export function requireAdmin(req, res, next) {
+  const user = authenticateUser(req);
+  if (!user || user.role !== 'admin') {
+    return res.status(403).json({
+      success: false,
+      message: 'Akses ditolak. Tindakan ini memerlukan hak akses Administrator.'
+    });
+  }
+  req.user = user;
+  next();
+}
