@@ -147,7 +147,7 @@ export default function LivingAIAvatar({
       className={`relative inline-flex items-center justify-center select-none shrink-0 ${currentSize.box} ${className}`}
       aria-label="WARAS AI Living Avatar"
     >
-      {/* ── 1. AMBIENT BLOOM GLOW DI BELAKANG ORB ── */}
+      {/* ── 1. AMBIENT BLOOM GLOW DI BELAKANG ORB (WARAS PALETTE) ── */}
       {showGlow && (
         <motion.div
           animate={{
@@ -162,19 +162,19 @@ export default function LivingAIAvatar({
           className={`absolute inset-[-15%] rounded-full pointer-events-none ${currentSize.glowBlur}`}
           style={{
             background:
-              "radial-gradient(circle, rgba(0,240,255,0.7) 0%, rgba(55,244,180,0.5) 30%, rgba(255,77,77,0.4) 65%, transparent 80%)",
+              "radial-gradient(circle, rgba(55,244,180,0.65) 0%, rgba(0,240,255,0.45) 35%, rgba(2,32,34,0.2) 70%, transparent 85%)",
           }}
         />
       )}
 
-      {/* ── 2. LAPISAN AURA CHROMATIC BERPUTAR UTAMA ── */}
+      {/* ── 2. LAPISAN AURA CHROMATIC BERPUTAR UTAMA (WARAS THEME) ── */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: spinDuration, ease: "linear" }}
         className="absolute inset-0 rounded-full"
         style={{
           background:
-            "conic-gradient(from 0deg, #00F0FF, #37F4B4, #3B82F6, #8B5CF6, #EC4899, #FF453A, #FF9F0A, #00F0FF)",
+            "conic-gradient(from 0deg, #37F4B4 0%, #00F0FF 25%, #E6FEFF 45%, #10B981 65%, #022022 85%, #37F4B4 100%)",
         }}
       />
 
@@ -191,16 +191,16 @@ export default function LivingAIAvatar({
         className="absolute inset-0 rounded-full opacity-70 mix-blend-screen"
         style={{
           background:
-            "conic-gradient(from 180deg, #FF3B30, #FF9500, #37F4B4, #00F0FF, #2563EB, #A855F7, #FF3B30)",
+            "conic-gradient(from 180deg, #00F0FF 0%, #37F4B4 30%, #0D2626 55%, #E6FEFF 75%, #059669 90%, #00F0FF 100%)",
         }}
       />
 
-      {/* ── 4. SOFT RIM BLUR UNTUK MEMPERHALUS TEPI GRADASI ── */}
+      {/* ── 4. SOFT RIM GLOW / SPECULAR RING ── */}
       <div
         className="absolute inset-[3%] rounded-full opacity-90"
         style={{
           boxShadow:
-            "inset 0 0 4px rgba(0,240,255,0.8), inset 0 0 8px rgba(255,77,77,0.6)",
+            "inset 0 0 5px rgba(55,244,180,0.85), inset 0 0 10px rgba(0,240,255,0.5), 0 0 6px rgba(55,244,180,0.3)",
         }}
       />
 
@@ -209,7 +209,7 @@ export default function LivingAIAvatar({
         className={`relative z-10 rounded-full flex items-center justify-center ${currentSize.inner} shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]`}
         style={{
           background:
-            "radial-gradient(circle at 50% 40%, #032A2D 0%, #011416 65%, #000B0C 100%)",
+            "radial-gradient(circle at 50% 35%, #032A2D 0%, #022022 65%, #011416 100%)",
         }}
       >
         {/* Soft radial inner glow */}
@@ -217,7 +217,7 @@ export default function LivingAIAvatar({
           className="absolute inset-0 rounded-full opacity-60 pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle at 50% 50%, rgba(55,244,180,0.25) 0%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, rgba(55,244,180,0.3) 0%, transparent 70%)",
           }}
         />
 
@@ -230,7 +230,7 @@ export default function LivingAIAvatar({
           <motion.div
             animate={leftBulletAnimate}
             transition={bulletTransition}
-            className="rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.95),0_0_12px_rgba(55,244,180,0.6)]"
+            className="rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.95),0_0_12px_rgba(55,244,180,0.85)]"
             style={{
               width: `${currentSize.bulletW}px`,
               height: `${currentSize.bulletH}px`,
@@ -241,7 +241,7 @@ export default function LivingAIAvatar({
           <motion.div
             animate={rightBulletAnimate}
             transition={bulletTransition}
-            className="rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.95),0_0_12px_rgba(0,240,255,0.6)]"
+            className="rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.95),0_0_12px_rgba(0,240,255,0.85)]"
             style={{
               width: `${currentSize.bulletW}px`,
               height: `${currentSize.bulletH}px`,

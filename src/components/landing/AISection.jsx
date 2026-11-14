@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, Send, ArrowRight, Bot } from "lucide-react";
+import LivingAIAvatar from "../common/LivingAIAvatar";
 
 export default function AISection() {
   const [activeChip, setActiveChip] = useState("Apa gejala demam?");
@@ -70,9 +71,7 @@ export default function AISection() {
               
               {/* CHAT HEADER */}
               <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-                <div className="w-9 h-9 rounded-xl bg-[#022022] text-[#37F4B4] flex items-center justify-center">
-                  <Bot className="w-5 h-5" />
-                </div>
+                <LivingAIAvatar size="md" state="idle" showGlow />
                 <div>
                   <h4 className="font-poppins font-bold text-xs text-[#022022]">WARAS AI Assistant</h4>
                   <p className="text-[10px] text-emerald-600 font-medium">Aktif • Edukasi Medis</p>
