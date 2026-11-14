@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, ArrowUpRight } from "lucide-react";
+import { useAccessibility } from "../../context/AccessibilityContext";
 
 const facilities = [
   {
@@ -41,32 +42,39 @@ const facilities = [
   },
 ];
 
-function SingleFacilityCard({ facility, speed = 18 }) {
-  // Duplikasi foto untuk seamless infinite loop seperti roll film
-  const filmImages = [...facility.images, ...facility.images];
+function SingleFacilityCard({ facility, delayOffset = 0 }) {
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const { reducedMotion } = useAccessibility();
+
+  // Auto-slide image satu per satu secara halus setiap 3.5 detik (pause saat di-hover atau saat reduced motion aktif)
+  useEffect(() => {
+    if (isHovered || reducedMotion) return;
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % facility.images.length);
+    }, 3500 + delayOffset);
+
+    return () => clearInterval(timer);
+  }, [facility.images.length, delayOffset, isHovered, reducedMotion]);
 
   return (
-    <div className="group rounded-3xl bg-white border border-[#022022]/10 p-4 sm:p-4.5 hover:border-[#022022]/25 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 flex flex-col justify-between">
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group rounded-3xl bg-white border border-[#022022]/10 p-4 sm:p-4.5 hover:border-[#022022]/25 hover:shadow-[0_15px_35px_rgba(2,32,34,0.08)] transition-all duration-300 flex flex-col justify-between"
+    >
       <div>
         {/* 
-          CONTINUOUS FILM-ROLL IMAGE CONTAINER:
-          Foto bergerak terus-menerus mengalir mulus tanpa patah-patah seperti roll film.
-          Otomatis pause secara halus ketika kursor diarahkan ke kartu (hover).
+          SLIDING IMAGE CONTAINER:
+          Slide berganti satu per satu dengan transisi halus dan dot indicator (bukan roll film).
         */}
         <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#022022]/5 select-none">
           <div
-            className="flex h-full will-change-transform group-hover:[animation-play-state:paused]"
-            style={{
-              width: `${filmImages.length * 100}%`,
-              animation: `marquee ${speed}s linear infinite`,
-            }}
+            className="flex w-full h-full transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${currentIdx * 100}%)` }}
           >
-            {filmImages.map((imgSrc, imgIndex) => (
-              <div
-                key={imgIndex}
-                className="h-full shrink-0 relative"
-                style={{ width: `${100 / filmImages.length}%` }}
-              >
+            {facility.images.map((imgSrc, imgIndex) => (
+              <div key={imgIndex} className="w-full h-full shrink-0 relative">
                 <img
                   src={imgSrc}
                   alt={facility.name}
@@ -80,9 +88,25 @@ function SingleFacilityCard({ facility, speed = 18 }) {
             ))}
           </div>
 
-          {/* Vignette halus di tepi kiri & kanan untuk efek kedalaman roll film */}
-          <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-4 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
+          {/* Minimal Subtle Dot Indicator */}
+          <div className="absolute bottom-2.5 inset-x-0 flex items-center justify-center gap-1.5 z-10">
+            {facility.images.map((_, dotIndex) => (
+              <button
+                key={dotIndex}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIdx(dotIndex);
+                }}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  dotIndex === currentIdx
+                    ? "w-4 h-1 bg-[#37F4B4] shadow-xs"
+                    : "w-1 h-1 bg-white/60 hover:bg-white"
+                }`}
+                aria-label={`Lihat foto ${dotIndex + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* DETAILS SECTION (Clean Plain Text Below, No Floating Badges) */}
@@ -148,13 +172,13 @@ export default function PopularFacilities() {
           </Link>
         </div>
 
-        {/* 3 CLEAN CARDS (Images roll continuously like a film reel, zero snapping!) */}
+        {/* 3 CLEAN CARDS (Images slide smoothly one-by-one inside each box) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {facilities.map((fac, idx) => (
             <SingleFacilityCard
               key={fac.id}
               facility={fac}
-              speed={idx === 0 ? 18 : idx === 1 ? 22 : 20}
+              delayOffset={idx * 350}
             />
           ))}
         </div>
