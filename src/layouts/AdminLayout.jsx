@@ -34,23 +34,23 @@ export default function AdminLayout() {
       {/* WRAPPER MAIN CONTENT */}
       <div
         className={clsx(
-          "flex-1 flex flex-col transition-all duration-300 ease-in-out min-h-screen px-4 sm:px-6 lg:px-8",
+          "flex-1 flex flex-col transition-all duration-300 ease-in-out min-w-0 overflow-x-hidden min-h-screen px-3 sm:px-6 lg:px-8",
           isCollapsed ? "lg:pl-25" : "lg:pl-72.5"
         )}
       >
         {/* BARIS ATAS KHUSUS MOBILE HAMBURGER & TOPBAR */}
-        <div className="flex items-center justify-between pt-3">
+        <div className="flex items-center justify-between gap-2 pt-3">
           <button
             type="button"
             onClick={() => setIsMobileOpen(true)}
-            className="lg:hidden p-2 rounded-xl bg-white border border-gray-200 text-[#082C2C] shadow-sm hover:bg-gray-50 cursor-pointer"
+            className="lg:hidden p-2 rounded-xl bg-white border border-gray-200 text-[#082C2C] shadow-sm hover:bg-gray-50 cursor-pointer shrink-0"
             aria-label="Open navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           {/* ADMIN TOPBAR */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <AdminTopbar onLogout={() => setIsLogoutModalOpen(true)} />
           </div>
         </div>

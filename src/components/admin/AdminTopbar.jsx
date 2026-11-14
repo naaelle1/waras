@@ -11,7 +11,6 @@ import {
   ChevronRight,
   Shield,
 } from "lucide-react";
-import SearchBar from "../common/SearchBar";
 
 import { authService } from "../../services/authService";
 
@@ -95,11 +94,6 @@ export default function AdminTopbar({ user: propUser, onLogout }) {
 
   return (
     <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none font-inter">
-      {/* SearchBar */}
-      <div className="w-56 sm:w-72">
-        <SearchBar placeholder="Cari pengguna, faskes, atau artikel..." />
-      </div>
-
       {/* Notification + Profile Container */}
       <div className="flex items-center gap-2 sm:gap-3 bg-white rounded-full px-3 py-1 sm:px-4 sm:py-1.5 border border-[#E2ECEB] shadow-2xs relative">
         {/* Notification Bell */}
