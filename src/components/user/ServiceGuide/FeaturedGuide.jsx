@@ -24,7 +24,7 @@ export default function FeaturedGuide({ featuredData, onSelectGuide }) {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-poppins font-bold bg-[#022022] text-white border border-white/20">
-                <Sparkles className="w-3.5 h-3.5 text-teal-200" />
+                <Sparkles className="w-3.5 h-3.5 text-white" />
                 {main.category}
               </span>
               <span className="text-xs text-[#5F6F70] font-medium">• {main.readTime}</span>

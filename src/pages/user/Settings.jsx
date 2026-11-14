@@ -353,7 +353,7 @@ export default function Settings() {
             onClick={handleSaveSettings}
             className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-white bg-[#022022] hover:bg-[#033033] border border-[#022022] shadow-sm hover:shadow text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
           >
-            <CheckCircle2 className="w-4 h-4 text-[#37F4B4]" />
+            <CheckCircle2 className="w-4 h-4 text-white" />
             <span>Simpan Perubahan</span>
           </button>
         </div>
@@ -389,10 +389,10 @@ export default function Settings() {
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#022022] text-white shadow-xs font-semibold"
-                  : "bg-white border border-[#E2ECEB] text-[#526666] hover:bg-[#E6FEFF]/50 hover:text-[#022022]"
+                  : "bg-white border border-[#E2ECEB] text-[#526666] hover:bg-gray-50 hover:text-[#022022]"
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? "text-[#37F4B4]" : "text-[#526666]"}`} />
+              <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-[#526666]"}`} />
               <span>{tab.label}</span>
             </button>
           );
@@ -406,7 +406,7 @@ export default function Settings() {
           <div className="bg-white rounded-3xl border border-[#E2ECEB] p-5 sm:p-7 shadow-xs space-y-5">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3.5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#E6FEFF] text-[#022022] border border-[#022022]/10 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
                   <Bell className="w-5 h-5 text-[#022022]" />
                 </div>
                 <div>
@@ -531,7 +531,7 @@ export default function Settings() {
         {(activeTab === "all" || activeTab === "accessibility") && (
           <div className="bg-white rounded-3xl border border-[#E2ECEB] p-5 sm:p-7 shadow-xs space-y-5">
             <div className="flex items-center gap-3 border-b border-gray-100 pb-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-[#E6FEFF] text-[#022022] border border-[#022022]/10 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
                 <Eye className="w-5 h-5 text-[#022022]" />
               </div>
               <div>
@@ -574,7 +574,7 @@ export default function Settings() {
                     }`}
                   >
                     <span className="block text-xs sm:text-sm font-semibold">{f.label}</span>
-                    <span className={`block text-[10px] mt-0.5 ${settings.accessibility.fontSize === f.id ? "text-teal-200" : "text-slate-400"}`}>
+                    <span className={`block text-[10px] mt-0.5 ${settings.accessibility.fontSize === f.id ? "text-white/80" : "text-slate-400"}`}>
                       {f.desc}
                     </span>
                   </button>
@@ -625,7 +625,7 @@ export default function Settings() {
         {(activeTab === "all" || activeTab === "security") && (
           <div className="bg-white rounded-3xl border border-[#E2ECEB] p-5 sm:p-7 shadow-xs space-y-5">
             <div className="flex items-center gap-3 border-b border-gray-100 pb-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-[#E6FEFF] text-[#022022] border border-[#022022]/10 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
                 <Shield className="w-5 h-5 text-[#022022]" />
               </div>
               <div>
@@ -656,7 +656,7 @@ export default function Settings() {
                 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] text-white hover:bg-[#033033] text-xs font-semibold shadow-xs active:scale-[0.98] transition-all cursor-pointer shrink-0"
               >
-                <KeyRound className="w-3.5 h-3.5 text-[#37F4B4]" />
+                <KeyRound className="w-3.5 h-3.5 text-white" />
                 <span>Ubah Sandi</span>
               </button>
             </div>
@@ -668,7 +668,7 @@ export default function Settings() {
               </span>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-white border border-[#E2ECEB]">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#E6FEFF] flex items-center justify-center text-[#022022] shrink-0">
+                  <div className="w-9 h-9 rounded-lg bg-[#022022]/10 flex items-center justify-center text-[#022022] shrink-0">
                     <Laptop className="w-4.5 h-4.5" />
                   </div>
                   <div>
@@ -700,7 +700,7 @@ export default function Settings() {
         {(activeTab === "all" || activeTab === "privacy") && (
           <div className="bg-white rounded-3xl border border-[#E2ECEB] p-5 sm:p-7 shadow-xs space-y-5">
             <div className="flex items-center gap-3 border-b border-gray-100 pb-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-[#E6FEFF] text-[#022022] border border-[#022022]/10 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-2xl bg-[#022022]/10 text-[#022022] border border-[#022022]/15 flex items-center justify-center font-bold">
                 <Lock className="w-5 h-5 text-[#022022]" />
               </div>
               <div>
@@ -745,7 +745,7 @@ export default function Settings() {
                 <button
                   type="button"
                   onClick={handleExportData}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#022022]/15 text-[#022022] hover:bg-[#E6FEFF]/50 text-xs font-semibold shadow-2xs transition-all cursor-pointer w-full"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#022022]/15 text-[#022022] hover:bg-gray-50 text-xs font-semibold shadow-2xs transition-all cursor-pointer w-full"
                 >
                   <Download className="w-3.5 h-3.5 text-[#022022]" />
                   <span>Unduh Arsip Data (JSON)</span>
@@ -781,7 +781,7 @@ export default function Settings() {
           <div className="bg-white w-full max-w-md rounded-3xl p-6 sm:p-7 shadow-xl border border-gray-100 relative space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-gray-100">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#E6FEFF] flex items-center justify-center text-[#022022]">
+                <div className="w-9 h-9 rounded-xl bg-[#022022]/10 flex items-center justify-center text-[#022022]">
                   <KeyRound className="w-4.5 h-4.5" />
                 </div>
                 <div>
