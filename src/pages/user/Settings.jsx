@@ -10,8 +10,16 @@ import {
   Moon,
   Sparkles
 } from "lucide-react";
+import { useAccessibility } from "../../context/AccessibilityContext";
 
 export default function Settings() {
+  const {
+    reducedMotion,
+    highContrast,
+    toggleReducedMotion,
+    toggleHighContrast,
+  } = useAccessibility();
+
   const [notifications, setNotifications] = useState({
     queueAlert: true,
     emergencyBroadcast: true,
@@ -19,20 +27,10 @@ export default function Settings() {
     dinkesAnnouncements: true,
   });
 
-  const [accessibility, setAccessibility] = useState({
-    reducedMotion: false,
-    highContrast: false,
-    largerText: false,
-  });
-
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleToggleNotification = (key) => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const handleToggleAccessibility = (key) => {
-    setAccessibility((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const handleSaveSettings = (e) => {
@@ -176,8 +174,8 @@ export default function Settings() {
               </div>
               <input
                 type="checkbox"
-                checked={accessibility.reducedMotion}
-                onChange={() => handleToggleAccessibility("reducedMotion")}
+                checked={reducedMotion}
+                onChange={toggleReducedMotion}
                 className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>
@@ -193,8 +191,8 @@ export default function Settings() {
               </div>
               <input
                 type="checkbox"
-                checked={accessibility.highContrast}
-                onChange={() => handleToggleAccessibility("highContrast")}
+                checked={highContrast}
+                onChange={toggleHighContrast}
                 className="w-4 h-4 rounded text-[#022022] accent-[#022022] cursor-pointer"
               />
             </label>

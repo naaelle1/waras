@@ -249,7 +249,7 @@
   animation: authSubtleGlow 8s ease-in-out infinite;
 }
 
-/* Respect reduced-motion preferences */
+/* Respect reduced-motion preferences (OS Level) */
 @media (prefers-reduced-motion: reduce) {
   .page-transition,
   .hover-lift,
@@ -265,4 +265,96 @@
     transform: none !important;
     opacity: 1 !important;
   }
+}
+
+/* ==========================================================================
+   AKSESIBILITAS: KURANGI EFEK ANIMASI (REDUCED MOTION)
+   ========================================================================== */
+html.waras-reduced-motion,
+html.waras-reduced-motion *,
+html.waras-reduced-motion *::before,
+html.waras-reduced-motion *::after {
+  animation: none !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0s !important;
+  transition: none !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+html.waras-reduced-motion *:hover,
+html.waras-reduced-motion *:active,
+html.waras-reduced-motion *:focus {
+  transform: none !important;
+  transition: none !important;
+}
+
+html.waras-reduced-motion .animate-marquee,
+html.waras-reduced-motion .animate-marquee-slow {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* ==========================================================================
+   AKSESIBILITAS: MODE KONTRAS TINGGI (HIGH CONTRAST)
+   Sederhana, bersih, dan nyaman di mata (tanpa over line/garis bertumpuk)
+   ========================================================================== */
+/* Pertegas garis pembatas kartu & container yang memang memiliki border */
+.waras-high-contrast [class*="border-[#E2ECEB]"],
+.waras-high-contrast [class*="border-[#E0ECEB]"],
+.waras-high-contrast [class*="border-gray-200"],
+.waras-high-contrast [class*="border-gray-100"],
+.waras-high-contrast [class*="border-slate-200"],
+.waras-high-contrast [class*="border-slate-100"] {
+  border-color: #022022 !important;
+}
+
+/* Garis pemisah (*divider*) lebih jelas */
+.waras-high-contrast .border-b,
+.waras-high-contrast .border-t {
+  border-color: #022022 !important;
+}
+
+/* Pembatas tabel & header antrean faskes yang rapi dan tegas */
+.waras-high-contrast table th {
+  border-bottom: 2px solid #022022 !important;
+  color: #022022 !important;
+  font-weight: 700 !important;
+}
+
+.waras-high-contrast table td {
+  border-bottom: 1px solid #022022 !important;
+}
+
+/* Teks abu-abu/sekunder dibuat lebih gelap dan kontras agar mudah dibaca */
+.waras-high-contrast [class*="text-[#526666]"],
+.waras-high-contrast [class*="text-[#566E70]"],
+.waras-high-contrast [class*="text-[#5F6F70]"],
+.waras-high-contrast .text-slate-500,
+.waras-high-contrast .text-slate-400,
+.waras-high-contrast .text-gray-500,
+.waras-high-contrast .text-gray-400 {
+  color: #022022 !important;
+}
+
+/* Form inputs & controls dengan garis pembatas jelas */
+.waras-high-contrast input:not([type="checkbox"]):not([type="radio"]),
+.waras-high-contrast select,
+.waras-high-contrast textarea {
+  border-color: #022022 !important;
+  color: #000000 !important;
+}
+
+.waras-high-contrast input[type="checkbox"],
+.waras-high-contrast input[type="radio"] {
+  outline: 1.5px solid #022022 !important;
+}
+
+.waras-high-contrast button:focus-visible,
+.waras-high-contrast a:focus-visible,
+.waras-high-contrast input:focus-visible {
+  outline: 2px solid #022022 !important;
+  outline-offset: 2px !important;
 }

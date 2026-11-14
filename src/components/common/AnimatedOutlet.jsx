@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { useAccessibility } from "../../context/AccessibilityContext";
 
 const pageVariants = {
   initial: {
@@ -36,8 +37,9 @@ const pageVariants = {
 export default function AnimatedOutlet({ context, disabled = false }) {
   const location = useLocation();
   const outlet = useOutlet(context);
+  const { reducedMotion } = useAccessibility();
 
-  if (disabled) {
+  if (disabled || reducedMotion) {
     return outlet;
   }
 

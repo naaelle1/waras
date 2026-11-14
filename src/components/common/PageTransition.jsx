@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useAccessibility } from "../../context/AccessibilityContext";
 
 const pageVariants = {
   initial: {
@@ -39,6 +40,16 @@ const pageVariants = {
  * @param {boolean} [props.fullHeight] - If true, uses h-full + flex (for AI page)
  */
 export default function PageTransition({ children, className = "", fullHeight = false }) {
+  const { reducedMotion } = useAccessibility();
+
+  if (reducedMotion) {
+    return (
+      <div className={`${fullHeight ? "h-full flex flex-col overflow-hidden" : "w-full"} ${className}`}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       variants={pageVariants}
