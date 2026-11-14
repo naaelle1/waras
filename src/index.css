@@ -304,6 +304,12 @@ html.reduced-motion .animate-marquee-slow {
   transform: none !important;
 }
 
+/* Pastikan slider foto faskes di landing page tetap dapat bergeser halus */
+html.waras-reduced-motion .facility-slider-track,
+.facility-slider-track {
+  transition: transform 700ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
 /* ==========================================================================
    AKSESIBILITAS: MODE KONTRAS TINGGI (HIGH CONTRAST)
    Sederhana, bersih, dan nyaman di mata (tanpa over line/garis bertumpuk)
@@ -385,4 +391,26 @@ html.high-contrast a:focus-visible,
 html.high-contrast input:focus-visible {
   outline: 2px solid #022022 !important;
   outline-offset: 2px !important;
+<<<<<<< HEAD
+=======
+}
+
+/* Dynamic Accessibility Overrides (Toggled from Settings) */
+html.high-contrast {
+  filter: contrast(120%);
+}
+
+html.high-contrast .glass-card,
+html.high-contrast .glass-card-light,
+html.high-contrast [class*="border-[#E2ECEB]"] {
+  border-color: #022022 !important;
+  border-width: 1.5px !important;
+}
+
+html.reduced-motion,
+html.reduced-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+>>>>>>> 1826ed8da67c0af8f64e7ecddb2557c42b552c8b
 }

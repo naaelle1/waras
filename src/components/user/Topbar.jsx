@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import {
   Bell,
@@ -44,8 +44,29 @@ export default function Topbar({
     avatar: "/images/default-avatar.png",
   },
   onLogout,
+  showSearch,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Rute di mana SearchBar disembunyikan sesuai permintaan:
+  // fasilitas kesehatan, panduan kesehatan, istilah medis, panduan layanan, laporkan kesalahan, settings, help, dan profil.
+  const HIDE_SEARCH_PATHS = [
+    "/user/facilities",
+    "/user/health-info/guides",
+    "/user/health-info/medical-terms",
+    "/user/health-info/terms",
+    "/user/health-info/services",
+    "/user/report-problem",
+    "/user/settings",
+    "/user/help",
+    "/user/profile",
+  ];
+
+  const shouldHideSearch =
+    showSearch !== undefined
+      ? !showSearch
+      : HIDE_SEARCH_PATHS.some((path) => location.pathname.startsWith(path));
 
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -88,9 +109,11 @@ export default function Topbar({
   return (
     <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none font-inter">
       {/* SearchBar */}
-      <div className="w-56 sm:w-72">
-        <SearchBar placeholder="Cari fasilitas atau artikel..." />
-      </div>
+      {!shouldHideSearch && (
+        <div className="w-56 sm:w-72">
+          <SearchBar placeholder="Cari fasilitas atau artikel..." />
+        </div>
+      )}
 
       {/* Notification + Profile Container */}
       <div className="flex items-center gap-2 sm:gap-3 bg-white rounded-full px-3 py-1 sm:px-4 sm:py-1.5 border border-[#E2ECEB] shadow-2xs relative">

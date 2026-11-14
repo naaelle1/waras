@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ScrollToTop from "../components/common/ScrollToTop";
 
 // Layouts & Public Pages
 import UserLayout from "../layouts/UserLayout";
@@ -37,6 +38,7 @@ import AdminSettings from "../pages/admin/AdminSettings";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Halaman Publik Landing Page & Otentikasi (Animasi Floating Up CSS) */}
         <Route path="/" element={<Home />} />
