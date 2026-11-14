@@ -28,10 +28,10 @@
 
 | No | Nama Anggota | Role / Kontribusi Utama | GitHub Profile |
 |:---:|:---|:---|:---|
-| 1 | **Dafa Arkananta** | Frontend Lead & UX Specialist (Panduan Layanan, Modal & UI Interaktif) | [@DafaArkananta](https://github.com/DafaArkananta) |
+| 1 | **Dafa Arkananta (Inttegraa)** | Frontend Lead & UX Specialist (Panduan Layanan, Modal & UI Interaktif) | [@DafaArkananta](https://github.com/DafaArkananta) |
 | 2 | **Elok Chandra (naaelle1)** | Product Designer & Frontend Developer (Dashboard User & Integrasi Peta) | [@naaelle1](https://github.com/naaelle1) |
-| 3 | **Ozzie (ozzie5555)** | Fullstack & Backend Architect (API Express, Turso Cloud, AI Gemini & RBAC) | [@ozzie5555](https://github.com/ozzie5555) |
-| 4 | **Yusuf Analendra (Wisnu1101)** | Quality Assurance, Database & Data Researcher (Dataset Faskes & Istilah Medis) | [@Wisnu1101](https://github.com/Wisnu1101) |
+| 3 | **Krisna Mandala (ozzie5555)** | Fullstack & Backend Architect (API Express, Turso Cloud, AI Gemini & RBAC) | [@ozzie5555](https://github.com/ozzie5555) |
+| 4 | **Nalendra Wisnu (Wisnu1101)** | Quality Assurance, Database & Data Researcher (Dataset Faskes & Istilah Medis) | [@Wisnu1101](https://github.com/Wisnu1101) |
 
 ---
 
