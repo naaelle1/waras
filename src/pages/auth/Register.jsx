@@ -63,7 +63,9 @@ export default function Register() {
 
   // Handler Pendaftaran Akun Cepat via Google OAuth 2.0
   const handleGoogleSignUpClick = () => {
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    const clientId =
+      import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+      "316051354828-c3driumks1hbvl5duh2b25uj70b9lve3.apps.googleusercontent.com";
     if (!clientId) {
       setErrorMessage("Google Client ID belum terkonfigurasi di sistem.");
       return;
