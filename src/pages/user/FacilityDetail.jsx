@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -10,21 +10,55 @@ import {
   ShieldCheck,
   AlertCircle,
   Navigation,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from "lucide-react";
 
 import Button from "../../components/common/Button";
 import Badge from "../../components/common/Badge";
 import Card from "../../components/common/Card";
 import MapComponent from "../../components/user/MapComponent";
-import { facilities } from "../../data/facilities";
+import { facilityService } from "../../services/facilityService";
+import { facilities as localFallbackFacilities } from "../../data/facilities";
 
 export default function FacilityDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Find facility matching the URL ID parameter
-  const facility = facilities.find((f) => f.id === parseInt(id, 10));
+  const [facility, setFacility] = useState(() => {
+    return localFallbackFacilities.find((f) => f.id === parseInt(id, 10)) || null;
+  });
+  const [isLoading, setIsLoading] = useState(!facility);
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchDetail() {
+      if (!id) return;
+      try {
+        const data = await facilityService.getById(id);
+        if (mounted && data) {
+          setFacility(data);
+        }
+      } catch (err) {
+        console.warn("[FacilityDetail] Error loading detail:", err);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    }
+    fetchDetail();
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="p-16 text-center space-y-3">
+        <Loader2 className="w-8 h-8 animate-spin text-[#022022] mx-auto" />
+        <p className="text-xs text-slate-500 font-inter">Memuat informasi fasilitas kesehatan...</p>
+      </div>
+    );
+  }
 
   if (!facility) {
     return (

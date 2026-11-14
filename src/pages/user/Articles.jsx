@@ -1,38 +1,54 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, ShieldCheck, Activity } from "lucide-react";
+import { BookOpen, ShieldCheck, Activity, Loader2 } from "lucide-react";
 import FeaturedArticle from "../../components/user/FeaturedArticle";
 import ArticleCategoryFilter from "../../components/user/ArticleCategoryFilter";
 import ArticleCard from "../../components/user/ArticleCard";
 import ArticleDetailModal from "../../components/user/ArticleDetailModal";
-import { articles } from "../../data/articles";
-
-const CATEGORIES = [
-  "Semua",
-  "Kesehatan Umum",
-  "Penyakit & Pencegahan",
-  "Kesehatan Mental",
-  "Gaya Hidup",
-  "Pertolongan Pertama"
-];
+import { articleService } from "../../services/articleService";
+import { articles as localFallbackArticles } from "../../data/articles";
 
 export default function Articles() {
+  const [articlesList, setArticlesList] = useState(localFallbackArticles);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [selectedArticleModal, setSelectedArticleModal] = useState(null);
   const navigate = useNavigate();
 
-  const featuredArticle = useMemo(() => {
-    return articles.find((art) => art.featured) || articles[0];
+  // Load artikel terkini dari database Turso
+  useEffect(() => {
+    let mounted = true;
+    async function loadArticles() {
+      setIsLoading(true);
+      try {
+        const data = await articleService.getAll();
+        if (mounted && Array.isArray(data) && data.length > 0) {
+          setArticlesList(data);
+        }
+      } catch (err) {
+        console.warn("[Articles Page] Gagal memuat artikel dari database:", err);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    }
+    loadArticles();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
+  const featuredArticle = useMemo(() => {
+    return articlesList.find((art) => art.featured) || articlesList[0];
+  }, [articlesList]);
+
   const recommendedArticles = useMemo(() => {
-    return articles.filter((art) => {
+    return articlesList.filter((art) => {
       const isNotFeatured = art.id !== featuredArticle?.id;
       const matchesCategory =
         selectedCategory === "Semua" || art.category === selectedCategory;
       return isNotFeatured && matchesCategory;
     });
-  }, [featuredArticle, selectedCategory]);
+  }, [articlesList, featuredArticle, selectedCategory]);
 
   const handleReadMore = (article) => {
     setSelectedArticleModal(article);
@@ -79,7 +95,7 @@ export default function Articles() {
             Kamu Mungkin Suka
           </h2>
           <ArticleCategoryFilter
-            categories={CATEGORIES}
+            categories={articleService.getCategories()}
             activeCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
           />

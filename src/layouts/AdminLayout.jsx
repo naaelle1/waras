@@ -5,11 +5,20 @@ import { Menu } from "lucide-react";
 import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminTopbar from "../components/admin/AdminTopbar";
 import AnimatedOutlet from "../components/common/AnimatedOutlet";
+import LogoutConfirmModal from "../components/common/LogoutConfirmModal";
+import { authService } from "../services/authService";
 
 export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const location = useLocation();
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
+    authService.logout();
+    window.location.replace("/login");
+  };
 
   return (
     <div className="bg-[#F8FAFA] text-[#0D2626] font-inter flex flex-col min-h-screen">
@@ -19,6 +28,7 @@ export default function AdminLayout() {
         setIsCollapsed={setIsCollapsed}
         isMobileOpen={isMobileOpen}
         setIsMobileOpen={setIsMobileOpen}
+        onLogout={() => setIsLogoutModalOpen(true)}
       />
 
       {/* WRAPPER MAIN CONTENT */}
@@ -41,7 +51,7 @@ export default function AdminLayout() {
 
           {/* ADMIN TOPBAR */}
           <div className="flex-1">
-            <AdminTopbar />
+            <AdminTopbar onLogout={() => setIsLogoutModalOpen(true)} />
           </div>
         </div>
 
@@ -52,6 +62,13 @@ export default function AdminLayout() {
           />
         </main>
       </div>
+
+      {/* POP-UP MODAL KONFIRMASI LOGOUT ADMIN */}
+      <LogoutConfirmModal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        onConfirm={handleConfirmLogout}
+      />
     </div>
   );
 }

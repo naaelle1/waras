@@ -16,6 +16,7 @@ import {
   ChevronUp,
   X,
 } from "lucide-react";
+import { authService } from "../../services/authService";
 
 const MAIN_NAV_ITEMS = [
   {
@@ -98,10 +99,10 @@ export default function Sidebar({
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
-    } else {
-      console.log("User logged out");
-      navigate("/login");
+      return;
     }
+    authService.logout();
+    window.location.replace("/login");
   };
 
   const handleNavClick = () => {

@@ -14,6 +14,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { authService } from "../../services/authService";
 
 const MAIN_NAV_ITEMS = [
   {
@@ -71,10 +72,10 @@ export default function AdminSidebar({
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
-    } else {
-      console.log("Admin logged out");
-      navigate("/login");
+      return;
     }
+    authService.logout();
+    window.location.replace("/login");
   };
 
   const handleNavClick = () => {

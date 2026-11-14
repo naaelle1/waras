@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   House,
@@ -25,13 +25,47 @@ import DashboardAIConsultation from "../../components/user/DashboardAIConsultati
 import ArticleDetailModal from "../../components/user/ArticleDetailModal";
 import MapComponent from "../../components/user/MapComponent";
 
+import { authService } from "../../services/authService";
 import { facilities as facilitiesData } from "../../data/facilities";
 import { articlesData } from "../../data/articles";
 import { queueData } from "../../data/queueData";
 import transhumansSvg from "../../assets/Transhumans Experiments.svg";
 
 export default function Dashboard() {
+  const [currentUser, setCurrentUser] = useState(() => authService.getCurrentUser());
   const [selectedArticleModal, setSelectedArticleModal] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    authService.getProfile().then((u) => {
+      if (mounted && u) {
+        setCurrentUser(u);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const greetingName = useMemo(() => {
+    if (!currentUser?.name) return "Warga";
+    const clean = currentUser.name.trim();
+    if (clean.includes("@")) {
+      const part = clean.split("@")[0];
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    }
+    const words = clean.split(/\s+/);
+    if (words.length > 1 && /^(dr\.|drg\.|prof\.|apt\.|ir\.|h\.|hj\.)/i.test(words[0])) {
+      return `${words[0]} ${words[1]}`;
+    }
+    if (words.length === 1) {
+      return words[0];
+    }
+    if (clean.length <= 18) {
+      return clean;
+    }
+    return words[0];
+  }, [currentUser]);
 
   const quickAccessItems = [
     {
@@ -148,8 +182,11 @@ export default function Dashboard() {
               <span>Portal Kesehatan Terpadu Kota Semarang</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins">
-              Halo, Nael!
+            <h1
+              className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins"
+              title={currentUser?.name ? `Akun terdaftar: ${currentUser.name}` : "Warga Terdaftar"}
+            >
+              Halo, {greetingName}!
             </h1>
 
             <p className="text-sm sm:text-base text-teal-100/90 leading-relaxed max-w-xl font-inter">

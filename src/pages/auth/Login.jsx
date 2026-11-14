@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -10,7 +10,6 @@ import {
   Lock,
   Mail,
   UserCheck,
-  Sparkles,
   Loader2,
   X
 } from "lucide-react";
@@ -45,9 +44,73 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+
+  // Handler Login Resmi via Google OAuth 2.0 (Google Identity Services)
+  const handleGoogleLoginClick = () => {
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    if (!clientId) {
+      setErrorMessage("Google Client ID belum terkonfigurasi di sistem.");
+      return;
+    }
+
+    if (!window.google?.accounts?.oauth2) {
+      setErrorMessage("Layanan Google SDK sedang dimuat. Silakan coba kembali...");
+      return;
+    }
+
+    setIsGoogleLoading(true);
+    setErrorMessage("");
+
+    try {
+      const tokenClient = window.google.accounts.oauth2.initTokenClient({
+        client_id: clientId,
+        scope: "openid email profile",
+        callback: async (tokenResponse) => {
+          if (tokenResponse.error) {
+            setIsGoogleLoading(false);
+            if (tokenResponse.error !== "access_denied") {
+              setErrorMessage("Gagal menghubungkan ke akun Google.");
+            }
+            return;
+          }
+
+          try {
+            // Ambil data profil dari Google UserInfo API
+            const userInfoRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+              headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+            });
+            const profile = await userInfoRes.json();
+
+            // Verifikasi & terbitkan sesi di backend WARAS
+            const result = await authService.loginWithGoogle({
+              accessToken: tokenResponse.access_token,
+              profile,
+            });
+
+            if (result?.user?.role === "admin") {
+              navigate("/admin/dashboard");
+            } else {
+              navigate("/user/dashboard");
+            }
+          } catch (err) {
+            setErrorMessage(err.message || "Gagal masuk menggunakan akun Google.");
+          } finally {
+            setIsGoogleLoading(false);
+          }
+        },
+      });
+
+      tokenClient.requestAccessToken({ prompt: "select_account" });
+    } catch (err) {
+      console.error("[Google OAuth Error]", err);
+      setIsGoogleLoading(false);
+      setErrorMessage("Tidak dapat membuka dialog masuk Google.");
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -68,28 +131,6 @@ export default function Login() {
       }
     } catch (err) {
       setErrorMessage(err.message || "Email/NIK atau kata sandi tidak sesuai.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDemoLogin = async () => {
-    const demoId = "nael@semarangkota.go.id";
-    const demoPw = "password123";
-    setIdentifier(demoId);
-    setPassword(demoPw);
-    setErrorMessage("");
-    setIsLoading(true);
-
-    try {
-      const result = await authService.login(demoId, demoPw);
-      if (result?.user?.role === "admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/user/dashboard");
-      }
-    } catch (err) {
-      setErrorMessage(err.message || "Gagal masuk menggunakan akun demo.");
     } finally {
       setIsLoading(false);
     }
@@ -353,27 +394,25 @@ export default function Login() {
             <span className="h-px flex-1 bg-slate-200" />
           </div>
 
-          {/* Social Buttons: Google & Akun Demo */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            <button
-              type="button"
-              onClick={handleDemoLogin}
-              disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-11.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-light text-slate-700 transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
-            >
-              <GoogleIcon />
-              <span>Google</span>
-            </button>
-            <button
-              type="button"
-              onClick={handleDemoLogin}
-              disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-11.5 rounded-2xl border border-[#022022]/15 bg-[#E6FEFF]/50 hover:bg-[#E6FEFF] text-xs sm:text-sm font-medium text-[#022022] transition-colors cursor-pointer disabled:opacity-60 shadow-2xs font-inter"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#022022] stroke-[1.5]" />
-              <span>Akun Demo</span>
-            </button>
-          </div>
+          {/* Tombol Masuk dengan Google */}
+          <button
+            type="button"
+            onClick={handleGoogleLoginClick}
+            disabled={isLoading || isGoogleLoading}
+            className="w-full h-11 sm:h-11.5 inline-flex items-center justify-center gap-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-light text-slate-700 transition-colors shadow-2xs font-inter cursor-pointer disabled:opacity-60 active:scale-[0.99]"
+          >
+            {isGoogleLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin text-slate-600" />
+                <span>Menghubungkan ke Google...</span>
+              </>
+            ) : (
+              <>
+                <GoogleIcon />
+                <span>Masuk dengan Google</span>
+              </>
+            )}
+          </button>
 
           {/* Switch to Register */}
           <div className="pt-3.5 sm:pt-4 border-t border-slate-100 text-center">

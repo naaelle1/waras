@@ -1,37 +1,62 @@
-/**
- * Mock Service untuk Pengiriman Laporan Masalah di Platform WARAS
- */
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
 export const reportService = {
   /**
-   * Simulasi pengiriman laporan ke server
+   * Mengirimkan laporan masalah data / aduan fasilitas ke backend database Turso
    * @param {Object} reportData
-   * @returns {Promise<Object>}
    */
   async submitReport(reportData) {
-    // Simulasi delay jaringan (750ms)
-    await new Promise((resolve) => setTimeout(resolve, 750));
+    try {
+      const res = await fetch(`${API_BASE}/reports`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportData),
+      });
 
-    // Generasi ID Referensi Laporan unik
-    const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const reportId = `WARAS-REP-${randomNum}`;
-
-    // Waktu pengiriman
-    const submittedAt = new Date().toLocaleString("id-ID", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-
-    return {
-      success: true,
-      data: {
-        reportId,
-        submittedAt,
-        status: "Menunggu Peninjauan",
-        payload: { ...reportData }
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Gagal menyimpan laporan ke server.");
       }
-    };
-  }
+
+      return data;
+    } catch (err) {
+      console.warn("[ReportService] Backend gagal dijangkau, menggunakan fallback lokal:", err.message);
+      // Fallback lokal jika offline
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      const reportId = `WARAS-REP-${randomNum}`;
+      const submittedAt = new Date().toLocaleString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      return {
+        success: true,
+        data: {
+          reportId,
+          submittedAt,
+          status: "Menunggu Peninjauan",
+          payload: { ...reportData },
+        },
+      };
+    }
+  },
+
+  /**
+   * Mengambil seluruh riwayat laporan dari backend
+   */
+  async getAllReports() {
+    try {
+      const res = await fetch(`${API_BASE}/reports`);
+      const data = await res.json();
+      if (res.ok && data.success) {
+        return data.data;
+      }
+      return [];
+    } catch (_err) {
+      return [];
+    }
+  },
 };

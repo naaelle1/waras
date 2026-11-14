@@ -45,6 +45,11 @@ CREATE TABLE IF NOT EXISTS reports (
   description TEXT NOT NULL,
   location TEXT,
   contact TEXT,
+  related_page TEXT,
+  specific_item TEXT,
+  suggested_correction TEXT,
+  attachment TEXT,
+  user_id INTEGER,
   status TEXT DEFAULT 'Menunggu Peninjauan',
   submitted_at TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -70,11 +75,32 @@ CREATE TABLE IF NOT EXISTS users (
   phone TEXT,
   password_hash TEXT NOT NULL,
   role TEXT DEFAULT 'user',
+  address TEXT,
+  district TEXT,
+  bpjs_number TEXT,
+  bpjs_status TEXT DEFAULT 'Aktif',
+  primary_facility TEXT,
+  blood_type TEXT,
+  allergies TEXT,
+  status TEXT DEFAULT 'Aktif',
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_users_nik ON users(nik);
+
+-- 5b. Tabel Permintaan Reset Kata Sandi
+CREATE TABLE IF NOT EXISTS password_resets (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL,
+  token TEXT NOT NULL,
+  otp_code TEXT,
+  expires_at DATETIME NOT NULL,
+  used INTEGER DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token);
+CREATE INDEX IF NOT EXISTS idx_password_resets_email ON password_resets(email);
 
 -- 6. Tabel Sesi Percakapan AI
 CREATE TABLE IF NOT EXISTS ai_conversations (

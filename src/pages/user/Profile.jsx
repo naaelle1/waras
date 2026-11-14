@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   User,
   CreditCard,
@@ -12,32 +12,87 @@ import {
   CheckCircle2,
   Calendar,
   AlertCircle,
-  Activity
+  Activity,
+  Loader2
 } from "lucide-react";
+import { authService } from "../../services/authService";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    name: "Nael Ardiansyah",
-    nik: "3374011208980004",
-    email: "nael@semarangkota.go.id",
-    phone: "0812-3456-7890",
-    address: "Jl. Pandanaran No. 42, RT 03/RW 02, Mugassari",
-    district: "Semarang Selatan",
-    bpjsNumber: "0001239845124",
-    bpjsStatus: "Aktif (Kelas 1)",
-    faskesPrimer: "Puskesmas Pandanaran",
-    bloodType: "O+",
-    allergies: "Tidak ada riwayat alergi obat",
+  const [isSaving, setIsSaving] = useState(false);
+  const [savedSuccess, setSavedSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [profileData, setProfileData] = useState(() => {
+    const cached = authService.getCurrentUser();
+    return {
+      name: cached?.name || "",
+      nik: cached?.nik || "",
+      email: cached?.email || "",
+      phone: cached?.phone || "",
+      address: cached?.address || "",
+      district: cached?.district || "",
+      bpjsNumber: cached?.bpjsNumber || cached?.bpjs_number || "",
+      bpjsStatus: cached?.bpjsStatus || cached?.bpjs_status || "Aktif",
+      faskesPrimer: cached?.primaryFacility || cached?.primary_facility || "",
+      bloodType: cached?.bloodType || cached?.blood_type || "",
+      allergies: cached?.allergies || "",
+    };
   });
 
-  const [savedSuccess, setSavedSuccess] = useState(false);
+  useEffect(() => {
+    async function loadProfile() {
+      try {
+        const user = await authService.getProfile();
+        if (user) {
+          setProfileData((prev) => ({
+            ...prev,
+            name: user.name || prev.name,
+            nik: user.nik || prev.nik,
+            email: user.email || prev.email,
+            phone: user.phone || prev.phone,
+            address: user.address || prev.address,
+            district: user.district || prev.district,
+            bpjsNumber: user.bpjsNumber || user.bpjs_number || prev.bpjsNumber,
+            bpjsStatus: user.bpjsStatus || user.bpjs_status || prev.bpjsStatus,
+            faskesPrimer: user.primaryFacility || user.primary_facility || prev.faskesPrimer,
+            bloodType: user.bloodType || user.blood_type || prev.bloodType,
+            allergies: user.allergies || prev.allergies,
+          }));
+        }
+      } catch (err) {
+        console.warn("[Profile] Gagal memuat data dari database:", err);
+      }
+    }
+    loadProfile();
+  }, []);
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    setIsEditing(false);
-    setSavedSuccess(true);
-    setTimeout(() => setSavedSuccess(false), 3000);
+    setIsSaving(true);
+    setErrorMessage("");
+
+    try {
+      await authService.updateProfile({
+        name: profileData.name,
+        phone: profileData.phone,
+        address: profileData.address,
+        district: profileData.district,
+        bpjsNumber: profileData.bpjsNumber,
+        bpjsStatus: profileData.bpjsStatus,
+        primaryFacility: profileData.faskesPrimer,
+        bloodType: profileData.bloodType,
+        allergies: profileData.allergies,
+      });
+
+      setIsEditing(false);
+      setSavedSuccess(true);
+      setTimeout(() => setSavedSuccess(false), 3000);
+    } catch (err) {
+      setErrorMessage(err.message || "Gagal menyimpan perubahan profil ke server.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -95,10 +150,17 @@ export default function Profile() {
         </div>
       </div>
 
+      {errorMessage && (
+        <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-rose-600" />
+          <span>{errorMessage}</span>
+        </div>
+      )}
+
       {savedSuccess && (
         <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4" />
-          <span>Data profil kependudukan Anda berhasil diperbarui.</span>
+          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+          <span>Data profil kependudukan Anda berhasil diperbarui di server.</span>
         </div>
       )}
 
@@ -114,7 +176,7 @@ export default function Profile() {
               </h2>
             </div>
             <span className="text-[11px] font-semibold text-[#526666]">
-              Data Valid KTP
+              {isEditing ? "Mode Edit Data" : "Data Valid KTP"}
             </span>
           </div>
 
@@ -149,14 +211,13 @@ export default function Profile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-[#526666]">
-                  Alamat Email
+                  Alamat Email (Akun)
                 </label>
                 <input
                   type="email"
-                  disabled={!isEditing}
+                  disabled
                   value={profileData.email}
-                  onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] disabled:opacity-80"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-gray-100 border border-[#E2ECEB] text-xs font-semibold text-gray-500 cursor-not-allowed"
                 />
               </div>
 
@@ -169,6 +230,36 @@ export default function Profile() {
                   disabled={!isEditing}
                   value={profileData.phone}
                   onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] disabled:opacity-80"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-[#526666]">
+                  Kecamatan (Semarang)
+                </label>
+                <input
+                  type="text"
+                  disabled={!isEditing}
+                  value={profileData.district}
+                  onChange={(e) => setProfileData({ ...profileData, district: e.target.value })}
+                  placeholder="Contoh: Semarang Selatan"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] disabled:opacity-80"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-[#526666]">
+                  Nomor BPJS Kesehatan / KIS
+                </label>
+                <input
+                  type="text"
+                  disabled={!isEditing}
+                  value={profileData.bpjsNumber}
+                  onChange={(e) => setProfileData({ ...profileData, bpjsNumber: e.target.value })}
+                  placeholder="13 digit nomor BPJS"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626] disabled:opacity-80"
                 />
               </div>
@@ -188,6 +279,52 @@ export default function Profile() {
             </div>
 
             {isEditing && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-[#526666]">
+                    Faskes Tingkat 1 (Puskesmas)
+                  </label>
+                  <input
+                    type="text"
+                    value={profileData.faskesPrimer}
+                    onChange={(e) => setProfileData({ ...profileData, faskesPrimer: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626]"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-[#526666]">
+                    Golongan Darah
+                  </label>
+                  <select
+                    value={profileData.bloodType}
+                    onChange={(e) => setProfileData({ ...profileData, bloodType: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626]"
+                  >
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+                <div className="sm:col-span-2 space-y-1">
+                  <label className="text-xs font-semibold text-[#526666]">
+                    Catatan Riwayat Alergi Obat / Makanan
+                  </label>
+                  <input
+                    type="text"
+                    value={profileData.allergies}
+                    onChange={(e) => setProfileData({ ...profileData, allergies: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFA] border border-[#E2ECEB] text-xs font-semibold text-[#0D2626]"
+                  />
+                </div>
+              </div>
+            )}
+
+            {isEditing && (
               <div className="pt-2 flex justify-end gap-2">
                 <button
                   type="button"
@@ -198,9 +335,17 @@ export default function Profile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer"
+                  disabled={isSaving}
+                  className="px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_4px_12px_rgba(2,32,34,0.16)] text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
                 >
-                  Simpan Perubahan
+                  {isSaving ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Menyimpan...</span>
+                    </>
+                  ) : (
+                    <span>Simpan Perubahan</span>
+                  )}
                 </button>
               </div>
             )}

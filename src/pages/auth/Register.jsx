@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
@@ -14,8 +14,32 @@ import {
   User,
   Phone,
   FileText,
-  UserPlus
+  UserPlus,
+  Loader2
 } from "lucide-react";
+
+function GoogleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" aria-hidden="true">
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.1A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 0 0 1 12c0 1.78.43 3.45 1.18 4.94l3.66-2.84z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+      />
+    </svg>
+  );
+}
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -31,10 +55,77 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
+
+  // Handler Pendaftaran Akun Cepat via Google OAuth 2.0
+  const handleGoogleSignUpClick = () => {
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    if (!clientId) {
+      setErrorMessage("Google Client ID belum terkonfigurasi di sistem.");
+      return;
+    }
+
+    if (!window.google?.accounts?.oauth2) {
+      setErrorMessage("Layanan Google SDK sedang dimuat. Silakan coba kembali...");
+      return;
+    }
+
+    setIsGoogleLoading(true);
+    setErrorMessage("");
+
+    try {
+      const tokenClient = window.google.accounts.oauth2.initTokenClient({
+        client_id: clientId,
+        scope: "openid email profile",
+        callback: async (tokenResponse) => {
+          if (tokenResponse.error) {
+            setIsGoogleLoading(false);
+            if (tokenResponse.error !== "access_denied") {
+              setErrorMessage("Gagal menghubungkan ke akun Google.");
+            }
+            return;
+          }
+
+          try {
+            // Ambil data profil dari Google UserInfo API
+            const userInfoRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+              headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+            });
+            const profile = await userInfoRes.json();
+
+            // Verifikasi & auto-register di backend WARAS
+            const result = await authService.loginWithGoogle({
+              accessToken: tokenResponse.access_token,
+              profile,
+            });
+
+            setSuccessMessage("Pendaftaran akun via Google berhasil! Mengalihkan ke dashboard...");
+            setTimeout(() => {
+              if (result?.user?.role === "admin") {
+                navigate("/admin/dashboard");
+              } else {
+                navigate("/user/dashboard");
+              }
+            }, 700);
+          } catch (err) {
+            setErrorMessage(err.message || "Gagal mendaftar menggunakan akun Google.");
+          } finally {
+            setIsGoogleLoading(false);
+          }
+        },
+      });
+
+      tokenClient.requestAccessToken({ prompt: "select_account" });
+    } catch (err) {
+      console.error("[Google OAuth Error]", err);
+      setIsGoogleLoading(false);
+      setErrorMessage("Tidak dapat membuka dialog masuk Google.");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -406,6 +497,33 @@ export default function Register() {
               )}
             </button>
           </form>
+
+          {/* Social / Quick Register Divider */}
+          <div className="flex items-center gap-3 my-3.5 sm:my-4">
+            <span className="h-px flex-1 bg-slate-200" />
+            <span className="text-[11px] text-slate-400 font-inter font-light">atau daftar instan dengan</span>
+            <span className="h-px flex-1 bg-slate-200" />
+          </div>
+
+          {/* Google Sign-Up Button Container */}
+          <button
+            type="button"
+            onClick={handleGoogleSignUpClick}
+            disabled={isLoading || isGoogleLoading}
+            className="w-full h-11 sm:h-11.5 inline-flex items-center justify-center gap-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-light text-slate-700 transition-colors shadow-2xs font-inter cursor-pointer disabled:opacity-60 active:scale-[0.99]"
+          >
+            {isGoogleLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin text-slate-600" />
+                <span>Menghubungkan ke Google...</span>
+              </>
+            ) : (
+              <>
+                <GoogleIcon />
+                <span>Daftar Akun dengan Google</span>
+              </>
+            )}
+          </button>
 
           {/* Switch to Login */}
           <div className="pt-3.5 sm:pt-4 border-t border-slate-100 text-center">

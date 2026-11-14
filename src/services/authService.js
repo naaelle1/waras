@@ -128,6 +128,29 @@ export const authService = {
   },
 
   /**
+   * Masuk atau pendaftaran akun otomatis via Google OAuth 2.0
+   * @param {string|Object} payload ID token kredensial atau { accessToken, profile }
+   */
+  async loginWithGoogle(payload) {
+    const body = typeof payload === "string" ? { credential: payload } : payload;
+    const res = await fetch(`${API_BASE}/auth/google`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Gagal masuk menggunakan akun Google.");
+    }
+
+    if (data.token) localStorage.setItem(TOKEN_KEY, data.token);
+    if (data.user) localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+
+    return data;
+  },
+
+  /**
    * Ambil data profil terkini dari database
    */
   async getProfile() {
@@ -150,11 +173,126 @@ export const authService = {
   },
 
   /**
-   * Keluar dari sesi akun
+   * Memperbarui informasi profil pengguna aktif ke database
+   * @param {Object} profileData
+   */
+  async updateProfile(profileData) {
+    const token = this.getToken();
+    if (!token) throw new Error("Sesi login tidak ditemukan.");
+
+    const res = await fetch(`${API_BASE}/auth/profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Gagal memperbarui profil.");
+    }
+
+    if (data.user) {
+      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+    }
+    return data;
+  },
+
+  /**
+   * Mengubah kata sandi akun aktif
+   * @param {string} currentPassword
+   * @param {string} newPassword
+   */
+  async changePassword(currentPassword, newPassword) {
+    const token = this.getToken();
+    if (!token) throw new Error("Sesi login tidak ditemukan.");
+
+    const res = await fetch(`${API_BASE}/auth/change-password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Gagal mengubah kata sandi.");
+    }
+    return data;
+  },
+
+  /**
+   * Meminta instruksi / kode OTP reset kata sandi
+   * @param {string} identifier (email atau NIK)
+   */
+  async forgotPassword(identifier) {
+    const res = await fetch(`${API_BASE}/auth/forgot-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identifier }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Gagal memproses permohonan reset sandi.");
+    }
+    return data;
+  },
+
+  /**
+   * Memvalidasi kode OTP / token reset
+   * @param {string} identifier
+   * @param {string} tokenOrOtp
+   */
+  async verifyResetToken(identifier, tokenOrOtp) {
+    const res = await fetch(`${API_BASE}/auth/verify-reset-token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identifier, tokenOrOtp }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Kode verifikasi tidak valid.");
+    }
+    return data;
+  },
+
+  /**
+   * Mengatur kata sandi baru
+   * @param {string} identifier
+   * @param {string} tokenOrOtp
+   * @param {string} newPassword
+   */
+  async resetPassword(identifier, tokenOrOtp, newPassword) {
+    const res = await fetch(`${API_BASE}/auth/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identifier, tokenOrOtp, newPassword }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Gagal mengatur ulang kata sandi.");
+    }
+    return data;
+  },
+
+  /**
+   * Keluar dari sesi akun dan bersihkan seluruh state kredensial
    */
   logout() {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+    try {
+      sessionStorage.clear();
+      // Bersihkan sesi konsultasi AI pengguna jika ada
+      localStorage.removeItem("waras_active_ai_session");
+    } catch (_e) {}
   },
 
   /**

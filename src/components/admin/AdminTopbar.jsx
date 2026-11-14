@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import SearchBar from "../common/SearchBar";
 
+import { authService } from "../../services/authService";
+
 const SAMPLE_NOTIFICATIONS = [
   {
     id: 1,
@@ -37,15 +39,16 @@ const SAMPLE_NOTIFICATIONS = [
   },
 ];
 
-export default function AdminTopbar({
-  user = {
-    name: "Admin",
-    role: "System Administrator",
-    avatar: "/images/default-avatar.png",
-  },
-  onLogout,
-}) {
+export default function AdminTopbar({ user: propUser, onLogout }) {
   const navigate = useNavigate();
+
+  const [currentUser, setCurrentUser] = useState(() => {
+    return propUser || authService.getCurrentUser() || {
+      name: "Administrator WARAS",
+      role: "admin",
+      avatar: "/images/default-avatar.png",
+    };
+  });
 
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -55,6 +58,13 @@ export default function AdminTopbar({
   const profileRef = useRef(null);
 
   const unreadCount = notifications.filter((n) => n.unread).length;
+
+  useEffect(() => {
+    const active = authService.getCurrentUser();
+    if (active) {
+      setCurrentUser(active);
+    }
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -80,10 +90,15 @@ export default function AdminTopbar({
     setIsProfileOpen(false);
     if (onLogout) {
       onLogout();
-    } else {
-      navigate("/login");
+      return;
     }
+    authService.logout();
+    window.location.replace("/login");
   };
+
+  const displayName = currentUser.name || "Administrator WARAS";
+  const displayRole = "System Administrator";
+  const initialLetter = displayName.charAt(0).toUpperCase();
 
   return (
     <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none font-inter">
@@ -188,17 +203,8 @@ export default function AdminTopbar({
             aria-label="Menu profil"
           >
             <div className="relative">
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="w-9 h-9 rounded-full object-cover ring-2 ring-white shadow-sm group-hover:scale-105 transition-transform duration-200"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  e.target.nextSibling.style.display = "flex";
-                }}
-              />
-              <div className="hidden w-9 h-9 rounded-full bg-[#022022] text-[#37F4B4] items-center justify-center text-xs font-semibold shadow-sm group-hover:scale-105 transition-transform duration-200">
-                {user.name.charAt(0)}
+              <div className="w-9 h-9 rounded-full bg-[#022022] text-[#37F4B4] flex items-center justify-center text-xs font-semibold shadow-sm group-hover:scale-105 transition-transform duration-200">
+                {initialLetter}
               </div>
             </div>
           </button>
@@ -208,13 +214,13 @@ export default function AdminTopbar({
             <div className="absolute right-0 top-full mt-3 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
               <div className="px-4 py-3 border-b border-slate-100 flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full bg-[#022022]/10 border border-[#37F4B4]/30 flex items-center justify-center text-[#022022] font-bold text-base shrink-0">
-                  {user.name.charAt(0)}
+                  {initialLetter}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-poppins text-sm font-bold text-[#022022] truncate">
-                    {user.name}
+                    {displayName}
                   </p>
-                  <p className="text-xs text-[#5F6F70] truncate">{user.role}</p>
+                  <p className="text-xs text-[#5F6F70] truncate">{displayRole}</p>
                 </div>
               </div>
 

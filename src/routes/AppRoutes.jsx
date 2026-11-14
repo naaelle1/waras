@@ -11,6 +11,10 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 
+// Route Guards
+import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
+
 // User Dashboard Pages
 import Dashboard from "../pages/user/Dashboard";
 import Facilities from "../pages/user/Facilities";
@@ -47,7 +51,14 @@ export default function AppRoutes() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Portal Aplikasi Dashboard Pengguna WARAS */}
-        <Route path="/user" element={<UserLayout />}>
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoute>
+              <UserLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="/user/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="facilities" element={<Facilities />} />
@@ -71,7 +82,14 @@ export default function AppRoutes() {
         </Route>
 
         {/* Portal Aplikasi Dashboard Admin WARAS */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<ManageUsers />} />

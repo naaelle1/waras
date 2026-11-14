@@ -1,24 +1,46 @@
-import React, { useState, useMemo } from "react";
-import { MapPin, Search, Filter, Hospital, RefreshCw, Activity } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { MapPin, Search, Filter, Hospital, RefreshCw, Activity, Loader2 } from "lucide-react";
 
 import SearchBar from "../../components/common/SearchBar";
 import Button from "../../components/common/Button";
 import MapComponent from "../../components/user/MapComponent";
 import FacilityCard from "../../components/user/FacilityCard";
-import { facilities } from "../../data/facilities";
+import { facilityService } from "../../services/facilityService";
+import { facilities as localFallbackFacilities } from "../../data/facilities";
 
 export default function Facilities() {
+  const [facilities, setFacilities] = useState(localFallbackFacilities);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [selectedDistrict, setSelectedDistrict] = useState("Semua");
 
+  // Load seluruh fasilitas dari backend database Turso
+  useEffect(() => {
+    let mounted = true;
+    async function loadData() {
+      setIsLoading(true);
+      try {
+        const data = await facilityService.getAll();
+        if (mounted && Array.isArray(data) && data.length > 0) {
+          setFacilities(data);
+        }
+      } catch (err) {
+        console.warn("[Facilities Page] Error fetching from backend:", err);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    }
+    loadData();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   // Extract unique districts from facility dataset
   const districts = useMemo(() => {
-    const list = facilities
-      .map((f) => f.district)
-      .filter((d) => d && d !== "Semarang");
-    return ["Semua", ...Array.from(new Set(list)).sort()];
-  }, []);
+    return facilityService.extractDistricts(facilities);
+  }, [facilities]);
 
   // Filter facilities based on search term, category, and district
   const filteredFacilities = useMemo(() => {
@@ -35,15 +57,16 @@ export default function Facilities() {
       const searchLower = searchTerm.toLowerCase();
       const matchesSearch =
         !searchTerm ||
-        facility.name.toLowerCase().includes(searchLower) ||
-        facility.address.toLowerCase().includes(searchLower) ||
+        facility.name?.toLowerCase().includes(searchLower) ||
+        facility.address?.toLowerCase().includes(searchLower) ||
         (facility.district && facility.district.toLowerCase().includes(searchLower)) ||
         (facility.services &&
+          Array.isArray(facility.services) &&
           facility.services.some((s) => s.toLowerCase().includes(searchLower)));
 
       return matchesCategory && matchesDistrict && matchesSearch;
     });
-  }, [searchTerm, selectedCategory, selectedDistrict]);
+  }, [facilities, searchTerm, selectedCategory, selectedDistrict]);
 
   const handleResetFilters = () => {
     setSearchTerm("");

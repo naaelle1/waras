@@ -21,9 +21,11 @@ import {
   Check,
   AlertTriangle,
   RotateCcw,
-  Sliders
+  Sliders,
+  Loader2
 } from "lucide-react";
 import { useAccessibility } from "../../context/AccessibilityContext";
+import { authService } from "../../services/authService";
 
 const DEFAULT_SETTINGS = {
   notifications: {
@@ -85,6 +87,7 @@ export default function Settings() {
   });
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState(false);
+  const [isSubmittingPassword, setIsSubmittingPassword] = useState(false);
 
   // Modal Konfirmasi Hapus Data AI
   const [isClearAiModalOpen, setIsClearAiModalOpen] = useState(false);
@@ -216,7 +219,7 @@ export default function Settings() {
   };
 
   // Submit Ubah Kata Sandi
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setPasswordError("");
 
@@ -233,16 +236,27 @@ export default function Settings() {
       return;
     }
 
-    // Sukses simulasi ubah sandi
-    setPasswordSuccess(true);
-    setTimeout(() => {
-      setPasswordSuccess(false);
-      setIsPasswordModalOpen(false);
-      setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
-      setToastMessage("Kata sandi akun warga berhasil diperbarui dengan aman.");
-      setSavedSuccess(true);
-      setTimeout(() => setSavedSuccess(false), 3500);
-    }, 1200);
+    setIsSubmittingPassword(true);
+    try {
+      await authService.changePassword(
+        passwordForm.currentPassword,
+        passwordForm.newPassword
+      );
+
+      setPasswordSuccess(true);
+      setTimeout(() => {
+        setPasswordSuccess(false);
+        setIsPasswordModalOpen(false);
+        setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+        setToastMessage("Kata sandi akun warga berhasil diperbarui di sistem.");
+        setSavedSuccess(true);
+        setTimeout(() => setSavedSuccess(false), 3500);
+      }, 1200);
+    } catch (err) {
+      setPasswordError(err.message || "Gagal mengubah kata sandi. Periksa kata sandi saat ini.");
+    } finally {
+      setIsSubmittingPassword(false);
+    }
   };
 
   // Unduh Berkas Rekam Medis (Ekspor JSON Riwayat)
@@ -878,9 +892,17 @@ export default function Settings() {
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 rounded-xl bg-[#022022] text-white hover:bg-[#033033] text-xs font-semibold cursor-pointer shadow-xs"
+                    disabled={isSubmittingPassword}
+                    className="px-5 py-2 rounded-xl bg-[#022022] text-white hover:bg-[#033033] text-xs font-semibold cursor-pointer shadow-xs disabled:opacity-50 flex items-center gap-1.5"
                   >
-                    Simpan Sandi Baru
+                    {isSubmittingPassword ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Menyimpan...</span>
+                      </>
+                    ) : (
+                      <span>Simpan Sandi Baru</span>
+                    )}
                   </button>
                 </div>
               </form>

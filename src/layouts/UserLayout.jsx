@@ -5,11 +5,20 @@ import { Menu } from "lucide-react";
 import Sidebar from "../components/user/Sidebar";
 import Topbar from "../components/user/Topbar";
 import AnimatedOutlet from "../components/common/AnimatedOutlet";
+import LogoutConfirmModal from "../components/common/LogoutConfirmModal";
+import { authService } from "../services/authService";
 
 export default function UserLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const location = useLocation();
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
+    authService.logout();
+    window.location.replace("/login");
+  };
 
   const isAIPage =
     location.pathname === "/user/ai" || location.pathname.startsWith("/user/ai/");
@@ -27,6 +36,7 @@ export default function UserLayout() {
         setIsCollapsed={setIsCollapsed}
         isMobileOpen={isMobileOpen}
         setIsMobileOpen={setIsMobileOpen}
+        onLogout={() => setIsLogoutModalOpen(true)}
       />
 
       {/* WRAPPER MAIN CONTENT */}
@@ -53,7 +63,7 @@ export default function UserLayout() {
 
             {/* TOPBAR PERSISTEN DENGAN PROPS EKSISTING */}
             <div className="flex-1">
-              <Topbar />
+              <Topbar onLogout={() => setIsLogoutModalOpen(true)} />
             </div>
           </div>
         )}
@@ -71,6 +81,13 @@ export default function UserLayout() {
           />
         </main>
       </div>
+
+      {/* POP-UP MODAL KONFIRMASI LOGOUT */}
+      <LogoutConfirmModal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        onConfirm={handleConfirmLogout}
+      />
     </div>
   );
 }
