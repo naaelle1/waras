@@ -136,10 +136,10 @@ export default function Dashboard() {
       </div>
 
       {/* SECTION 2: WELCOME HERO BANNER */}
-      <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
+      <section className="relative w-full rounded-2xl sm:rounded-3xl bg-[#022022] border border-white/10 p-5 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-hidden lg:overflow-visible">
 
         {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl sm:rounded-3xl flex items-center justify-center">
           <svg
             className="w-full h-full object-cover"
             preserveAspectRatio="none"
@@ -192,7 +192,7 @@ export default function Dashboard() {
             </div>
 
             <h1
-              className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-poppins"
               title={currentUser?.name ? `Akun terdaftar: ${currentUser.name}` : "Warga Terdaftar"}
             >
               Halo, {greetingName}!
@@ -203,11 +203,11 @@ export default function Dashboard() {
             </p>
 
             {/* BARIS TOMBOL AKSI UTAMA (TETAP HORIZONTAL KIRI & KANAN DENGAN EFEK GLASS) */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
               <GlassButton
                 to="/user/facilities"
                 variant="hero-light"
-                className="px-6 py-3"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
                 leftIcon={Search}
               >
                 Cari Fasilitas Kesehatan
@@ -216,7 +216,7 @@ export default function Dashboard() {
               <GlassButton
                 to="/user/ai"
                 variant="hero-emerald"
-                className="px-6 py-3"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
                 leftIcon={Bot}
               >
                 Konsultasi WARAS AI
@@ -225,11 +225,11 @@ export default function Dashboard() {
           </div>
 
           {/* KOLOM KANAN: ILUSTRASI / LOGO SVG LANGSUNG MENIMPA CARD UTAMA (TANPA CARD TAMBAHAN) */}
-          <div className="lg:col-span-5 flex items-end justify-center lg:justify-end -mb-6 sm:-mb-8 lg:-mb-10 translate-y-2 pointer-events-none select-none">
+          <div className="lg:col-span-5 flex items-end justify-center lg:justify-end -mb-4 sm:-mb-8 lg:-mb-10 translate-y-2 pointer-events-none select-none">
             <img
               src={transhumansSvg}
               alt="Ilustrasi Layanan Medis WARAS"
-              className="w-[270px] sm:w-[320px] lg:w-[365px] h-auto object-contain drop-shadow-md"
+              className="w-[220px] sm:w-[280px] lg:w-[365px] h-auto object-contain drop-shadow-md"
             />
           </div>
         </div>
@@ -272,15 +272,15 @@ export default function Dashboard() {
 
       {/* SECTION 4: STATUS ANTRIAN HARI INI */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">Status Antrian Hari Ini</h3>
+            <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">Status Antrian Hari Ini</h3>
             <p className="text-xs text-[#526666]">Pantau estimasi dan kondisi antrean fasilitas secara transparan.</p>
           </div>
           <GlassButton
             to="/user/facilities"
             variant="card-subtle"
-            className="px-4 py-2 text-xs font-semibold"
+            className="self-start sm:self-auto px-4 py-2 text-xs font-semibold"
             rightIcon={ArrowRight}
           >
             Lihat Semua Antrian
@@ -296,15 +296,15 @@ export default function Dashboard() {
 
       {/* SECTION 5: FASILITAS KESEHATAN TERDEKAT & MAP PREVIEW */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">Fasilitas Kesehatan Terdekat</h3>
+            <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">Fasilitas Kesehatan Terdekat</h3>
             <p className="text-xs text-[#526666]">Temukan pusat layanan kesehatan di sekitar Kota Semarang.</p>
           </div>
           <GlassButton
             to="/user/facilities"
             variant="card-subtle"
-            className="px-4 py-2 text-xs font-semibold"
+            className="self-start sm:self-auto px-4 py-2 text-xs font-semibold"
             rightIcon={ArrowRight}
           >
             Lihat Semua Fasilitas
@@ -318,7 +318,7 @@ export default function Dashboard() {
             ))}
           </div>
           <div className="lg:col-span-5 h-full">
-            <MapComponent facilities={facilitiesData} className="h-full min-h-[380px]" />
+            <MapComponent facilities={facilitiesData} className="h-full min-h-[260px] sm:min-h-[380px]" />
           </div>
         </div>
       </section>
@@ -332,7 +332,7 @@ export default function Dashboard() {
             <div>
               <div className="flex items-center gap-2 text-[#022022]">
                 <Bot className="w-5 h-5 text-[#022022]" />
-                <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">
+                <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">
                   Tanya WARAS AI
                 </h3>
               </div>
@@ -348,11 +348,11 @@ export default function Dashboard() {
 
           {/* KOLOM KANAN: INFO KESEHATAN TERKINI */}
           <div className="lg:col-span-7 flex flex-col h-full space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2 text-[#022022]">
                   <BookOpen className="w-5 h-5 text-[#022022]" />
-                  <h3 className="font-poppins font-semibold text-xl text-[#0D2626]">
+                  <h3 className="font-poppins font-semibold text-lg sm:text-xl text-[#0D2626]">
                     Info Kesehatan Terkini
                   </h3>
                 </div>
@@ -364,7 +364,7 @@ export default function Dashboard() {
               <GlassButton
                 to="/user/health-info/articles"
                 variant="card-subtle"
-                className="px-4 py-2 text-xs font-semibold"
+                className="self-start sm:self-auto px-4 py-2 text-xs font-semibold"
                 rightIcon={ArrowRight}
               >
                 Lihat Semua Artikel

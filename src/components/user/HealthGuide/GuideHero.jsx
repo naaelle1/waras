@@ -17,10 +17,10 @@ export default function GuideHero({ heroData, onOpenModal }) {
 
   return (
     <div className="relative group overflow-hidden rounded-2xl bg-white border border-[#E2ECEB] shadow-xs transition-all duration-200">
-      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-85">
+      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-0 lg:min-h-85">
         
         {/* LEFT SIDE: Hero Guide Details (Solid, structured, filled layout) */}
-        <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-7 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5 sm:space-y-6">
           <div className="space-y-4">
             {/* Header Badges */}
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -88,7 +88,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
           </div>
 
           {/* Action button inside Left Panel */}
-          <div className="pt-5 mt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+          <div className="pt-4 sm:pt-5 mt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-medium text-[#526666]">
               <CheckCircle2 className="w-4 h-4 text-[#022022]" />
               <span>Prosedur Medis Terstandarisasi</span>
@@ -97,7 +97,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
             <button
               type="button"
               onClick={() => onOpenModal && onOpenModal(heroData)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] text-white font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-[#022022] transition-colors shadow-xs active:scale-[0.98] cursor-pointer group/btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] text-white font-semibold text-xs sm:text-sm hover:bg-[#033033] border border-[#022022] transition-colors shadow-xs active:scale-[0.98] cursor-pointer group/btn"
             >
               <span>Lihat Detail Langkah Selengkapnya</span>
               <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
@@ -106,7 +106,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
         </div>
 
         {/* RIGHT SIDE: Emergency CTA Panel (Matching FeaturedArticle Dark Right Panel) */}
-        <div className="lg:col-span-5 bg-[#022022] border-t lg:border-t-0 lg:border-l border-white/10 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden space-y-6">
+        <div className="lg:col-span-5 bg-[#022022] border-t lg:border-t-0 lg:border-l border-white/10 text-white p-5 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden space-y-5 sm:space-y-6">
           {/* Wave Pattern Overlay from mask-group.svg (Persis Card Dashboard & FeaturedArticle) */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center">
             <img
@@ -154,7 +154,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
             </div>
           </div>
 
-          <div className="relative z-10 pt-5 mt-4 border-t border-white/15 flex items-center justify-between">
+          <div className="relative z-10 pt-4 sm:pt-5 mt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <div className="h-7 px-2 rounded-full bg-white/15 flex items-center justify-center">
                 <Logo tone="light" className="h-3.5" />
@@ -164,7 +164,7 @@ export default function GuideHero({ heroData, onOpenModal }) {
 
             <Link
               to="/user/facilities"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group/btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group/btn"
             >
               <Hospital className="w-4 h-4 text-teal-200" />
               <span>Cari Faskes</span>

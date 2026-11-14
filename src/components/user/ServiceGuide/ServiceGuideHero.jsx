@@ -4,9 +4,9 @@ import GlassButton from "../../ui/GlassButton";
 
 export default function ServiceGuideHero({ onScrollToGuides }) {
   return (
-    <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
+    <section className="relative w-full rounded-2xl sm:rounded-3xl bg-[#022022] border border-white/10 p-5 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-hidden lg:overflow-visible">
       {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl sm:rounded-3xl flex items-center justify-center">
         <svg
           className="w-full h-full object-cover"
           preserveAspectRatio="none"
@@ -58,7 +58,7 @@ export default function ServiceGuideHero({ onScrollToGuides }) {
             <span>WARAS Healthcare Guide</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-poppins">
             Pahami Layanan Kesehatan dengan Lebih Mudah
           </h1>
 
@@ -67,11 +67,11 @@ export default function ServiceGuideHero({ onScrollToGuides }) {
           </p>
 
           {/* BARIS TOMBOL AKSI UTAMA (TETAP HORIZONTAL KIRI & KANAN DENGAN EFEK GLASS) */}
-          <div className="flex flex-wrap items-center gap-3.5 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
             <GlassButton
               onClick={onScrollToGuides}
               variant="hero-light"
-              className="px-6 py-3"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
               rightIcon={ArrowRight}
             >
               Mulai Panduan
@@ -80,7 +80,7 @@ export default function ServiceGuideHero({ onScrollToGuides }) {
             <GlassButton
               to="/user/facilities"
               variant="hero-light"
-              className="px-6 py-3"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
               leftIcon={MapPin}
             >
               Cari Faskes

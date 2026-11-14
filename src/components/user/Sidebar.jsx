@@ -111,6 +111,8 @@ export default function Sidebar({
     }
   };
 
+  const showExpanded = !isCollapsed || isMobileOpen;
+
   return (
     <>
       {isMobileOpen && (
@@ -125,8 +127,8 @@ export default function Sidebar({
         className={clsx(
           "fixed top-3 bottom-3 z-50 flex flex-col transition-all duration-300 ease-in-out font-inter",
           "bg-white border border-[#E2ECEB] shadow-xs rounded-2xl",
-          isMobileOpen ? "left-3 right-auto" : "-left-full lg:left-3",
-          isCollapsed ? "w-19" : "w-67.5"
+          isMobileOpen ? "left-3 right-auto w-72 max-w-[calc(100vw-24px)]" : "-left-full lg:left-3",
+          isCollapsed ? "lg:w-19" : "lg:w-67.5"
         )}
       >
         <button
@@ -155,7 +157,7 @@ export default function Sidebar({
         </button>
 
         <div className="pt-6 pb-4 px-5 flex flex-col items-start min-h-22 justify-center">
-          {isCollapsed ? (
+          {!showExpanded ? (
             <div className="w-full flex justify-center">
               <img
                 src={LOGO_SRC}
@@ -197,7 +199,7 @@ export default function Sidebar({
 
         <div className="flex-1 overflow-y-auto px-3.5 py-2 space-y-5 scrollbar-thin">
           <div>
-            {!isCollapsed && (
+            {showExpanded && (
               <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase font-poppins">
                 MAIN
               </h3>
@@ -241,7 +243,7 @@ export default function Sidebar({
                           />
                         </div>
 
-                        {!isCollapsed && (
+                        {showExpanded && (
                           <>
                             <span className="ml-3 truncate tracking-tight text-[14px]">
                               {item.name}
@@ -255,7 +257,7 @@ export default function Sidebar({
                         )}
                       </button>
 
-                      {!isCollapsed && isDropdownOpen && (
+                      {showExpanded && isDropdownOpen && (
                         <div className="pt-1 pb-1 ml-5 pl-2 space-y-1">
                           {item.subItems.map((sub, index) => {
                             const isLast = index === item.subItems.length - 1;
@@ -317,13 +319,13 @@ export default function Sidebar({
                           />
                         </div>
 
-                        {!isCollapsed && (
+                        {showExpanded && (
                           <span className="ml-3 truncate tracking-tight text-[14px]">
                             {item.name}
                           </span>
                         )}
 
-                        {isCollapsed && (
+                        {!showExpanded && (
                           <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#022022] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                             {item.name}
                           </div>
@@ -341,7 +343,7 @@ export default function Sidebar({
           </div>
 
           <div>
-            {!isCollapsed && (
+            {showExpanded && (
               <h3 className="px-3 mb-2 text-[10px] font-bold tracking-wider text-[#5F6F70] uppercase font-poppins">
                 SETTINGS
               </h3>
@@ -378,14 +380,13 @@ export default function Sidebar({
                           />
                         </div>
 
-                        {!isCollapsed && (
+                        {showExpanded && (
                           <span className="ml-3 truncate tracking-tight text-[14px]">
                             {item.name}
                           </span>
                         )}
 
-
-                        {isCollapsed && (
+                        {!showExpanded && (
                           <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#022022] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                             {item.name}
                           </div>
@@ -426,10 +427,10 @@ export default function Sidebar({
                     strokeWidth={2}
                   />
                 </div>
-                {!isCollapsed && (
+                {showExpanded && (
                   <span className="ml-3 truncate text-[14px]">Help</span>
                 )}
-                {isCollapsed && (
+                {!showExpanded && (
                   <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#022022] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                     Help
                   </div>
@@ -442,17 +443,17 @@ export default function Sidebar({
             type="button"
             onClick={handleLogout}
             title={isCollapsed ? "Logout Account" : undefined}
-            className="group relative w-full flex items-center h-11 px-3.5 rounded-xl font-medium text-sm text-[#FF5A5A] hover:bg-[#FF5A5A]/8 transition-all duration-200 select-none"
+            className="group relative w-full flex items-center h-11 px-3.5 rounded-xl font-medium text-sm text-[#FF5A5A] hover:bg-[#FF5A5A]/8 transition-all duration-200 select-none cursor-pointer"
           >
             <div className="flex items-center justify-center min-w-5.5">
               <LogOut className="w-5 h-5 text-[#FF5A5A]" strokeWidth={2} />
             </div>
-            {!isCollapsed && (
+            {showExpanded && (
               <span className="ml-3 truncate font-medium text-[14px]">
                 Logout Account
               </span>
             )}
-            {isCollapsed && (
+            {!showExpanded && (
               <div className="absolute left-full ml-3 px-2.5 py-1 bg-[#FF5A5A] text-white text-xs font-medium rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50 shadow-lg">
                 Logout Account
               </div>

@@ -163,19 +163,19 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
           </div>
 
           {/* Modal Footer Actions */}
-          <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+          <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
+              className="order-last sm:order-first px-5 py-2.5 sm:py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer text-center"
             >
               Tutup
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={handleAskAI}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-full text-[#022022] bg-gradient-to-br from-[#022022]/[0.08] via-teal-50/70 to-white/90 hover:from-[#022022]/[0.14] hover:via-teal-100/70 hover:to-white backdrop-blur-md border border-[#022022]/15 hover:border-[#022022]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_12px_rgba(2,32,34,0.05)] font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
               >
                 <Bot className="w-3.5 h-3.5 text-[#022022]" />
                 <span>Tanya AI tentang Artikel Ini</span>
@@ -184,7 +184,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
               <Link
                 to="/user/facilities"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-semibold text-xs active:scale-[0.98] transition-all"
+                className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 sm:py-2 rounded-full text-white bg-gradient-to-br from-[#023b3b] via-[#022022] to-[#011414] hover:from-[#034d4d] hover:via-[#033033] hover:to-[#022022] backdrop-blur-md border border-[#022022]/80 hover:border-white/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.28),0_6px_16px_rgba(2,32,34,0.16)] font-semibold text-xs active:scale-[0.98] transition-all"
               >
                 <MapPin className="w-3.5 h-3.5 text-white" />
                 <span>Cari Faskes Terdekat</span>

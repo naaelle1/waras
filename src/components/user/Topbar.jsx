@@ -127,13 +127,13 @@ export default function Topbar({
     <header className="flex items-center justify-end gap-3 sm:gap-4 w-full py-2 px-1 mb-4 select-none font-inter">
       {/* SearchBar */}
       {!shouldHideSearch && (
-        <div className="w-56 sm:w-72">
+        <div className="w-36 sm:w-64 md:w-72 max-w-full">
           <SearchBar placeholder="Cari fasilitas atau artikel..." />
         </div>
       )}
 
       {/* Notification + Profile Container */}
-      <div className="flex items-center gap-2 sm:gap-3 bg-white rounded-full px-3 py-1 sm:px-4 sm:py-1.5 border border-[#E2ECEB] shadow-2xs relative">
+      <div className="flex items-center gap-1.5 sm:gap-3 bg-white rounded-full px-2.5 py-1 sm:px-4 sm:py-1.5 border border-[#E2ECEB] shadow-2xs relative shrink-0">
         {/* Notification Bell */}
         <div className="relative" ref={notificationRef}>
           <button
@@ -143,20 +143,20 @@ export default function Topbar({
               setIsProfileOpen(false);
             }}
             className={clsx(
-              "relative flex items-center justify-center w-9 h-9 rounded-full text-[#022022]",
+              "relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full text-[#022022]",
               "hover:bg-[#022022]/5 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
             )}
             aria-label="Lihat notifikasi"
           >
-            <Bell className="w-4.5 h-4.5 stroke-[1.8]" />
+            <Bell className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-600 rounded-full ring-2 ring-white" />
+              <span className="absolute top-1 sm:top-1.5 right-1 sm:right-1.5 w-2 h-2 bg-emerald-600 rounded-full ring-2 ring-white" />
             )}
           </button>
 
           {/* Dropdown Notifikasi */}
           {isNotificationOpen && (
-            <div className="absolute -right-10 sm:right-0 top-full mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50">
+            <div className="absolute right-0 top-full mt-3 w-[calc(100vw-32px)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50">
               <div className="flex items-center justify-between px-4 pb-2.5 border-b border-slate-100">
                 <div className="flex items-center space-x-2">
                   <span className="font-poppins font-semibold text-sm text-[#022022]">

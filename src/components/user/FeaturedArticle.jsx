@@ -7,9 +7,9 @@ export default function FeaturedArticle({ article, onReadMore }) {
 
   return (
     <div className="relative group overflow-hidden rounded-2xl bg-white border border-[#E2ECEB] shadow-xs transition-all duration-200">
-      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-85">
+      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-0 lg:min-h-85">
         {/* Left Hero Image */}
-        <div className="lg:col-span-7 relative min-h-60 sm:min-h-72 lg:min-h-full overflow-hidden bg-gray-100">
+        <div className="lg:col-span-7 relative min-h-48 sm:min-h-64 lg:min-h-full overflow-hidden bg-gray-100">
           <img
             src={article.image}
             alt={article.title}
@@ -29,7 +29,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
         </div>
 
         {/* Right Content Panel */}
-        <div className="lg:col-span-5 bg-[#022022] border-t lg:border-t-0 lg:border-l border-white/10 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+        <div className="lg:col-span-5 bg-[#022022] border-t lg:border-t-0 lg:border-l border-white/10 text-white p-5 sm:p-7 lg:p-8 flex flex-col justify-between relative overflow-hidden space-y-4">
           {/* Wave Pattern Overlay from mask-group.svg (Persis Card Dashboard) */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center">
             <img
@@ -67,7 +67,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
             </p>
           </div>
 
-          <div className="relative z-10 pt-6 mt-4 border-t border-white/15 flex items-center justify-between">
+          <div className="relative z-10 pt-5 mt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <div className="h-7 px-2 rounded-full bg-white/15 flex items-center justify-center">
                 <Logo tone="light" className="h-3.5" />
@@ -78,7 +78,7 @@ export default function FeaturedArticle({ article, onReadMore }) {
             <button
               type="button"
               onClick={() => onReadMore && onReadMore(article)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group/btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group/btn"
             >
               <span>Baca Artikel</span>
               <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" />

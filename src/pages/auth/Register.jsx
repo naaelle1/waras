@@ -191,7 +191,7 @@ export default function Register() {
   return (
     <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-900 selection:bg-[#022022] selection:text-white">
       {/* ── PANEL KIRI: 50% FULL-HEIGHT BRANDING & EDITORIAL COMPOSITION (Senada Warna Card Dashboard #022022) ── */}
-      <aside className="lg:col-span-1 bg-[#022022] text-white relative overflow-hidden flex flex-col justify-between p-6 sm:p-10 lg:p-10 xl:p-12 min-h-[540px] lg:min-h-screen">
+      <aside className="hidden lg:flex lg:col-span-1 bg-[#022022] text-white relative overflow-hidden flex-col justify-between p-6 sm:p-10 lg:p-10 xl:p-12 min-h-screen">
         {/* Wave Pattern Overlay from Mask Group.svg at bottom (Persis Card Dashboard) */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center">
           <img
@@ -281,20 +281,36 @@ export default function Register() {
 
       {/* ── PANEL KANAN: SPACIOUS & WIDE FORM (Bebas Potong & Overflow Lancar) ── */}
       <main className="lg:col-span-1 bg-white min-h-screen lg:h-screen overflow-y-auto flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-14 py-4 sm:py-6">
-        {/* Top Navigation Bar */}
-        <div className="w-full max-w-[660px] xl:max-w-[700px] mx-auto flex items-center justify-between pb-3 sm:pb-4 animate-auth-float-soft">
-          <Link
-            to="/login"
-            className="text-xs sm:text-sm font-light text-slate-500 hover:text-[#022022] flex items-center gap-1.5 transition-colors font-inter"
-          >
-            <ArrowLeft className="w-4 h-4 stroke-[1.5]" />
-            <span>Kembali ke Halaman Masuk</span>
-          </Link>
+        {/* Top Navigation Bar & Mobile Brand */}
+        <div className="w-full max-w-[660px] xl:max-w-[700px] mx-auto flex flex-col gap-3 pb-3 sm:pb-4 animate-auth-float-soft">
+          {/* Logo WARAS Warna Gelap di Kiri Atas (Khusus Mobile) */}
+          <div className="lg:hidden flex items-center justify-start pt-1">
+            <Link
+              to="/"
+              aria-label="WARAS - Beranda"
+              className="inline-flex items-center group w-fit"
+            >
+              <Logo
+                tone="dark"
+                className="h-8 transition-transform duration-200 group-hover:scale-105 origin-left"
+              />
+            </Link>
+          </div>
 
-          {/* Text Only - Tanpa card/pill, font-light & font-inter (sesuai instruksi Image 2) */}
-          <div className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 font-inter font-light">
-            <ShieldCheck className="w-4 h-4 text-slate-400 stroke-[1.5]" />
-            <span>Registrasi Pasien Resmi</span>
+          <div className="flex items-center justify-between">
+            <Link
+              to="/login"
+              className="text-xs sm:text-sm font-light text-slate-500 hover:text-[#022022] flex items-center gap-1.5 transition-colors font-inter"
+            >
+              <ArrowLeft className="w-4 h-4 stroke-[1.5]" />
+              <span>Kembali ke Halaman Masuk</span>
+            </Link>
+
+            {/* Text Only - Tanpa card/pill, font-light & font-inter (sesuai instruksi Image 2) */}
+            <div className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 font-inter font-light">
+              <ShieldCheck className="w-4 h-4 text-slate-400 stroke-[1.5]" />
+              <span>Registrasi Pasien Resmi</span>
+            </div>
           </div>
         </div>
 

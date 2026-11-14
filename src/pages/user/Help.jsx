@@ -104,9 +104,9 @@ export default function Help() {
       </div>
 
       {/* HERO BANNER (Persis Card Dashboard & ServiceGuideHero) */}
-      <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-hidden">
+      <section className="relative w-full rounded-2xl sm:rounded-3xl bg-[#022022] border border-white/10 p-5 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-hidden">
         {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA */}
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl sm:rounded-3xl flex items-center justify-center">
           <svg
             className="w-full h-full object-cover"
             preserveAspectRatio="none"
@@ -370,7 +370,7 @@ export default function Help() {
 
         <Link
           to="/user/report-problem"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] hover:bg-[#033033] text-white text-xs sm:text-sm font-semibold shadow-xs border border-white/20 transition-all shrink-0 self-start sm:self-auto cursor-pointer group/btn"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] hover:bg-[#033033] text-white text-xs sm:text-sm font-semibold shadow-xs border border-white/20 transition-all shrink-0 self-start sm:self-auto cursor-pointer group/btn"
         >
           <span>Laporkan Kesalahan</span>
           <ArrowRight className="w-3.5 h-3.5 text-white group-hover/btn:translate-x-0.5 transition-transform" />

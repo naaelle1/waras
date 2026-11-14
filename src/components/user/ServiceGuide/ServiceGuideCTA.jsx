@@ -4,9 +4,9 @@ import GlassButton from "../../ui/GlassButton";
 
 export default function ServiceGuideCTA() {
   return (
-    <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
+    <section className="relative w-full rounded-2xl sm:rounded-3xl bg-[#022022] border border-white/10 p-5 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
       {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl sm:rounded-3xl flex items-center justify-center">
         <svg
           className="w-full h-full object-cover"
           preserveAspectRatio="none"
@@ -69,7 +69,7 @@ export default function ServiceGuideCTA() {
             <GlassButton
               to="/user/facilities"
               variant="hero-light"
-              className="px-6 py-2.5 sm:py-3"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
               rightIcon={ArrowRight}
             >
               Cari Faskes Terdekat
@@ -77,7 +77,8 @@ export default function ServiceGuideCTA() {
           </div>
         </div>
 
-        {/* Vertical Divider for Desktop */}
+        {/* Divider: Horizontal for Mobile, Vertical for Desktop */}
+        <div className="block lg:hidden border-t border-white/10 my-1 w-full" />
         <div className="hidden lg:flex lg:col-span-1 justify-center self-stretch py-2">
           <div className="w-px bg-white/15 h-full" />
         </div>
@@ -101,7 +102,7 @@ export default function ServiceGuideCTA() {
             <GlassButton
               to="/user/ai"
               variant="hero-light"
-              className="px-6 py-2.5 sm:py-3"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 justify-center"
               leftIcon={MessageCircle}
             >
               Tanya WARAS AI

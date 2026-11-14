@@ -78,17 +78,17 @@ export default function GuideDetailModal({ isOpen, guide, onClose }) {
         )}
 
         {/* Footer Actions */}
-        <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+        <div className="pt-4 border-t border-gray-100 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-[#022022] font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-[#022022] font-semibold text-xs sm:text-sm transition-colors cursor-pointer text-center"
           >
             Tutup
           </button>
 
           <Link
             to="/user/facilities"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] hover:bg-[#033033] text-white border border-white/20 font-semibold text-xs sm:text-sm transition-colors shadow-xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#022022] hover:bg-[#033033] text-white border border-white/20 font-semibold text-xs sm:text-sm transition-colors shadow-xs"
           >
             <Hospital className="w-4 h-4 text-white" />
             <span>Cari Faskes Terdekat</span>
