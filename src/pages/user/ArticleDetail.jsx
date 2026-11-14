@@ -124,7 +124,7 @@ export default function ArticleDetail() {
         </div>
 
         {/* ARTICLE BODY */}
-        <div className="p-6 sm:p-10 space-y-6 font-inter text-sm sm:text-base text-[#2B3E3E] leading-relaxed">
+        <div className="p-6 sm:p-10 space-y-6 font-inter text-sm sm:text-base text-[#526666] leading-relaxed">
           <div className="p-4 sm:p-5 rounded-xl bg-[#F8FAFA] border-l-4 border-[#022022] text-[#0D2626] font-medium leading-relaxed">
             {article.description}
           </div>

@@ -29,16 +29,31 @@ export default function FeaturedArticle({ article, onReadMore }) {
         </div>
 
         {/* Right Content Panel */}
-        <div className="lg:col-span-5 bg-[#022022] border-l border-white/10 text-white p-6 sm:p-8 flex flex-col justify-between relative z-10">
-          <div className="space-y-3.5">
+        <div className="lg:col-span-5 bg-[#022022] border-t lg:border-t-0 lg:border-l border-white/10 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+          {/* Wave Pattern Overlay from mask-group.svg (Persis Card Dashboard) */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden flex items-end justify-center">
+            <img
+              src="/images/mask-group.svg"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/Mask Group.svg";
+              }}
+              className="w-full h-full object-cover object-bottom select-none pointer-events-none opacity-90"
+            />
+          </div>
+
+          <div className="relative z-10 space-y-3.5">
             <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-teal-100">
-              <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-teal-200 border border-white/20">
+              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-teal-100 border border-white/15 backdrop-blur-sm">
                 <Tag className="w-3 h-3 text-teal-200" />
                 {article.category}
               </span>
               <span>•</span>
-              <span className="flex items-center gap-1 text-gray-200">
-                <Clock className="w-3 h-3" />
+              <span className="flex items-center gap-1 text-teal-100/80">
+                <Clock className="w-3 h-3 text-teal-200" />
                 {article.readingTime || "5 min baca"}
               </span>
             </div>
@@ -47,17 +62,17 @@ export default function FeaturedArticle({ article, onReadMore }) {
               {article.title}
             </h2>
 
-            <p className="font-inter text-xs sm:text-sm text-gray-200 leading-relaxed line-clamp-3">
+            <p className="font-inter text-xs sm:text-sm text-teal-100/90 leading-relaxed line-clamp-3">
               {article.description}
             </p>
           </div>
 
-          <div className="pt-6 mt-4 border-t border-white/15 flex items-center justify-between">
+          <div className="relative z-10 pt-6 mt-4 border-t border-white/15 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="h-7 px-2 rounded-full bg-white/15 flex items-center justify-center">
                 <Logo tone="light" className="h-3.5" />
               </div>
-              <span className="text-xs font-medium text-gray-200">{article.author || "Tim Medis WARAS"}</span>
+              <span className="text-xs font-medium text-teal-100/90">{article.author || "Tim Medis WARAS"}</span>
             </div>
 
             <button

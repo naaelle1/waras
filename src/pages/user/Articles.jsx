@@ -97,7 +97,7 @@ export default function Articles() {
           </div>
         ) : (
           <div className="p-12 text-center rounded-2xl bg-white border border-[#E2ECEB] space-y-3">
-            <ShieldCheck className="w-10 h-10 text-gray-400 mx-auto" />
+            <ShieldCheck className="w-10 h-10 text-[#809494] mx-auto" />
             <h3 className="font-poppins font-semibold text-base text-[#0D2626]">
               Artikel Tidak Ditemukan
             </h3>

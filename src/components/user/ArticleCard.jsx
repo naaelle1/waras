@@ -57,7 +57,7 @@ export default function ArticleCard({ article, onReadMore, className = "" }) {
             <span>{article.date || "Terbaru"}</span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-gray-400" />
+              <Clock className="w-3 h-3 text-[#809494]" />
               {article.readingTime || "4 min baca"}
             </span>
           </div>

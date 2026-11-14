@@ -112,7 +112,7 @@ export default function ArticleDetailModal({ isOpen, article, onClose }) {
           </div>
 
           {/* Main Description */}
-          <div className="space-y-4 font-inter text-sm text-[#2B3E3E] leading-relaxed">
+          <div className="space-y-4 font-inter text-sm text-[#526666] leading-relaxed">
             <p className="text-base text-[#0D2626] font-medium leading-relaxed bg-[#F8FAFA] p-4 rounded-xl border border-[#E2ECEB]">
               {article.description}
             </p>

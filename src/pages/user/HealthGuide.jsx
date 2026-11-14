@@ -76,8 +76,8 @@ export default function HealthGuide() {
       <section className="rounded-2xl bg-[#022022]/5 border border-[#022022]/15 p-5 backdrop-blur-md">
         <div className="flex items-start gap-3">
           <Info className="w-5 h-5 text-[#022022] shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-[#4B5E5E] font-inter leading-relaxed">
-            <strong>Penafian Edukasi:</strong> Informasi dan panduan di halaman ini bertujuan sebagai pertolongan awal edukatif dan tidak menggantikan perawatan atau diagnosis langsung oleh tenaga kesehatan medis profesional.
+          <p className="text-xs sm:text-sm text-[#526666] font-inter leading-relaxed">
+            <strong className="text-[#0D2626]">Penafian Edukasi:</strong> Informasi dan panduan di halaman ini bertujuan sebagai pertolongan awal edukatif dan tidak menggantikan perawatan atau diagnosis langsung oleh tenaga kesehatan medis profesional.
           </p>
         </div>
       </section>

@@ -1,48 +1,93 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ArrowRight, Compass, MapPin } from "lucide-react";
+import GlassButton from "../../ui/GlassButton";
 
 export default function ServiceGuideHero({ onScrollToGuides }) {
   return (
-    <div className="relative overflow-hidden rounded-4xl bg-[#022022] p-8 sm:p-12 lg:p-14 text-white shadow-xl shadow-[#022022]/20 border border-white/20">
-      {/* Decorative Subtle Ambient Background */}
-      <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/3 -mb-12 w-80 h-80 rounded-full bg-white/[0.02] blur-3xl pointer-events-none" />
-
-      {/* Main Narrative Content (Full & Fitted to the Big Card) */}
-      <div className="relative z-10 max-w-3xl space-y-5 sm:space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-poppins font-semibold bg-white/10 text-white backdrop-blur-md border border-white/20">
-          <Compass className="w-4 h-4 text-white" />
-          <span>WARAS HEALTHCARE GUIDE</span>
-        </div>
-
-        <h1 className="font-poppins font-bold text-2xl sm:text-4xl lg:text-5xl leading-tight tracking-tight text-white">
-          Pahami Layanan Kesehatan dengan Lebih Mudah
-        </h1>
-
-        <p className="font-inter text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl">
-          Temukan panduan praktis untuk memilih fasilitas kesehatan, mempersiapkan dokumen kunjungan, dan memahami alur pelayanan medis sesuai kebutuhan Anda.
-        </p>
-
-        <div className="pt-2 flex flex-wrap items-center gap-3.5">
-          <button
-            type="button"
-            onClick={onScrollToGuides}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] hover:from-white/[0.25] hover:via-white/[0.12] hover:to-white/[0.05] backdrop-blur-md border border-white/25 hover:border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),0_8px_20px_rgba(0,0,0,0.12)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group"
+    <section className="relative w-full rounded-3xl bg-[#022022] border border-white/10 p-6 sm:p-8 lg:p-10 text-white shadow-[0_20px_50px_rgba(2,32,34,0.3)] overflow-visible">
+      {/* LAYER BACKGROUND: GELOMBANG DEKORASI FIGMA (TETAP TERPOTONG RAPI DI DALAM CARD) */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl flex items-center justify-center">
+        <svg
+          className="w-full h-full object-cover"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 437"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask_service_guide_hero"
+            style={{ maskType: "alpha" }}
+            maskUnits="userSpaceOnUse"
+            x="-22"
+            y="0"
+            width="1526"
+            height="644"
           >
-            <span>Mulai Panduan</span>
-            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-          </button>
+            <rect
+              x="-21.5717"
+              y="216.55"
+              width="1478.35"
+              height="431.236"
+              transform="rotate(-8.42308 -21.5717 216.55)"
+              fill="#C4C4C4"
+            />
+          </mask>
+          <g mask="url(#mask_service_guide_hero)">
+            <g opacity="0.05">
+              <path
+                d="M1515.04 106.21C1515.04 106.21 1479.05 144.573 1174.49 197.569C944.011 237.673 492.796 195.637 230.373 241.502C-39.7321 288.641 -0.135085 355.024 -7.1507 307.647L3.33789 378.478C3.33789 378.478 84.0207 298.473 241.502 275.771C473.097 242.507 970.597 317.04 1198.76 287.855C1421.28 259.369 1522.06 153.588 1522.06 153.588L1515.04 106.21Z"
+                fill="white"
+              />
+            </g>
+            <g opacity="0.1">
+              <path
+                d="M1465.08 92.3023C979.851 431.606 579.315 131.724 301.597 180.662C15.6588 231.092 5.94788 378.047 -1.94859 324.721L9.86135 404.475C9.86135 404.475 99.4007 357.504 259.746 323.434C841.544 199.818 924.335 522.66 1192.07 447.213C1459.81 371.766 1598.83 -1.22344 1465.08 92.3023Z"
+                fill="white"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
 
-          <Link
-            to="/user/facilities"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-white/[0.02] hover:from-white/[0.22] hover:via-white/[0.10] hover:to-white/[0.04] backdrop-blur-md border border-white/20 hover:border-white/35 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),0_8px_20px_rgba(0,0,0,0.12)] font-poppins font-semibold text-xs sm:text-sm active:scale-[0.98] transition-all duration-200 cursor-pointer group"
-          >
-            <MapPin className="w-4 h-4 text-white" />
-            <span>Cari Faskes</span>
-          </Link>
+      {/* KONTEN UTAMA DI LAYER ATAS (z-10) */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        {/* Kolom Kiri: Sapaan & Tombol Pill */}
+        <div className="lg:col-span-8 space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-xs font-medium text-teal-100 backdrop-blur-sm">
+            <Compass className="w-3.5 h-3.5 text-teal-200" />
+            <span>WARAS Healthcare Guide</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-poppins">
+            Pahami Layanan Kesehatan dengan Lebih Mudah
+          </h1>
+
+          <p className="text-sm sm:text-base text-teal-100/90 leading-relaxed max-w-xl font-inter">
+            Temukan panduan praktis untuk memilih fasilitas kesehatan, mempersiapkan dokumen kunjungan, dan memahami alur pelayanan medis sesuai kebutuhan Anda.
+          </p>
+
+          {/* BARIS TOMBOL AKSI UTAMA (TETAP HORIZONTAL KIRI & KANAN DENGAN EFEK GLASS) */}
+          <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <GlassButton
+              onClick={onScrollToGuides}
+              variant="hero-light"
+              className="px-6 py-3"
+              rightIcon={ArrowRight}
+            >
+              Mulai Panduan
+            </GlassButton>
+
+            <GlassButton
+              to="/user/facilities"
+              variant="hero-light"
+              className="px-6 py-3"
+              leftIcon={MapPin}
+            >
+              Cari Faskes
+            </GlassButton>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
